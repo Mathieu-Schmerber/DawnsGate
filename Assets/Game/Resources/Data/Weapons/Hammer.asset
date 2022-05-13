@@ -1,0 +1,91 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7c31a13881607b48a94693c8ad199d3, type: 3}
+  m_Name: Hammer
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  Mesh: {fileID: 4300000, guid: 69c3ba73285f94e489e8cd5a6b07da3c, type: 3}
+  LocomotionLayer: DefaultLocomotion
+  AttackSpeed: 1.5
+  ComboIntervalTime: 0.2
+  AttackCombos:
+  - AttackAnimation: {fileID: 7400000, guid: 8166b5ed3ca6a6248a5347aca90aecef, type: 2}
+    Attack:
+      AttackData: {fileID: 11400000, guid: cba9f7096f88bbd4c9f8867a45aaebc2, type: 2}
+      StartOffset: {x: 0, y: 1, z: 1.5}
+      TravelDistance: {x: 0, y: 0, z: 0}
+      AimAssist: 1
+      LockAim: 0
+      LockMovement: 1
+      IsHeavyAttack: 0
+    Dash:
+      OnlyWhenMoving: 1
+      OnAnimationEventOnly: 0
+      Distance: 2
+      Duration: 0.1
+      AfterImages: 0
+    FX:
+      CameraShakeForce: {x: 0, y: 0, z: 0}
+      CameraShakeDuration: 0
+      VibrationForce: 0
+      VibrationDuration: 0
+    OnHitDamage: 0
+  - AttackAnimation: {fileID: 7400000, guid: 4e82d4c59b31c7347b451f8c6a5ccc9a, type: 2}
+    Attack:
+      AttackData: {fileID: 11400000, guid: 6ecc0c5fd0ec7354da77330c0089de43, type: 2}
+      StartOffset: {x: 0, y: 1, z: 1.5}
+      TravelDistance: {x: 0, y: 0, z: 0}
+      AimAssist: 1
+      LockAim: 0
+      LockMovement: 1
+      IsHeavyAttack: 0
+    Dash:
+      OnlyWhenMoving: 1
+      OnAnimationEventOnly: 0
+      Distance: 2
+      Duration: 0.1
+      AfterImages: 0
+    FX:
+      CameraShakeForce: {x: 0, y: 0, z: 0}
+      CameraShakeDuration: 0
+      VibrationForce: 0
+      VibrationDuration: 0
+    OnHitDamage: 0
+  - AttackAnimation: {fileID: 7400000, guid: 98d45639c99390540801f5384782c40e, type: 2}
+    Attack:
+      AttackData: {fileID: 11400000, guid: 677fe4c347a22ec4e862ff99c0ca0579, type: 2}
+      StartOffset: {x: 0, y: 0.1, z: 1.7}
+      TravelDistance: {x: 0, y: 0, z: 0}
+      AimAssist: 0
+      LockAim: 1
+      LockMovement: 1
+      IsHeavyAttack: 1
+    Dash:
+      OnlyWhenMoving: 1
+      OnAnimationEventOnly: 1
+      Distance: 3
+      Duration: 0.1
+      AfterImages: 3
+    FX:
+      CameraShakeForce: {x: 0.5, y: 0.5, z: 0.5}
+      CameraShakeDuration: 0.2
+      VibrationForce: 0.246
+      VibrationDuration: 0.2
+    OnHitDamage: 0
