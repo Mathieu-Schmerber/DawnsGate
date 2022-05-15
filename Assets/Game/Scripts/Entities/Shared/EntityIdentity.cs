@@ -10,16 +10,17 @@ namespace Game.Entities.Shared
 {
 	public class EntityIdentity : MonoBehaviour
 	{
-		[SerializeField] private EntityStatData _stats;
-		private int _currentHealth;
+		[SerializeField] private BaseStatData _stats;
 
-		public int CurrentHealth { get => _currentHealth; set => _currentHealth = Mathf.Clamp(value, 0, _stats.MaxHealth.Value); }
+		private BaseStatData _cachedStat;
+		private float _currentHealth;
 
-		public EntityStatData Stats => _stats;
-
+		public float CurrentHealth { get => _currentHealth; set => _currentHealth = Mathf.Clamp(value, 0, _stats.MaxHealth.Value); }
+		public BaseStatData Stats => _cachedStat;
 
 		private void Awake()
 		{
+			_cachedStat = _stats.Clone() as BaseStatData; // Clone scriptable object so that we can edit it
 			CurrentHealth = Stats.MaxHealth.Value;
 		}
 	}

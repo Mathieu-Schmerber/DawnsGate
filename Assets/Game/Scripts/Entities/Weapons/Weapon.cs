@@ -147,7 +147,7 @@ namespace Game.Entities.Weapons
 
 			// Dashed attack
 			if (IsDashedAttack())
-				_controller.Dash(aimDir, CurrentWeaponAttack.Dash.Distance, CurrentWeaponAttack.Dash.Duration, CurrentWeaponAttack.Dash.AfterImages);
+				_controller.Dash(aimDir, CurrentWeaponAttack.Dash.Distance, CurrentWeaponAttack.Dash.Duration);
 
 			// Aim assist
 			if (CurrentWeaponAttack.Attack.AimAssist)
@@ -159,7 +159,7 @@ namespace Game.Entities.Weapons
 			if (animation == "Attack")
 				PerformAttack();
 			else if (animation == "Dash" && CurrentWeaponAttack.Dash.OnAnimationEventOnly && (_controller.GetMovementNormal().magnitude > 0 || !CurrentWeaponAttack.Dash.OnlyWhenMoving))
-				_controller.Dash(_controller.GetAimNormal(), CurrentWeaponAttack.Dash.Distance, CurrentWeaponAttack.Dash.Duration, CurrentWeaponAttack.Dash.AfterImages);
+				_controller.Dash(_controller.GetAimNormal(), CurrentWeaponAttack.Dash.Distance, CurrentWeaponAttack.Dash.Duration);
 		}
 
 		public virtual void OnAnimationEnter(AnimatorStateInfo stateInfo) => _controller.CanMove = false;

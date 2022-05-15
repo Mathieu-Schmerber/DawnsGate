@@ -13,10 +13,46 @@ MonoBehaviour:
   m_Name: Player
   m_EditorClassIdentifier: 
   MaxHealth:
-    _baseValue: 100
-    BonusValue: 0
-    TemporaryValue: 0
-  Speed:
-    _baseValue: 6
-    BonusValue: 0
-    TemporaryValue: 0
+    _naturalUnit: 50
+    BonusModifier: 0
+    TemporaryModifier: 0
+  MovementSpeed:
+    _naturalUnit: 6
+    BonusModifier: 0
+    TemporaryModifier: 0
+  AttackRange:
+    _naturalUnit: 100
+    BonusModifier: 0
+    TemporaryModifier: 0
+  Armor:
+    _naturalUnit: 0
+    BonusModifier: 0
+    TemporaryModifier: 0
+  AttackDamage:
+    _naturalUnit: 100
+    BonusModifier: 0
+    TemporaryModifier: 0
+  ArmorDamage:
+    _naturalUnit: 100
+    BonusModifier: 0
+    TemporaryModifier: 0
+  AttackSpeed:
+    _naturalUnit: 100
+    BonusModifier: 0
+    TemporaryModifier: 0
+  KnockbackForce:
+    _naturalUnit: 100
+    BonusModifier: 0
+    TemporaryModifier: 0
+  KnockbackResistance:
+    _naturalUnit: 100
+    BonusModifier: 0
+    TemporaryModifier: 0
+  DashRange:
+    _naturalUnit: 4
+    BonusModifier: 0
+    TemporaryModifier: 0
+  DashCooldown:
+    _naturalUnit: 0.5
+    BonusModifier: 0
+    TemporaryModifier: 0

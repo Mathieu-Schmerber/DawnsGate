@@ -674,6 +674,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6546747649455751366, guid: 373aa941ec93eb94abecb56f31b8ba55,
         type: 3}
+      propertyPath: _dashCooldown
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6546747649455751366, guid: 373aa941ec93eb94abecb56f31b8ba55,
+        type: 3}
+      propertyPath: _dashDistance
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6546747649455751366, guid: 373aa941ec93eb94abecb56f31b8ba55,
+        type: 3}
       propertyPath: serializationData.Prefab
       value: 
       objectReference: {fileID: 6546747649455751366, guid: 373aa941ec93eb94abecb56f31b8ba55,

@@ -34,7 +34,6 @@ namespace Game.Scriptables
 			public bool OnAnimationEventOnly;
 			[Min(0)] public float Distance;
 			[Min(0)] public float Duration;
-			[Min(0)] public int AfterImages;
 		}
 
 		[System.Serializable]
