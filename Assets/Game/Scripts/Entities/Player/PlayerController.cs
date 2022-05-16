@@ -14,10 +14,7 @@ namespace Game.Entities.Player
 	{
 		#region Properties
 
-		[SerializeField] private float _dashCooldown;
-		[SerializeField] private float _dashDistance;
-		[SerializeField] private float _dashTime;
-		[SerializeField] private int _afterImagesNumber;
+		[SerializeField] private float _dashTime = 0.1f;
 		[SerializeField] private ParticleSystem _dashFx;
 
 		private Timer _dashTimer = new();
@@ -41,7 +38,7 @@ namespace Game.Entities.Player
 		{
 			base.Awake();
 			_inputs = GetComponent<InputHandler>();
-			_dashTimer.Start(_dashCooldown, false);
+			_dashTimer.Start(_entity.Stats.DashCooldown.Value, false);
 		}
 
 		#endregion
@@ -53,7 +50,7 @@ namespace Game.Entities.Player
 				Vector3 direction = GetMovementNormal().magnitude > 0 ? GetMovementNormal() : GetAimNormal();
 
 				_dashFx.Play(true);
-				Dash(direction, _dashDistance, _dashTime, _afterImagesNumber);
+				Dash(direction, _entity.Stats.DashRange.Value, _dashTime);
 				_dashTimer.Restart();
 			}
 		}

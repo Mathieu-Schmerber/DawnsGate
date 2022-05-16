@@ -9,10 +9,22 @@ namespace Game.Entities.Shared.Effects
 	public class AfterImageEffect : MonoBehaviour
 	{
 		private SkinnedMeshRenderer _skin;
+		private AController _controller;
 
 		private void Awake()
 		{
 			_skin = GetComponentInChildren<SkinnedMeshRenderer>();
+			_controller = GetComponentInParent<AController>();
+		}
+
+		private void OnEnable()
+		{
+			_controller.OnDashStarted += OnDash;
+		}
+
+		private void OnDisable()
+		{
+			_controller.OnDashStarted -= OnDash;
 		}
 
 		private IEnumerator AfterImage(float duration, int number)
@@ -29,9 +41,6 @@ namespace Game.Entities.Shared.Effects
 			}
 		}
 
-		public void Play(float duration, int number)
-		{
-			StartCoroutine(AfterImage(duration, number));
-		}
+		private void OnDash(DashParameters obj) => StartCoroutine(AfterImage(obj.Time, Mathf.FloorToInt(obj.Distance)));
 	}
 }

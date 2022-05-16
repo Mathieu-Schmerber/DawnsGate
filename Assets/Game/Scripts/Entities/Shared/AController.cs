@@ -6,24 +6,33 @@ using Sirenix.OdinInspector;
 using Pixelplacement;
 using Nawlian.Lib.Extensions;
 using Game.Entities.Shared.Effects;
+using System;
 
 namespace Game.Entities.Shared
 {
+	public struct DashParameters
+	{
+		public Vector3 Direction { get; set; }
+		public float Distance { get; set; }
+		public float Time { get; set; }
+	}
+
 	[RequireComponent(typeof(EntityIdentity))]
 	public abstract class AController : SerializedMonoBehaviour
 	{
 		#region Properties
 
-		private AfterImageEffect _afterImageEffect;
+		[SerializeField] private float _rotationSpeed = 6f;
+
 		protected EntityIdentity _entity;
 		protected Rigidbody _rb;
 		protected Quaternion _desiredRotation;
 		protected GameObject _graphics;
 		protected Animator _gfxAnim;
 		private Transform _target;
-
 		private bool _canMove = true;
-		[ShowInInspector] private float _rotationSpeed = 6f;
+
+		public event Action<DashParameters> OnDashStarted;
 
 		public Transform Graphics => _graphics.transform;
 		protected Transform _lockedTarget => _target;
@@ -53,7 +62,6 @@ namespace Game.Entities.Shared
 			_entity = GetComponent<EntityIdentity>();
 			_rb = GetComponent<Rigidbody>();
 			_gfxAnim = GetComponentInChildren<Animator>();
-			_afterImageEffect = GetComponentInChildren<AfterImageEffect>();
 			_graphics = _gfxAnim.gameObject;
 			_desiredRotation = transform.rotation;
 		}
@@ -121,27 +129,56 @@ namespace Game.Entities.Shared
 			// Calculate how fast we should be moving
 			var targetVelocity = GetMovementsInputs();
 			targetVelocity = transform.TransformDirection(targetVelocity);
-			targetVelocity *= _entity.Stats.Speed.Value;
+			targetVelocity *= _entity.Stats.MovementSpeed.Value;
 
 			// Apply a force that attempts to reach our target velocity
 			var velocity = _rb.velocity;
 			var velocityChange = targetVelocity - velocity;
-			velocityChange.x = Mathf.Clamp(velocityChange.x, -_entity.Stats.Speed.Value, _entity.Stats.Speed.Value);
-			velocityChange.z = Mathf.Clamp(velocityChange.z, -_entity.Stats.Speed.Value, _entity.Stats.Speed.Value);
+			velocityChange.x = Mathf.Clamp(velocityChange.x, -_entity.Stats.MovementSpeed.Value, _entity.Stats.MovementSpeed.Value);
+			velocityChange.z = Mathf.Clamp(velocityChange.z, -_entity.Stats.MovementSpeed.Value, _entity.Stats.MovementSpeed.Value);
 			velocityChange.y = 0;
 			_rb.AddForce(velocityChange, ForceMode.VelocityChange);
 		}
 
-		public void Dash(Vector3 direction, float distance, float time, int afterImages = 0)
+		public void Dash(DashParameters parameters)
 		{
-			Vector3 destination = transform.position + direction * distance;
+			Vector3 destination = transform.position + parameters.Direction * parameters.Distance;
+			float speed = parameters.Distance / parameters.Time;
 
-			if (afterImages > 0)
-				_afterImageEffect.Play(time, afterImages);
-			Tween.Position(transform, destination, time, 0, Tween.EaseOut,
-				startCallback: () => IsDashing = true,
-				completeCallback: () => IsDashing = false
-			);
+			OnDashStarted?.Invoke(parameters);
+			//Tween.Value(parameters.Direction * speed, parameters.Direction * speed, (newValue) => _rb.velocity = newValue, parameters.Time, 0, Tween.EaseOut,
+			//	startCallback: () => IsDashing = true,
+			//	completeCallback: () => {
+			//		IsDashing = false;
+			//	});
+
+			StartCoroutine(ExecuteDash());
+
+			IEnumerator ExecuteDash()
+			{
+				float startTime = Time.time;
+
+				IsDashing = true;
+				while (Time.time < startTime + parameters.Time)
+				{
+					_rb.MovePosition(_rb.position + parameters.Direction * speed * Time.deltaTime);
+					//_rb.AddForce(parameters.Direction.normalized * speed, ForceMode.VelocityChange);
+					yield return null;
+				}
+				IsDashing = false;
+			}
+
+			//Tween.Position(transform, destination, parameters.Time, 0, Tween.EaseOut,
+			//	startCallback: () => IsDashing = true,
+			//	completeCallback: () => IsDashing = false
+			//);
 		}
+
+		public void Dash(Vector3 direction, float distance, float time) => Dash(new DashParameters()
+		{
+			Direction = direction,
+			Distance = distance,
+			Time = time
+		});
 	}
 }
