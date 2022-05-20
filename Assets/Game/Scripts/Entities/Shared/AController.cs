@@ -10,6 +10,13 @@ using System;
 
 namespace Game.Entities.Shared
 {
+	public enum EntityState
+	{
+		IDLE,
+		LOCOMOTION,
+		DASH
+	}
+
 	public struct DashParameters
 	{
 		public Vector3 Direction { get; set; }
@@ -48,9 +55,11 @@ namespace Game.Entities.Shared
 			}
 		}
 
-		public bool IsDashing { get; private set; }
+		public bool IsDashing => State == EntityState.DASH;
 
 		public bool IsAimLocked { get; set; }
+
+		public EntityState State { get; private set; }
 
 		#endregion
 
@@ -64,6 +73,7 @@ namespace Game.Entities.Shared
 			_gfxAnim = GetComponentInChildren<Animator>();
 			_graphics = _gfxAnim.gameObject;
 			_desiredRotation = transform.rotation;
+			State = EntityState.IDLE;
 		}
 
 		// Initialization
@@ -146,32 +156,20 @@ namespace Game.Entities.Shared
 			float speed = parameters.Distance / parameters.Time;
 
 			OnDashStarted?.Invoke(parameters);
-			//Tween.Value(parameters.Direction * speed, parameters.Direction * speed, (newValue) => _rb.velocity = newValue, parameters.Time, 0, Tween.EaseOut,
-			//	startCallback: () => IsDashing = true,
-			//	completeCallback: () => {
-			//		IsDashing = false;
-			//	});
-
 			StartCoroutine(ExecuteDash());
 
 			IEnumerator ExecuteDash()
 			{
 				float startTime = Time.time;
 
-				IsDashing = true;
+				State = EntityState.DASH;
 				while (Time.time < startTime + parameters.Time)
 				{
 					_rb.MovePosition(_rb.position + parameters.Direction * speed * Time.deltaTime);
-					//_rb.AddForce(parameters.Direction.normalized * speed, ForceMode.VelocityChange);
 					yield return null;
 				}
-				IsDashing = false;
+				State = EntityState.IDLE;
 			}
-
-			//Tween.Position(transform, destination, parameters.Time, 0, Tween.EaseOut,
-			//	startCallback: () => IsDashing = true,
-			//	completeCallback: () => IsDashing = false
-			//);
 		}
 
 		public void Dash(Vector3 direction, float distance, float time) => Dash(new DashParameters()

@@ -16,20 +16,28 @@ MonoBehaviour:
     _naturalUnit: 50
     BonusModifier: 0
     TemporaryModifier: 0
-  MovementSpeed:
-    _naturalUnit: 6
+  ArmorRatio:
+    _naturalUnit: 0
     BonusModifier: 0
     TemporaryModifier: 0
   AttackRange:
     _naturalUnit: 100
     BonusModifier: 0
     TemporaryModifier: 0
-  Armor:
+  AttackDamage:
+    _naturalUnit: 100
+    BonusModifier: 0
+    TemporaryModifier: 0
+  LifeSteal:
     _naturalUnit: 0
     BonusModifier: 0
     TemporaryModifier: 0
-  AttackDamage:
-    _naturalUnit: 100
+  CriticalRate:
+    _naturalUnit: 0
+    BonusModifier: 0
+    TemporaryModifier: 0
+  AdditionalCriticalDamage:
+    _naturalUnit: 0
     BonusModifier: 0
     TemporaryModifier: 0
   ArmorDamage:
@@ -45,7 +53,11 @@ MonoBehaviour:
     BonusModifier: 0
     TemporaryModifier: 0
   KnockbackResistance:
-    _naturalUnit: 100
+    _naturalUnit: 0
+    BonusModifier: 0
+    TemporaryModifier: 0
+  MovementSpeed:
+    _naturalUnit: 6
     BonusModifier: 0
     TemporaryModifier: 0
   DashRange:

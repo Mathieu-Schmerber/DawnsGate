@@ -71,11 +71,11 @@ namespace Game.Entities.Shared.Attacks
 			if (damageProcessor != null)
 			{
 				Vector3 direction = _attackData.KnockbackDir == KnockbackDirection.FORWARD ? transform.forward : (collider.transform.position - transform.position).normalized.WithY(0);
-				float knockbackForce = _attackData.BaseKnockbackForce;
+				float knockbackForce = _attackData.BaseKnockbackForce * (Caster.Stats.KnockbackForce.Value / 100);
+				float totalDamage = _attackData.BaseDamage * (Caster.Stats.AttackDamage.Value / 100);
 
-				// TODO: apply Caster stats
-				damageProcessor.ApplyKnockback(gameObject, direction * knockbackForce);
-				damageProcessor.ApplyDamage(gameObject, _attackData.BaseDamage);
+				damageProcessor.ApplyKnockback(Caster, direction * knockbackForce);
+				damageProcessor.ApplyDamage(Caster, totalDamage);
 				ObjectPooler.Get(PoolIdEnum.SLASH_HIT_FX, collider.transform.position.WithY(transform.position.y), Quaternion.Euler(0, transform.rotation.eulerAngles.y + _attackData.HitYRotation, 0), null);
 			}
 		}

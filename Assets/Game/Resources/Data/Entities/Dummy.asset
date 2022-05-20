@@ -13,10 +13,58 @@ MonoBehaviour:
   m_Name: Dummy
   m_EditorClassIdentifier: 
   MaxHealth:
-    _baseValue: 100
-    BonusValue: 0
-    TemporaryValue: 0
-  Speed:
-    _baseValue: 0
-    BonusValue: 0
-    TemporaryValue: 0
+    _naturalUnit: 500
+    BonusModifier: 0
+    TemporaryModifier: 0
+  ArmorRatio:
+    _naturalUnit: 0
+    BonusModifier: 0
+    TemporaryModifier: 0
+  AttackRange:
+    _naturalUnit: 0
+    BonusModifier: 0
+    TemporaryModifier: 0
+  AttackDamage:
+    _naturalUnit: 0
+    BonusModifier: 0
+    TemporaryModifier: 0
+  LifeSteal:
+    _naturalUnit: 0
+    BonusModifier: 0
+    TemporaryModifier: 0
+  CriticalRate:
+    _naturalUnit: 0
+    BonusModifier: 0
+    TemporaryModifier: 0
+  AdditionalCriticalDamage:
+    _naturalUnit: 0
+    BonusModifier: 0
+    TemporaryModifier: 0
+  ArmorDamage:
+    _naturalUnit: 0
+    BonusModifier: 0
+    TemporaryModifier: 0
+  AttackSpeed:
+    _naturalUnit: 0
+    BonusModifier: 0
+    TemporaryModifier: 0
+  KnockbackForce:
+    _naturalUnit: 0
+    BonusModifier: 0
+    TemporaryModifier: 0
+  KnockbackResistance:
+    _naturalUnit: 0
+    BonusModifier: 0
+    TemporaryModifier: 0
+  MovementSpeed:
+    _naturalUnit: 0
+    BonusModifier: 0
+    TemporaryModifier: 0
+  DashRange:
+    _naturalUnit: 0
+    BonusModifier: 0
+    TemporaryModifier: 0
+  DashCooldown:
+    _naturalUnit: 0
+    BonusModifier: 0
+    TemporaryModifier: 0

@@ -52,55 +52,70 @@ namespace Game.Scriptables
 		[SuffixLabel("In unit", true)] public StatLine MaxHealth;
 
 		/// <summary>
-		/// Movement speed of an entity
+		/// Armor of an entity in % of maxHealth <br></br>
+		/// Armor is another form of health point that gets affected prior to health
 		/// </summary>
-		[SuffixLabel("In meter/second", true)] public StatLine MovementSpeed;
+		[SuffixLabel("In percent", true)] public StatLine ArmorRatio;
 
 		/// <summary>
 		/// Attack range of an entity
 		/// </summary>
-		[SuffixLabel("In percent", true)] public StatLine AttackRange;
-
-		/// <summary>
-		/// Armor of an entity in % of maxHealth <br></br>
-		/// Armor is another form of health point that gets affected prior to health
-		/// </summary>
-		[SuffixLabel("In percent", true)] public StatLine Armor;
+		[SuffixLabel("In percent", true), TitleGroup("Attack")] public StatLine AttackRange;
 
 		/// <summary>
 		/// Attack damage of an entity in % of the performed attack
 		/// </summary>
-		[SuffixLabel("In percent", true)] public StatLine AttackDamage;
+		[SuffixLabel("In percent", true), TitleGroup("Attack")] public StatLine AttackDamage;
+
+		/// <summary>
+		/// Lifesteal, in % of the attack damage
+		/// </summary>
+		[SuffixLabel("In percent", true), TitleGroup("Attack")] public StatLine LifeSteal;
+
+		/// <summary>
+		/// Crit chance
+		/// </summary>
+		[SuffixLabel("In percent", true), TitleGroup("Attack")] public StatLine CriticalRate;
+
+		/// <summary>
+		/// Additional damage of a critical attack, in % of attack damage
+		/// </summary>
+		[SuffixLabel("In percent", true), TitleGroup("Attack")] public StatLine AdditionalCriticalDamage;
 
 		/// <summary>
 		/// Damage modifier when attacking armor, in % of the attack damage
 		/// </summary>
-		[SuffixLabel("In percent", true)] public StatLine ArmorDamage;
+		[SuffixLabel("In percent", true), TitleGroup("Attack")] public StatLine ArmorDamage;
 
 		/// <summary>
 		/// Attack speed, in % of the weapon attack speed
 		/// </summary>
-		[SuffixLabel("In percent", true)] public StatLine AttackSpeed;
+		[SuffixLabel("In percent", true), TitleGroup("Attack")] public StatLine AttackSpeed;
 
 		/// <summary>
 		/// The knockback force applied to an entity, in % of the performed attack
 		/// </summary>
-		[SuffixLabel("In percent", true)] public StatLine KnockbackForce;
+		[SuffixLabel("In percent", true), TitleGroup("Knockback")] public StatLine KnockbackForce;
 
 		/// <summary>
 		/// The resistance to the knockback force, in % of the force received
 		/// </summary>
-		[SuffixLabel("In percent", true)] public StatLine KnockbackResistance;
+		[SuffixLabel("In percent", true), TitleGroup("Knockback")] public StatLine KnockbackResistance;
+
+		/// <summary>
+		/// Movement speed of an entity
+		/// </summary>
+		[SuffixLabel("In meter/second", true), TitleGroup("Mobility")] public StatLine MovementSpeed;
 
 		/// <summary>
 		/// The range of dash (in unit)
 		/// </summary>
-		[SuffixLabel("In meter", true)] public StatLine DashRange;
+		[SuffixLabel("In meter", true), TitleGroup("Mobility")] public StatLine DashRange;
 
 		/// <summary>
 		/// The cooldown between two dashes (in seconds)
 		/// </summary>
-		[SuffixLabel("In second", true)] public StatLine DashCooldown;
+		[SuffixLabel("In second", true), TitleGroup("Mobility")] public StatLine DashCooldown;
 
 		public object Clone() => Instantiate(this);
 	}
