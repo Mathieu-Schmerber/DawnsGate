@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Game.Scriptables
 {
-	[CreateAssetMenu(menuName = "Data/Entity/Stats")]
+	[CreateAssetMenu(menuName = "Data/Entity/Stats/Base")]
 	public class BaseStatData : ScriptableObject, ICloneable
 	{
 		#region Types
@@ -56,11 +56,6 @@ namespace Game.Scriptables
 		/// Armor is another form of health point that gets affected prior to health
 		/// </summary>
 		[SuffixLabel("In percent", true)] public StatLine ArmorRatio;
-
-		/// <summary>
-		/// Attack range of an entity
-		/// </summary>
-		[SuffixLabel("In percent", true), TitleGroup("Attack")] public StatLine AttackRange;
 
 		/// <summary>
 		/// Attack damage of an entity in % of the performed attack
