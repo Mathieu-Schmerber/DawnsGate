@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
+using StatModifier = Game.Scriptables.StatModifier;
 
 namespace Game.Entities.Shared.Health
 {
@@ -18,6 +19,7 @@ namespace Game.Entities.Shared.Health
 	{
 		private EntityIdentity _identity;
 		private TweenBase _knockbackMotion = null;
+		private AController _controller;
 
 		public bool IsDead => _identity.CurrentHealth <= 0;
 
@@ -27,6 +29,7 @@ namespace Game.Entities.Shared.Health
 		private void Awake()
 		{
 			_identity = GetComponent<EntityIdentity>();
+			_controller = GetComponent<AController>();
 		}
 
 		/// <summary>
@@ -37,22 +40,31 @@ namespace Game.Entities.Shared.Health
 		/// <param name="damage"></param>
 		public void ApplyDamage(EntityIdentity attacker, float damage)
 		{
-			if (IsDead) return;
+			if (IsDead || _identity.IsInvulnerable) return;
 
 			float totalDamage = damage;
 
 			// Critical hit check
-			if (Random.Range(0, 100) <= attacker.Stats.CriticalRate.Value)
-				totalDamage += totalDamage * (attacker.Stats.AdditionalCriticalDamage.Value / 100);
+			if (Random.Range(0, 100) <= attacker.Stats.Modifiers[StatModifier.CriticalRate].Value)
+				totalDamage = attacker.Scale(totalDamage, StatModifier.CriticalDamage);
 
 			// Apply damage
 			if (_identity.CurrentArmor > 0)
-				_identity.CurrentArmor -= totalDamage * (attacker.Stats.ArmorDamage.Value / 100);
+				_identity.CurrentArmor -= attacker.Scale(totalDamage, StatModifier.ArmorDamage);
 			else
 				_identity.CurrentHealth -= totalDamage;
 
+			// Stun
+			if (_identity.CurrentArmor == 0) {
+				float baseStunTime = 0.5f;
+				float resistanceRatio = Mathf.Clamp(_identity.Stats.Modifiers[StatModifier.StunResistance].Value, 0, 100);
+				float reduced = baseStunTime - (baseStunTime * (resistanceRatio / 100));
+
+				_controller?.Stun(reduced);
+			}
+
 			// Lifesteal
-			attacker.CurrentHealth += totalDamage * (attacker.Stats.LifeSteal.Value / 100);
+			attacker.CurrentHealth += attacker.Scale(totalDamage, StatModifier.LifeSteal);
 
 			// Triggering event
 			OnDamage?.Invoke();
@@ -73,7 +85,7 @@ namespace Game.Entities.Shared.Health
 		{
 			if (IsDead) return;
 
-			float resistanceRatio = Mathf.Clamp(_identity.Stats.KnockbackResistance.Value, 0, 100);
+			float resistanceRatio = Mathf.Clamp(_identity.Stats.Modifiers[StatModifier.KnockbackResistance].Value, 0, 100);
 			Vector3 totalForce = force - (force * (resistanceRatio / 100));
 
 			if (_knockbackMotion != null)

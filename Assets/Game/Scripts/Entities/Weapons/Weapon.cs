@@ -9,7 +9,6 @@ using System.Linq;
 using UnityEngine;
 using Game.Entities.Camera;
 using Game.Managers;
-using Game.Inputs;
 
 namespace Game.Entities.Weapons
 {
@@ -139,11 +138,11 @@ namespace Game.Entities.Weapons
 
 			// Locks
 			_controller.IsAimLocked = CurrentWeaponAttack.Attack.LockAim;
-			_controller.CanMove = !CurrentWeaponAttack.Attack.LockMovement;
+			_controller.LockMovement = CurrentWeaponAttack.Attack.LockMovement;
 
 			// FX
 			_camera.Shake(CurrentWeaponAttack.FX.CameraShakeForce, CurrentWeaponAttack.FX.CameraShakeDuration);
-			InputHandler.VibrateController(CurrentWeaponAttack.FX.VibrationForce, CurrentWeaponAttack.FX.VibrationDuration);
+			InputManager.VibrateController(CurrentWeaponAttack.FX.VibrationForce, CurrentWeaponAttack.FX.VibrationDuration);
 
 			// Dashed attack
 			if (IsDashedAttack())
@@ -162,11 +161,13 @@ namespace Game.Entities.Weapons
 				_controller.Dash(_controller.GetAimNormal(), CurrentWeaponAttack.Dash.Distance, CurrentWeaponAttack.Dash.Duration);
 		}
 
-		public virtual void OnAnimationEnter(AnimatorStateInfo stateInfo) => _controller.CanMove = false;
+		public virtual void OnAnimationEnter(AnimatorStateInfo stateInfo) => _controller.State = EntityState.ATTACKING;
 
 		public virtual void OnAnimationExit(AnimatorStateInfo stateInfo)
 		{
-			_controller.CanMove = true;
+			_controller.LockMovement = false;
+			if (_controller.State == EntityState.ATTACKING)
+				_controller.State = EntityState.IDLE;
 			_controller.IsAimLocked = false;
 		}
 

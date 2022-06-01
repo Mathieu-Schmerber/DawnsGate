@@ -71,8 +71,8 @@ namespace Game.Entities.Shared.Attacks
 			if (damageProcessor != null)
 			{
 				Vector3 direction = _attackData.KnockbackDir == KnockbackDirection.FORWARD ? transform.forward : (collider.transform.position - transform.position).normalized.WithY(0);
-				float knockbackForce = _attackData.BaseKnockbackForce * (Caster.Stats.KnockbackForce.Value / 100);
-				float totalDamage = _attackData.BaseDamage * (Caster.Stats.AttackDamage.Value / 100);
+				float knockbackForce = Caster.Scale(_attackData.BaseKnockbackForce, StatModifier.KnockbackForce);
+				float totalDamage = Caster.Scale(_attackData.BaseDamage, StatModifier.AttackDamage);
 
 				damageProcessor.ApplyKnockback(Caster, direction * knockbackForce);
 				damageProcessor.ApplyDamage(Caster, totalDamage);

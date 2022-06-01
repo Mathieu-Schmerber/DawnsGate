@@ -5,7 +5,9 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 using Pixelplacement;
 using Nawlian.Lib.Extensions;
+using Nawlian.Lib.Utils;
 using Game.Entities.Shared.Effects;
+using Game.Scriptables;
 using System;
 
 namespace Game.Entities.Shared
@@ -13,8 +15,9 @@ namespace Game.Entities.Shared
 	public enum EntityState
 	{
 		IDLE,
-		LOCOMOTION,
-		DASH
+		DASH,
+		STUN,
+		ATTACKING
 	}
 
 	public struct DashParameters
@@ -37,29 +40,23 @@ namespace Game.Entities.Shared
 		protected GameObject _graphics;
 		protected Animator _gfxAnim;
 		private Transform _target;
-		private bool _canMove = true;
+		private bool _lockMovement = false;
 
 		public event Action<DashParameters> OnDashStarted;
 
-		public Transform Graphics => _graphics.transform;
-		protected Transform _lockedTarget => _target;
-
-		public bool CanMove
-		{
-			get => _canMove && !IsDashing;
-			set
-			{
-				if (value == false)
-					_rb.velocity = Vector3.zero;
-				_canMove = value;
-			}
+		public bool LockMovement { get => _lockMovement; 
+			set { 
+				_lockMovement = value; 
+				if (_lockMovement == true)
+					_rb.velocity = Vector3.zero; 
+			} 
 		}
 
-		public bool IsDashing => State == EntityState.DASH;
-
+		public Transform Graphics => _graphics.transform;
+		protected Transform _lockedTarget => _target;
+		public bool CanMove => !LockMovement && State != EntityState.DASH && State != EntityState.STUN;
 		public bool IsAimLocked { get; set; }
-
-		public EntityState State { get; private set; }
+		public EntityState State { get; set; }
 
 		#endregion
 
@@ -71,7 +68,7 @@ namespace Game.Entities.Shared
 			_entity = GetComponent<EntityIdentity>();
 			_rb = GetComponent<Rigidbody>();
 			_gfxAnim = GetComponentInChildren<Animator>();
-			_graphics = _gfxAnim.gameObject;
+			_graphics = _gfxAnim?.gameObject;
 			_desiredRotation = transform.rotation;
 			State = EntityState.IDLE;
 		}
@@ -139,15 +136,23 @@ namespace Game.Entities.Shared
 			// Calculate how fast we should be moving
 			var targetVelocity = GetMovementsInputs();
 			targetVelocity = transform.TransformDirection(targetVelocity);
-			targetVelocity *= _entity.Stats.MovementSpeed.Value;
+			targetVelocity *= _entity.Scale(_entity.Stats.MovementSpeed, StatModifier.MovementSpeed);
 
 			// Apply a force that attempts to reach our target velocity
 			var velocity = _rb.velocity;
 			var velocityChange = targetVelocity - velocity;
-			velocityChange.x = Mathf.Clamp(velocityChange.x, -_entity.Stats.MovementSpeed.Value, _entity.Stats.MovementSpeed.Value);
-			velocityChange.z = Mathf.Clamp(velocityChange.z, -_entity.Stats.MovementSpeed.Value, _entity.Stats.MovementSpeed.Value);
+			velocityChange.x = Mathf.Clamp(velocityChange.x, -_entity.Scale(_entity.Stats.MovementSpeed, StatModifier.MovementSpeed), _entity.Scale(_entity.Stats.MovementSpeed, StatModifier.MovementSpeed));
+			velocityChange.z = Mathf.Clamp(velocityChange.z, -_entity.Scale(_entity.Stats.MovementSpeed, StatModifier.MovementSpeed), _entity.Scale(_entity.Stats.MovementSpeed, StatModifier.MovementSpeed));
 			velocityChange.y = 0;
 			_rb.AddForce(velocityChange, ForceMode.VelocityChange);
+		}
+
+		public void Stun(float duration)
+		{
+			if (duration == 0)
+				return;
+			State = EntityState.STUN;
+			Awaiter.WaitAndExecute(duration, () => State = EntityState.IDLE);
 		}
 
 		public void Dash(DashParameters parameters)
@@ -156,6 +161,8 @@ namespace Game.Entities.Shared
 			float speed = parameters.Distance / parameters.Time;
 
 			OnDashStarted?.Invoke(parameters);
+
+			_entity.SetInvulnerable(parameters.Time); // Invulnerable during dash
 			StartCoroutine(ExecuteDash());
 
 			IEnumerator ExecuteDash()

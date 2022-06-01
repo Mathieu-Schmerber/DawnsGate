@@ -5,8 +5,9 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 using Nawlian.Lib.Utils;
 using Nawlian.Lib.Extensions;
-using Game.Inputs;
+using Game.Managers;
 using Game.Entities.Shared;
+using Game.Scriptables;
 
 namespace Game.Entities.Player
 {
@@ -18,7 +19,9 @@ namespace Game.Entities.Player
 		[SerializeField] private ParticleSystem _dashFx;
 
 		private Timer _dashTimer = new();
-		private InputHandler _inputs;
+		private InputManager _inputs;
+
+		public bool CanDash => CanMove && _dashTimer.IsOver();
 
 		#endregion
 
@@ -37,20 +40,21 @@ namespace Game.Entities.Player
 		protected override void Awake()
 		{
 			base.Awake();
-			_inputs = GetComponent<InputHandler>();
-			_dashTimer.Start(_entity.Stats.DashCooldown.Value, false);
+			_inputs = InputManager.Instance;
+			_dashTimer.Start(_entity.Scale(_entity.Stats.DashCooldown, StatModifier.DashCooldown), false);
 		}
 
 		#endregion
 
 		private void OnDashInput()
 		{
-			if (_dashTimer.IsOver())
+			if (CanDash)
 			{
 				Vector3 direction = GetMovementNormal().magnitude > 0 ? GetMovementNormal() : GetAimNormal();
 
 				_dashFx.Play(true);
-				Dash(direction, _entity.Stats.DashRange.Value, _dashTime);
+				Dash(direction, _entity.Scale(_entity.Stats.DashRange, StatModifier.DashRange), _dashTime);
+				_dashTimer.Interval = _entity.Scale(_entity.Stats.DashCooldown, StatModifier.DashCooldown);
 				_dashTimer.Restart();
 			}
 		}

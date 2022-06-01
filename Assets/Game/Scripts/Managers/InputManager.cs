@@ -1,17 +1,16 @@
-﻿using System;
-using System.Collections;
+﻿using Nawlian.Lib.Utils;
+using System;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Game.Inputs
+namespace Game.Managers
 {
-
 	/// <summary>
 	/// Input handler. <br></br>
 	/// Stores the inputs states
 	/// </summary>
-	public class InputHandler : MonoBehaviour
+	public class InputManager : ManagerSingleton<InputManager>
 	{
 		private Controls _controls;
 		public Vector2 MovementAxis => _controls.Player.Movement.ReadValue<Vector2>();
@@ -50,7 +49,7 @@ namespace Game.Inputs
 
 		public static void VibrateController(float normalizedAmount, float time)
 		{
-			if (time == 0 || normalizedAmount == 0)
+			if (time == 0 || normalizedAmount == 0 || Gamepad.current == null)
 				return;
 			Gamepad.current.SetMotorSpeeds(normalizedAmount, normalizedAmount);
 			WaitAndExecute(time, () => Gamepad.current.SetMotorSpeeds(0, 0));

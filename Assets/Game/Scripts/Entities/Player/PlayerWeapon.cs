@@ -1,7 +1,7 @@
 using Game.Entities.Shared;
 using Game.Entities.Shared.Attacks;
 using Game.Entities.Weapons;
-using Game.Inputs;
+using Game.Managers;
 using Game.Scriptables;
 using Nawlian.Lib.Systems.Animations;
 using Nawlian.Lib.Utils;
@@ -20,13 +20,13 @@ namespace Game.Entities.Player
 
 		private EntityIdentity _identity;
 		private Animator _animator;
-		private InputHandler _inputs;
+		private InputManager _inputs;
 		private List<GameObject> _weaponAttackPool;
 		private Timer _attackTimer = new();
 		private float _minTimeBetweenAttacks = 0.1f;
 
 		private WeaponState _weaponState;
-		private Weapon _weapon => _weaponState.EquippedState;
+		private Weapon _weapon => _weaponState?.EquippedState;
 
 		#region Unity builtins
 
@@ -35,7 +35,7 @@ namespace Game.Entities.Player
 			_identity = GetComponent<EntityIdentity>();
 			_weaponState = GetComponentInChildren<WeaponState>();
 			_animator = GetComponentInChildren<Animator>();
-			_inputs = GetComponent<InputHandler>();
+			_inputs = InputManager.Instance;
 			_weaponAttackPool = new List<GameObject>();
 		}
 
@@ -78,7 +78,11 @@ namespace Game.Entities.Player
 		{
 			_animator.SetLayerWeight(_animator.GetLayerIndex("DefaultLocomotion"), 0f);
 			_animator.SetLayerWeight(_animator.GetLayerIndex("GreatSwordLocomotion"), 0f);
-			_animator.SetLayerWeight(_animator.GetLayerIndex(_weapon.Data.LocomotionLayer), 1f);
+
+			if (_weapon != null)
+				_animator.SetLayerWeight(_animator.GetLayerIndex(_weapon.Data.LocomotionLayer), 1f);
+			else
+				_animator.SetLayerWeight(_animator.GetLayerIndex("DefaultLocomotion"), 1f);
 		}
 
 		#endregion
@@ -113,7 +117,7 @@ namespace Game.Entities.Player
 
 		protected virtual void TryAttack()
 		{
-			if (_attackTimer.IsOver())
+			if (_attackTimer.IsOver() && _weapon != null)
 			{
 				OnMeleeAttack();
 				_attackTimer.Restart();

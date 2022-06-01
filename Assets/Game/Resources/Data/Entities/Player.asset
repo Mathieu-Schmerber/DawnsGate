@@ -12,59 +12,49 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 566f1086d2203ac4b9ca93d086353bd1, type: 3}
   m_Name: Player
   m_EditorClassIdentifier: 
-  MaxHealth:
-    _naturalUnit: 50
-    BonusModifier: 0
-    TemporaryModifier: 0
-  ArmorRatio:
-    _naturalUnit: 0
-    BonusModifier: 0
-    TemporaryModifier: 0
-  AttackRange:
-    _naturalUnit: 100
-    BonusModifier: 0
-    TemporaryModifier: 0
-  AttackDamage:
-    _naturalUnit: 100
-    BonusModifier: 0
-    TemporaryModifier: 0
-  LifeSteal:
-    _naturalUnit: 0
-    BonusModifier: 0
-    TemporaryModifier: 0
-  CriticalRate:
-    _naturalUnit: 0
-    BonusModifier: 0
-    TemporaryModifier: 0
-  AdditionalCriticalDamage:
-    _naturalUnit: 0
-    BonusModifier: 0
-    TemporaryModifier: 0
-  ArmorDamage:
-    _naturalUnit: 100
-    BonusModifier: 0
-    TemporaryModifier: 0
-  AttackSpeed:
-    _naturalUnit: 100
-    BonusModifier: 0
-    TemporaryModifier: 0
-  KnockbackForce:
-    _naturalUnit: 100
-    BonusModifier: 0
-    TemporaryModifier: 0
-  KnockbackResistance:
-    _naturalUnit: 0
-    BonusModifier: 0
-    TemporaryModifier: 0
-  MovementSpeed:
-    _naturalUnit: 6
-    BonusModifier: 0
-    TemporaryModifier: 0
-  DashRange:
-    _naturalUnit: 4
-    BonusModifier: 0
-    TemporaryModifier: 0
-  DashCooldown:
-    _naturalUnit: 0.5
-    BonusModifier: 0
-    TemporaryModifier: 0
+  StartHealth: 50
+  MovementSpeed: 6
+  DashRange: 4
+  DashCooldown: 1
+  Modifiers:
+    keyData: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c000000
+    valueData:
+    - _naturalUnit: 100
+      BonusModifier: 0
+      TemporaryModifier: 0
+    - _naturalUnit: 100
+      BonusModifier: 0
+      TemporaryModifier: 0
+    - _naturalUnit: 0
+      BonusModifier: 0
+      TemporaryModifier: 0
+    - _naturalUnit: 100
+      BonusModifier: 0
+      TemporaryModifier: 0
+    - _naturalUnit: 0
+      BonusModifier: 0
+      TemporaryModifier: 0
+    - _naturalUnit: 0
+      BonusModifier: 0
+      TemporaryModifier: 0
+    - _naturalUnit: 150
+      BonusModifier: 0
+      TemporaryModifier: 0
+    - _naturalUnit: 100
+      BonusModifier: 0
+      TemporaryModifier: 0
+    - _naturalUnit: 100
+      BonusModifier: 0
+      TemporaryModifier: 0
+    - _naturalUnit: 100
+      BonusModifier: 0
+      TemporaryModifier: 0
+    - _naturalUnit: 0
+      BonusModifier: 0
+      TemporaryModifier: 0
+    - _naturalUnit: 100
+      BonusModifier: 0
+      TemporaryModifier: 0
+    - _naturalUnit: 100
+      BonusModifier: 0
+      TemporaryModifier: 0

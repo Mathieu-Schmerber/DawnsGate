@@ -1,4 +1,4 @@
-﻿using Game.Inputs;
+﻿using Game.Managers;
 using Nawlian.Lib.Systems.Interaction;
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ namespace Game.Entities.Player
 	{
 		private HashSet<MonoBehaviour> _nearbyInteractions = new();
 		private MonoBehaviour _lastNearest = null;
-		private InputHandler _inputs;
+		private InputManager _inputs;
 
 		/// <summary>
 		/// Triggers when the interaction suggestion changed, the interactable object may be null.
@@ -31,7 +31,7 @@ namespace Game.Entities.Player
 
 		private void Awake()
 		{
-			_inputs = GetComponent<InputHandler>();
+			_inputs = InputManager.Instance;
 		}
 
 		private void Update()
