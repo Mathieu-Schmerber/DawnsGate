@@ -1,4 +1,5 @@
 using Nawlian.Lib.Systems.Pooling;
+using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -8,6 +9,7 @@ namespace Game.Entities.Shared.Effects
 {
 	public class AfterImageEffect : MonoBehaviour
 	{
+		[SerializeField, ValidateInput(nameof(EditorValidate), "_afterImageEffect needs an IPoolableObject component.")] private GameObject _afterImageEffect;
 		private SkinnedMeshRenderer _skin;
 		private AController _controller;
 
@@ -33,7 +35,7 @@ namespace Game.Entities.Shared.Effects
 
 			for (int i = 0; i < number; i++)
 			{
-				GameObject image = ObjectPooler.Get(PoolIdEnum.AFTER_IMAGE, transform.position, transform.rotation, null);
+				GameObject image = ObjectPooler.Get(_afterImageEffect, transform.position, transform.rotation, null);
 				var filter = image.GetComponentInChildren<MeshFilter>();
 
 				_skin.BakeMesh(filter.mesh);
@@ -42,5 +44,7 @@ namespace Game.Entities.Shared.Effects
 		}
 
 		private void OnDash(DashParameters obj) => StartCoroutine(AfterImage(obj.Time, Mathf.FloorToInt(obj.Distance)));
+
+		private bool EditorValidate() => _afterImageEffect.GetComponent<IPoolableObject>() != null;
 	}
 }

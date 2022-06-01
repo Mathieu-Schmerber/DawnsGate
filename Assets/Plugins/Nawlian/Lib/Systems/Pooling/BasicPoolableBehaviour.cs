@@ -17,7 +17,6 @@ namespace Nawlian.Lib.Systems.Pooling
 		protected override void OnReleasing()
 		{
 			base.OnReleasing();
-			Debug.Log("Release");
 		}
 	}
 }

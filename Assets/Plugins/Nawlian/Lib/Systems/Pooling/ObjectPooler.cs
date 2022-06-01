@@ -16,7 +16,8 @@ namespace Nawlian.Lib.Systems.Pooling
 	{
 		#region Types
 
-		[System.Serializable] public class PoolDictionary : SerializedDictionary<PoolIdEnum, PooledItem> { }
+		[System.Serializable] public class IdPoolDictionary : SerializedDictionary<PoolIdEnum, PooledItem> { }
+		[System.Serializable] public class NamedPoolDictionary : SerializedDictionary<string, PooledItem> { }
 
 		[System.Serializable]
 		public class PooledItem
@@ -30,7 +31,8 @@ namespace Nawlian.Lib.Systems.Pooling
 
 		#endregion
 
-		[SerializeField] private PoolDictionary _pools = new PoolDictionary();
+		[SerializeField] private IdPoolDictionary _idPool = new IdPoolDictionary();
+		[SerializeField] private NamedPoolDictionary _namedPool = new NamedPoolDictionary();
 
 		private void Start() => SpawnPools();
 
@@ -41,8 +43,8 @@ namespace Nawlian.Lib.Systems.Pooling
 		/// </summary>
 		/// <param name="id"></param>
 		/// <param name="prefab"></param>
-		public static void AddToPool(PoolIdEnum id, GameObject prefab) => Instance._pools.Add(id, new PooledItem() { Prefab = prefab });
-		public static string[] GetPoolNames() => Instance._pools.Where(x => x.Value.Prefab != null).Select(x => x.Value.Prefab.name).ToArray();
+		public static void AddToPool(PoolIdEnum id, GameObject prefab) => Instance._idPool.Add(id, new PooledItem() { Prefab = prefab });
+		public static string[] GetPoolNames() => Instance._idPool.Where(x => x.Value.Prefab != null).Select(x => x.Value.Prefab.name).ToArray();
 
 		#endregion
 
@@ -61,8 +63,6 @@ namespace Nawlian.Lib.Systems.Pooling
 		/// <summary>
 		/// Gets an object from the pool.
 		/// </summary>
-		/// <param name="poolId"></param>
-		/// <param name="callback"></param>
 		/// <returns></returns>
 		public static GameObject Get(PoolIdEnum poolId, object initializationData, Action<GameObject> onInititialized = null)
 		{
@@ -77,12 +77,40 @@ namespace Nawlian.Lib.Systems.Pooling
 		/// <summary>
 		/// Gets an object from the pool.
 		/// </summary>
-		/// <param name="poolId"></param>
-		/// <param name="callback"></param>
 		/// <returns></returns>
 		public static GameObject Get(PoolIdEnum poolId, Vector3 position, Quaternion rotation, object initializationData, Action<GameObject> onInititialized = null)
 		{
 			IPoolableObject poolable = Instance.GetObject(poolId);
+			GameObject instance = poolable.Get();
+
+			instance.transform.position = position;
+			instance.transform.rotation = rotation;
+			poolable.InitFromPool(initializationData);
+			onInititialized?.Invoke(instance);
+			return instance;
+		}
+
+		/// <summary>
+		/// Gets an object from the pool.
+		/// </summary>
+		/// <returns></returns>
+		public static GameObject Get(GameObject poolPrefab, object initializationData, Action<GameObject> onInititialized = null)
+		{
+			IPoolableObject poolable = Instance.GetObject(poolPrefab);
+			GameObject instance = poolable.Get();
+
+			poolable.InitFromPool(initializationData);
+			onInititialized?.Invoke(instance);
+			return instance;
+		}
+
+		/// <summary>
+		/// Gets an object from the pool.
+		/// </summary>
+		/// <returns></returns>
+		public static GameObject Get(GameObject poolPrefab, Vector3 position, Quaternion rotation, object initializationData, Action<GameObject> onInititialized = null)
+		{
+			IPoolableObject poolable = Instance.GetObject(poolPrefab);
 			GameObject instance = poolable.Get();
 
 			instance.transform.position = position;
@@ -101,12 +129,25 @@ namespace Nawlian.Lib.Systems.Pooling
 		/// </summary>
 		private void SpawnPools()
 		{
-			foreach (PooledItem item in _pools.Values)
+			foreach (PooledItem item in _idPool.Values)
 			{
 				for (int i = 0; i < item.InitialCount; i++)
 				{
 					GameObject go = Instantiate(item.Prefab);
 
+					go.name = item.Prefab.name;
+					item.Pool.Add(go.GetComponent<IPoolableObject>());
+					go.SetActive(false);
+				}
+			}
+
+			foreach (PooledItem item in _namedPool.Values)
+			{
+				for (int i = 0; i < item.InitialCount; i++)
+				{
+					GameObject go = Instantiate(item.Prefab);
+
+					go.name = item.Prefab.name;
 					item.Pool.Add(go.GetComponent<IPoolableObject>());
 					go.SetActive(false);
 				}
@@ -115,7 +156,28 @@ namespace Nawlian.Lib.Systems.Pooling
 
 		private IPoolableObject GetObject(PoolIdEnum poolId)
 		{
-			PooledItem pooledItem = _pools[poolId];
+			if (!_idPool.ContainsKey(poolId))
+				Debug.LogError($"ObjectPooler - Requested id {poolId} not found within the pool.");
+
+			PooledItem pooledItem = _idPool[poolId];
+			IPoolableObject instance;
+
+			foreach (IPoolableObject item in pooledItem.Pool)
+			{
+				if (item.Released)
+					return item;
+			}
+			instance = Instantiate(pooledItem.Prefab).GetComponent<IPoolableObject>();
+			pooledItem.Pool.Add(instance);
+			return instance;
+		}
+
+		private IPoolableObject GetObject(GameObject poolObject)
+		{
+			if (!_namedPool.ContainsKey(poolObject.name))
+				_namedPool.Add(poolObject.name, new PooledItem() { Prefab = poolObject, Pool = new() });
+
+			PooledItem pooledItem = _namedPool[poolObject.name];
 			IPoolableObject instance;
 
 			foreach (IPoolableObject item in pooledItem.Pool)
