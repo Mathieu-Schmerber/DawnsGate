@@ -1,10 +1,8 @@
 ﻿using Game.Entities.Player;
 using Nawlian.Lib.Systems.Interaction;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-namespace Game.Entities.Weapons
+namespace Game.Systems.Combat.Weapons
 {
 	public class WeaponItem : MonoBehaviour, IInteractable
 	{

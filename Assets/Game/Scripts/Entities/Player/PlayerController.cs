@@ -7,7 +7,6 @@ using Nawlian.Lib.Utils;
 using Nawlian.Lib.Extensions;
 using Game.Managers;
 using Game.Entities.Shared;
-using Game.Scriptables;
 
 namespace Game.Entities.Player
 {

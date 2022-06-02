@@ -1,13 +1,9 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using Sirenix.OdinInspector;
-using Pixelplacement;
 using Nawlian.Lib.Extensions;
 using Nawlian.Lib.Utils;
-using Game.Entities.Shared.Effects;
-using Game.Scriptables;
+using Game.VFX;
 using System;
 
 namespace Game.Entities.Shared

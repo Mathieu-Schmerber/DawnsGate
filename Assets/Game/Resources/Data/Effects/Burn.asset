@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c20aea0fd1aa67419e2f70ffca4d7bc, type: 3}
+  m_Name: Burn
+  m_EditorClassIdentifier: 
+  DisplayName: Burn
+  Description: 
+  Script: {fileID: 11500000, guid: ab790384dc304bd478352368cd7fc1e2, type: 3}
+  Interval:
+    Enabled: 1
+    _value: 1
+  Actions:
+  - Action: 1
+    DamageAmount: 0
+    Modifiers:
+      keyData: 01000000
+      valueData:
+      - _naturalUnit: 10
+        BonusModifier: 0
+        TemporaryModifier: 0
+    Prefab: {fileID: 0}
+    StickToEntity: 0

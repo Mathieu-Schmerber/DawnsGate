@@ -1,4 +1,3 @@
-using Game.Entities.Shared;
 using Pixelplacement;
 using Pixelplacement.TweenSystem;
 using System;
@@ -7,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
-using StatModifier = Game.Scriptables.StatModifier;
+using StatModifier = Game.Entities.Shared.StatModifier;
 
 namespace Game.Entities.Shared.Health
 {
@@ -72,6 +71,24 @@ namespace Game.Entities.Shared.Health
 			// Death check
 			if (IsDead)
 				Kill(attacker);
+		}
+
+		public void ApplyPassiveDamage(float damage)
+		{
+			if (IsDead || _identity.IsInvulnerable) return;
+
+			// Apply damage
+			if (_identity.CurrentArmor > 0)
+				_identity.CurrentArmor -= damage;
+			else
+				_identity.CurrentHealth -= damage;
+
+			// Triggering event
+			OnDamage?.Invoke();
+
+			// Death check
+			if (IsDead)
+				Kill(null);
 		}
 
 		/// <summary>

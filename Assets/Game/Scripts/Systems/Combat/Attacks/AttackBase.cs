@@ -1,9 +1,8 @@
 ﻿using Game.Entities.Shared;
-using Game.Scriptables;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Game.Entities.Shared.Attacks
+namespace Game.Systems.Combat.Attacks
 {
 	public abstract class AttackBase : MonoBehaviour
 	{

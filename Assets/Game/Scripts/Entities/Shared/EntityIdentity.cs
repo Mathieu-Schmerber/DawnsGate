@@ -1,4 +1,3 @@
-using Game.Scriptables;
 using Nawlian.Lib.Utils;
 using Sirenix.OdinInspector;
 using System;

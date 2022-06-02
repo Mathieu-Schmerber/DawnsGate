@@ -6,11 +6,10 @@ using UnityEngine;
 using Nawlian.Lib.Extensions;
 using Nawlian.Lib.Systems.Pooling;
 using Game.Entities.Shared;
-using Game.Scriptables;
-using static Game.Scriptables.AttackBaseData;
+using static Game.Systems.Combat.Attacks.AttackBaseData;
 using System.Linq;
 
-namespace Game.Entities.Shared.Attacks
+namespace Game.Systems.Combat.Attacks
 {
 	public class ModularAttack : AttackBase
 	{

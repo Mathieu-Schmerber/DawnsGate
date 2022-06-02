@@ -1,16 +1,12 @@
 using Game.Entities.Shared;
 using Game.Entities.Player;
-using Game.Entities.Shared.Attacks;
-using Game.Scriptables;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Game.Entities.Camera;
 using Game.Managers;
+using Game.Systems.Combat.Attacks;
 
-namespace Game.Entities.Weapons
+namespace Game.Systems.Combat.Weapons
 {
 	public class Weapon : MonoBehaviour
 	{
@@ -132,7 +128,7 @@ namespace Game.Entities.Weapons
 			// Managing attack instance
 			Vector3 aimDir = _controller.GetAimNormal();
 			Vector3 dashOffset = IsDashedAttack() && !attack.FollowCaster ? attack.transform.forward * CurrentWeaponAttack.Dash.Distance : Vector3.zero;
-			
+
 			attack.transform.rotation = Quaternion.LookRotation(aimDir);
 			attack.OnStart(CurrentWeaponAttack.Attack.StartOffset + dashOffset, CurrentWeaponAttack.Attack.TravelDistance);
 

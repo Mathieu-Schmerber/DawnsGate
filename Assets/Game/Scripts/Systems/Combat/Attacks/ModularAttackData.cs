@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace Game.Scriptables
+namespace Game.Systems.Combat.Attacks
 {
 	[CreateAssetMenu(menuName = "Data/Attacks/ModularAttack")]
 	public class ModularAttackData : AttackBaseData
@@ -21,6 +21,6 @@ namespace Game.Scriptables
 		public bool FollowCaster;
 		public float Range;
 
-		private bool EditorValidate() => HitFx.GetComponent<IPoolableObject>() != null;
+		private bool EditorValidate() => HitFx != null && HitFx.GetComponent<IPoolableObject>() != null;
 	}
 }

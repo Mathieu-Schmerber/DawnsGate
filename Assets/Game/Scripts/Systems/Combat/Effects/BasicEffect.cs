@@ -1,0 +1,82 @@
+﻿using Game.Entities.Shared;
+using Nawlian.Lib.Systems.Pooling;
+using System.Collections.Generic;
+using UnityEngine;
+
+namespace Game.Systems.Combat.Effects
+{
+	public class BasicEffect : AEffect
+	{
+		private BasicEffectData _data;
+		private IDamageProcessor _damageProcessor;
+		private EntityIdentity _identity;
+		private List<GameObject> _spawned = new();
+
+		private int _activations { get; set; }
+
+		private void Awake()
+		{
+			_damageProcessor = GetComponent<IDamageProcessor>();
+			_identity = GetComponent<EntityIdentity>();
+		}
+
+		public override void OnStart(float duration, AEffectBaseData data)
+		{
+			_data = data as BasicEffectData;
+			base.OnStart(duration, data);
+		}
+
+		protected override void OnEnd()
+		{
+			foreach (BasicEffectData.ActionDescriptor action in _data.Actions)
+			{
+				if (action.Action == EffectAction.APPLY_MODIFIER)
+					RemoveModifiers(action.Modifiers);
+			}
+			_spawned.ForEach(x => x.GetComponent<IPoolableObject>()?.Release());
+		}
+
+		private void ApplyModifiers(StatDictionary modifiers)
+		{
+			foreach (var item in modifiers)
+			{
+				_identity.Stats.Modifiers[item.Key].TemporaryModifier += item.Value.Value;
+				Debug.Log($"Add: {item.Value.Value}");
+			}
+		}
+
+		private void RemoveModifiers(StatDictionary modifiers)
+		{
+			foreach (var item in modifiers) {
+				_identity.Stats.Modifiers[item.Key].TemporaryModifier -= item.Value.Value * _activations;
+				Debug.Log($"Remove: {item.Value.Value * _activations}");
+			}
+		}
+
+		protected override void OnActivation()
+		{
+			foreach (BasicEffectData.ActionDescriptor action in _data.Actions)
+			{
+				switch (action.Action)
+				{
+					case EffectAction.APPLY_DAMAGE:
+						_damageProcessor.ApplyPassiveDamage(action.DamageAmount);
+						break;
+					case EffectAction.APPLY_MODIFIER:
+						ApplyModifiers(action.Modifiers);
+						break;
+					case EffectAction.SPAWN_OBJECT:
+						ObjectPooler.Get(action.Prefab, null, (GameObject go) => {
+							if (action.StickToEntity)
+								go.transform.parent = transform;
+							_spawned.Add(go);
+						});
+						break;
+					default:
+						break;
+				}
+			}
+			_activations++;
+		}
+	}
+}

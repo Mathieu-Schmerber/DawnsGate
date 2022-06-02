@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
-namespace Game.Entities.Weapons
+namespace Game.Systems.Combat.Weapons
 {
 	/// <summary>
 	/// Manages weapon state between being an item on the ground or equipped in hand

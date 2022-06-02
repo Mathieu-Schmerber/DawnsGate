@@ -1,4 +1,4 @@
-﻿using Game.Scriptables;
+﻿using Game.Entities.Shared;
 using Sirenix.OdinInspector;
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace Game.Assets.Game.Scripts.Scriptables
+namespace Game.Entities.AI
 {
 	[CreateAssetMenu(menuName = "Data/Entity/Stats/Enemy")]
 	public class EnemyStatData : BaseStatData

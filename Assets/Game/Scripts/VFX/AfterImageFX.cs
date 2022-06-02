@@ -1,3 +1,4 @@
+using Game.Entities.Shared;
 using Nawlian.Lib.Systems.Pooling;
 using Sirenix.OdinInspector;
 using System.Collections;
@@ -5,9 +6,9 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace Game.Entities.Shared.Effects
+namespace Game.VFX
 {
-	public class AfterImageEffect : MonoBehaviour
+	public class AfterImageFX : MonoBehaviour
 	{
 		[SerializeField, ValidateInput(nameof(EditorValidate), "_afterImageEffect needs an IPoolableObject component.")] private GameObject _afterImageEffect;
 		private SkinnedMeshRenderer _skin;

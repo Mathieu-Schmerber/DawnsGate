@@ -1,16 +1,12 @@
 using Game.Entities.Shared;
-using Game.Entities.Shared.Attacks;
-using Game.Entities.Weapons;
 using Game.Managers;
-using Game.Scriptables;
+using Game.Systems.Combat.Attacks;
+using Game.Systems.Combat.Weapons;
 using Nawlian.Lib.Systems.Animations;
 using Nawlian.Lib.Utils;
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 namespace Game.Entities.Player
 {
@@ -129,13 +125,18 @@ namespace Game.Entities.Player
 		/// </summary>
 		protected virtual void OnMeleeAttack()
 		{
-			bool canCombo = Time.time - _attackTimer.LastTickFrame - _attackTimer.Interval <= _weapon.ComboIntervalTime;
+			float delta = Time.time - _attackTimer.LastTickFrame;
+			bool canCombo = delta - _attackTimer.Interval <= _weapon.ComboIntervalTime;
 			var attack = _weapon.GetNextAttack(canCombo);
+			float attackSpeed = _identity.Scale(_weapon.Data.AttackSpeed, StatModifier.AttackSpeed);
+
+			Debug.Log($"{_weapon.Data.AttackSpeed} => {_identity.Stats.Modifiers[StatModifier.AttackSpeed].Value}% = {attackSpeed}");
 
 			if (attack == null)
 				return;
 			_weapon.OnAttackStart();
-			_attackTimer.Interval = attack.AttackAnimation.length / _weapon.Data.AttackSpeed + _minTimeBetweenAttacks;
+			_animator.SetFloat("AttackSpeed", attackSpeed);
+			_attackTimer.Interval = attack.AttackAnimation.length / attackSpeed + _minTimeBetweenAttacks;
 			_animator.Play(attack.AttackAnimation.name);
 		}
 

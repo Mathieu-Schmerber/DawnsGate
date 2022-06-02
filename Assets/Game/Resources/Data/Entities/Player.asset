@@ -17,7 +17,7 @@ MonoBehaviour:
   DashRange: 4
   DashCooldown: 1
   Modifiers:
-    keyData: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c000000
+    keyData: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d000000
     valueData:
     - _naturalUnit: 100
       BonusModifier: 0
@@ -56,5 +56,8 @@ MonoBehaviour:
       BonusModifier: 0
       TemporaryModifier: 0
     - _naturalUnit: 100
+      BonusModifier: 0
+      TemporaryModifier: 0
+    - _naturalUnit: 0
       BonusModifier: 0
       TemporaryModifier: 0
