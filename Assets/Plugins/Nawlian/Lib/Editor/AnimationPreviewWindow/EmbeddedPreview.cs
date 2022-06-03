@@ -41,10 +41,10 @@ namespace Nawlian.Lib.EditorTools.AnimationPreviewWindow
 			{
 				PreviewGameObject = previewGO;
 				SetupScene();
-				//Preview.CameraController.Target = previewGO.transform.position;
+				Preview.CameraController.Target = previewGO.transform.position;
 			}
-			//Preview.SetButtonsEnabled(true);
-			//Preview.CameraController.SetStatesEnabled(true);
+			Preview.SetButtonsEnabled(true);
+			Preview.CameraController.SetStatesEnabled(true);
 		}
 
 		public sealed override void OnInteractivePreviewGUI(Rect r, GUIStyle background)

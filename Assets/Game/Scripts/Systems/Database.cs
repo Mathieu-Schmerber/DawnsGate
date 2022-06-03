@@ -37,12 +37,12 @@ namespace Databases
             public class Editor
             {
                 
-                public static UnityEngine.GameObject Player = (UnityEngine.GameObject)Instance.DatabaseAsset.Sections[0].Sections[0].Assets[0].Prefab;
+                public static UnityEngine.GameObject AnimationPreview = (UnityEngine.GameObject)Instance.DatabaseAsset.Sections[0].Sections[0].Assets[0].Prefab;
                 
                 public static IEnumerable<T> All<T>()
                     where T : UnityEngine.Object
                 {
-                    UnityEngine.Object[] all = new UnityEngine.Object[1] {Player};
+                    UnityEngine.Object[] all = new UnityEngine.Object[1] {AnimationPreview};
                     return all.Where(x => x is T).Select(x => (T)x);
                 }
             }

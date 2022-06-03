@@ -46,7 +46,7 @@ namespace Nawlian.Lib.EditorTools.AnimationPreviewWindow
 		{
 			_eventDrawer.Clip = Data;
 			serializedObject.Update();
-			serializedObject.ApplyModifiedProperties();
+			//serializedObject.ApplyModifiedProperties();
 			_timeline.EndTime = Data.length;
 			_timeline.Framerate = Data.frameRate;
 			if (_timeline != null) _timeline.Visible = Data != null;
@@ -85,6 +85,7 @@ namespace Nawlian.Lib.EditorTools.AnimationPreviewWindow
 			_previewAnimator.Character = PreviewGameObject;
 			_previewAnimator.Character.transform.position = Vector3.zero;
 			_previewAnimator.Character.transform.eulerAngles = Vector3.zero;
+			Preview.Camera.nearClipPlane = 0.01f;
 			Preview.Camera.transform.position = new Vector3(5, 3.5f, 5);
 			Preview.Camera.transform.rotation = Quaternion.Euler(new Vector3(20, -135, 0));
 			Preview.Camera.orthographic = true;

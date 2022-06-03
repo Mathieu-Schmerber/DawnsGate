@@ -116,7 +116,7 @@ namespace Game.Editor
                     {
                         item.AttackAnimation = (AnimationClip)EditorGUILayout.ObjectField("Animation", item.AttackAnimation, typeof(AnimationClip), false);
                         if (GUILayout.Button(new GUIContent("", EditorGUIUtility.IconContent("animationvisibilitytoggleon").image), GUILayout.Width(45)))
-                            AnimationPreviewWindow.OpenWindow<WeaponAttackEvent>(item.AttackAnimation, "OnAnimationEvent", Databases.Database.Templates.Editor.Player);
+                            AnimationPreviewWindow.OpenWindow<WeaponAttackEvent>(item.AttackAnimation, "OnAnimationEvent", Databases.Database.Templates.Editor.AnimationPreview);
                     }
                     EditorGUILayout.EndHorizontal();
                 }
