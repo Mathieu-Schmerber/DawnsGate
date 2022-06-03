@@ -1,11 +1,16 @@
 using Game.Systems.Combat.Attacks;
 using Sirenix.OdinInspector;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Game.Systems.Combat.Weapons
 {
+	public enum WeaponAttackEvent
+	{
+		ATTACK,
+		DASH
+	}
+
 	[CreateAssetMenu(menuName = "Data/Weapons/Weapon")]
 	public class WeaponData : SerializedScriptableObject
 	{
@@ -47,13 +52,17 @@ namespace Game.Systems.Combat.Weapons
 		[System.Serializable]
 		public class WeaponAttack
 		{
-			[Required, InlineButton("@Debug.Log(AttackAnimation.name)", "Edit Animation Events")] public AnimationClip AttackAnimation;
-
+			[Required] public AnimationClip AttackAnimation;
 			[TabGroup("Attack"), HideLabel] public Attack Attack;
 			[TabGroup("Dash"), HideLabel] public Dash Dash;
 			[TabGroup("FX"), HideLabel] public FX FX;
 
-			public int OnHitDamage;
+			public WeaponAttack()
+			{
+				Attack = new();
+				Dash = new();
+				FX = new();
+			}
 		}
 
 		#endregion
@@ -70,6 +79,7 @@ namespace Game.Systems.Combat.Weapons
 		#endregion
 
 		public bool IsHeavy(WeaponAttack attack) => attack == AttackCombos[AttackCombos.Count - 1];
+
 
 	}
 }

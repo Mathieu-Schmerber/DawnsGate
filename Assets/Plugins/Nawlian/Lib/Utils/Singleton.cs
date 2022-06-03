@@ -33,6 +33,6 @@ namespace Nawlian.Lib.Utils
 
         public static T Instance => _instance ??= (T)Activator.CreateInstance(typeof(T));
 
-        private Singleton() {}
+        public Singleton() {}
     }
 }
