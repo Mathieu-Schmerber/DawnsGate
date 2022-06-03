@@ -7,8 +7,8 @@ namespace Game.Systems.Combat.Weapons
 {
 	public enum WeaponAttackEvent
 	{
-		ATTACK,
-		DASH
+		Attack,
+		Dash
 	}
 
 	[CreateAssetMenu(menuName = "Data/Weapons/Weapon")]

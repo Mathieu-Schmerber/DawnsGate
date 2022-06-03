@@ -8,8 +8,7 @@ using Nawlian.Lib.Extensions;
 
 namespace Nawlian.Lib.EditorTools.AnimationPreviewWindow
 {
-    public class AnimationPreviewWindow<TEnum> : PreviewEditorWindow<AnimationPreview, AnimationClip>
-		where TEnum : Enum
+    public class AnimationPreviewWindow : PreviewEditorWindow<AnimationPreview, AnimationClip>
     {
         internal class IndexRangePair
 		{
@@ -29,16 +28,19 @@ namespace Nawlian.Lib.EditorTools.AnimationPreviewWindow
 
 		private List<AnimationEvent> _events = new List<AnimationEvent>();
 		private Vector2 _scoll;
+		private Type _enum;
 
         #endregion
 
-        public static void OpenWindow(AnimationClip clip, string animationEventCallback, GameObject animatedObject = null)
+        public static void OpenWindow<TEnum>(AnimationClip clip, string animationEventCallback, GameObject animatedObject = null)
+			where TEnum : Enum
         {
-            AnimationPreviewWindow<TEnum> window = CreateWindow<AnimationPreviewWindow<TEnum>>();
+            AnimationPreviewWindow window = CreateWindow<AnimationPreviewWindow>();
 
 			window.AnimationCallback = animationEventCallback;
 			window.DataPreview = clip;
 			window.PreviewGameObject = animatedObject;
+			window._enum = typeof(TEnum);
 			window.SaveEvents();
             window.Show();
 			window.Focus();
@@ -62,7 +64,7 @@ namespace Nawlian.Lib.EditorTools.AnimationPreviewWindow
 
 		private void RenderEvent(AnimationEvent animationEvent, ref int index)
 		{
-			List<string> events = Enum.GetNames(typeof(TEnum)).ToList();
+			List<string> events = Enum.GetNames(_enum).ToList();
 			Color color = GUI.backgroundColor;
 			bool remove;
 			int select = events.IndexOf(animationEvent.stringParameter);
@@ -99,7 +101,7 @@ namespace Nawlian.Lib.EditorTools.AnimationPreviewWindow
 			{
 				_events.Add(new AnimationEvent() { 
 					functionName = AnimationCallback, 
-					stringParameter = Enum.GetNames(typeof(TEnum))[0],
+					stringParameter = Enum.GetNames(_enum)[0],
 					time = PreviewEditor.CurrentTime
 				});
 				_events = _events.OrderBy(x => x.time).ToList();
