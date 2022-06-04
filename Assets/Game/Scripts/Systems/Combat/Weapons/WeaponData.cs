@@ -1,6 +1,7 @@
 using Game.Systems.Combat.Attacks;
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Game.Systems.Combat.Weapons
@@ -19,7 +20,6 @@ namespace Game.Systems.Combat.Weapons
 		[System.Serializable]
 		public class Attack
 		{
-			[Required]
 			public AttackBaseData AttackData;
 			public Vector3 StartOffset;
 			public Vector3 TravelDistance;
@@ -36,7 +36,23 @@ namespace Game.Systems.Combat.Weapons
 			public bool OnlyWhenMoving;
 			public bool OnAnimationEventOnly;
 			[Min(0)] public float Distance;
-			[Min(0)] public float Duration;
+
+#if UNITY_EDITOR
+
+			public string GetInfo() => $"The {nameof(Distance)} field can be set to 0 to disable auto-dashing the attack.";
+
+			public string GetWarning()
+			{
+				if (Distance > 0)
+					return null;
+				if (OnlyWhenMoving)
+					return $"{nameof(OnlyWhenMoving)} is checked, but the dash distance is 0.";
+				if (OnAnimationEventOnly)
+					return $"{nameof(OnAnimationEventOnly)} is checked, but the dash distance is 0.";
+				return null;
+			}
+
+#endif
 		}
 
 		[System.Serializable]
@@ -47,15 +63,21 @@ namespace Game.Systems.Combat.Weapons
 
 			[Range(0, 1)] public float VibrationForce;
 			public float VibrationDuration;
+
+#if UNITY_EDITOR
+			public string GetInfo() => $"Any FX triggers when the {WeaponAttackEvent.Attack} event triggers on the animation.";
+
+			public string GetWarning() => null;
+#endif
 		}
 
 		[System.Serializable]
 		public class WeaponAttack
 		{
-			[Required] public AnimationClip AttackAnimation;
-			[TabGroup("Attack"), HideLabel] public Attack Attack;
-			[TabGroup("Dash"), HideLabel] public Dash Dash;
-			[TabGroup("FX"), HideLabel] public FX FX;
+			public AnimationClip AttackAnimation;
+			public Attack Attack;
+			public Dash Dash;
+			public FX FX;
 
 			public WeaponAttack()
 			{
@@ -63,23 +85,28 @@ namespace Game.Systems.Combat.Weapons
 				Dash = new();
 				FX = new();
 			}
+
+			public bool ContainsEvent(WeaponAttackEvent @event) => AttackAnimation.events.Any(x => x.stringParameter == @event.ToString());
 		}
 
 		#endregion
 
 		#region Properties
 
-
-		[Required] public Mesh Mesh;
-		public string LocomotionLayer = "DefaultLocomotion";
-		[Min(0)] public float AttackSpeed;
-		[Min(0)] public float ComboIntervalTime;
+		public Mesh Mesh;
+		[@Tooltip("Animator layer to use when moving around holding this weapon.")] public string LocomotionLayer = "DefaultLocomotion";
+		[Min(0), @Tooltip("Base attack speed of the weapon, affects animation speed.")] public float AttackSpeed;
+		[Min(0), @Tooltip("Maximum allowed time between two attacks to not break the combo.")] public float ComboIntervalTime;
 		public List<WeaponAttack> AttackCombos;
 
 		#endregion
 
 		public bool IsHeavy(WeaponAttack attack) => attack == AttackCombos[AttackCombos.Count - 1];
 
+#if UNITY_EDITOR
 
+
+
+#endif
 	}
 }

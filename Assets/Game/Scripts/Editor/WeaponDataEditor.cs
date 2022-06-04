@@ -127,7 +127,7 @@ namespace Game.Editor
                 var tabs = new GUIContent[] {
                     new GUIContent("Attack", EditorGUIUtility.IconContent("d_AudioMixerController Icon").image),
                     new GUIContent("Dash", EditorGUIUtility.IconContent("d_NavMeshAgent Icon").image),
-                    new GUIContent("FX", EditorGUIUtility.IconContent("d_ParticleSystem Icon").image)
+                    new GUIContent("FX", EditorGUIUtility.IconContent("d_ParticleSystem Icon").image),
                 };
                 _foldouts[item].selectedTab = GUILayout.Toolbar(_foldouts[item].selectedTab, tabs, GUILayout.Height(EditorGUIUtility.singleLineHeight * 1.5f));
 
@@ -135,26 +135,46 @@ namespace Game.Editor
                 {
                     case 0:
                         item.Attack.StartOffset = SirenixEditorFields.Vector3Field("Start Offset", item.Attack.StartOffset);
-                        item.Attack.StartOffset = SirenixEditorFields.Vector3Field("Travel distance", item.Attack.TravelDistance);
+                        item.Attack.TravelDistance = SirenixEditorFields.Vector3Field("Travel distance", item.Attack.TravelDistance);
                         item.Attack.AimAssist = EditorGUILayout.Toggle("Aim assist", item.Attack.AimAssist);
                         item.Attack.LockAim = EditorGUILayout.Toggle("Lock aim", item.Attack.LockAim);
                         item.Attack.LockMovement = EditorGUILayout.Toggle("Lock movement", item.Attack.LockMovement);
                         break;
                     case 1:
+                        ShowInfo(item.Dash.GetInfo());
+                        ShowWarning(item.Dash.GetWarning());
                         item.Dash.OnlyWhenMoving = EditorGUILayout.Toggle("Only When Moving", item.Dash.OnlyWhenMoving);
-                        item.Dash.OnAnimationEventOnly = EditorGUILayout.Toggle("On Animation Event Only", item.Dash.OnAnimationEventOnly);
-                        item.Dash.Distance = SirenixEditorFields.FloatField("Distance", item.Dash.Distance);
-                        item.Dash.Duration = SirenixEditorFields.FloatField("Duration", item.Dash.Duration);
+                        if (item.ContainsEvent(WeaponAttackEvent.Dash))
+                            item.Dash.OnAnimationEventOnly = EditorGUILayout.Toggle("On Animation Event Only", item.Dash.OnAnimationEventOnly);
+                        item.Dash.Distance = Mathf.Clamp(SirenixEditorFields.FloatField("Distance", item.Dash.Distance), 0, 10);
                         break;
                     case 2:
+                        ShowInfo(item.FX.GetInfo());
+                        ShowWarning(item.FX.GetWarning());
                         item.FX.CameraShakeForce = SirenixEditorFields.Vector3Field("Camera Shake Force", item.FX.CameraShakeForce);
-                        item.FX.CameraShakeDuration = SirenixEditorFields.FloatField("Camera Shake Duration", item.FX.CameraShakeDuration);
+                        if (item.FX.CameraShakeForce.magnitude > 0)
+                            item.FX.CameraShakeDuration = SirenixEditorFields.FloatField("Camera Shake Duration", item.FX.CameraShakeDuration);
                         item.FX.VibrationForce = SirenixEditorFields.RangeFloatField("Vibration Force", item.FX.VibrationForce, 0, 1);
-                        item.FX.VibrationDuration = SirenixEditorFields.FloatField("Vibration Duration", item.FX.VibrationDuration);
+                        if (item.FX.VibrationForce > 0)
+                            item.FX.VibrationDuration = SirenixEditorFields.FloatField("Vibration Duration", item.FX.VibrationDuration);
                         break;
                 }
             }
             SirenixEditorGUI.EndBox();
+        }
+
+        private void ShowWarning(string warning)
+        {
+            if (string.IsNullOrEmpty(warning))
+                return;
+            EditorGUILayout.HelpBox(warning, MessageType.Warning);
+        }
+
+        private void ShowInfo(string info)
+        {
+            if (string.IsNullOrEmpty(info))
+                return;
+            EditorGUILayout.HelpBox(info, MessageType.Info);
         }
     }
 }

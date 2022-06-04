@@ -21,6 +21,8 @@ namespace Game.Systems.Combat.Weapons
 		protected PlayerWeapon _weaponManager;
 		protected int _lastAttackIndex = -1;
 
+		private const float DASH_DURATION = 0.1f;
+
 		/// <summary>
 		/// Returns the current attack
 		/// </summary>
@@ -142,7 +144,7 @@ namespace Game.Systems.Combat.Weapons
 
 			// Dashed attack
 			if (IsDashedAttack())
-				_controller.Dash(aimDir, CurrentWeaponAttack.Dash.Distance, CurrentWeaponAttack.Dash.Duration);
+				_controller.Dash(aimDir, CurrentWeaponAttack.Dash.Distance, DASH_DURATION);
 
 			// Aim assist
 			if (CurrentWeaponAttack.Attack.AimAssist)
@@ -154,7 +156,7 @@ namespace Game.Systems.Combat.Weapons
 			if (animation == "Attack")
 				PerformAttack();
 			else if (animation == "Dash" && CurrentWeaponAttack.Dash.OnAnimationEventOnly && (_controller.GetMovementNormal().magnitude > 0 || !CurrentWeaponAttack.Dash.OnlyWhenMoving))
-				_controller.Dash(_controller.GetAimNormal(), CurrentWeaponAttack.Dash.Distance, CurrentWeaponAttack.Dash.Duration);
+				_controller.Dash(_controller.GetAimNormal(), CurrentWeaponAttack.Dash.Distance, DASH_DURATION);
 		}
 
 		public virtual void OnAnimationEnter(AnimatorStateInfo stateInfo) => _controller.State = EntityState.ATTACKING;

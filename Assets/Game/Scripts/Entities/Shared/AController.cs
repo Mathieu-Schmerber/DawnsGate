@@ -153,6 +153,9 @@ namespace Game.Entities.Shared
 
 		public void Dash(DashParameters parameters)
 		{
+			if (parameters.Distance == 0)
+				return;
+
 			Vector3 destination = transform.position + parameters.Direction * parameters.Distance;
 			float speed = parameters.Distance / parameters.Time;
 
