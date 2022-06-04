@@ -23,7 +23,7 @@ namespace Game.Systems.Combat.Attacks
 
 		[Title("Attack stats")]
 		public int BaseDamage;
-		[@Tooltip("Test")]public int BaseKnockbackForce;
+		public int BaseKnockbackForce;
 		public KnockbackDirection KnockbackDir;
 
 #if UNITY_EDITOR

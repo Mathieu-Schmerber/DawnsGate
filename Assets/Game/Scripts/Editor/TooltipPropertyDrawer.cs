@@ -8,7 +8,7 @@ public class TooltipPropertyDrawer : PropertyDrawer
     {
         EditorGUI.PropertyField(position, property, label);
 
-        Rect btnRect = new Rect(position.position.x + GetLabelSize(label).x, position.position.y, EditorGUIUtility.singleLineHeight, EditorGUIUtility.singleLineHeight);
+        Rect btnRect = new Rect(position.position.x + GetLabelSize(property.name).x, position.position.y, EditorGUIUtility.singleLineHeight, EditorGUIUtility.singleLineHeight);
         GUI.Button(btnRect, new GUIContent(EditorGUIUtility.IconContent("_Help@2x").image, ((Tooltip)attribute).text), GetStyle());
     }
 
@@ -24,11 +24,5 @@ public class TooltipPropertyDrawer : PropertyDrawer
         return style;
     }
 
-    private Vector2 GetLabelSize(GUIContent label) => GUI.skin.label.CalcSize(label);
-
-    public void GenerateTooltip(string text)
-    {
-        var propRect = GUILayoutUtility.GetLastRect();
-        GUI.Label(propRect, new GUIContent("", text));
-    }
+    private Vector2 GetLabelSize(string label) => GUI.skin.label.CalcSize(new GUIContent(label));
 }
