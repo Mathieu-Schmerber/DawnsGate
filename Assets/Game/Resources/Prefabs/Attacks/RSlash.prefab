@@ -4898,13 +4898,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17e5775844e65f84f9514b819ac7d21a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hitYRotation: 0
-  _activeTime: 0.4
-  _baseDamage: 10
-  _baseKnockbackForce: 1
-  _knockbackDirection: 1
-  _followCaster: 0
-  _range: 2.8
+  _attackData: {fileID: 11400000, guid: cf36fccbbc6be5f4ebb2e86e08393d51, type: 2}
 --- !u!65 &8336055474934556729
 BoxCollider:
   m_ObjectHideFlags: 0

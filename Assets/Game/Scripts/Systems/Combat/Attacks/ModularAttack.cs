@@ -13,12 +13,12 @@ namespace Game.Systems.Combat.Attacks
 {
 	public class ModularAttack : AttackBase
 	{
-		private ModularAttackData _attackData;
+		[SerializeField] private ModularAttackData _attackData;
 
 		public override bool FollowCaster => _attackData.FollowCaster;
 
 		/// TODO: calculate range from particle system and sh*t rather than affecting it manually
-		public override float Range => _attackData.Range;
+		public override float Range => _attackData?.Range ?? 0;
 
 		private List<Collider> _hitColliders = new List<Collider>();
 		private float _startTime;

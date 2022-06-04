@@ -4897,13 +4897,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17e5775844e65f84f9514b819ac7d21a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hitYRotation: 0
-  _activeTime: 0.4
-  _baseDamage: 20
-  _baseKnockbackForce: 2
-  _knockbackDirection: 1
-  _followCaster: 0
-  _range: 5
+  _attackData: {fileID: 11400000, guid: 9386e878b10001843aece5082ff2325d, type: 2}
 --- !u!136 &8947667001947049750
 CapsuleCollider:
   m_ObjectHideFlags: 0

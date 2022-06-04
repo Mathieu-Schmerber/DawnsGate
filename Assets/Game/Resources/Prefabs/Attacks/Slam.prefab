@@ -4906,13 +4906,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17e5775844e65f84f9514b819ac7d21a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hitYRotation: 0
-  _activeTime: 0.6
-  _baseDamage: 30
-  _baseKnockbackForce: 2
-  _knockbackDirection: 0
-  _followCaster: 1
-  _range: 6
+  _attackData: {fileID: 11400000, guid: 677fe4c347a22ec4e862ff99c0ca0579, type: 2}
 --- !u!135 &1934207743
 SphereCollider:
   m_ObjectHideFlags: 0
