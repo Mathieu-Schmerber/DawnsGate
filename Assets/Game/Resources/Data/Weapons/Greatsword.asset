@@ -29,34 +29,32 @@ MonoBehaviour:
   - AttackAnimation: {fileID: 7400000, guid: c1a35dc06e78ad143929fcd2e91a0648, type: 2}
     Attack:
       AttackData: {fileID: 11400000, guid: 3fe5b49525bec9e4184c79482cf32ece, type: 2}
-      StartOffset: {x: 0, y: 0, z: 2}
-      TravelDistance: {x: 0, y: 0, z: 2}
+      StartOffset: {x: 0, y: 0, z: 0.5}
+      TravelDistance: {x: 0, y: 0, z: 1.5}
       AimAssist: 0
       LockAim: 0
-      LockMovement: 0
+      LockMovement: 1
     Dash:
       OnlyWhenMoving: 1
-      OnAnimationEventOnly: 0
       Distance: 2
     FX:
-      CameraShakeForce: {x: 0, y: 0, z: 0}
+      CameraShakeForce: 0
       CameraShakeDuration: 0
       VibrationForce: 0
       VibrationDuration: 0
   - AttackAnimation: {fileID: 7400000, guid: eaa8bfba00fa6004d91026e7976f46b2, type: 2}
     Attack:
       AttackData: {fileID: 11400000, guid: 3fe5b49525bec9e4184c79482cf32ece, type: 2}
-      StartOffset: {x: 0, y: 0, z: 2}
-      TravelDistance: {x: 0, y: 0, z: 2}
+      StartOffset: {x: 0, y: 0, z: 0.5}
+      TravelDistance: {x: 0, y: 0, z: 1.5}
       AimAssist: 0
       LockAim: 0
-      LockMovement: 0
+      LockMovement: 1
     Dash:
       OnlyWhenMoving: 1
-      OnAnimationEventOnly: 0
       Distance: 2
     FX:
-      CameraShakeForce: {x: 0, y: 0, z: 0}
+      CameraShakeForce: 0
       CameraShakeDuration: 0
       VibrationForce: 0
       VibrationDuration: 0
@@ -70,10 +68,9 @@ MonoBehaviour:
       LockMovement: 1
     Dash:
       OnlyWhenMoving: 0
-      OnAnimationEventOnly: 0
       Distance: 4
     FX:
-      CameraShakeForce: {x: 0, y: 0, z: 0}
+      CameraShakeForce: 0
       CameraShakeDuration: 0
       VibrationForce: 0
       VibrationDuration: 0

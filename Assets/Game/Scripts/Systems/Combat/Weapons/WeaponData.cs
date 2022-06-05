@@ -21,36 +21,24 @@ namespace Game.Systems.Combat.Weapons
 		public class Attack
 		{
 			public AttackBaseData AttackData;
-			public Vector3 StartOffset;
-			public Vector3 TravelDistance;
-			public bool AimAssist;
-			public bool LockAim;
-			public bool LockMovement;
-
-			private bool AssertIsAttack(GameObject prefab) => prefab?.GetComponent<AttackBase>() != null;
+			[@Tooltip("Where to spawn the attack, relative to the player (Z being in front of the player)")] public Vector3 StartOffset;
+			[@Tooltip("The distance that the attack will travel, relative to the attack (Z being the front of the attack)")] public Vector3 TravelDistance;
+			[@Tooltip("Should this move be aim assisted ?")] public bool AimAssist;
+			[@Tooltip("Can the player rotate during the attack ?")] public bool LockAim;
+			[@Tooltip("Can the player move during the attack ?")] public bool LockMovement;
 		}
 
 		[System.Serializable]
 		public class Dash
 		{
-			public bool OnlyWhenMoving;
-			public bool OnAnimationEventOnly;
+			[@Tooltip("Should the dash event trigger only when moving ?")] public bool OnlyWhenMoving;
 			[Min(0)] public float Distance;
 
 #if UNITY_EDITOR
 
-			public string GetInfo() => $"The {nameof(Distance)} field can be set to 0 to disable auto-dashing the attack.";
+			public string GetInfo() => null;
 
-			public string GetWarning()
-			{
-				if (Distance > 0)
-					return null;
-				if (OnlyWhenMoving)
-					return $"{nameof(OnlyWhenMoving)} is checked, but the dash distance is 0.";
-				if (OnAnimationEventOnly)
-					return $"{nameof(OnAnimationEventOnly)} is checked, but the dash distance is 0.";
-				return null;
-			}
+			public string GetWarning() => null;
 
 #endif
 		}
@@ -58,11 +46,11 @@ namespace Game.Systems.Combat.Weapons
 		[System.Serializable]
 		public class FX
 		{
-			public Vector3 CameraShakeForce;
-			public float CameraShakeDuration;
+			[Range(0, 2)] public float CameraShakeForce;
+			[Min(0)] public float CameraShakeDuration;
 
 			[Range(0, 1)] public float VibrationForce;
-			public float VibrationDuration;
+			[Min(0)] public float VibrationDuration;
 
 #if UNITY_EDITOR
 			public string GetInfo() => $"Any FX triggers when the {WeaponAttackEvent.Attack} event triggers on the animation.";
@@ -86,7 +74,8 @@ namespace Game.Systems.Combat.Weapons
 				FX = new();
 			}
 
-			public bool ContainsEvent(WeaponAttackEvent @event) => AttackAnimation.events.Any(x => x.stringParameter == @event.ToString());
+			public bool ContainsEvent(WeaponAttackEvent @event) => AttackAnimation != null && AttackAnimation.events.Any(x => x.stringParameter == @event.ToString());
+			public bool HasError() => !ContainsEvent(WeaponAttackEvent.Attack);
 		}
 
 		#endregion
@@ -94,9 +83,12 @@ namespace Game.Systems.Combat.Weapons
 		#region Properties
 
 		public Mesh Mesh;
-		[@Tooltip("Animator layer to use when moving around holding this weapon.")] public string LocomotionLayer = "DefaultLocomotion";
-		[Min(0), @Tooltip("Base attack speed of the weapon, affects animation speed.")] public float AttackSpeed;
-		[Min(0), @Tooltip("Maximum allowed time between two attacks to not break the combo.")] public float ComboIntervalTime;
+		[@Tooltip("Animator layer to use when moving around holding this weapon.")] 
+		public string LocomotionLayer = "DefaultLocomotion";
+		[@Tooltip("Base attack speed of the weapon, affects animation speed.")]
+		[Min(0)] public float AttackSpeed;
+		[@Tooltip("Maximum allowed time to perform an attack input while not breaking a combo.")] 
+		[Min(0)] public float ComboIntervalTime;
 		public List<WeaponAttack> AttackCombos;
 
 		#endregion

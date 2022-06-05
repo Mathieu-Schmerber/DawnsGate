@@ -65,13 +65,14 @@ namespace Game.Editor
                 }
                 SirenixEditorGUI.EndBoxHeader();
 
-                foreach (var item in Data.AttackCombos.ToArray())
-                    DrawAttackContent(item);
+				for (int i = 0; i < Data.AttackCombos.Count; i++)
+                    DrawAttackContent(Data.AttackCombos[i], serializedObject.FindProperty(nameof(Data.AttackCombos)).GetArrayElementAtIndex(i));
+                    
             }
             SirenixEditorGUI.EndBox();
         }
 
-        private void DrawAttackContent(WeaponData.WeaponAttack item)
+        private void DrawAttackContent(WeaponData.WeaponAttack item, SerializedProperty itemProp)
         {
             if (!_foldouts.ContainsKey(item))
                 _foldouts[item] = new();
@@ -80,7 +81,7 @@ namespace Game.Editor
 
             var bg = GUI.backgroundColor;
 
-            GUI.backgroundColor = Color.black;
+            GUI.backgroundColor = item.HasError() ? Color.red : Color.black;
             SirenixEditorGUI.BeginBox();
             {
                 GUI.backgroundColor = bg;
@@ -90,7 +91,10 @@ namespace Game.Editor
                     {
                         _foldouts[item].foldout = SirenixEditorGUI.Foldout(new Rect(rect.position, new Vector2(10, EditorGUIUtility.singleLineHeight)), _foldouts[item].foldout, new GUIContent());
                         GUILayout.Space(20);
+
+                        GUI.backgroundColor = item.Attack.AttackData == null ? Color.red : bg;
                         item.Attack.AttackData = (AttackBaseData)EditorGUILayout.ObjectField(Data.IsHeavy(item) ? "Heavy Attack" : "Light Attack", item.Attack.AttackData, typeof(AttackBaseData), false);
+                        GUI.backgroundColor = bg;
                         if (GUILayout.Button(new GUIContent("", EditorGUIUtility.IconContent("P4_DeletedLocal").image), GUILayout.Height(EditorGUIUtility.singleLineHeight), GUILayout.Width(40)))
                         {
                             if (item.Attack.AttackData == null
@@ -102,7 +106,7 @@ namespace Game.Editor
                 }
                 SirenixEditorGUI.EndBoxHeader();
 
-                if (!_foldouts[item].foldout)
+                if (!_foldouts[item].foldout || item.Attack.AttackData == null)
                 {
                     SirenixEditorGUI.EndBox();
                     return;
@@ -114,9 +118,12 @@ namespace Game.Editor
                 {
                     EditorGUILayout.BeginHorizontal();
                     {
-                        item.AttackAnimation = (AnimationClip)EditorGUILayout.ObjectField("Animation", item.AttackAnimation, typeof(AnimationClip), false);
-                        if (GUILayout.Button(new GUIContent("", EditorGUIUtility.IconContent("animationvisibilitytoggleon").image), GUILayout.Width(45)))
+                        bg = GUI.backgroundColor;
+                        GUI.backgroundColor = item.ContainsEvent(WeaponAttackEvent.Attack) ? bg : Color.red;
+                        EditorGUILayout.PropertyField(itemProp.FindPropertyRelative(nameof(item.AttackAnimation)));
+                        if (item.AttackAnimation != null && GUILayout.Button(new GUIContent("", EditorGUIUtility.IconContent("animationvisibilitytoggleon").image), GUILayout.Width(45)))
                             AnimationPreviewWindow.OpenWindow<WeaponAttackEvent>(item.AttackAnimation, "OnAnimationEvent", Databases.Database.Templates.Editor.AnimationPreview);
+                        GUI.backgroundColor = bg;
                     }
                     EditorGUILayout.EndHorizontal();
                 }
@@ -126,7 +133,7 @@ namespace Game.Editor
 
                 var tabs = new GUIContent[] {
                     new GUIContent("Attack", EditorGUIUtility.IconContent("d_AudioMixerController Icon").image),
-                    new GUIContent("Dash", EditorGUIUtility.IconContent("d_NavMeshAgent Icon").image),
+                    new GUIContent("Auto Dash", EditorGUIUtility.IconContent("d_NavMeshAgent Icon").image),
                     new GUIContent("FX", EditorGUIUtility.IconContent("d_ParticleSystem Icon").image),
                 };
                 _foldouts[item].selectedTab = GUILayout.Toolbar(_foldouts[item].selectedTab, tabs, GUILayout.Height(EditorGUIUtility.singleLineHeight * 1.5f));
@@ -134,29 +141,45 @@ namespace Game.Editor
                 switch (_foldouts[item].selectedTab)
                 {
                     case 0:
-                        item.Attack.StartOffset = SirenixEditorFields.Vector3Field("Start Offset", item.Attack.StartOffset);
-                        item.Attack.TravelDistance = SirenixEditorFields.Vector3Field("Travel distance", item.Attack.TravelDistance);
-                        item.Attack.AimAssist = EditorGUILayout.Toggle("Aim assist", item.Attack.AimAssist);
-                        item.Attack.LockAim = EditorGUILayout.Toggle("Lock aim", item.Attack.LockAim);
-                        item.Attack.LockMovement = EditorGUILayout.Toggle("Lock movement", item.Attack.LockMovement);
+                        SerializedProperty attackProp = itemProp.FindPropertyRelative(nameof(item.Attack));
+
+                        if (item.ContainsEvent(WeaponAttackEvent.Attack))
+                        {
+                            EditorGUILayout.PropertyField(attackProp.FindPropertyRelative(nameof(item.Attack.StartOffset)));
+                            EditorGUILayout.PropertyField(attackProp.FindPropertyRelative(nameof(item.Attack.TravelDistance)));
+                            EditorGUILayout.PropertyField(attackProp.FindPropertyRelative(nameof(item.Attack.AimAssist)));
+                            EditorGUILayout.PropertyField(attackProp.FindPropertyRelative(nameof(item.Attack.LockAim)));
+                            EditorGUILayout.PropertyField(attackProp.FindPropertyRelative(nameof(item.Attack.LockMovement)));
+                        }
+                        else
+                            ShowError($"The '{nameof(item.AttackAnimation)}' doesn't contain any {WeaponAttackEvent.Attack} event.");
                         break;
                     case 1:
-                        ShowInfo(item.Dash.GetInfo());
-                        ShowWarning(item.Dash.GetWarning());
-                        item.Dash.OnlyWhenMoving = EditorGUILayout.Toggle("Only When Moving", item.Dash.OnlyWhenMoving);
+                        SerializedProperty dashProp = itemProp.FindPropertyRelative(nameof(item.Dash));
+
                         if (item.ContainsEvent(WeaponAttackEvent.Dash))
-                            item.Dash.OnAnimationEventOnly = EditorGUILayout.Toggle("On Animation Event Only", item.Dash.OnAnimationEventOnly);
-                        item.Dash.Distance = Mathf.Clamp(SirenixEditorFields.FloatField("Distance", item.Dash.Distance), 0, 10);
+                        {
+                            ShowInfo(item.Dash.GetInfo());
+                            ShowWarning(item.Dash.GetWarning());
+
+                            EditorGUILayout.PropertyField(dashProp.FindPropertyRelative(nameof(item.Dash.OnlyWhenMoving)));
+                            EditorGUILayout.PropertyField(dashProp.FindPropertyRelative(nameof(item.Dash.Distance)));
+                        }
+                        else
+                            ShowInfo($"No 'Dash' event have been setup within the {nameof(item.AttackAnimation)}.");
                         break;
                     case 2:
+                        SerializedProperty fxProp = itemProp.FindPropertyRelative(nameof(item.FX));
+
                         ShowInfo(item.FX.GetInfo());
                         ShowWarning(item.FX.GetWarning());
-                        item.FX.CameraShakeForce = SirenixEditorFields.Vector3Field("Camera Shake Force", item.FX.CameraShakeForce);
-                        if (item.FX.CameraShakeForce.magnitude > 0)
-                            item.FX.CameraShakeDuration = SirenixEditorFields.FloatField("Camera Shake Duration", item.FX.CameraShakeDuration);
-                        item.FX.VibrationForce = SirenixEditorFields.RangeFloatField("Vibration Force", item.FX.VibrationForce, 0, 1);
+
+                        EditorGUILayout.PropertyField(fxProp.FindPropertyRelative(nameof(item.FX.CameraShakeForce)));
+                        if (item.FX.CameraShakeForce > 0)
+                            EditorGUILayout.PropertyField(fxProp.FindPropertyRelative(nameof(item.FX.CameraShakeDuration)));
+                        EditorGUILayout.PropertyField(fxProp.FindPropertyRelative(nameof(item.FX.VibrationForce)));
                         if (item.FX.VibrationForce > 0)
-                            item.FX.VibrationDuration = SirenixEditorFields.FloatField("Vibration Duration", item.FX.VibrationDuration);
+                            EditorGUILayout.PropertyField(fxProp.FindPropertyRelative(nameof(item.FX.VibrationDuration)));
                         break;
                 }
             }
@@ -175,6 +198,13 @@ namespace Game.Editor
             if (string.IsNullOrEmpty(info))
                 return;
             EditorGUILayout.HelpBox(info, MessageType.Info);
+        }
+
+        private void ShowError(string error)
+        {
+            if (string.IsNullOrEmpty(error))
+                return;
+            EditorGUILayout.HelpBox(error, MessageType.Error);
         }
     }
 }

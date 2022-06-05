@@ -34,18 +34,14 @@ MonoBehaviour:
       AimAssist: 1
       LockAim: 0
       LockMovement: 1
-      IsHeavyAttack: 0
     Dash:
       OnlyWhenMoving: 1
-      OnAnimationEventOnly: 0
       Distance: 2
-      Duration: 0.1
     FX:
-      CameraShakeForce: {x: 0, y: 0, z: 0}
+      CameraShakeForce: 0
       CameraShakeDuration: 0
       VibrationForce: 0
       VibrationDuration: 0
-    OnHitDamage: 0
   - AttackAnimation: {fileID: 7400000, guid: 4e82d4c59b31c7347b451f8c6a5ccc9a, type: 2}
     Attack:
       AttackData: {fileID: 11400000, guid: 6ecc0c5fd0ec7354da77330c0089de43, type: 2}
@@ -54,18 +50,14 @@ MonoBehaviour:
       AimAssist: 1
       LockAim: 0
       LockMovement: 1
-      IsHeavyAttack: 0
     Dash:
       OnlyWhenMoving: 1
-      OnAnimationEventOnly: 0
       Distance: 2
-      Duration: 0.1
     FX:
-      CameraShakeForce: {x: 0, y: 0, z: 0}
+      CameraShakeForce: 0
       CameraShakeDuration: 0
       VibrationForce: 0
       VibrationDuration: 0
-    OnHitDamage: 0
   - AttackAnimation: {fileID: 7400000, guid: 98d45639c99390540801f5384782c40e, type: 2}
     Attack:
       AttackData: {fileID: 11400000, guid: 677fe4c347a22ec4e862ff99c0ca0579, type: 2}
@@ -74,15 +66,11 @@ MonoBehaviour:
       AimAssist: 0
       LockAim: 1
       LockMovement: 1
-      IsHeavyAttack: 1
     Dash:
       OnlyWhenMoving: 1
-      OnAnimationEventOnly: 1
       Distance: 3
-      Duration: 0.1
     FX:
-      CameraShakeForce: {x: 0.5, y: 0.5, z: 0.5}
+      CameraShakeForce: 0.5
       CameraShakeDuration: 0.2
-      VibrationForce: 0.246
+      VibrationForce: 0.25
       VibrationDuration: 0.2
-    OnHitDamage: 0

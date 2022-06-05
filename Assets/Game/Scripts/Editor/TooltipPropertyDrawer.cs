@@ -6,10 +6,13 @@ public class TooltipPropertyDrawer : PropertyDrawer
 {
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
     {
-        EditorGUI.PropertyField(position, property, label);
+        string tooltip = ((Tooltip)attribute).text;
+        Vector2 labelSize = GetLabelSize(property.name);
+        Rect btnRect = new Rect(position.position.x + labelSize.x, position.position.y, EditorGUIUtility.singleLineHeight, EditorGUIUtility.singleLineHeight);
 
-        Rect btnRect = new Rect(position.position.x + GetLabelSize(property.name).x, position.position.y, EditorGUIUtility.singleLineHeight, EditorGUIUtility.singleLineHeight);
-        GUI.Button(btnRect, new GUIContent(EditorGUIUtility.IconContent("_Help@2x").image, ((Tooltip)attribute).text), GetStyle());
+        label.tooltip = tooltip;
+        EditorGUI.PropertyField(position, property, label);
+        GUI.Button(btnRect, new GUIContent(EditorGUIUtility.IconContent("_Help@2x").image, tooltip), GetStyle());
     }
 
     public override float GetPropertyHeight(SerializedProperty property, GUIContent label)

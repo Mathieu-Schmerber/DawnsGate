@@ -44,7 +44,7 @@ namespace Game.Entities.Shared.Health
 			float totalDamage = damage;
 
 			// Critical hit check
-			if (Random.Range(0, 100) <= attacker.Stats.Modifiers[StatModifier.CriticalRate].Value)
+			if (Random.Range(0, 100) <= attacker.Stats.Modifiers[StatModifier.CriticalRate]?.Value)
 				totalDamage = attacker.Scale(totalDamage, StatModifier.CriticalDamage);
 
 			// Apply damage
@@ -56,7 +56,7 @@ namespace Game.Entities.Shared.Health
 			// Stun
 			if (_identity.CurrentArmor == 0) {
 				float baseStunTime = 0.5f;
-				float resistanceRatio = Mathf.Clamp(_identity.Stats.Modifiers[StatModifier.StunResistance].Value, 0, 100);
+				float resistanceRatio = Mathf.Clamp(_identity.Stats.Modifiers[StatModifier.StunResistance]?.Value ?? 0, 0, 100);
 				float reduced = baseStunTime - (baseStunTime * (resistanceRatio / 100));
 
 				_controller?.Stun(reduced);
@@ -102,7 +102,7 @@ namespace Game.Entities.Shared.Health
 		{
 			if (IsDead) return;
 
-			float resistanceRatio = Mathf.Clamp(_identity.Stats.Modifiers[StatModifier.KnockbackResistance].Value, 0, 100);
+			float resistanceRatio = Mathf.Clamp(_identity.Stats.Modifiers[StatModifier.KnockbackResistance]?.Value ?? 0, 0, 100);
 			Vector3 totalForce = force - (force * (resistanceRatio / 100));
 
 			if (_knockbackMotion != null)

@@ -113,11 +113,6 @@ namespace Game.Systems.Combat.Weapons
 			return _data.AttackCombos.First();
 		}
 
-		private bool IsDashedAttack() =>
-			CurrentWeaponAttack.Dash.Distance > 0 &&
-			(_controller.GetMovementNormal().magnitude > 0 || !CurrentWeaponAttack.Dash.OnlyWhenMoving) &&
-			!CurrentWeaponAttack.Dash.OnAnimationEventOnly;
-
 		private void PerformAttack()
 		{
 			// Getting the attack from pool
@@ -129,22 +124,17 @@ namespace Game.Systems.Combat.Weapons
 
 			// Managing attack instance
 			Vector3 aimDir = _controller.GetAimNormal();
-			Vector3 dashOffset = IsDashedAttack() && !attack.FollowCaster ? attack.transform.forward * CurrentWeaponAttack.Dash.Distance : Vector3.zero;
 
 			attack.transform.rotation = Quaternion.LookRotation(aimDir);
-			attack.OnStart(CurrentWeaponAttack.Attack.StartOffset + dashOffset, CurrentWeaponAttack.Attack.TravelDistance);
+			attack.OnStart(CurrentWeaponAttack.Attack.StartOffset, CurrentWeaponAttack.Attack.TravelDistance);
 
 			// Locks
 			_controller.IsAimLocked = CurrentWeaponAttack.Attack.LockAim;
 			_controller.LockMovement = CurrentWeaponAttack.Attack.LockMovement;
 
 			// FX
-			_camera.Shake(CurrentWeaponAttack.FX.CameraShakeForce, CurrentWeaponAttack.FX.CameraShakeDuration);
+			_camera.Shake(CurrentWeaponAttack.FX.CameraShakeForce * Vector3.one, CurrentWeaponAttack.FX.CameraShakeDuration);
 			InputManager.VibrateController(CurrentWeaponAttack.FX.VibrationForce, CurrentWeaponAttack.FX.VibrationDuration);
-
-			// Dashed attack
-			if (IsDashedAttack())
-				_controller.Dash(aimDir, CurrentWeaponAttack.Dash.Distance, DASH_DURATION);
 
 			// Aim assist
 			if (CurrentWeaponAttack.Attack.AimAssist)
@@ -153,9 +143,9 @@ namespace Game.Systems.Combat.Weapons
 
 		public virtual void OnAnimationEvent(string animation)
 		{
-			if (animation == "Attack")
+			if (animation == nameof(WeaponAttackEvent.Attack))
 				PerformAttack();
-			else if (animation == "Dash" && CurrentWeaponAttack.Dash.OnAnimationEventOnly && (_controller.GetMovementNormal().magnitude > 0 || !CurrentWeaponAttack.Dash.OnlyWhenMoving))
+			else if (animation == nameof(WeaponAttackEvent.Dash) && (_controller.GetMovementNormal().magnitude > 0 || !CurrentWeaponAttack.Dash.OnlyWhenMoving))
 				_controller.Dash(_controller.GetAimNormal(), CurrentWeaponAttack.Dash.Distance, DASH_DURATION);
 		}
 

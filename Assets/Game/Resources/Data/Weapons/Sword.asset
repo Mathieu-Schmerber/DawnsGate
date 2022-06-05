@@ -29,51 +29,48 @@ MonoBehaviour:
   - AttackAnimation: {fileID: 7400000, guid: 48ce825a1d0cb8a4a8bce5a67e11b82b, type: 2}
     Attack:
       AttackData: {fileID: 11400000, guid: ae7de145c805a484a9014315c70b2831, type: 2}
-      StartOffset: {x: 0, y: 1, z: 1.5}
+      StartOffset: {x: 0, y: 0, z: 1.5}
       TravelDistance: {x: 0, y: 0, z: 0}
       AimAssist: 1
       LockAim: 0
       LockMovement: 0
     Dash:
       OnlyWhenMoving: 1
-      OnAnimationEventOnly: 0
       Distance: 2
     FX:
-      CameraShakeForce: {x: 0, y: 0, z: 0}
+      CameraShakeForce: 0
       CameraShakeDuration: 0
       VibrationForce: 0
       VibrationDuration: 0
   - AttackAnimation: {fileID: 7400000, guid: 533a16217f3f9404dba614ce03bb25b9, type: 2}
     Attack:
       AttackData: {fileID: 11400000, guid: cf36fccbbc6be5f4ebb2e86e08393d51, type: 2}
-      StartOffset: {x: 0, y: 0, z: 0}
+      StartOffset: {x: 0, y: 0, z: 1.5}
       TravelDistance: {x: 0, y: 0, z: 0}
       AimAssist: 1
       LockAim: 0
       LockMovement: 0
     Dash:
       OnlyWhenMoving: 1
-      OnAnimationEventOnly: 0
       Distance: 2
     FX:
-      CameraShakeForce: {x: 0, y: 0, z: 0}
+      CameraShakeForce: 0
       CameraShakeDuration: 0
       VibrationForce: 0
       VibrationDuration: 0
   - AttackAnimation: {fileID: 7400000, guid: 7c054e738dd5b6b468b77dc99522627e, type: 2}
     Attack:
       AttackData: {fileID: 11400000, guid: 9386e878b10001843aece5082ff2325d, type: 2}
-      StartOffset: {x: 0, y: 0, z: 0}
+      StartOffset: {x: 0, y: 0, z: 2}
       TravelDistance: {x: 0, y: 0, z: 0}
       AimAssist: 1
       LockAim: 0
       LockMovement: 0
     Dash:
       OnlyWhenMoving: 0
-      OnAnimationEventOnly: 0
       Distance: 4
     FX:
-      CameraShakeForce: {x: 0, y: 0, z: 0}
+      CameraShakeForce: 0
       CameraShakeDuration: 0
       VibrationForce: 0
       VibrationDuration: 0
