@@ -12,22 +12,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5f68c38aa37b3f43ba9e3cfde74ea92, type: 3}
   m_Name: Settings
   m_EditorClassIdentifier: 
-  MinExitNumber: 1
   MaxExitNumber: 3
+  RoomFolders:
+    keyData: 000000000100000002000000030000000400000005000000
+    valueData:
+    - Folder: Assets/Game/Scenes/Rooms/Combat
+    - Folder: Assets/Game/Scenes/Rooms/Event
+    - Folder: Assets/Game/Scenes/Rooms/Shop
+    - Folder: Assets/Game/Scenes/Rooms/LifeShop
+    - Folder: Assets/Game/Scenes/Rooms/Upgrade
+    - Folder: Assets/Game/Scenes/Rooms/Boss
   RoomRules:
   - {fileID: 11400000, guid: 524bd8840420669418cc7e82f9e97272, type: 2}
-  - {fileID: 11400000, guid: 09b6dcb7f0113794cbdf21166af1e854, type: 2}
-  - {fileID: 11400000, guid: 09b6dcb7f0113794cbdf21166af1e854, type: 2}
+  - {fileID: 11400000, guid: 524bd8840420669418cc7e82f9e97272, type: 2}
+  - {fileID: 11400000, guid: 524bd8840420669418cc7e82f9e97272, type: 2}
   - {fileID: 11400000, guid: 703b35c19301b8c4d92c1445fe7c0360, type: 2}
   - {fileID: 11400000, guid: 79ec421b3049b9c419c735921f2143a6, type: 2}
-  - {fileID: 11400000, guid: 09b6dcb7f0113794cbdf21166af1e854, type: 2}
-  - {fileID: 11400000, guid: 09b6dcb7f0113794cbdf21166af1e854, type: 2}
+  - {fileID: 11400000, guid: 524bd8840420669418cc7e82f9e97272, type: 2}
+  - {fileID: 11400000, guid: 524bd8840420669418cc7e82f9e97272, type: 2}
   - {fileID: 11400000, guid: 09b6dcb7f0113794cbdf21166af1e854, type: 2}
   - {fileID: 11400000, guid: 80848813aaedede41a0150cd43523eaf, type: 2}
-  - {fileID: 11400000, guid: 09b6dcb7f0113794cbdf21166af1e854, type: 2}
+  - {fileID: 11400000, guid: 524bd8840420669418cc7e82f9e97272, type: 2}
   - {fileID: 11400000, guid: 703b35c19301b8c4d92c1445fe7c0360, type: 2}
   - {fileID: 11400000, guid: 09b6dcb7f0113794cbdf21166af1e854, type: 2}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 09b6dcb7f0113794cbdf21166af1e854, type: 2}
+  - {fileID: 11400000, guid: a5de0bdf3c1ad23439ecae58a4264cf8, type: 2}
   - {fileID: 11400000, guid: e0e0b01f992b9884ca7ee76fd0aa0744, type: 2}
-  - {fileID: 0}

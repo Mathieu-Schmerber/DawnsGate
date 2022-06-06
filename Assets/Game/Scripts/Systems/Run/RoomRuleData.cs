@@ -22,7 +22,14 @@ namespace Game.Systems.Run
 		public class RoomDictionary : SerializedDictionary<RoomType, RangeInt> {}
 
 		[TextArea] public string RuleDescription;
-		[ReadOnly, ShowInInspector] public int MinRoomChoice => RoomProbabilities.Where(x => x.Value.Mandatory).Count();
+		[ReadOnly, ShowInInspector]
+		public int MinRoomChoice
+		{
+			get
+			{
+				return Mathf.Max(1, RoomProbabilities.Count(x => x.Value.Mandatory));
+			}
+		}
 
 		[Space]
 

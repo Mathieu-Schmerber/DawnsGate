@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c78fcc7270edc1d41b2cc2916f7fde8b, type: 3}
-  m_Name: Boss-ONLY
+  m_Name: ONLY-Event
   m_EditorClassIdentifier: 
-  RuleDescription: Boss room
+  RuleDescription: Forced event room
   RoomProbabilities:
-    keyData: 05000000
+    keyData: 01000000
     valueData:
     - Mandatory: 1
       Probability: 0
