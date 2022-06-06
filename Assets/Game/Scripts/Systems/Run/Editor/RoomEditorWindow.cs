@@ -7,10 +7,11 @@ using UnityEngine.SceneManagement;
 using UnityEditor.SceneManagement;
 using System.IO;
 using Game.Systems.Run.Rooms;
+using Game.Managers;
 
 namespace Game.Systems.Run.Editor
 {
-    public static class RoomEditorWindow
+	public static class RoomEditorWindow
     {
 		[MenuItem("Tools/Game/Create Room/Combat room", false)] public static void CreateC() => CreateRoom(RoomType.COMBAT);
 		[MenuItem("Tools/Game/Create Room/Event room", false)] public static void CreateE() => CreateRoom(RoomType.EVENT);

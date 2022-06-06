@@ -9,8 +9,17 @@ namespace Game.Systems.Run.Rooms
 {
 	public abstract class ARoom : MonoBehaviour, IRoom
 	{
+		private RoomInfo _info;
+
 		public static event Action OnRoomActivated;
 		public static event Action OnRoomCleared;
+
+		public bool Cleared { get; protected set; }
+
+		protected virtual void Awake()
+		{
+			_info = GetComponent<RoomInfo>();
+		}
 
 		protected abstract void OnActivate();
 
@@ -28,6 +37,7 @@ namespace Game.Systems.Run.Rooms
 		public void Clear()
 		{
 			OnRoomCleared?.Invoke();
+			Cleared = true;
 			OnClear();
 		}
 	}

@@ -1,4 +1,5 @@
-﻿using Sirenix.OdinInspector;
+﻿using Game.Managers;
+using Sirenix.OdinInspector;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,10 @@ namespace Game.Systems.Run.Rooms
 	/// </summary>
 	public class RoomInfo : MonoBehaviour
 	{
-		[SerializeField, ReadOnly] private RoomType _roomType;
+		[SerializeField, OnValueChanged(nameof(OnTypeChanged))] private RoomType _roomType;
+		[SerializeField] private Transform _playerSpawn;
+		[SerializeField] private RoomDoor[] _doors;
+
 		private ARoom _room;
 
 		public RoomType Type { get => _roomType; set 
@@ -23,6 +27,14 @@ namespace Game.Systems.Run.Rooms
 			} 
 		}
 
+		private void Start()
+		{
+			GameManager.Instance.Player.transform.position = _playerSpawn.position;
+		}
+
+		#region Editor Tools
+
+#if UNITY_EDITOR
 		private void OnTypeChanged()
 		{
 			if (_room != null)
@@ -46,5 +58,8 @@ namespace Game.Systems.Run.Rooms
 					break;
 			}
 		}
+#endif
+
+		#endregion
 	}
 }
