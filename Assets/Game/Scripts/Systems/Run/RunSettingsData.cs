@@ -14,6 +14,13 @@ namespace Game.Systems.Run
     {
 		#region Types
 
+        [System.Serializable]
+        public class RoomTypeRewardPair
+		{
+            public RoomType Type;
+            [ShowIf("@Type == RoomType.COMBAT || Type == RoomType.EVENT")] public RoomRewardType Reward;
+		}
+
         [System.Serializable] [InlineProperty]
         public class RoomFolder
 		{
@@ -37,9 +44,11 @@ namespace Game.Systems.Run
 
 		[Title("General")]
         [MinValue(0)] public int MaxExitNumber;
+        public string LobbySceneName;
         public RoomFolderDictionary RoomFolders;
 
         [Title("Rules"), ValidateInput("@ValidateMaxExit().Item1", "@ValidateMaxExit().Item2")]
+        public RoomTypeRewardPair FirstRoom;
         [LabelText("Room Order")] public RoomRuleData[] RoomRules;
 
         #region Editor check

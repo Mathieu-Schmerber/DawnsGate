@@ -40,6 +40,10 @@ namespace Game.Entities.Player
 		{
 			base.Awake();
 			_inputs = InputManager.Instance;
+		}
+
+		private void Start()
+		{
 			_dashTimer.Start(_entity.Scale(_entity.Stats.DashCooldown, StatModifier.DashCooldown), false);
 		}
 

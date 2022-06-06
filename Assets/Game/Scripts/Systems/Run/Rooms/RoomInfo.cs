@@ -20,6 +20,7 @@ namespace Game.Systems.Run.Rooms
 
 		private ARoom _room;
 
+		public RoomDoor[] Doors => _doors;
 		public RoomType Type { get => _roomType; set 
 			{ 
 				_roomType = value;
@@ -39,24 +40,28 @@ namespace Game.Systems.Run.Rooms
 		{
 			if (_room != null)
 				Destroy(_room);
-			switch (Type)
-			{
-				case RoomType.COMBAT:
-					_room = gameObject.AddComponent<CombatRoom>();
-					break;
-				case RoomType.EVENT:
-					break;
-				case RoomType.SHOP:
-					break;
-				case RoomType.LIFE_SHOP:
-					break;
-				case RoomType.UPGRADE:
-					break;
-				case RoomType.BOSS:
-					break;
-				default:
-					break;
-			}
+
+			// TODO: remove, test purpose
+			_room = gameObject.AddComponent<CombatRoom>();
+
+			//switch (Type)
+			//{
+			//	case RoomType.COMBAT:
+			//		_room = gameObject.AddComponent<CombatRoom>();
+			//		break;
+			//	case RoomType.EVENT:
+			//		break;
+			//	case RoomType.SHOP:
+			//		break;
+			//	case RoomType.LIFE_SHOP:
+			//		break;
+			//	case RoomType.UPGRADE:
+			//		break;
+			//	case RoomType.BOSS:
+			//		break;
+			//	default:
+			//		break;
+			//}
 		}
 #endif
 

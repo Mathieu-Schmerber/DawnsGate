@@ -8,11 +8,12 @@ using UnityEditor.SceneManagement;
 using System.IO;
 using Game.Systems.Run.Rooms;
 using Game.Managers;
+using System.Linq;
 
 namespace Game.Systems.Run.Editor
 {
 	public static class RoomEditorWindow
-    {
+	{
 		[MenuItem("Tools/Game/Create Room/Combat room", false)] public static void CreateC() => CreateRoom(RoomType.COMBAT);
 		[MenuItem("Tools/Game/Create Room/Event room", false)] public static void CreateE() => CreateRoom(RoomType.EVENT);
 		[MenuItem("Tools/Game/Create Room/Shop room", false)] public static void CreateS() => CreateRoom(RoomType.SHOP);
@@ -33,10 +34,20 @@ namespace Game.Systems.Run.Editor
 			var folder = RunManager.RunSettings.RoomFolders[type];
 			string roomFolderName = $"{type}-{folder.GetValidSceneNumber()}";
 			Scene scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
+			string scenePath = Path.Combine(folder.Folder, $"{roomFolderName}.unity");
 
 			scene.name = roomFolderName;
 			PopulateNewScene(type, scene);
-			EditorSceneManager.SaveScene(scene, Path.Combine(folder.Folder, $"{roomFolderName}.unity"));
+			EditorSceneManager.SaveScene(scene, scenePath);
+			AddToBuild(scenePath);
+		}
+
+		private static void AddToBuild(string scenePath)
+		{
+			List<EditorBuildSettingsScene> editorBuildSettingsScenes = EditorBuildSettings.scenes.ToList();
+
+			editorBuildSettingsScenes.Add(new EditorBuildSettingsScene(scenePath, true));
+			EditorBuildSettings.scenes = editorBuildSettingsScenes.ToArray();
 		}
 
 		private static void PopulateNewScene(RoomType type, Scene scene)

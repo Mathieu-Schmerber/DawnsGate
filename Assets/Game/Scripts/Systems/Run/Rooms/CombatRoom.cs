@@ -5,15 +5,20 @@ namespace Game.Systems.Run.Rooms
 {
 	public class CombatRoom : ARoom
 	{
-		private IEnumerator Start()
+		protected override void Start()
 		{
-			yield return new WaitForSeconds(3);
+			base.Start();
+			StartCoroutine(ClearTest());
+		}
+
+		private IEnumerator ClearTest()
+		{
+			yield return new WaitForSeconds(1);
 			Clear();
 		}
 
 		protected override void OnActivate()
 		{
-
 		}
 	}
 }

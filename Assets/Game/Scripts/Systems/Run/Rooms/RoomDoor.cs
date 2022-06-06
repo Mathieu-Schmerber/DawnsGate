@@ -1,4 +1,5 @@
-﻿using Nawlian.Lib.Systems.Interaction;
+﻿using Game.Managers;
+using Nawlian.Lib.Systems.Interaction;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,8 +14,13 @@ namespace Game.Systems.Run.Rooms
 		private bool _active = false;
 		public event Action OnActivated;
 
+		public Room LeadToRoom { get; set; }
+
 		public void Activate()
 		{
+			// Cannot activate a dead-end
+			if (LeadToRoom == null)
+				return;
 			_active = true;
 			OnActivated?.Invoke();
 		}
@@ -23,7 +29,8 @@ namespace Game.Systems.Run.Rooms
 
 		public void Interact(IInteractionActor actor)
 		{
-			Debug.Log("Next room");
+			actor.UnSuggestInteraction(this);
+			RunManager.SelectNextRoom(LeadToRoom);
 		}
 
 		private void OnTriggerEnter(Collider other)

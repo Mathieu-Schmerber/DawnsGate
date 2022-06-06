@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4555957898433297779}
   - component: {fileID: -3602183934703829413}
+  - component: {fileID: -2591901086208549162}
   m_Layer: 0
   m_Name: _RoomLogic
   m_TagString: Untagged
@@ -54,6 +55,18 @@ MonoBehaviour:
   - {fileID: 3698469104458406674}
   - {fileID: 5480456702781273363}
   - {fileID: 6686167212600811647}
+--- !u!114 &-2591901086208549162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4555957898433297776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb5d1f68a223f2c4890b85021c9a0b84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8842385039136731664
 GameObject:
   m_ObjectHideFlags: 0

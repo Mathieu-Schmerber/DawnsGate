@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Settings
   m_EditorClassIdentifier: 
   MaxExitNumber: 3
+  LobbySceneName: Lobby
   RoomFolders:
     keyData: 000000000100000002000000030000000400000005000000
     valueData:
@@ -22,6 +23,9 @@ MonoBehaviour:
     - Folder: Assets/Game/Scenes/Rooms/LifeShop
     - Folder: Assets/Game/Scenes/Rooms/Upgrade
     - Folder: Assets/Game/Scenes/Rooms/Boss
+  FirstRoom:
+    Type: 0
+    Reward: 1
   RoomRules:
   - {fileID: 11400000, guid: 524bd8840420669418cc7e82f9e97272, type: 2}
   - {fileID: 11400000, guid: 524bd8840420669418cc7e82f9e97272, type: 2}
