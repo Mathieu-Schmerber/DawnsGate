@@ -22,7 +22,7 @@ namespace Nawlian.Lib.Utils.ResourcePanel
 			tree.Config.DrawSearchToolbar = true;
 			tree.Config.DefaultMenuStyle.Height = 18;
 
-			tree.AddAllAssetsAtPath("", "Assets/Game/Resources", typeof(ScriptableObject), true);
+			tree.AddAllAssetsAtPath("", "Assets/Game/Resources/Data", typeof(ScriptableObject), true);
 			return tree;
 		}
 	}

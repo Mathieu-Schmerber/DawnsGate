@@ -60,6 +60,8 @@ namespace Nawlian.Lib.Utils.Database.Editor
 				EditorGUILayout.HelpBox("Any database asset should be within a 'Resources' folder", MessageType.Error);
 			if (canGenerate && GUILayout.Button("Save database"))
 				SaveAsset(_data);
+			if (canGenerate && GUILayout.Button("Open database panel"))
+				DatabaseDataEditorWindow.OpenEditor(_data);
 			#endregion
 		}
 	}

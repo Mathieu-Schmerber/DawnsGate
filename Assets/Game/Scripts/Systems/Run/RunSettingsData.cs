@@ -14,7 +14,7 @@ namespace Game.Systems.Run
         [MinValue(0)] public int MaxExitNumber;
 
         [Title("Rules"), ValidateInput("@ValidateMaxExit().Item1", "@ValidateMaxExit().Item2")]
-        public RoomRuleData[] RoomRules;
+        [LabelText("Room Order")] public RoomRuleData[] RoomRules;
 
 #if UNITY_EDITOR
 
