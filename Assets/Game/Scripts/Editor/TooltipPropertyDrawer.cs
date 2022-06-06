@@ -7,7 +7,7 @@ public class TooltipPropertyDrawer : PropertyDrawer
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
     {
         string tooltip = ((Tooltip)attribute).text;
-        Vector2 labelSize = GetLabelSize(property.name);
+        Vector2 labelSize = GetLabelSize(property.name + "\t");
         Rect btnRect = new Rect(position.position.x + labelSize.x, position.position.y, EditorGUIUtility.singleLineHeight, EditorGUIUtility.singleLineHeight);
 
         label.tooltip = tooltip;

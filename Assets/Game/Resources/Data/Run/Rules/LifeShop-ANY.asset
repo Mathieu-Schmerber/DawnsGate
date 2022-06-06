@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c78fcc7270edc1d41b2cc2916f7fde8b, type: 3}
+  m_Name: LifeShop-ANY
+  m_EditorClassIdentifier: 
+  RuleDescription: A lifeshop and any other room (not boss)
+  RoomProbabilities:
+    keyData: 0300000000000000010000000200000004000000
+    valueData:
+    - Mandatory: 1
+      Probability: 0
+    - Mandatory: 0
+      Probability: 70
+    - Mandatory: 0
+      Probability: 15
+    - Mandatory: 0
+      Probability: 10
+    - Mandatory: 0
+      Probability: 5
