@@ -28,11 +28,6 @@ namespace Game.Systems.Run.Rooms
 			} 
 		}
 
-		private void Start()
-		{
-			GameManager.Player.transform.position = _playerSpawn.position;
-		}
-
 		#region Editor Tools
 
 #if UNITY_EDITOR
@@ -41,27 +36,24 @@ namespace Game.Systems.Run.Rooms
 			if (_room != null)
 				Destroy(_room);
 
-			// TODO: remove, test purpose
-			_room = gameObject.AddComponent<CombatRoom>();
-
-			//switch (Type)
-			//{
-			//	case RoomType.COMBAT:
-			//		_room = gameObject.AddComponent<CombatRoom>();
-			//		break;
-			//	case RoomType.EVENT:
-			//		break;
-			//	case RoomType.SHOP:
-			//		break;
-			//	case RoomType.LIFE_SHOP:
-			//		break;
-			//	case RoomType.UPGRADE:
-			//		break;
-			//	case RoomType.BOSS:
-			//		break;
-			//	default:
-			//		break;
-			//}
+			switch (Type)
+			{
+				case RoomType.COMBAT:
+					_room = gameObject.AddComponent<CombatRoom>();
+					break;
+				case RoomType.EVENT:
+					break;
+				case RoomType.SHOP:
+					break;
+				case RoomType.LIFE_SHOP:
+					break;
+				case RoomType.UPGRADE:
+					break;
+				case RoomType.BOSS:
+					break;
+				default:
+					break;
+			}
 		}
 #endif
 

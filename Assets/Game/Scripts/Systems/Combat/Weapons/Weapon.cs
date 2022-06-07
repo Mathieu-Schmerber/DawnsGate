@@ -12,15 +12,14 @@ namespace Game.Systems.Combat.Weapons
 	{
 		#region Properties
 
-		[SerializeField] private WeaponData _data;
-		public WeaponData Data => _data;
+		public WeaponData Data { get; private set; }
 
-		private WeaponState _state;
 		private CameraController _camera;
 		protected AController _controller;
 		protected PlayerWeapon _weaponManager;
-		protected int _lastAttackIndex = -1;
+		private MeshFilter _meshFilter;
 
+		protected int _lastAttackIndex = -1;
 		private const float DASH_DURATION = 0.1f;
 
 		/// <summary>
@@ -28,13 +27,13 @@ namespace Game.Systems.Combat.Weapons
 		/// </summary>
 		public WeaponData.WeaponAttack CurrentWeaponAttack
 		{
-			get => _data.AttackCombos[_lastAttackIndex];
+			get => Data.AttackCombos[_lastAttackIndex];
 		}
 
 		/// <summary>
 		/// Returns the time to input between attack animations to perform a combo
 		/// </summary>
-		public float ComboIntervalTime { get => _data.ComboIntervalTime; }
+		public float ComboIntervalTime { get => Data.ComboIntervalTime; }
 
 		#endregion
 
@@ -43,27 +42,19 @@ namespace Game.Systems.Combat.Weapons
 		private void Awake()
 		{
 			_camera = GameManager.Camera;
-			_state = GetComponent<WeaponState>();
-		}
-
-		private void OnEnable()
-		{
-			_state.OnEquipStateEnabled += OnEquipState;
-		}
-
-		private void OnDisable()
-		{
-			_state.OnEquipStateEnabled -= OnEquipState;
-		}
-
-		public void OnEquipState()
-		{
-			_weaponManager = GetComponentInParent<PlayerWeapon>();
+			_meshFilter = GetComponent<MeshFilter>();
 			_controller = GetComponentInParent<AController>();
-			_lastAttackIndex = 0;
+			_weaponManager = GetComponentInParent<PlayerWeapon>();
 		}
 
 		#endregion
+
+		public void SetData(WeaponData data)
+		{
+			Data = data;
+			_meshFilter.mesh = data?.Mesh;
+			_lastAttackIndex = -1;
+		}
 
 		#region Aim assist
 
@@ -104,13 +95,13 @@ namespace Game.Systems.Combat.Weapons
 		/// <returns></returns>
 		public virtual WeaponData.WeaponAttack GetNextAttack(bool continueCombo = true)
 		{
-			if (_lastAttackIndex + 1 < _data.AttackCombos.Count && continueCombo)
+			if (_lastAttackIndex + 1 < Data.AttackCombos.Count && continueCombo)
 			{
 				_lastAttackIndex++;
 				return CurrentWeaponAttack;
 			}
 			_lastAttackIndex = 0;
-			return _data.AttackCombos.First();
+			return Data.AttackCombos.First();
 		}
 
 		private void PerformAttack()

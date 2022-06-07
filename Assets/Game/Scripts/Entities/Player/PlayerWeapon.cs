@@ -12,26 +12,24 @@ namespace Game.Entities.Player
 {
 	public class PlayerWeapon : MonoBehaviour, IAnimationEventListener
 	{
-		[SerializeField] private Transform _weaponJoint;
-
 		private EntityIdentity _identity;
 		private Animator _animator;
 		private InputManager _inputs;
 		private List<GameObject> _weaponAttackPool;
 		private Timer _attackTimer = new();
 		private float _minTimeBetweenAttacks = 0.1f;
+		private Weapon _weapon;
 
-		private WeaponState _weaponState;
-		private Weapon _weapon => _weaponState?.EquippedState;
+		public WeaponData CurrentWeapon => _weapon.Data;
 
 		#region Unity builtins
 
 		private void Awake()
 		{
 			_identity = GetComponent<EntityIdentity>();
-			_weaponState = GetComponentInChildren<WeaponState>();
-			_animator = GetComponentInChildren<Animator>();
 			_inputs = InputManager.Instance;
+			_animator = GetComponentInChildren<Animator>();
+			_weapon = GetComponentInChildren<Weapon>();
 			_weaponAttackPool = new List<GameObject>();
 		}
 
@@ -52,21 +50,11 @@ namespace Game.Entities.Player
 		#region Equip / UnEquip
 
 		/// <summary>
-		/// Equips a weapon.
+		/// Equips a weapon or unequips if null is passed as a parameter.
 		/// </summary>
-		public void EquipWeapon(WeaponState weaponState)
+		public void EquipWeapon(WeaponData weaponData)
 		{
-			// Drop current
-			_weaponState?.ToItemState();
-
-			// Position weapon on joint
-			_weaponState = weaponState;
-			_weaponState.transform.SetParent(_weaponJoint);
-			_weaponState.transform.localPosition = Vector3.zero;
-			_weaponState.transform.localRotation = Quaternion.Euler(-90, 0, 0);
-			_weaponState.ToEquippedState();
-
-			// Setup animator accordingly
+			_weapon.SetData(weaponData);
 			SetupWeaponConstraints();
 		}
 
@@ -75,7 +63,7 @@ namespace Game.Entities.Player
 			_animator.SetLayerWeight(_animator.GetLayerIndex("DefaultLocomotion"), 0f);
 			_animator.SetLayerWeight(_animator.GetLayerIndex("GreatSwordLocomotion"), 0f);
 
-			if (_weapon != null)
+			if (_weapon.Data != null)
 				_animator.SetLayerWeight(_animator.GetLayerIndex(_weapon.Data.LocomotionLayer), 1f);
 			else
 				_animator.SetLayerWeight(_animator.GetLayerIndex("DefaultLocomotion"), 1f);
@@ -113,7 +101,7 @@ namespace Game.Entities.Player
 
 		protected virtual void TryAttack()
 		{
-			if (_attackTimer.IsOver() && _weapon != null)
+			if (_attackTimer.IsOver() && _weapon.Data != null)
 			{
 				OnMeleeAttack();
 				_attackTimer.Restart();
@@ -129,8 +117,6 @@ namespace Game.Entities.Player
 			bool canCombo = delta - _attackTimer.Interval <= _weapon.ComboIntervalTime;
 			var attack = _weapon.GetNextAttack(canCombo);
 			float attackSpeed = _identity.Scale(_weapon.Data.AttackSpeed, StatModifier.AttackSpeed);
-
-			Debug.Log($"{_weapon.Data.AttackSpeed} => {_identity.Stats.Modifiers[StatModifier.AttackSpeed].Value}% = {attackSpeed}");
 
 			if (attack == null)
 				return;

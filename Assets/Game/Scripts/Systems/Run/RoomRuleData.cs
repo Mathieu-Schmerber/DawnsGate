@@ -60,13 +60,7 @@ namespace Game.Systems.Run
 	public class RoomRuleData : ScriptableObject
 	{
 		[TextArea] public string RuleDescription;
-		[ReadOnly, ShowInInspector] public int MinRoomChoice
-		{
-			get
-			{
-				return Mathf.Max(1, RoomProbabilities.Count(x => x.Value.Mandatory));
-			}
-		}
+		[ReadOnly, ShowInInspector] public int MinRoomChoice => Mathf.Min(MaxRoomChoice, RoomProbabilities.Count(x => x.Value.Mandatory) + 1);
 		[ReadOnly, ShowInInspector] public int MaxRoomChoice
 		{
 			get
