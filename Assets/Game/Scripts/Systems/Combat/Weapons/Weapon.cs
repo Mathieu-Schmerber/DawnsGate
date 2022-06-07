@@ -42,7 +42,7 @@ namespace Game.Systems.Combat.Weapons
 
 		private void Awake()
 		{
-			_camera = GameManager.Instance.Camera;
+			_camera = GameManager.Camera;
 			_state = GetComponent<WeaponState>();
 		}
 

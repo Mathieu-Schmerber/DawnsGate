@@ -23,6 +23,7 @@ namespace Game.Managers
 
 		#region Properties
 
+		private string _currentRoomScene;
 		private int _currentRoom;
 		private Room _room;
 		private RunState _runState = RunState.LOBBY;
@@ -51,13 +52,13 @@ namespace Game.Managers
 			Instance._currentRoom = 0;
 			Instance._room = new() {
 				Type = RunSettings.FirstRoom.Type,
-				Reward = RunSettings.FirstRoom.Reward
+				Reward = RunSettings.FirstRoom.Reward,
 			};
+			Instance._currentRoomScene = RunSettings.LobbySceneName;
 			Instance._room.DefineExitsFromRule(RunSettings.MaxExitNumber, RunSettings.RoomRules[Instance._currentRoom]);
 			Instance._runState = RunState.IN_RUN;
 
-			// TODO: smooth out with scene transition and async load
-			SceneManager.LoadScene(GetRandomRoomScene(RunSettings.FirstRoom.Type));
+			ChangeScene(RunSettings.FirstRoom.Type);
 		}
 
 		public static void SelectNextRoom(Room selected)
@@ -74,18 +75,31 @@ namespace Game.Managers
 				};
 				Instance._room.DefineExitsFromRule(RunSettings.MaxExitNumber, RunSettings.RoomRules[Instance._currentRoom]);
 
-				// TODO: smooth out with scene transition and async load
-				SceneManager.LoadScene(GetRandomRoomScene(selected.Type));
+				ChangeScene(selected.Type);
 			}
 		}
 
 		private static void EndRun()
 		{
-			SceneManager.LoadScene(RunSettings.LobbySceneName);
+			ChangeScene(RunSettings.LobbySceneName);
 			Instance._runState = RunState.LOBBY;
 		}
 
 		private static string GetRandomRoomScene(RoomType type) => Path.GetFileNameWithoutExtension(Instance._scenes[type].Random());
+
+		private static void ChangeScene(RoomType type)
+		{
+			string nextScene = GetRandomRoomScene(type);
+
+			ChangeScene(nextScene);
+		}
+
+		private static void ChangeScene(string scene)
+		{
+			SceneManager.UnloadSceneAsync(Instance._currentRoomScene);
+			SceneManager.LoadScene(scene, LoadSceneMode.Additive);
+			Instance._currentRoomScene = scene;
+		}
 
 		#endregion
 	}

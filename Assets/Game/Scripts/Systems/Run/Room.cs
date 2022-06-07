@@ -18,7 +18,7 @@ namespace Game.Systems.Run
 
     public class Room
     {
-        public RoomType Type { get; set; }
+		public RoomType Type { get; set; }
         public RoomRewardType Reward { get; set; }
         public List<Room> NextRooms { get; set; }
 

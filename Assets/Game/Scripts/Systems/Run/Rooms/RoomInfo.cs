@@ -30,7 +30,7 @@ namespace Game.Systems.Run.Rooms
 
 		private void Start()
 		{
-			GameManager.Instance.Player.transform.position = _playerSpawn.position;
+			GameManager.Player.transform.position = _playerSpawn.position;
 		}
 
 		#region Editor Tools

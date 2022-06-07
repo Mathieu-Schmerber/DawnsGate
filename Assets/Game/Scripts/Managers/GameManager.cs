@@ -12,13 +12,10 @@ namespace Game.Managers
 {
 	public class GameManager : ManagerSingleton<GameManager>
 	{
-		public PlayerController Player { get; private set; }
-		public CameraController Camera { get; private set; }
+		[SerializeField] private PlayerController _player;
+		[SerializeField] private CameraController _camera;
 
-		private void Awake()
-		{
-			Player = FindObjectOfType<PlayerController>();
-			Camera = FindObjectOfType<CameraController>();
-		}
+		public static PlayerController Player => Instance._player;
+		public static CameraController Camera => Instance._camera;
 	}
 }

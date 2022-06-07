@@ -65,6 +65,21 @@ namespace Databases
                     return all.Where(x => x is T).Select(x => (T)x);
                 }
             }
+            
+            public class Boostrap
+            {
+                
+                public static UnityEngine.GameObject Essentials = (UnityEngine.GameObject)Instance.DatabaseAsset.Sections[1].Sections[1].Assets[0].Prefab;
+                
+                public static UnityEngine.GameObject Managers = (UnityEngine.GameObject)Instance.DatabaseAsset.Sections[1].Sections[1].Assets[1].Prefab;
+                
+                public static IEnumerable<T> All<T>()
+                    where T : UnityEngine.Object
+                {
+                    UnityEngine.Object[] all = new UnityEngine.Object[2] {Essentials, Managers};
+                    return all.Where(x => x is T).Select(x => (T)x);
+                }
+            }
         }
     }
 }

@@ -15,7 +15,7 @@ namespace Game.Entities.Player
 		private void Awake()
 		{
 			_ps = GetComponent<ParticleSystem>();
-			_animator = GameManager.Instance.Player.GetComponentInChildren<Animator>();
+			_animator = GameManager.Player.GetComponentInChildren<Animator>();
 		}
 
 		private void OnTriggerEnter(Collider other)
