@@ -23,12 +23,21 @@ namespace Game.Systems.Run
 		public class RoomDictionary : SerializedDictionary<RoomType, RangeInt> {}
 
 		[TextArea] public string RuleDescription;
-		[ReadOnly, ShowInInspector]
-		public int MinRoomChoice
+		[ReadOnly, ShowInInspector] public int MinRoomChoice
 		{
 			get
 			{
 				return Mathf.Max(1, RoomProbabilities.Count(x => x.Value.Mandatory));
+			}
+		}
+		[ReadOnly, ShowInInspector] public int MaxRoomChoice
+		{
+			get
+			{
+				int nonReward = RoomProbabilities.Count(x => !Room.IsRewardRoom(x.Key));
+				int reward = RoomProbabilities.Count - nonReward;
+
+				return Mathf.Min(nonReward + (reward * Room.REWARD_NUMBER), Databases.Database.Data.Run.Settings.MaxExitNumber);
 			}
 		}
 
@@ -42,10 +51,7 @@ namespace Game.Systems.Run
 			var nonMandatories = RoomProbabilities.Where(x => !x.Value.Mandatory).ToArray();
 
 			if (nonMandatories.Length == 0)
-			{
-				nonMandatories = RoomProbabilities.Where(x => x.Value.Mandatory).ToArray();
-				return nonMandatories.Random().Key;
-			}
+				return RoomProbabilities.Random().Key;
 
 			int total = nonMandatories.Select(x => x.Value.Probability).Sum();
 			int random = UnityEngine.Random.Range(0, total);

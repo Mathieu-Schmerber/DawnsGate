@@ -1,3 +1,4 @@
+using Game.Managers;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -14,7 +15,7 @@ namespace Game
 		{
 			_text = GetComponent<TextMeshPro>();
 
-			_text.text = SceneManager.GetActiveScene().name;
+			_text.text = RunManager.CurrentRoomScene;
 		}
 	}
 }

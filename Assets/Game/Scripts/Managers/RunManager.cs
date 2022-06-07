@@ -31,6 +31,7 @@ namespace Game.Managers
 
 		public static Room CurrentRoom => Instance._room;
 		public static bool IsLastRoom => Instance._currentRoom == RunSettings.RoomRules.Length - 1;
+		public static string CurrentRoomScene;
 		public static RunState RunState => Instance._runState;
 
 		#endregion
@@ -55,7 +56,7 @@ namespace Game.Managers
 				Reward = RunSettings.FirstRoom.Reward,
 			};
 			Instance._currentRoomScene = RunSettings.LobbySceneName;
-			Instance._room.DefineExitsFromRule(RunSettings.MaxExitNumber, RunSettings.RoomRules[Instance._currentRoom]);
+			Instance._room.DefineExitsFromRule(RunSettings.RoomRules[Instance._currentRoom]);
 			Instance._runState = RunState.IN_RUN;
 
 			ChangeScene(RunSettings.FirstRoom.Type);
@@ -73,7 +74,7 @@ namespace Game.Managers
 					Type = selected.Type,
 					Reward = selected.Reward
 				};
-				Instance._room.DefineExitsFromRule(RunSettings.MaxExitNumber, RunSettings.RoomRules[Instance._currentRoom]);
+				Instance._room.DefineExitsFromRule(RunSettings.RoomRules[Instance._currentRoom]);
 
 				ChangeScene(selected.Type);
 			}

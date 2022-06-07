@@ -21,7 +21,6 @@ namespace Game.Systems.Run.Rooms
 
 		protected virtual void Awake()
 		{
-			Debug.Log("Awake");
 			_info = GetComponent<RoomInfo>();
 		}
 
@@ -45,7 +44,6 @@ namespace Game.Systems.Run.Rooms
 
 		public void Clear()
 		{
-			Debug.Log("Clear");
 			OnRoomCleared?.Invoke();
 			Cleared = true;
 			OnClear();

@@ -1,6 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using Nawlian.Lib.Extensions;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Game.Systems.Run
 {
@@ -14,17 +17,23 @@ namespace Game.Systems.Run
         BOSS
     }
 
-    public enum RoomRewardType { STARS, ITEM }
+    public enum RoomRewardType { STARS, ITEM, NONE }
 
     public class Room
     {
-		public RoomType Type { get; set; }
+        public static readonly int REWARD_NUMBER = 2;
+        public RoomType Type { get; set; }
         public RoomRewardType Reward { get; set; }
+        public bool RewardRoom => IsRewardRoom(Type);
         public List<Room> NextRooms { get; set; }
 
-        public void DefineExitsFromRule(int maxExit, RoomRuleData rule)
+        public static bool IsRewardRoom(RoomType type) => type == RoomType.COMBAT || type == RoomType.EVENT;
+        public static bool IsUniqueRoom(RoomType type) => !IsRewardRoom(type);
+
+        public void DefineExitsFromRule(RoomRuleData rule)
 		{
-            NextRooms = new List<Room>(Random.Range(rule.MinRoomChoice, maxExit));
+            NextRooms?.Clear();
+            NextRooms = new List<Room>(Random.Range(rule.MinRoomChoice, rule.MaxRoomChoice));
             RoomType[] mandatoryRooms = rule.RoomProbabilities.Where(x => x.Value.Mandatory).Select(x => x.Key).ToArray();
 
             foreach (RoomType room in mandatoryRooms)
@@ -32,20 +41,43 @@ namespace Game.Systems.Run
                 NextRooms.Add(new Room()
                 {
                     Type = room,
-                    Reward = Random.Range(0, 2) == 0 ? RoomRewardType.STARS : RoomRewardType.ITEM // 50% rate
+                    Reward = IsRewardRoom(room) ? (Random.Range(0, 2) == 0 ? RoomRewardType.STARS : RoomRewardType.ITEM) : RoomRewardType.NONE
                 });
 			}
 
             for (int i = 0; i < NextRooms.Capacity - mandatoryRooms.Length; i++)
 			{
                 RoomType type = rule.GetRandomNonMandatory();
-                
+                RoomRewardType reward = RoomRewardType.NONE;
+                bool alreadyExists = NextRooms.Any(x => x.Type == type);
+
+                if (alreadyExists && IsUniqueRoom(type))
+                    continue;
+                reward = IsRewardRoom(type) ? GetUniqueReward(type) : RoomRewardType.NONE;
+                if (reward == RoomRewardType.NONE && IsRewardRoom(type))
+                    continue;
+
                 NextRooms.Add(new Room()
                 {
                     Type = type,
-                    Reward = Random.Range(0, 2) == 0 ? RoomRewardType.STARS : RoomRewardType.ITEM // 50% rate
+                    Reward = reward
                 });
             }
 		}
+
+		private RoomRewardType GetUniqueReward(RoomType type)
+		{
+            var possibleRewards = ((RoomRewardType[])Enum.GetValues(typeof(RoomRewardType))).ToList();
+
+            possibleRewards.Remove(RoomRewardType.NONE);
+			foreach (var room in NextRooms)
+			{
+                if (room.Type == type)
+                    possibleRewards.Remove(room.Reward);
+			}
+            if (possibleRewards.Count == 0)
+                return RoomRewardType.NONE;
+            return possibleRewards.Random();
+        }
     }
 }

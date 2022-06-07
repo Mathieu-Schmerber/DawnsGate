@@ -14,6 +14,8 @@ namespace Game.Systems.Run.Editor
 {
 	public static class RoomCreator
 	{
+		[MenuItem("Scene/Test", false, -1)] public static void Test() => Debug.Log("Test");
+
 		[MenuItem("Tools/Game/Create Room/Combat room", false)] public static void CreateC() => CreateRoom(RoomType.COMBAT);
 		[MenuItem("Tools/Game/Create Room/Event room", false)] public static void CreateE() => CreateRoom(RoomType.EVENT);
 		[MenuItem("Tools/Game/Create Room/Shop room", false)] public static void CreateS() => CreateRoom(RoomType.SHOP);
