@@ -44,6 +44,7 @@ namespace Game.Systems.Run
 
 		[Title("General")]
         [MinValue(0)] public int MaxExitNumber;
+        [FilePath(RequireExistingPath = true)] public string BootScenePath;
         public string LobbySceneName;
         public RoomFolderDictionary RoomFolders;
 

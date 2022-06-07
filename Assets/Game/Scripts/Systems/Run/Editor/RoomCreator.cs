@@ -12,7 +12,7 @@ using System.Linq;
 
 namespace Game.Systems.Run.Editor
 {
-	public static class RoomEditorWindow
+	public static class RoomCreator
 	{
 		[MenuItem("Tools/Game/Create Room/Combat room", false)] public static void CreateC() => CreateRoom(RoomType.COMBAT);
 		[MenuItem("Tools/Game/Create Room/Event room", false)] public static void CreateE() => CreateRoom(RoomType.EVENT);
@@ -30,10 +30,11 @@ namespace Game.Systems.Run.Editor
 			}
 
 			EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo();
+			EditorSceneManager.OpenScene(RunManager.RunSettings.BootScenePath, OpenSceneMode.Single);
 
 			var folder = RunManager.RunSettings.RoomFolders[type];
 			string roomFolderName = $"{type}-{folder.GetValidSceneNumber()}";
-			Scene scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
+			Scene scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Additive);
 			string scenePath = Path.Combine(folder.Folder, $"{roomFolderName}.unity");
 
 			scene.name = roomFolderName;
