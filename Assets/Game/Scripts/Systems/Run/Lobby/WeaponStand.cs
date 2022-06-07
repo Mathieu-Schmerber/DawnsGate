@@ -28,10 +28,10 @@ namespace Game.Systems.Run.Lobby
 		{
 			MonoBehaviour behaviour = actor as MonoBehaviour;
 			PlayerWeapon playerWeapon = behaviour.GetComponent<PlayerWeapon>();
-			WeaponData current = playerWeapon.CurrentWeapon;
+			WeaponData currentWeapon = playerWeapon.CurrentWeapon;
 
-			playerWeapon.EquipWeapon(_weapon);
-			_weapon = playerWeapon.CurrentWeapon;
+			playerWeapon.EquipWeapon(Data);
+			Data = currentWeapon;
 			OnIntracted?.Invoke();
 		}
 
