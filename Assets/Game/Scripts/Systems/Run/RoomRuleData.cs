@@ -7,21 +7,58 @@ using UnityEngine;
 
 namespace Game.Systems.Run
 {
-	[CreateAssetMenu(menuName = "Data/Run/Room Rule")]
-	public class RoomRuleData : ScriptableObject
+	[System.Serializable]
+	public class RoomDictionary : SerializedDictionary<RoomType, RoomDictionary.RangeInt>, ICloneable
 	{
 		[System.Serializable, InlineProperty]
-		public class RangeInt
+		public class RangeInt : ICloneable
 		{
 			public bool Mandatory;
 			[Range(0, 100), ShowIf("@Mandatory == false")] public int Probability;
 
 			public RangeInt(int value) => Probability = value;
+
+			public object Clone()
+			{
+				RangeInt clone = new(Probability);
+
+				clone.Mandatory = Mandatory;
+				return clone;
+			}
 		}
 
-		[System.Serializable]
-		public class RoomDictionary : SerializedDictionary<RoomType, RangeInt> {}
+		public RoomType GetRandomNonMandatory()
+		{
+			var nonMandatories = this.Where(x => !x.Value.Mandatory).ToArray();
 
+			if (nonMandatories.Length == 0)
+				return this.Random().Key;
+
+			int total = nonMandatories.Select(x => x.Value.Probability).Sum();
+			int random = UnityEngine.Random.Range(0, total);
+			int weight = 0;
+
+			for (int i = 0; i < nonMandatories.Length; i++)
+			{
+				weight += nonMandatories[i].Value.Probability;
+				if (random <= weight)
+					return nonMandatories[i].Key;
+			}
+			throw new Exception("GetRandomNonMandatory(): No item got picked, make sure the sum of probabilities is 100%.");
+		}
+
+		public object Clone()
+		{
+			RoomDictionary clone = new RoomDictionary();
+
+			this.ForEach(x => clone.Add(x.Key, (RangeInt)x.Value.Clone()));
+			return clone;
+		}
+	}
+
+	[CreateAssetMenu(menuName = "Data/Run/Room Rule")]
+	public class RoomRuleData : ScriptableObject
+	{
 		[TextArea] public string RuleDescription;
 		[ReadOnly, ShowInInspector] public int MinRoomChoice
 		{
@@ -41,30 +78,10 @@ namespace Game.Systems.Run
 			}
 		}
 
-		[Space]
-
-		[ValidateInput(nameof(ValidateEditor), "The sum of all probabilities should be 100%")]
+		[Space, ValidateInput(nameof(ValidateEditor), "The sum of all probabilities should be 100%")]
 		public RoomDictionary RoomProbabilities;
 
-		public RoomType GetRandomNonMandatory()
-		{
-			var nonMandatories = RoomProbabilities.Where(x => !x.Value.Mandatory).ToArray();
-
-			if (nonMandatories.Length == 0)
-				return RoomProbabilities.Random().Key;
-
-			int total = nonMandatories.Select(x => x.Value.Probability).Sum();
-			int random = UnityEngine.Random.Range(0, total);
-			int weight = 0;
-
-			for (int i = 0; i < nonMandatories.Length; i++)
-			{
-				weight += nonMandatories[i].Value.Probability;
-				if (random <= weight)
-					return nonMandatories[i].Key;
-			}
-			throw new Exception("GetRandomNonMandatory(): No item got picked, make sure the sum of probabilities is 100%.");
-		}
+		public RoomType GetRandomNonMandatory() => RoomProbabilities.GetRandomNonMandatory();
 
 		#region Editor tools
 

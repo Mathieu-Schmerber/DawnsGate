@@ -32,9 +32,9 @@ namespace Game.Systems.Run
 
         public void DefineExitsFromRule(RoomRuleData rule)
 		{
-            NextRooms?.Clear();
             NextRooms = new List<Room>(Random.Range(rule.MinRoomChoice, rule.MaxRoomChoice));
             RoomType[] mandatoryRooms = rule.RoomProbabilities.Where(x => x.Value.Mandatory).Select(x => x.Key).ToArray();
+            RoomDictionary possibleRooms = (RoomDictionary)rule.RoomProbabilities.Clone();
 
             foreach (RoomType room in mandatoryRooms)
 			{
@@ -43,19 +43,24 @@ namespace Game.Systems.Run
                     Type = room,
                     Reward = IsRewardRoom(room) ? (Random.Range(0, 2) == 0 ? RoomRewardType.STARS : RoomRewardType.ITEM) : RoomRewardType.NONE
                 });
+
+                if (IsUniqueRoom(room))
+                    ExcludeType(possibleRooms, room);
 			}
 
             for (int i = 0; i < NextRooms.Capacity - mandatoryRooms.Length; i++)
 			{
-                RoomType type = rule.GetRandomNonMandatory();
+                RoomType type = possibleRooms.GetRandomNonMandatory();
                 RoomRewardType reward = RoomRewardType.NONE;
                 bool alreadyExists = NextRooms.Any(x => x.Type == type);
 
-                if (alreadyExists && IsUniqueRoom(type))
-                    continue;
                 reward = IsRewardRoom(type) ? GetUniqueReward(type) : RoomRewardType.NONE;
                 if (reward == RoomRewardType.NONE && IsRewardRoom(type))
+                {
+                    ExcludeType(possibleRooms, type);
+                    i--;
                     continue;
+                }
 
                 NextRooms.Add(new Room()
                 {
@@ -63,6 +68,20 @@ namespace Game.Systems.Run
                     Reward = reward
                 });
             }
+		}
+
+        private void ExcludeType(RoomDictionary original, RoomType excluded)
+		{
+            int max = original.Select(x => x.Value.Probability).Sum();
+            int exclusionValue = original[excluded].Probability;
+
+            if (exclusionValue == 0)
+                return;
+
+            float ratio = max / exclusionValue;
+
+            original.Remove(excluded);
+            original.Values.ForEach(x => x.Probability = Mathf.FloorToInt(x.Probability * ratio));
 		}
 
 		private RoomRewardType GetUniqueReward(RoomType type)
