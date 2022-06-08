@@ -42,6 +42,10 @@ namespace Game.VFX
 			_renderer.materials = _defaultMaterials;
 		}
 
-		public void OnDamageDealt() => StartCoroutine(Highlight());
+		public void OnDamageDealt()
+		{
+			if (!_damageable.IsDead)
+				StartCoroutine(Highlight());
+		}
 	}
 }

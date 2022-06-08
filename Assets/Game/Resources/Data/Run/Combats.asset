@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ae862a78bfd74746987d0de656a8d9b, type: 3}
+  m_Name: Combats
+  m_EditorClassIdentifier: 
+  DelayBetweenWaves: 1
+  MinWaveNumber: 2
+  MaxWaveNumber: 3
+  MinEntityPerWave: 4
+  MaxEntityPerWave: 6
+  Enemies:
+  - {fileID: 1398924161840144190, guid: 275728197f66c1d458d01ca159e1826a, type: 3}

@@ -58,27 +58,20 @@ namespace Databases
                 
                 public static Game.Systems.Run.RunSettingsData Settings = (Game.Systems.Run.RunSettingsData)Instance.DatabaseAsset.Sections[1].Sections[0].Assets[0].Prefab;
                 
+                public static Game.Systems.Run.Rooms.CombatRoomData Combats = (Game.Systems.Run.Rooms.CombatRoomData)Instance.DatabaseAsset.Sections[1].Sections[0].Assets[1].Prefab;
+                
+                public static Game.Systems.Run.Rooms.RewardRoomData Events = (Game.Systems.Run.Rooms.RewardRoomData)Instance.DatabaseAsset.Sections[1].Sections[0].Assets[2].Prefab;
+                
                 public static IEnumerable<T> All<T>()
                     where T : UnityEngine.Object
                 {
-                    UnityEngine.Object[] all = new UnityEngine.Object[1] {Settings};
+                    UnityEngine.Object[] all = new UnityEngine.Object[3] {Settings, Combats, Events};
                     return all.Where(x => x is T).Select(x => (T)x);
                 }
             }
             
             public class Boostrap
             {
-                
-                public static UnityEngine.GameObject Essentials = (UnityEngine.GameObject)Instance.DatabaseAsset.Sections[1].Sections[1].Assets[0].Prefab;
-                
-                public static UnityEngine.GameObject Managers = (UnityEngine.GameObject)Instance.DatabaseAsset.Sections[1].Sections[1].Assets[1].Prefab;
-                
-                public static IEnumerable<T> All<T>()
-                    where T : UnityEngine.Object
-                {
-                    UnityEngine.Object[] all = new UnityEngine.Object[2] {Essentials, Managers};
-                    return all.Where(x => x is T).Select(x => (T)x);
-                }
             }
         }
     }

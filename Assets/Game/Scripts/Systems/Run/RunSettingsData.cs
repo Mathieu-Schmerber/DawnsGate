@@ -31,7 +31,7 @@ namespace Game.Systems.Run
 
             private string GetFolderDisplayName() => $"{nameof(Folder)} ({GetValidSceneNumber()})";
 
-            public int GetValidSceneNumber() => Directory.GetFiles(Folder, "*.unity", SearchOption.TopDirectoryOnly).Length;
+            public int GetValidSceneNumber() => Directory.GetFiles(Folder, "*.unity", SearchOption.AllDirectories).Length;
 
             private bool IsFolderEmpty() => GetValidSceneNumber() > 0;
 

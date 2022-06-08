@@ -37,7 +37,10 @@ namespace Game.Systems.Run.Editor
 			var folder = RunManager.RunSettings.RoomFolders[type];
 			string roomFolderName = $"{type}-{folder.GetValidSceneNumber()}";
 			Scene scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Additive);
-			string scenePath = Path.Combine(folder.Folder, $"{roomFolderName}.unity");
+			string folderPath = Path.Combine(folder.Folder, roomFolderName);
+			string scenePath = Path.Combine(folderPath, $"{roomFolderName}.unity");
+
+			Directory.CreateDirectory(folderPath);
 
 			scene.name = roomFolderName;
 			PopulateNewScene(type, scene);
@@ -57,6 +60,9 @@ namespace Game.Systems.Run.Editor
 		{
 			GameObject roomLogic = (GameObject)PrefabUtility.InstantiatePrefab(Databases.Database.Templates.Editor.RoomLogic);
 			RoomInfo roomInfo = roomLogic.GetComponent<RoomInfo>();
+
+			// Unpack prefab, so the _navigation doesn't get overwritten
+			PrefabUtility.UnpackPrefabInstance(roomLogic, PrefabUnpackMode.OutermostRoot, InteractionMode.AutomatedAction);
 
 			roomInfo.Type = type;
 		}

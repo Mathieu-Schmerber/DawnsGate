@@ -38,12 +38,12 @@ namespace Game.Managers
 
 		private void Awake()
 		{
-			_scenes.Add(RoomType.COMBAT, Directory.GetFiles(RunSettings.RoomFolders[RoomType.COMBAT].Folder, "*.unity"));
-			_scenes.Add(RoomType.EVENT, Directory.GetFiles(RunSettings.RoomFolders[RoomType.EVENT].Folder, "*.unity"));
-			_scenes.Add(RoomType.SHOP, Directory.GetFiles(RunSettings.RoomFolders[RoomType.SHOP].Folder, "*.unity"));
-			_scenes.Add(RoomType.UPGRADE, Directory.GetFiles(RunSettings.RoomFolders[RoomType.UPGRADE].Folder, "*.unity"));
-			_scenes.Add(RoomType.LIFE_SHOP, Directory.GetFiles(RunSettings.RoomFolders[RoomType.LIFE_SHOP].Folder, "*.unity"));
-			_scenes.Add(RoomType.BOSS, Directory.GetFiles(RunSettings.RoomFolders[RoomType.BOSS].Folder, "*.unity"));
+			_scenes.Add(RoomType.COMBAT, Directory.GetFiles(RunSettings.RoomFolders[RoomType.COMBAT].Folder, "*.unity", SearchOption.AllDirectories));
+			_scenes.Add(RoomType.EVENT, Directory.GetFiles(RunSettings.RoomFolders[RoomType.EVENT].Folder, "*.unity", SearchOption.AllDirectories));
+			_scenes.Add(RoomType.SHOP, Directory.GetFiles(RunSettings.RoomFolders[RoomType.SHOP].Folder, "*.unity", SearchOption.AllDirectories));
+			_scenes.Add(RoomType.UPGRADE, Directory.GetFiles(RunSettings.RoomFolders[RoomType.UPGRADE].Folder, "*.unity", SearchOption.AllDirectories));
+			_scenes.Add(RoomType.LIFE_SHOP, Directory.GetFiles(RunSettings.RoomFolders[RoomType.LIFE_SHOP].Folder, "*.unity", SearchOption.AllDirectories));
+			_scenes.Add(RoomType.BOSS, Directory.GetFiles(RunSettings.RoomFolders[RoomType.BOSS].Folder, "*.unity", SearchOption.AllDirectories));
 		}
 
 		#region Tools
@@ -95,11 +95,11 @@ namespace Game.Managers
 			ChangeScene(nextScene);
 		}
 
-		private static void ChangeScene(string scene)
+		private static void ChangeScene(string sceneName)
 		{
 			SceneManager.UnloadSceneAsync(Instance._currentRoomScene);
-			SceneManager.LoadScene(scene, LoadSceneMode.Additive);
-			Instance._currentRoomScene = scene;
+			SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
+			Instance._currentRoomScene = sceneName;
 		}
 
 		#endregion

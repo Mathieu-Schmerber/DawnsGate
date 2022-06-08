@@ -17,7 +17,10 @@ namespace Game.Systems.Run.Rooms
 		public static event Action OnRoomActivated;
 		public static event Action OnRoomCleared;
 
+		protected RoomInfo _roomInfo => _info;
 		public bool Cleared { get; protected set; }
+		public Room RoomData => RunManager.CurrentRoom;
+
 
 		protected virtual void Awake()
 		{
@@ -26,10 +29,10 @@ namespace Game.Systems.Run.Rooms
 
 		protected virtual void Start()
 		{
-			Room room = RunManager.CurrentRoom;
+			SceneManager.SetActiveScene(gameObject.scene);
 
-			for (int i = 0; i < room.NextRooms.Count; i++)
-				_info.Doors[i].LeadToRoom = room.NextRooms[i];
+			for (int i = 0; i < RoomData.NextRooms.Count; i++)
+				_info.Doors[i].LeadToRoom = RoomData.NextRooms[i];
 		}
 
 		protected abstract void OnActivate();

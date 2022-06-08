@@ -19,14 +19,17 @@ namespace Game.Entities.Shared
 		public bool IsInvulnerable { get; private set; }
 		public float CurrentHealth { get => _currentHealth; set => _currentHealth = Mathf.Clamp(value, 0, _stats.StartHealth); }
 		public float CurrentArmor { get => _currentArmor; set => _currentArmor = Mathf.Clamp(value, 0, Scale(Stats.StartHealth, StatModifier.ArmorRatio)); }
-		public BaseStatData Stats => _cachedStat;
 
-		private void Awake()
+		public void ResetStats()
 		{
 			_cachedStat = _stats.Clone() as BaseStatData; // Clone scriptable object so that we can edit it
 			CurrentHealth = Stats.StartHealth;
 			CurrentArmor = Scale(Stats.StartHealth, StatModifier.ArmorRatio);
 		}
+
+		public BaseStatData Stats => _cachedStat;
+
+		private void Awake() => ResetStats();
 
 		public float Scale(float baseValue, StatModifier modifier)
 		{
