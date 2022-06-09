@@ -21,12 +21,12 @@ namespace Game.VFX
 
 		private void OnEnable()
 		{
-			_stand.OnIntracted += OnInteracted;
+			_stand.OnInteracted += OnInteracted;
 		}
 
 		private void OnDisable()
 		{
-			_stand.OnIntracted -= OnInteracted;
+			_stand.OnInteracted -= OnInteracted;
 		}
 
 		private void OnInteracted()

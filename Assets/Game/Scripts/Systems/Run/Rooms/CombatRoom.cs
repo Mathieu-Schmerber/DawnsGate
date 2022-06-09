@@ -13,6 +13,8 @@ namespace Game.Systems.Run.Rooms
 		private int _currentWave = 0;
 		private List<GameObject> _wave = new();
 
+		public override bool RequiresNavBaking => true;
+
 		protected override void Awake()
 		{
 			base.Awake();

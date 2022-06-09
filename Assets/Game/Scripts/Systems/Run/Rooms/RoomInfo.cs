@@ -1,4 +1,5 @@
 ﻿using Game.Managers;
+using Game.Systems.Run.GPE;
 using Sirenix.OdinInspector;
 using System;
 using System.Collections.Generic;
@@ -20,11 +21,12 @@ namespace Game.Systems.Run.Rooms
 		[SerializeField, OnValueChanged(nameof(OnTypeChanged))] private RoomType _roomType;
 		[SerializeField] private Transform _playerSpawn;
 		[SerializeField] private RoomDoor[] _doors;
-		[SerializeField, ReadOnly] private RoomNavigationData _navigation;
+		[SerializeField, ReadOnly, ShowIf(nameof(_requiresNav))] private RoomNavigationData _navigation;
 
 		private Bounds _sceneBounds;
 		private ARoom _room;
 
+		private bool _requiresNav => GetRoom()?.RequiresNavBaking ?? false;
 		public RoomNavigationData NavigationData => _navigation;
 		public RoomDoor[] Doors => _doors;
 		public RoomType Type { get => _roomType; set 
@@ -37,32 +39,31 @@ namespace Game.Systems.Run.Rooms
 		#region Editor Tools
 
 #if UNITY_EDITOR
+
+		private ARoom GetRoom() => _room ?? GetComponent<ARoom>();
+
 		private void OnTypeChanged()
 		{
+			_room = GetRoom();
 			if (_room != null)
-				Destroy(_room);
+				DestroyImmediate(_room);
 
 			switch (Type)
 			{
 				case RoomType.COMBAT:
 					_room = gameObject.AddComponent<CombatRoom>();
 					break;
-				case RoomType.EVENT:
-					break;
 				case RoomType.SHOP:
-					break;
 				case RoomType.LIFE_SHOP:
-					break;
-				case RoomType.UPGRADE:
-					break;
-				case RoomType.BOSS:
+					_room = gameObject.AddComponent<ShopRoom>();
 					break;
 				default:
+					_room = gameObject.AddComponent<IdleRoom>();
 					break;
 			}
 		}
 
-		[Button]
+		[Button, ShowIf(nameof(_requiresNav))]
 		private void BakeNavMesh()
 		{
 			NavMeshHit hit;
@@ -136,6 +137,9 @@ namespace Game.Systems.Run.Rooms
 
 		private void OnDrawGizmos()
 		{
+			if (!_requiresNav)
+				return;
+
 			Gizmos.color = Color.gray;
 			Gizmos.DrawWireCube(_sceneBounds.center, _sceneBounds.size);
 

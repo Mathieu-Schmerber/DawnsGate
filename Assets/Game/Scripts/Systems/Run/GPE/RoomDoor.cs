@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace Game.Systems.Run.Rooms
+namespace Game.Systems.Run.GPE
 {
 	public class RoomDoor : MonoBehaviour, IInteractable
 	{

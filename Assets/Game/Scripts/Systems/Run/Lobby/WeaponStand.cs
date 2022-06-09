@@ -11,7 +11,7 @@ namespace Game.Systems.Run.Lobby
 	{
 		[SerializeField] private WeaponData _weapon;
 
-		public event Action OnIntracted;
+		public event Action OnInteracted;
 
 		public WeaponData Data { get => _weapon; private set => _weapon = value; }
 		public bool Empty => Data == null;
@@ -19,7 +19,7 @@ namespace Game.Systems.Run.Lobby
 		private void Start()
 		{
 			// Update GFX
-			OnIntracted?.Invoke();
+			OnInteracted?.Invoke();
 		}
 
 		#region Interaction
@@ -32,7 +32,7 @@ namespace Game.Systems.Run.Lobby
 
 			playerWeapon.EquipWeapon(Data);
 			Data = currentWeapon;
-			OnIntracted?.Invoke();
+			OnInteracted?.Invoke();
 		}
 
 		private void OnTriggerEnter(Collider other) => other.GetComponent<IInteractionActor>()?.SuggestInteraction(this);

@@ -19,6 +19,8 @@ namespace Game.Systems.Run.Rooms
 
 		protected RoomInfo _roomInfo => _info;
 		public bool Cleared { get; protected set; }
+		public abstract bool RequiresNavBaking { get; }
+
 		public Room RoomData => RunManager.CurrentRoom;
 
 

@@ -1135,7 +1135,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4555957896664274604}
   - component: {fileID: 5621188100699248004}
-  - component: {fileID: 6631470950218478857}
+  - component: {fileID: 5621188100699248005}
   m_Layer: 0
   m_Name: _RoomLogic
   m_TagString: Untagged
@@ -1155,13 +1155,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 505b12af58f768942b23092939d8c319, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _roomType: 0
+  _roomType: 5
   _playerSpawn: {fileID: 6270288323220217908}
   _doors:
   - {fileID: 6410346653642826883}
   - {fileID: 2858593939639831172}
   - {fileID: 3994609276102500336}
   _navigation: {fileID: 11400000, guid: ece19d753a3565549b067245e2b9f233, type: 2}
+--- !u!114 &5621188100699248005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4555957896664274607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cd0c75099dacf141a998a6ed0ab6428, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &6270288323220217907
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1324,15 +1336,3 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 6410346653642826882}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6631470950218478857
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4555957896664274607}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb5d1f68a223f2c4890b85021c9a0b84, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
