@@ -31,7 +31,6 @@ namespace Game.VFX
 
 		private void OnInteracted()
 		{
-			Debug.Log($"Interacted: {_stand.Data}");
 			if (_stand.Empty)
 				_meshFilter.mesh = null;
 			else

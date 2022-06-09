@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Game.Systems.Run.Rooms
 {
-	public class RoomNavigationData : ScriptableObject
+	public class RoomInfoData : ScriptableObject
 	{
 		public List<Vector3> SpawnablePositions;
 	}

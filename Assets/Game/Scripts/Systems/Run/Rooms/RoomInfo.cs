@@ -18,16 +18,16 @@ namespace Game.Systems.Run.Rooms
 	/// </summary>
 	public class RoomInfo : MonoBehaviour
 	{
-		[SerializeField, OnValueChanged(nameof(OnTypeChanged))] private RoomType _roomType;
+		[SerializeField, OnValueChanged(nameof(OnTypeChanged)), ValidateInput("@GetError() == null", "@GetError()")] private RoomType _roomType;
 		[SerializeField] private Transform _playerSpawn;
 		[SerializeField] private RoomDoor[] _doors;
-		[SerializeField, ReadOnly, ShowIf(nameof(_requiresNav))] private RoomNavigationData _navigation;
+		[SerializeField, ReadOnly, ShowIf(nameof(_requiresNav))] private RoomInfoData _navigation;
 
 		private Bounds _sceneBounds;
 		private ARoom _room;
 
 		private bool _requiresNav => GetRoom()?.RequiresNavBaking ?? false;
-		public RoomNavigationData NavigationData => _navigation;
+		public RoomInfoData NavigationData => _navigation;
 		public RoomDoor[] Doors => _doors;
 		public RoomType Type { get => _roomType; set 
 			{ 
@@ -116,7 +116,7 @@ namespace Game.Systems.Run.Rooms
 			File.Delete($"{navmeshFolder}.meta");
 
 			// Create RoomNavigationData asset
-			RoomNavigationData asset = ScriptableObject.CreateInstance<RoomNavigationData>();
+			RoomInfoData asset = ScriptableObject.CreateInstance<RoomInfoData>();
 			string soPath = Path.Combine(sceneFolder, "RoomNavigationData.asset").Substring(Application.dataPath.Length);
 			string assetRelativePath = $"Assets{soPath}";
 
@@ -149,6 +149,15 @@ namespace Game.Systems.Run.Rooms
 			Gizmos.color = Color.red;
 			foreach (var item in _navigation.SpawnablePositions)
 				Gizmos.DrawWireSphere(item, 0.5f);
+		}
+
+		public string GetError()
+		{
+			if (_requiresNav && !FindObjectsOfType<GameObject>().Any(x => x.isStatic))
+				return "No walkalble surface found. Walkable surfaces are defined by making objects static.";
+			if (_requiresNav && _navigation == null)
+				return "The room navmesh needs to be baked";
+			return null;
 		}
 
 #endif
