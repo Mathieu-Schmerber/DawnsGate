@@ -1,3 +1,4 @@
+using Game.Systems.Run.Rooms;
 using Nawlian.Lib.Utils;
 using Sirenix.OdinInspector;
 using System;
@@ -5,6 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using UnityEditor;
 using UnityEngine;
 
 namespace Game.Systems.Run
@@ -26,14 +28,41 @@ namespace Game.Systems.Run
 		{
             [ValidateInput(nameof(IsFolderEmpty), "This folder contains no scene.")]
             [FolderPath(RequireExistingPath = true), LabelText("@GetFolderDisplayName()")] public string Folder;
+            [ReadOnly, ListDrawerSettings(HideAddButton = true, HideRemoveButton = true, ShowIndexLabels = false, ElementColor = nameof(GetElementColor))] 
+            public List<RoomInfoData> RoomDatas;
 
 #if UNITY_EDITOR
 
-            private string GetFolderDisplayName() => $"{nameof(Folder)} ({GetValidSceneNumber()})";
+			private string GetFolderDisplayName() => $"{nameof(Folder)} ({GetValidSceneNumber()})";
 
             public int GetValidSceneNumber() => Directory.GetFiles(Folder, "*.unity", SearchOption.AllDirectories).Length;
 
             private bool IsFolderEmpty() => GetValidSceneNumber() > 0;
+
+			private Color GetElementColor(int index, Color defaultColor)
+			{
+				if (RoomDatas[index] == null)
+					return defaultColor;
+				if (RoomDatas[index].HasErrors)
+					return Color.red;
+                return defaultColor;
+			}
+
+			[OnInspectorInit]
+            private void CheckValidity()
+			{
+                //FindAssets uses tags check documentation for more info
+                string[] guids = AssetDatabase.FindAssets("t:" + typeof(RoomInfoData).Name);
+               
+                RoomDatas = new List<RoomInfoData>();
+                for (int i = 0; i < guids.Length; i++)
+                {
+                    string path = AssetDatabase.GUIDToAssetPath(guids[i]);
+
+                    if (path.Contains(Folder))
+                        RoomDatas.Add(AssetDatabase.LoadAssetAtPath<RoomInfoData>(path));
+                }
+            }
 
 #endif
         }
@@ -44,7 +73,7 @@ namespace Game.Systems.Run
 
 		[Title("General")]
         [MinValue(0)] public int MaxExitNumber;
-        [FilePath(RequireExistingPath = true)] public string BootScenePath;
+        [Sirenix.OdinInspector.FilePath(RequireExistingPath = true)] public string BootScenePath;
         public string LobbySceneName;
         public RoomFolderDictionary RoomFolders;
 

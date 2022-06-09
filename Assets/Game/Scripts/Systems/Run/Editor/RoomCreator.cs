@@ -32,16 +32,16 @@ namespace Game.Systems.Run.Editor
 			EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo();
 			EditorSceneManager.OpenScene(RunManager.RunSettings.BootScenePath, OpenSceneMode.Single);
 
-			var folder = RunManager.RunSettings.RoomFolders[type];
+			RunSettingsData.RoomFolder folder = RunManager.RunSettings.RoomFolders[type];
 			string roomFolderName = $"{type}-{folder.GetValidSceneNumber()}";
-			Scene scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Additive);
 			string folderPath = Path.Combine(folder.Folder, roomFolderName);
 			string scenePath = Path.Combine(folderPath, $"{roomFolderName}.unity");
+			Scene scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Additive);
 
-			Directory.CreateDirectory(folderPath);
+			AssetDatabase.CreateFolder(folder.Folder, roomFolderName);
 
 			scene.name = roomFolderName;
-			PopulateNewScene(type, scene);
+			PopulateNewScene(type, folderPath);
 			EditorSceneManager.SaveScene(scene, scenePath);
 			AddToBuild(scenePath);
 		}
@@ -54,15 +54,37 @@ namespace Game.Systems.Run.Editor
 			EditorBuildSettings.scenes = editorBuildSettingsScenes.ToArray();
 		}
 
-		private static void PopulateNewScene(RoomType type, Scene scene)
+		private static RoomInfoData CreateRoomData(string sceneFolderPath)
+		{
+			// Create RoomNavigationData asset
+			RoomInfoData asset = ScriptableObject.CreateInstance<RoomInfoData>();
+			string sceneName = Path.GetFileName(sceneFolderPath);
+			string soPath = Path.Combine(sceneFolderPath, $"{sceneName}.asset");
+
+			Debug.Log(soPath);
+			if (File.Exists(soPath))
+				File.Delete(soPath);
+			AssetDatabase.CreateAsset(asset, soPath);
+			AssetDatabase.SaveAssets();
+
+			// Refresh project directory
+			AssetDatabase.Refresh();
+
+			return asset;
+		}
+
+		private static void PopulateNewScene(RoomType type, string folderPath)
 		{
 			GameObject roomLogic = (GameObject)PrefabUtility.InstantiatePrefab(Databases.Database.Templates.Editor.RoomLogic);
 			RoomInfo roomInfo = roomLogic.GetComponent<RoomInfo>();
 
 			// Unpack prefab, so the _navigation doesn't get overwritten
 			PrefabUtility.UnpackPrefabInstance(roomLogic, PrefabUnpackMode.OutermostRoot, InteractionMode.AutomatedAction);
-
 			roomInfo.Type = type;
+			roomInfo.Data = CreateRoomData(folderPath);
+
+			EditorUtility.SetDirty(roomInfo.Data);
+			AssetDatabase.SaveAssets();
 		}
 	}
 }

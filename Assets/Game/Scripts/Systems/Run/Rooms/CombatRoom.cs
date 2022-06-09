@@ -34,7 +34,7 @@ namespace Game.Systems.Run.Rooms
 		private void SpawnEnemy()
 		{
 			GameObject enemy = _settings.Enemies.Random();
-			Vector3 spawnPos = _roomInfo.NavigationData.SpawnablePositions.Random();
+			Vector3 spawnPos = _roomInfo.Data.SpawnablePositions.Random();
 
 			_wave.Add(ObjectPooler.Get(enemy, spawnPos, Quaternion.identity, this));
 		}
