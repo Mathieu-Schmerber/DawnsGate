@@ -13,6 +13,8 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEditor.SceneManagement;
 using UnityEngine.SceneManagement;
+using Sirenix.Utilities.Editor;
+using Game.Scripts.Tools;
 
 namespace Game.Systems.Run.Rooms
 {
@@ -21,9 +23,14 @@ namespace Game.Systems.Run.Rooms
 	/// </summary>
 	public class RoomInfo : MonoBehaviour
 	{
-		[SerializeField, OnValueChanged(nameof(OnTypeChanged)), ValidateInput("@GetError() == null", "@GetError()")] private RoomType _roomType;
+		[Space]
+		[Title("General")]
+		[SerializeField, OnValueChanged(nameof(OnTypeChanged))] private RoomType _roomType;
 		[SerializeField] private Transform _playerSpawn;
 		[SerializeField] private RoomDoor[] _doors;
+
+		[Title("Navigation")]
+		[SerializeField, ShowIf(nameof(_requiresNav))] private bool _drawGizmos = true;
 		[ReadOnly, ShowIf(nameof(_requiresNav))] public RoomInfoData Data;
 
 		private Bounds _sceneBounds;
@@ -89,8 +96,10 @@ namespace Game.Systems.Run.Rooms
 						Data.SpawnablePositions.Add(hit.position);
 				}
 			}
+			_drawGizmos = true;
 			EditorUtility.SetDirty(Data);
 			AssetDatabase.SaveAssets();
+			EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo();
 		}
 
 		private void BakeNavigationMesh()
@@ -98,9 +107,15 @@ namespace Game.Systems.Run.Rooms
 			string sceneFolder = Directory.GetParent(gameObject.scene.path).FullName;
 			string navmeshFolder = Path.Combine(sceneFolder, Path.GetFileNameWithoutExtension(gameObject.scene.path));
 
-
 			// Bake NavMesh
 			UnityEditor.AI.NavMeshBuilder.BuildNavMesh();
+
+			if (!Directory.Exists(navmeshFolder))
+			{
+				Debug.LogError("[RoomInfo] The NavMesh couldn't be baked, ensure that your walkable surfaces are large enough.");
+				Data.NavMesh = null;
+				return;
+			}
 
 			// Move navmesh data to scene folder
 			string assetPath = Path.Combine(sceneFolder, "NavMesh.asset");
@@ -135,11 +150,56 @@ namespace Game.Systems.Run.Rooms
 				PrefabUtility.UnpackPrefabInstance(gameObject, PrefabUnpackMode.OutermostRoot, InteractionMode.AutomatedAction);
 
 			Data = asset;
+			Data.NavMesh = AssetDatabase.LoadAssetAtPath<NavMeshData>($"Assets{assetPath.Substring(Application.dataPath.Length)}");
+			Debug.Log("[RoomInfo] NavMesh successfully baked !");
 		}
+
+		public void OnSceneSaved()
+		{
+			bool state = GetError() != null;
+
+			if (Data != null && state != Data.HasErrors)
+			{
+				Data.HasErrors = state;
+				EditorUtility.SetDirty(Data);
+				AssetDatabase.SaveAssets();
+				RunManager.RunSettings.RoomFolders.Refresh();
+			}
+		}
+
+		public string GetError()
+		{
+			if (_requiresNav &&
+				FindObjectsOfType<GameObject>().Count(x => x.isStatic && x.GetComponent<Collider>() != null && x.GetComponentInParent<RoomInfo>() == null) == 0)
+			{
+				Data?.SpawnablePositions.Clear();
+				return "No walkalble surface found. Walkable surfaces are defined by making objects static.";
+			}
+			if (_requiresNav && (Data == null || Data.SpawnablePositions.Count == 0) || Data.NavMesh == null || !NavMesh.SamplePosition(Vector3.zero, out var hit, 1000.0f, 1))
+				return "The room navmesh needs to be baked.";
+			return null;
+		}
+
+		[OnInspectorGUI, PropertyOrder(int.MinValue)]
+		private void DisplayErrorBox()
+		{
+			string error = GetError();
+
+			if (error == null)
+			{
+				SuccessMessageBox.Show("Everything is OK !");
+				return;
+			}
+			SirenixEditorGUI.ErrorMessageBox(error);
+		}
+
+#endif
+
+		#endregion
 
 		private void OnDrawGizmos()
 		{
-			if (!_requiresNav)
+			if (!_requiresNav || !_drawGizmos)
 				return;
 
 			Gizmos.color = Color.gray;
@@ -152,31 +212,5 @@ namespace Game.Systems.Run.Rooms
 			foreach (var item in Data.SpawnablePositions)
 				Gizmos.DrawSphere(item, 0.1f);
 		}
-
-		public void OnSceneSaved()
-		{
-			bool state = GetError() != null;
-
-			if (Data != null && state != Data.HasErrors)
-			{
-				Data.HasErrors = state;
-				EditorUtility.SetDirty(Data);
-				AssetDatabase.SaveAssets();
-			}
-		}
-
-		public string GetError()
-		{
-			if (_requiresNav && 
-				FindObjectsOfType<GameObject>().Count(x => x.isStatic && x.GetComponent<Collider>() != null && x.GetComponentInParent<RoomInfo>() == null) == 0)
-				return "No walkalble surface found. Walkable surfaces are defined by making objects static.";
-			if (_requiresNav && (Data == null || Data.SpawnablePositions.Count == 0) || !NavMesh.SamplePosition(Vector3.zero, out var hit, 1000.0f, 1))
-				return "The room navmesh needs to be baked";
-			return null;
-		}
-
-#endif
-
-		#endregion
 	}
 }

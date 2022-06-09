@@ -5,12 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace Game.Systems.Run.Rooms
 {
 	public class RoomInfoData : ScriptableObject
 	{
-		[ReadOnly] public bool HasErrors;
+		[HideInInspector] public bool HasErrors;
+		[ReadOnly] public NavMeshData NavMesh;
 		public List<Vector3> SpawnablePositions;
 	}
 }

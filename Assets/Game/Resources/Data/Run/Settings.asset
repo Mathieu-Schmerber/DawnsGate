@@ -19,22 +19,28 @@ MonoBehaviour:
     keyData: 000000000100000002000000030000000400000005000000
     valueData:
     - Folder: Assets/Game/Scenes/Rooms/Combat
+      HasError: 1
       RoomDatas:
       - {fileID: 11400000, guid: cc2f09d03b1e7354cb54ec334ddd4c5a, type: 2}
       - {fileID: 11400000, guid: 443d9191640e6c044bcf719a1bb4e775, type: 2}
     - Folder: Assets/Game/Scenes/Rooms/Event
+      HasError: 0
       RoomDatas:
       - {fileID: 11400000, guid: 96347e5a664d7ca4fbd29b177abb0a5e, type: 2}
     - Folder: Assets/Game/Scenes/Rooms/Shop
+      HasError: 0
       RoomDatas:
       - {fileID: 11400000, guid: de65b0e3968836a45ac41f298cd861ff, type: 2}
     - Folder: Assets/Game/Scenes/Rooms/LifeShop
+      HasError: 0
       RoomDatas:
       - {fileID: 11400000, guid: 410946fffa9433b4a9148f2963a74373, type: 2}
     - Folder: Assets/Game/Scenes/Rooms/Upgrade
+      HasError: 0
       RoomDatas:
       - {fileID: 11400000, guid: bcf39f31d58566744a30e9a4ac622bcc, type: 2}
     - Folder: Assets/Game/Scenes/Rooms/Boss
+      HasError: 0
       RoomDatas:
       - {fileID: 11400000, guid: ece19d753a3565549b067245e2b9f233, type: 2}
   FirstRoom:

@@ -1,6 +1,9 @@
+using Game.Scripts.Tools;
 using Game.Systems.Run.Rooms;
+using Nawlian.Lib.Extensions;
 using Nawlian.Lib.Utils;
 using Sirenix.OdinInspector;
+using Sirenix.Utilities.Editor;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -28,9 +31,11 @@ namespace Game.Systems.Run
 		{
             [ValidateInput(nameof(IsFolderEmpty), "This folder contains no scene.")]
             [FolderPath(RequireExistingPath = true), LabelText("@GetFolderDisplayName()")] public string Folder;
-            [ReadOnly, ListDrawerSettings(HideAddButton = true, HideRemoveButton = true, ShowIndexLabels = false, ElementColor = nameof(GetElementColor))] 
+            [HideInInspector] public bool HasError;
+            [ReadOnly, ListDrawerSettings(HideAddButton = true, HideRemoveButton = true, ShowIndexLabels = false, ElementColor = nameof(GetElementColor))]
             public List<RoomInfoData> RoomDatas;
 
+			#region Editor
 #if UNITY_EDITOR
 
 			private string GetFolderDisplayName() => $"{nameof(Folder)} ({GetValidSceneNumber()})";
@@ -48,42 +53,81 @@ namespace Game.Systems.Run
                 return defaultColor;
 			}
 
+            public void Refresh()
+			{
+                bool state = HasError;
+
+                CheckValidity();
+                HasError = RoomDatas.Any(x => x.HasErrors);
+
+                if (HasError != state)
+				{
+                    EditorUtility.SetDirty(Databases.Database.Data.Run.Settings);
+                    AssetDatabase.SaveAssets();
+                }
+            }
+
 			[OnInspectorInit]
             private void CheckValidity()
 			{
-                //FindAssets uses tags check documentation for more info
                 string[] guids = AssetDatabase.FindAssets("t:" + typeof(RoomInfoData).Name);
-               
+
+                HasError = false;
                 RoomDatas = new List<RoomInfoData>();
                 for (int i = 0; i < guids.Length; i++)
                 {
                     string path = AssetDatabase.GUIDToAssetPath(guids[i]);
 
                     if (path.Contains(Folder))
-                        RoomDatas.Add(AssetDatabase.LoadAssetAtPath<RoomInfoData>(path));
+                    {
+                        RoomInfoData rid = AssetDatabase.LoadAssetAtPath<RoomInfoData>(path);
+                        RoomDatas.Add(rid);
+                    }
                 }
             }
 
 #endif
-        }
+			#endregion
+		}
 
-        [System.Serializable] public class RoomFolderDictionary : SerializedDictionary<RoomType, RoomFolder> { }
+		[System.Serializable] public class RoomFolderDictionary : SerializedDictionary<RoomType, RoomFolder>
+        {
+            public void Refresh() => Values.ForEach(x => x.Refresh());
+        }
 
 		#endregion
 
-		[Title("General")]
+		[Title("General", "Essentials settings and room scene setups")]
+
+        [@Tooltip("Maximum number of doors that can be activated in a room")]
         [MinValue(0)] public int MaxExitNumber;
+
         [Sirenix.OdinInspector.FilePath(RequireExistingPath = true)] public string BootScenePath;
+
+        [OnInspectorGUI(nameof(ValidateFolders))]
+
         public string LobbySceneName;
+
         public RoomFolderDictionary RoomFolders;
 
-        [Title("Rules"), ValidateInput("@ValidateMaxExit().Item1", "@ValidateMaxExit().Item2")]
+        [Title("Rules", "Run generation rules")]
+
+        [ValidateInput("@ValidateMaxExit().Item1", "@ValidateMaxExit().Item2")]
         public RoomTypeRewardPair FirstRoom;
-        [LabelText("Room Order")] public RoomRuleData[] RoomRules;
+        [LabelText("Room Order")] 
+        public RoomRuleData[] RoomRules;
 
         #region Editor check
 
 #if UNITY_EDITOR
+
+        public void ValidateFolders()
+		{
+			RoomFolder error = RoomFolders.Values.FirstOrDefault(x => x.HasError);
+
+            if (error != null)
+                SirenixEditorGUI.ErrorMessageBox($"Some {RoomFolders.Keys.First(x => RoomFolders[x] == error)} rooms contain errors which will affect the gameplay.");
+        }
 
         public (bool, string) ValidateMaxExit()
         {
