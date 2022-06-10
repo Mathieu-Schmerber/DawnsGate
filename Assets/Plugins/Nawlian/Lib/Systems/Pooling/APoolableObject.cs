@@ -30,6 +30,7 @@ namespace Nawlian.Lib.Systems.Pooling
 		{
 			OnReleasing();
 			gameObject.SetActive(false);
+			gameObject.transform.SetParent(ObjectPooler.Instance.transform);
 		}
 
 		#endregion

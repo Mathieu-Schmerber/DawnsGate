@@ -1,5 +1,6 @@
 ﻿using Game.Systems.Run;
 using Nawlian.Lib.Extensions;
+using Nawlian.Lib.Systems.Pooling;
 using Nawlian.Lib.Utils;
 using System;
 using System.Collections.Generic;
@@ -97,6 +98,7 @@ namespace Game.Managers
 
 		private static void ChangeScene(string sceneName)
 		{
+			ObjectPooler.ReleaseAll();
 			SceneManager.UnloadSceneAsync(Instance._currentRoomScene);
 			SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
 			Instance._currentRoomScene = sceneName;

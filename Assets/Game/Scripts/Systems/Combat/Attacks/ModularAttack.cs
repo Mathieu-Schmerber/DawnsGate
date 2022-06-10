@@ -25,12 +25,12 @@ namespace Game.Systems.Combat.Attacks
 		private Vector3 _baseOffset;
 		private Vector3 _velocity;
 
-		public override void Init(AttackBaseData data, EntityIdentity caster)
+		public override void Init(object data)
 		{
-			base.Init(data, caster);
+			base.Init(data);
 			_startTime = Time.time;
 			_hitColliders.Clear();
-			_attackData = data as ModularAttackData;
+			_attackData = _data as ModularAttackData;
 		}
 
 		public override void OnStart(Vector3 offset, Vector3 travelDistance)
@@ -49,7 +49,7 @@ namespace Game.Systems.Combat.Attacks
 		private void Update()
 		{
 			if (Time.time - _startTime >= _attackData.ActiveTime)
-				gameObject.SetActive(false);
+				Release();
 			else if (FollowCaster)
 			{
 				Vector3 localOffsetDir = transform.InverseTransformDirection(_baseOffset);

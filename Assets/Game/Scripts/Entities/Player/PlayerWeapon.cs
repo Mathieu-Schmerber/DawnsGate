@@ -3,6 +3,7 @@ using Game.Managers;
 using Game.Systems.Combat.Attacks;
 using Game.Systems.Combat.Weapons;
 using Nawlian.Lib.Systems.Animations;
+using Nawlian.Lib.Systems.Pooling;
 using Nawlian.Lib.Utils;
 using System.Collections.Generic;
 using System.Linq;
@@ -73,22 +74,31 @@ namespace Game.Entities.Player
 
 		public AttackBase SpawnFromPool(AttackBaseData attack, Vector3 position, Quaternion rotation)
 		{
-			GameObject pulled = _weaponAttackPool.FirstOrDefault(x => x.activeSelf == false && x.name == attack.name);
+			//GameObject pulled = _weaponAttackPool.FirstOrDefault(x => x.activeSelf == false && x.name == attack.name);
 
-			if (pulled == null)
-			{
-				pulled = Instantiate(attack.Prefab.gameObject, position, rotation);
-				pulled.name = attack.name;
-				_weaponAttackPool.Add(pulled);
-			}
-			pulled.transform.position = position;
-			pulled.transform.rotation = rotation;
-			pulled.SetActive(true);
+			//if (pulled == null)
+			//{
+			//	pulled = Instantiate(attack.Prefab.gameObject, position, rotation);
+			//	pulled.name = attack.name;
+			//	_weaponAttackPool.Add(pulled);
+			//}
+			//pulled.transform.position = position;
+			//pulled.transform.rotation = rotation;
+			//pulled.SetActive(true);
 
-			AttackBase result = pulled.GetComponent<AttackBase>();
-			result.Init(attack, _identity);
+			//AttackBase result = pulled.GetComponent<AttackBase>();
+			//result.Init(attack, _identity);
 
-			return result;
+			//return result;
+
+			GameObject instance = ObjectPooler.Get(attack.Prefab.gameObject, position, rotation, 
+				new AttackBase.InitData() 
+				{ 
+					Data = attack, 
+					Caster = _identity
+				});
+
+			return instance.GetComponent<AttackBase>();
 		}
 
 		#region Attack

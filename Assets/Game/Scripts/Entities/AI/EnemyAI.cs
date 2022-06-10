@@ -28,7 +28,11 @@ namespace Game.Entities.AI
 			_identity.ResetStats();
 		}
 
-		public void Release() => gameObject.SetActive(false);
+		public void Release()
+		{
+			gameObject.SetActive(false);
+			gameObject.transform.SetParent(ObjectPooler.Instance.transform);
+		}
 
 		#endregion
 

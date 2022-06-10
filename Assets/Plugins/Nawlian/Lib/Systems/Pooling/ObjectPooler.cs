@@ -5,6 +5,7 @@ using Sirenix.OdinInspector;
 using System.Linq;
 using Nawlian.Lib.Utils;
 using System.Linq.Expressions;
+using Nawlian.Lib.Extensions;
 
 namespace Nawlian.Lib.Systems.Pooling
 {
@@ -58,6 +59,15 @@ namespace Nawlian.Lib.Systems.Pooling
 		{
 			if (!go.Released)
 				go.Release();
+		}
+
+		/// <summary>
+		/// Releases all objects to the pool
+		/// </summary>
+		public static void ReleaseAll()
+		{
+			Instance._idPool.ForEach(x => x.Value.Pool.ForEach(y => y.Release()));
+			Instance._namedPool.ForEach(x => x.Value.Pool.ForEach(y => y.Release()));
 		}
 
 		/// <summary>

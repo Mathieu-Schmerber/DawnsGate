@@ -175,7 +175,7 @@ namespace Game.Systems.Run.Rooms
 				Data?.SpawnablePositions.Clear();
 				return "No walkalble surface found. Walkable surfaces are defined by making objects static.";
 			}
-			if (_requiresNav && (Data == null || Data.SpawnablePositions.Count == 0) || Data.NavMesh == null || !NavMesh.SamplePosition(Vector3.zero, out var hit, 1000.0f, 1))
+			if (_requiresNav && (Data == null || Data.SpawnablePositions.Count == 0 || Data.NavMesh == null || !NavMesh.SamplePosition(Vector3.zero, out var hit, 1000.0f, 1)))
 				return "The room navmesh needs to be baked.";
 			return null;
 		}

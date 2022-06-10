@@ -1,11 +1,18 @@
 ﻿using Game.Entities.Shared;
+using Nawlian.Lib.Systems.Pooling;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Game.Systems.Combat.Attacks
 {
-	public abstract class AttackBase : MonoBehaviour
+	public abstract class AttackBase : APoolableObject
 	{
+		public struct InitData
+		{
+			public AttackBaseData Data;
+			public EntityIdentity Caster;
+		}
+
 		protected AttackBaseData _data;
 
 		/// <summary>
@@ -20,10 +27,12 @@ namespace Game.Systems.Combat.Attacks
 
 		protected EntityIdentity Caster { get; private set; }
 
-		public virtual void Init(AttackBaseData data, EntityIdentity caster)
+		public override void Init(object data)
 		{
-			_data = data;
-			Caster = caster;
+			InitData init = (InitData)data;
+
+			_data = init.Data;
+			Caster = init.Caster;
 		}
 
 		public abstract void OnStart(Vector3 offset, Vector3 travelDistance);
