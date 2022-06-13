@@ -129,7 +129,7 @@ namespace Game.Entities.Shared
 		{
 			if (!CanMove) return;
 
-			transform.Translate(GetMovementsInputs() * _entity.CurrentSpeed * Time.deltaTime);
+			transform.Translate(GetMovementNormal().WithY(0) * _entity.CurrentSpeed * Time.deltaTime);
 		}
 
 		public void Stun(float duration)

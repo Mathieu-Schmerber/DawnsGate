@@ -12,29 +12,42 @@ namespace Game.Entities.AI
 {
 	public class Seeker : EnemyAI
 	{
+		[SerializeField] private float _mesurePerMeter;
+		[SerializeField] private float _waveAmplitude;
+		private Vector3? _sinPos;
+
 		protected override bool UsesPathfinding => false;
-		protected override Vector3 GetTargetPosition() => GameManager.Player.transform.position;
 
-		protected override void Move()
+		protected override Vector3 GetTargetPosition() => _sinPos ?? GameManager.Player.transform.position;
+
+		protected override Vector3 GetMovementsInputs()
 		{
-			Vector3 destination = GetTargetPosition().WithY(transform.position.y);
+			Vector3 destination = _sinPos ?? GameManager.Player.transform.position;
+
+			return destination - transform.position;
+		}
+
+		protected override void Init(object data)
+		{
+			base.Init(data);
+			transform.Translate(new Vector3(0, 0.5f, 0));
+		}
+
+		protected override void Update()
+		{
+			GenerateSinPath();
+			base.Update();
+		}
+
+		private void GenerateSinPath()
+		{
+			Vector3 destination = GetPathfindingDestination();
+			float distance = Vector3.Distance(transform.position, destination);
+			float precision = distance * _mesurePerMeter;
 			Vector3 dir = (destination - transform.position).normalized;
+			Vector3 right = Quaternion.AngleAxis(90, Vector3.up) * dir;
 
-			//// Calculate how fast we should be moving
-			//Vector3 targetVelocity = dir;
-			//targetVelocity *= _identity.CurrentSpeed;
-
-			//// Apply a force that attempts to reach our target velocity
-			//var velocity = _rb.velocity;
-			//var velocityChange = targetVelocity - velocity;
-			//velocityChange.x = Mathf.Clamp(velocityChange.x, -_identity.CurrentSpeed, _identity.CurrentSpeed);
-			//velocityChange.z = Mathf.Clamp(velocityChange.z, -_identity.CurrentSpeed, _identity.CurrentSpeed);
-			//velocityChange.y = 0;
-			//_rb.AddForce(velocityChange, ForceMode.VelocityChange);
-
-			//// We apply gravity manually for more tuning control
-			//_rb.AddForce(new Vector3(0, -14f * _rb.mass, 0));
-			transform.Translate(dir * _identity.CurrentSpeed * Time.deltaTime);
+			_sinPos = transform.position + dir * (distance / precision) + right * Mathf.Sin(Time.time) * _waveAmplitude;
 		}
 	}
 }
