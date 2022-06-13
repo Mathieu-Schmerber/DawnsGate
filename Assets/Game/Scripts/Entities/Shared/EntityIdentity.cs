@@ -19,6 +19,9 @@ namespace Game.Entities.Shared
 		public bool IsInvulnerable { get; private set; }
 		public float CurrentHealth { get => _currentHealth; set => _currentHealth = Mathf.Clamp(value, 0, _stats.StartHealth); }
 		public float CurrentArmor { get => _currentArmor; set => _currentArmor = Mathf.Clamp(value, 0, Scale(Stats.StartHealth, StatModifier.ArmorRatio)); }
+		public float CurrentSpeed => Scale(_stats.MovementSpeed, StatModifier.MovementSpeed);
+		public float CurrentDashRange => Scale(_stats.DashRange, StatModifier.DashRange);
+		public float CurrentDashCooldown => Scale(_stats.DashCooldown, StatModifier.DashCooldown);
 
 		public void ResetStats()
 		{

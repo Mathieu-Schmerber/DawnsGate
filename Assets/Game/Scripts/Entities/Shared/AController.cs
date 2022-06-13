@@ -81,9 +81,9 @@ namespace Game.Entities.Shared
 
 			_gfxAnim?.SetFloat("Speed", inputs.magnitude);
 			_gfxAnim?.SetFloat("Angle", Vector3.Angle(inputs, dir));
-		}
 
-		protected virtual void FixedUpdate() => Move();
+			Move();
+		}
 
 		#endregion
 
@@ -129,18 +129,7 @@ namespace Game.Entities.Shared
 		{
 			if (!CanMove) return;
 
-			// Calculate how fast we should be moving
-			var targetVelocity = GetMovementsInputs();
-			targetVelocity = transform.TransformDirection(targetVelocity);
-			targetVelocity *= _entity.Scale(_entity.Stats.MovementSpeed, StatModifier.MovementSpeed);
-
-			// Apply a force that attempts to reach our target velocity
-			var velocity = _rb.velocity;
-			var velocityChange = targetVelocity - velocity;
-			velocityChange.x = Mathf.Clamp(velocityChange.x, -_entity.Scale(_entity.Stats.MovementSpeed, StatModifier.MovementSpeed), _entity.Scale(_entity.Stats.MovementSpeed, StatModifier.MovementSpeed));
-			velocityChange.z = Mathf.Clamp(velocityChange.z, -_entity.Scale(_entity.Stats.MovementSpeed, StatModifier.MovementSpeed), _entity.Scale(_entity.Stats.MovementSpeed, StatModifier.MovementSpeed));
-			velocityChange.y = 0;
-			_rb.AddForce(velocityChange, ForceMode.VelocityChange);
+			transform.Translate(GetMovementsInputs() * _entity.CurrentSpeed * Time.deltaTime);
 		}
 
 		public void Stun(float duration)

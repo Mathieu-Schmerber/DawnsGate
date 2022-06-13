@@ -44,7 +44,7 @@ namespace Game.Entities.Player
 
 		private void Start()
 		{
-			_dashTimer.Start(_entity.Scale(_entity.Stats.DashCooldown, StatModifier.DashCooldown), false);
+			_dashTimer.Start(_entity.CurrentDashCooldown, false);
 		}
 
 		#endregion
@@ -56,8 +56,8 @@ namespace Game.Entities.Player
 				Vector3 direction = GetMovementNormal().magnitude > 0 ? GetMovementNormal() : GetAimNormal();
 
 				_dashFx.Play(true);
-				Dash(direction, _entity.Scale(_entity.Stats.DashRange, StatModifier.DashRange), _dashTime);
-				_dashTimer.Interval = _entity.Scale(_entity.Stats.DashCooldown, StatModifier.DashCooldown);
+				Dash(direction, _entity.CurrentDashRange, _dashTime);
+				_dashTimer.Interval = _entity.CurrentDashCooldown;
 				_dashTimer.Restart();
 			}
 		}

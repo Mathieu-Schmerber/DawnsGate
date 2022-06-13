@@ -76,6 +76,8 @@ namespace Game.Systems.Run.Rooms
 		private void BakeNavMesh()
 		{
 			NavMeshHit hit;
+			float lowerGround = float.MaxValue;
+
 			_sceneBounds = new Bounds(Vector3.zero, Vector3.zero);
 
 			BakeNavigationMesh();
@@ -93,9 +95,14 @@ namespace Game.Systems.Run.Rooms
 					if (Data.SpawnablePositions.Contains(position))
 						continue;
 					else if (NavMesh.SamplePosition(position, out hit, 1000, 1) && Vector3.Distance(hit.position.WithY(position.y), position) < 0.2f)
+					{
+						if (lowerGround > hit.position.y)
+							lowerGround = hit.position.y;
 						Data.SpawnablePositions.Add(hit.position);
+					}
 				}
 			}
+			Data.SpawnablePositions.RemoveAll(pos => pos.y > lowerGround);
 			_drawGizmos = true;
 			EditorUtility.SetDirty(Data);
 			AssetDatabase.SaveAssets();
