@@ -18,5 +18,11 @@ namespace Game.Entities.AI
 
 		[@Tooltip("The range at which the enemy returns to a patrol state")]
 		public float UntriggerRange;
+
+		[@Tooltip("The range at which the enemy will start attacking")]
+		public float AttackRange;
+
+		[@Tooltip("Minimum time between attacks")]
+		public float AttackCooldown;
 	}
 }

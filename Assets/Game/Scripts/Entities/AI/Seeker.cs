@@ -1,5 +1,7 @@
 ﻿using Game.Managers;
 using Nawlian.Lib.Extensions;
+using Nawlian.Lib.Systems.Animations;
+using Nawlian.Lib.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +12,7 @@ using UnityEngine;
 
 namespace Game.Entities.AI
 {
-	public class Seeker : EnemyAI
+	public class Seeker : EnemyAI, IAnimationEventListener
 	{
 		[SerializeField] private float _mesurePerMeter;
 		[SerializeField] private float _waveAmplitude;
@@ -43,12 +45,6 @@ namespace Game.Entities.AI
 
 		private void GenerateSinPath()
 		{
-			if (_aiState == EnemyState.PATROL)
-			{
-				_sinPos = GetPathfindingDestination();
-				return;
-			}
-
 			Vector3 destination = GetPathfindingDestination();
 			float distance = Vector3.Distance(transform.position, destination);
 			float precision = distance * _mesurePerMeter;
@@ -56,6 +52,44 @@ namespace Game.Entities.AI
 			Vector3 right = Quaternion.AngleAxis(90, Vector3.up) * dir;
 
 			_sinPos = transform.position + dir * (distance / precision) + right * Mathf.Sin(Time.time) * _waveAmplitude;
+		}
+
+		#endregion
+
+		#region Attack
+
+		protected override void Attack()
+		{
+			LockMovement = true;
+			LockTarget(GameManager.Player.transform, true);
+			_gfxAnim.Play("LoadCharge");
+		}
+
+		public void OnAnimationEvent(string animationArg) {}
+
+		public void OnAnimationEnter(AnimatorStateInfo stateInfo) 
+		{
+			if (stateInfo.IsName("Charge"))
+			{
+				Vector3 dir = GetAimNormal();
+
+				UnlockTarget();
+				IsAimLocked = true;
+				Dash(dir, _aiSettings.AttackRange, 0.3f);
+				Awaiter.WaitAndExecute(0.3f, () => {
+					_gfxAnim.Play("EndCharge");
+				});
+			}
+		}
+
+		public void OnAnimationExit(AnimatorStateInfo stateInfo)
+		{
+			if (stateInfo.IsName("EndCharge"))
+			{
+				State = Shared.EntityState.IDLE;
+				LockMovement = false;
+				IsAimLocked = false;
+			}
 		}
 
 		#endregion

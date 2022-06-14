@@ -50,9 +50,9 @@ namespace Game.Entities.Shared
 
 		public Transform Graphics => _graphics.transform;
 		protected Transform _lockedTarget => _target;
-		public bool CanMove => !LockMovement && State != EntityState.DASH && State != EntityState.STUN;
-		public bool IsAimLocked { get; set; }
-		public EntityState State { get; set; }
+		[ShowInInspector, ReadOnly] public bool CanMove => !LockMovement && State != EntityState.DASH && State != EntityState.STUN;
+		[ShowInInspector, ReadOnly] public bool IsAimLocked { get; set; }
+		[ShowInInspector, ReadOnly] public EntityState State { get; set; }
 
 		#endregion
 
@@ -129,6 +129,7 @@ namespace Game.Entities.Shared
 		{
 			if (!CanMove) return;
 
+			Debug.Log($"{gameObject.name} Move()");
 			transform.Translate(GetMovementNormal().WithY(0) * _entity.CurrentSpeed * Time.deltaTime);
 		}
 
@@ -173,5 +174,13 @@ namespace Game.Entities.Shared
 			Distance = distance,
 			Time = time
 		});
+
+		private void OnDrawGizmos()
+		{
+			if (!Application.isPlaying)
+				return;
+			Gizmos.color = Color.magenta;
+			Gizmos.DrawRay(transform.position, GetAimNormal());
+		}
 	}
 }

@@ -16,7 +16,7 @@ namespace Game.VFX
 		{
 			_ai = GetComponentInParent<EnemyAI>();
 			_renderer = GetComponent<Renderer>();
-			_ai_OnStateChanged(EnemyState.PATROL);
+			_ai_OnStateChanged(EnemyState.PASSIVE);
 		}
 
 		private void OnEnable()
@@ -31,7 +31,7 @@ namespace Game.VFX
 
 		private void _ai_OnStateChanged(EnemyState obj)
 		{
-			_renderer.material = obj == EnemyState.PATROL ? _patrolMaterial : _chaseMaterial;
+			_renderer.material = obj == EnemyState.PASSIVE ? _patrolMaterial : _chaseMaterial;
 		}
 	}
 }

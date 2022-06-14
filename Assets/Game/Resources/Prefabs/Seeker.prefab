@@ -241,6 +241,7 @@ GameObject:
   - component: {fileID: 4548806808917394141}
   - component: {fileID: 8234798275850951934}
   - component: {fileID: 8525285451206231726}
+  - component: {fileID: 9137784201379614058}
   m_Layer: 7
   m_Name: GFX
   m_TagString: Untagged
@@ -328,7 +329,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 92b09ae3befa599488d44e298d1d1310, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
@@ -349,6 +350,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _patrolMaterial: {fileID: 2100000, guid: 201f8f12ae97b96469a3d308084c27ba, type: 2}
   _chaseMaterial: {fileID: 2100000, guid: 17dc241a15bcc6d49a777755b56819b8, type: 2}
+--- !u!114 &9137784201379614058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2603194663712711432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d805d54c9dd9b1143beb01088a5da72e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4732068448631359841
 GameObject:
   m_ObjectHideFlags: 0
