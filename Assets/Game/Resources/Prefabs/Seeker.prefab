@@ -177,7 +177,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47314d708ab17de4e91f9fb1ba4516d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _stats: {fileID: 11400000, guid: 1ba5dd8a9d9e3f849a31743c20997785, type: 2}
+  _stats: {fileID: 11400000, guid: ab2dce5c104907643a430cc52706b95d, type: 2}
 --- !u!114 &1398924161840144188
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -217,7 +217,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   serializationData:
-    SerializedFormat: 0
+    SerializedFormat: 2
     SerializedBytes: 
     ReferencedUnityObjects: []
     SerializedBytesString: 
@@ -240,6 +240,7 @@ GameObject:
   - component: {fileID: 1784671168099694103}
   - component: {fileID: 4548806808917394141}
   - component: {fileID: 8234798275850951934}
+  - component: {fileID: 8525285451206231726}
   m_Layer: 7
   m_Name: GFX
   m_TagString: Untagged
@@ -334,6 +335,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &8525285451206231726
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2603194663712711432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed72be90e54cf374696c1c33ad73e02c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _patrolMaterial: {fileID: 2100000, guid: 201f8f12ae97b96469a3d308084c27ba, type: 2}
+  _chaseMaterial: {fileID: 2100000, guid: 17dc241a15bcc6d49a777755b56819b8, type: 2}
 --- !u!1 &4732068448631359841
 GameObject:
   m_ObjectHideFlags: 0

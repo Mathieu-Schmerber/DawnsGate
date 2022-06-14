@@ -16,6 +16,14 @@ namespace Game.Entities.AI
 		[SerializeField] private float _waveAmplitude;
 		private Vector3? _sinPos;
 
+		protected override void Init(object data)
+		{
+			base.Init(data);
+			transform.Translate(new Vector3(0, 0.5f, 0));
+		}
+
+		#region Movement
+
 		protected override bool UsesPathfinding => false;
 
 		protected override Vector3 GetTargetPosition() => _sinPos ?? GameManager.Player.transform.position;
@@ -27,12 +35,6 @@ namespace Game.Entities.AI
 			return destination - transform.position;
 		}
 
-		protected override void Init(object data)
-		{
-			base.Init(data);
-			transform.Translate(new Vector3(0, 0.5f, 0));
-		}
-
 		protected override void Update()
 		{
 			GenerateSinPath();
@@ -41,6 +43,12 @@ namespace Game.Entities.AI
 
 		private void GenerateSinPath()
 		{
+			if (_aiState == EnemyState.PATROL)
+			{
+				_sinPos = GetPathfindingDestination();
+				return;
+			}
+
 			Vector3 destination = GetPathfindingDestination();
 			float distance = Vector3.Distance(transform.position, destination);
 			float precision = distance * _mesurePerMeter;
@@ -49,5 +57,7 @@ namespace Game.Entities.AI
 
 			_sinPos = transform.position + dir * (distance / precision) + right * Mathf.Sin(Time.time) * _waveAmplitude;
 		}
+
+		#endregion
 	}
 }

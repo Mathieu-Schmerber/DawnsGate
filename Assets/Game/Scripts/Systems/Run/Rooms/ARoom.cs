@@ -17,7 +17,7 @@ namespace Game.Systems.Run.Rooms
 		public static event Action OnRoomActivated;
 		public static event Action OnRoomCleared;
 
-		protected RoomInfo _roomInfo => _info;
+		public RoomInfo Info => _info;
 		public bool Cleared { get; protected set; }
 		public abstract bool RequiresNavBaking { get; }
 

@@ -4,6 +4,9 @@ using Game.Managers;
 using Game.Systems.Run.Rooms;
 using Nawlian.Lib.Extensions;
 using Nawlian.Lib.Systems.Pooling;
+using Pixelplacement;
+using System;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -22,8 +25,13 @@ namespace Game.Entities.AI
 		protected NavMeshPath _path;
 		protected EnemyState _aiState;
 		protected Damageable _damageable;
+		protected EnemyStatData _aiSettings;
+		private Vector3 _nextPatrolPosition;
 
 		protected abstract bool UsesPathfinding { get; }
+		protected Vector3 NextPatrolPosition { get => _nextPatrolPosition.WithY(transform.position.y); set => _nextPatrolPosition = value; }
+
+		public event Action<EnemyState> OnStateChanged;
 
 		#region IPoolableObject
 
@@ -49,8 +57,12 @@ namespace Game.Entities.AI
 
 		protected virtual void Init(object data)
 		{
-			_aiState = EnemyState.PATROL;
 			_room = (CombatRoom)data;
+			_aiSettings = (EnemyStatData)_entity.Stats;
+
+			_aiState = EnemyState.PATROL;
+			NextPatrolPosition = transform.position;
+
 			_entity.ResetStats();
 			_path.ClearCorners();
 		}
@@ -83,9 +95,10 @@ namespace Game.Entities.AI
 				for (int i = 0; i < _path.corners.Length - 1; i++)
 					Debug.DrawLine(_path.corners[i], _path.corners[i + 1], Color.red);
 			}
+			UpdateAiState();
 			base.Update();
 		}
-
+		
 		#endregion
 
 		#region Movement system
@@ -104,7 +117,39 @@ namespace Game.Entities.AI
 			return Vector3.zero;
 		}
 
-		protected virtual Vector3 GetPathfindingDestination() => GameManager.Player.transform.position;
+		protected virtual Vector3 UpdatePatrolPoint()
+		{
+			if (Vector3.Distance(transform.position, NextPatrolPosition) < 0.1f)
+			{
+				var aroundPos = _room.Info.GetPositionsAround(NextPatrolPosition, 5f);
+				float maxDistance = aroundPos.Max(x => Vector3.Distance(x, NextPatrolPosition));
+
+				NextPatrolPosition = aroundPos.Where(pos => Vector3.Distance(pos, NextPatrolPosition) == maxDistance).Random();
+			}
+			return NextPatrolPosition;
+		}
+
+		protected virtual Vector3 GetPathfindingDestination() => _aiState == EnemyState.PATROL ? UpdatePatrolPoint() : GameManager.Player.transform.position;
+
+		#endregion
+
+		#region State
+
+		private void UpdateAiState()
+		{
+			float distance = Vector3.Distance(transform.position, GameManager.Player.transform.position.WithY(transform.position.y));
+
+			if (_aiState == EnemyState.PATROL && distance < _aiSettings.TriggerRange)
+			{
+				_aiState = EnemyState.CHASE;
+				OnStateChanged?.Invoke(_aiState);
+			}
+			else if (_aiState == EnemyState.CHASE && distance > _aiSettings.UntriggerRange)
+			{
+				_aiState = EnemyState.PATROL;
+				OnStateChanged?.Invoke(_aiState);
+			}
+		}
 
 		#endregion
 

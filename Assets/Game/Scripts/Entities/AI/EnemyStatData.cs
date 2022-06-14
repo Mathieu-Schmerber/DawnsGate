@@ -12,9 +12,11 @@ namespace Game.Entities.AI
 	[CreateAssetMenu(menuName = "Data/Entity/Stats/Enemy")]
 	public class EnemyStatData : BaseStatData
 	{
-		/// <summary>
-		/// Attack range of an entity
-		/// </summary>
-		[SuffixLabel("In percent", true), TitleGroup("Attack")] public StatLine AttackRange;
+		[Title("AI")]
+		[@Tooltip("The range at which the enemy spots the player")]
+		public float TriggerRange;
+
+		[@Tooltip("The range at which the enemy returns to a patrol state")]
+		public float UntriggerRange;
 	}
 }
