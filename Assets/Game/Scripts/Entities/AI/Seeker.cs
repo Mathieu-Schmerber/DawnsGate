@@ -75,7 +75,7 @@ namespace Game.Entities.AI
 
 				UnlockTarget();
 				IsAimLocked = true;
-				Dash(dir, _aiSettings.AttackRange, 0.3f);
+				Dash(dir, _aiSettings.DashRange, 0.3f);
 				Awaiter.WaitAndExecute(0.3f, () => {
 					_gfxAnim.Play("EndCharge");
 				});

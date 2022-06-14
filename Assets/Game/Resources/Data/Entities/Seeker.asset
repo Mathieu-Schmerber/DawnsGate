@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Seeker
   m_EditorClassIdentifier: 
   StartHealth: 50
-  MovementSpeed: 3
-  DashRange: 0
+  MovementSpeed: 4
+  DashRange: 12
   DashCooldown: 0
   Modifiers:
     keyData: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d000000
@@ -61,7 +61,7 @@ MonoBehaviour:
     - _naturalUnit: 0
       BonusModifier: 0
       TemporaryModifier: 0
-  TriggerRange: 10
+  TriggerRange: 11
   UntriggerRange: 12
-  AttackRange: 20
-  AttackCooldown: 4
+  AttackRange: 9
+  AttackCooldown: 3
