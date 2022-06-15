@@ -182,6 +182,9 @@ namespace Game.Entities.Shared
 				return;
 			Gizmos.color = Color.yellow;
 			Gizmos.DrawRay(transform.position, GetAimNormal() * 2);
+
+			Gizmos.color = Color.green;
+			Gizmos.DrawSphere(GetTargetPosition(), 0.2f);
 		}
 	}
 }

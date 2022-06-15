@@ -16,9 +16,23 @@ namespace Game.Entities.Shared
 		private float _currentHealth;
 		private float _currentArmor;
 
+		public event Action OnArmorBroken;
+		public event Action OnArmorGained;
+
 		public bool IsInvulnerable { get; private set; }
 		public float CurrentHealth { get => _currentHealth; set => _currentHealth = Mathf.Clamp(value, 0, _stats.StartHealth); }
-		public float CurrentArmor { get => _currentArmor; set => _currentArmor = Mathf.Clamp(value, 0, Scale(Stats.StartHealth, StatModifier.ArmorRatio)); }
+		public float CurrentArmor { get => _currentArmor; 
+			set
+			{
+				float before = _currentArmor;
+
+				_currentArmor = Mathf.Clamp(value, 0, Scale(Stats.StartHealth, StatModifier.ArmorRatio));
+				if (_currentArmor == 0 && before > _currentArmor)
+					OnArmorBroken?.Invoke();
+				else if (_currentArmor > 0 && before == 0)
+					OnArmorGained?.Invoke();
+			}
+		}
 		public float CurrentSpeed => Scale(_stats.MovementSpeed, StatModifier.MovementSpeed);
 		public float CurrentDashRange => Scale(_stats.DashRange, StatModifier.DashRange);
 		public float CurrentDashCooldown => Scale(_stats.DashCooldown, StatModifier.DashCooldown);

@@ -17,12 +17,12 @@ namespace Game.VFX
 
 		private void OnEnable()
 		{
-			_damageable.OnDamage += OnDamageDealt;
+			_damageable.OnDamaged += OnDamageDealt;
 		}
 
 		private void OnDisable()
 		{
-			_damageable.OnDamage -= OnDamageDealt;
+			_damageable.OnDamaged -= OnDamageDealt;
 		}
 
 		private void Awake()

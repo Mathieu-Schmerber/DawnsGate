@@ -29,8 +29,10 @@ namespace Game.Entities.AI
 		protected EnemyStatData _aiSettings;
 
 		private Timer _attackCooldown;
+		private int _pathPointIndex;
 		private Vector3 _nextPatrolPosition;
 		private Vector3 _nextAggressivePosition;
+		private Vector3 _cachedDestination;
 
 		protected abstract bool UsesPathfinding { get; }
 		protected Vector3 NextPatrolPosition { get => _nextPatrolPosition.WithY(transform.position.y); set => _nextPatrolPosition = value; }
@@ -98,15 +100,12 @@ namespace Game.Entities.AI
 		{
 			if (UsesPathfinding)
 			{
-				// TODO: cache GetTargetPosition() result, and only calculate path if the destination hasn't changed much
-				NavMesh.CalculatePath(transform.position, GetPathfindingDestination(), NavMesh.AllAreas, _path);
-
-				// Debug
-				for (int i = 0; i < _path.corners.Length - 1; i++)
-					Debug.DrawLine(_path.corners[i], _path.corners[i + 1], Color.red);
+				CalculatePathfinding();
+				UpdatePathIndex();
 			}
 
 			UpdateAiState();
+
 			if (_aiState == EnemyState.AGGRESSIVE)
 				TryAttacking();
 
@@ -121,20 +120,49 @@ namespace Game.Entities.AI
 		protected override Vector3 GetMovementsInputs()
 		{
 			if (UsesPathfinding && _path.status != NavMeshPathStatus.PathInvalid)
-				return (_path.corners[1] - transform.position);
+				return (_path.corners[_pathPointIndex] - transform.position).normalized;
 			return Vector3.zero;
 		}
 
 		protected override Vector3 GetTargetPosition()
 		{
 			if (UsesPathfinding && _path.status != NavMeshPathStatus.PathInvalid)
-				return _path.corners[1];
+				return _path.corners[_pathPointIndex].WithY(transform.position.y);
 			return Vector3.zero;
+		}
+
+		protected virtual Vector3 GetPathfindingDestination() => _aiState == EnemyState.PASSIVE ? UpdatePatrolPoint() : UpdateAgressivePoint();
+
+		protected void UpdatePathIndex()
+		{
+			if (Vector3.Distance(transform.position, _path.corners[_pathPointIndex].WithY(transform.position.y)) < 0.5f && _pathPointIndex < _path.corners.Length - 1)
+				_pathPointIndex++;
+		}
+
+		protected void CalculatePathfinding()
+		{
+			Vector3 destination = GetPathfindingDestination();
+
+			if (_path.corners?.Length > 0)
+			{
+				// Debug
+				for (int i = 0; i < _path.corners.Length - 1; i++)
+					Debug.DrawLine(_path.corners[i], _path.corners[i + 1], Color.red);
+			}
+
+			if (_cachedDestination == destination)
+				return;
+
+			_pathPointIndex = 0;
+			_cachedDestination = destination;
+
+			Debug.Log("New path");
+			NavMesh.CalculatePath(transform.position, _cachedDestination, NavMesh.AllAreas, _path);
 		}
 
 		protected virtual Vector3 UpdateAgressivePoint()
 		{
-			if (Vector3.Distance(transform.position, NextAggressivePosition) < 0.1f)
+			if (Vector3.Distance(transform.position, NextAggressivePosition) < 0.5f)
 			{
 				var aroundPos = _room.Info.GetPositionsAround(GameManager.Player.transform.position, _aiSettings.AttackRange / 2);
 
@@ -145,17 +173,19 @@ namespace Game.Entities.AI
 
 		protected virtual Vector3 UpdatePatrolPoint()
 		{
-			if (Vector3.Distance(transform.position, NextPatrolPosition) < 0.1f)
+			if (Vector3.Distance(transform.position, NextPatrolPosition) < 0.5f)
 			{
 				var aroundPos = _room.Info.GetPositionsAround(NextPatrolPosition, 5f);
+
+				if (aroundPos.Length == 0)
+					return NextPatrolPosition = _room.Info.Data.SpawnablePositions.Random();
+
 				float maxDistance = aroundPos.Max(x => Vector3.Distance(x, NextPatrolPosition));
 
 				NextPatrolPosition = aroundPos.Where(pos => Vector3.Distance(pos, NextPatrolPosition) == maxDistance).Random();
 			}
 			return NextPatrolPosition;
 		}
-
-		protected virtual Vector3 GetPathfindingDestination() => _aiState == EnemyState.PASSIVE ? UpdatePatrolPoint() : UpdateAgressivePoint();
 
 		#endregion
 
@@ -197,6 +227,11 @@ namespace Game.Entities.AI
 				Attack();
 				_attackCooldown.Restart();
 			}
+		}
+
+		protected void OnAttackEnd()
+		{
+			State = EntityState.IDLE;
 		}
 
 		#endregion

@@ -86,11 +86,9 @@ namespace Game.Entities.AI
 		{
 			if (stateInfo.IsName("EndCharge"))
 			{
-				NextAggressivePosition = transform.position;
-				UpdateAgressivePoint();
-				State = Shared.EntityState.IDLE;
 				LockMovement = false;
 				IsAimLocked = false;
+				OnAttackEnd();
 			}
 		}
 
