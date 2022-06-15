@@ -30,9 +30,11 @@ namespace Game.Entities.AI
 
 		private Timer _attackCooldown;
 		private Vector3 _nextPatrolPosition;
+		private Vector3 _nextAggressivePosition;
 
 		protected abstract bool UsesPathfinding { get; }
 		protected Vector3 NextPatrolPosition { get => _nextPatrolPosition.WithY(transform.position.y); set => _nextPatrolPosition = value; }
+		protected Vector3 NextAggressivePosition { get => _nextAggressivePosition.WithY(transform.position.y); set => _nextAggressivePosition = value; }
 
 		public event Action<EnemyState> OnStateChanged;
 
@@ -130,6 +132,17 @@ namespace Game.Entities.AI
 			return Vector3.zero;
 		}
 
+		protected virtual Vector3 UpdateAgressivePoint()
+		{
+			if (Vector3.Distance(transform.position, NextAggressivePosition) < 0.1f)
+			{
+				var aroundPos = _room.Info.GetPositionsAround(GameManager.Player.transform.position, _aiSettings.AttackRange / 2);
+
+				NextAggressivePosition = aroundPos.Random();
+			}
+			return NextAggressivePosition;
+		}
+
 		protected virtual Vector3 UpdatePatrolPoint()
 		{
 			if (Vector3.Distance(transform.position, NextPatrolPosition) < 0.1f)
@@ -142,7 +155,7 @@ namespace Game.Entities.AI
 			return NextPatrolPosition;
 		}
 
-		protected virtual Vector3 GetPathfindingDestination() => _aiState == EnemyState.PASSIVE ? UpdatePatrolPoint() : GameManager.Player.transform.position;
+		protected virtual Vector3 GetPathfindingDestination() => _aiState == EnemyState.PASSIVE ? UpdatePatrolPoint() : UpdateAgressivePoint();
 
 		#endregion
 
@@ -155,11 +168,15 @@ namespace Game.Entities.AI
 			if (_aiState == EnemyState.PASSIVE && distance < _aiSettings.TriggerRange)
 			{
 				_aiState = EnemyState.AGGRESSIVE;
+				NextAggressivePosition = transform.position;
+				UpdateAgressivePoint();
 				OnStateChanged?.Invoke(_aiState);
 			}
 			else if (_aiState == EnemyState.AGGRESSIVE && distance > _aiSettings.UntriggerRange)
 			{
 				_aiState = EnemyState.PASSIVE;
+				NextPatrolPosition = transform.position;
+				UpdatePatrolPoint();
 				OnStateChanged?.Invoke(_aiState);
 			}
 		}

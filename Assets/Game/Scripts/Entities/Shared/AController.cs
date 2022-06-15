@@ -5,6 +5,7 @@ using Nawlian.Lib.Extensions;
 using Nawlian.Lib.Utils;
 using Game.VFX;
 using System;
+using Pixelplacement;
 
 namespace Game.Entities.Shared
 {
@@ -100,7 +101,13 @@ namespace Game.Entities.Shared
 		/// <returns></returns>
 		protected abstract Vector3 GetTargetPosition();
 
-		public Vector3 GetAimNormal() => ((_target != null ? _target.position : GetTargetPosition()) - _rb.position).normalized.WithY(0);
+		public Vector3 GetAimNormal()
+		{
+			if (_target != null)
+				return (_target.position - _rb.position).normalized;
+			return (GetTargetPosition() - _rb.position).normalized;
+		}
+
 		public Vector3 GetMovementNormal() => GetMovementsInputs().normalized;
 
 		public void LockTarget(Transform target, bool forceRotation = false)
@@ -129,7 +136,6 @@ namespace Game.Entities.Shared
 		{
 			if (!CanMove) return;
 
-			Debug.Log($"{gameObject.name} Move()");
 			transform.Translate(GetMovementNormal().WithY(0) * _entity.CurrentSpeed * Time.deltaTime);
 		}
 
@@ -146,26 +152,21 @@ namespace Game.Entities.Shared
 			if (parameters.Distance == 0)
 				return;
 
-			Vector3 destination = transform.position + parameters.Direction * parameters.Distance;
-			float speed = parameters.Distance / parameters.Time;
+			Vector3 destination = (_rb.position + parameters.Direction * parameters.Distance).WithY(_rb.position.y);
 
 			OnDashStarted?.Invoke(parameters);
-
 			_entity.SetInvulnerable(parameters.Time); // Invulnerable during dash
-			StartCoroutine(ExecuteDash());
 
-			IEnumerator ExecuteDash()
-			{
-				float startTime = Time.time;
-
-				State = EntityState.DASH;
-				while (Time.time < startTime + parameters.Time)
+			Tween.Position(transform, destination, parameters.Time, 0,
+				startCallback: () =>
 				{
-					_rb.MovePosition(_rb.position + parameters.Direction * speed * Time.deltaTime);
-					yield return null;
+					State = EntityState.DASH;
+				},
+				completeCallback: () => 
+				{
+					State = EntityState.IDLE;
 				}
-				State = EntityState.IDLE;
-			}
+			);
 		}
 
 		public void Dash(Vector3 direction, float distance, float time) => Dash(new DashParameters()
@@ -179,8 +180,8 @@ namespace Game.Entities.Shared
 		{
 			if (!Application.isPlaying)
 				return;
-			Gizmos.color = Color.magenta;
-			Gizmos.DrawRay(transform.position, GetAimNormal());
+			Gizmos.color = Color.yellow;
+			Gizmos.DrawRay(transform.position, GetAimNormal() * 2);
 		}
 	}
 }

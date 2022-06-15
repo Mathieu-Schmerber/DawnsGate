@@ -61,7 +61,7 @@ namespace Game.Entities.AI
 		protected override void Attack()
 		{
 			LockMovement = true;
-			LockTarget(GameManager.Player.transform, true);
+			LockTarget(GameManager.Player.transform);
 			_gfxAnim.Play("LoadCharge");
 		}
 
@@ -73,8 +73,8 @@ namespace Game.Entities.AI
 			{
 				Vector3 dir = GetAimNormal();
 
-				UnlockTarget();
 				IsAimLocked = true;
+				UnlockTarget();
 				Dash(dir, _aiSettings.DashRange, 0.3f);
 				Awaiter.WaitAndExecute(0.3f, () => {
 					_gfxAnim.Play("EndCharge");
@@ -86,6 +86,8 @@ namespace Game.Entities.AI
 		{
 			if (stateInfo.IsName("EndCharge"))
 			{
+				NextAggressivePosition = transform.position;
+				UpdateAgressivePoint();
 				State = Shared.EntityState.IDLE;
 				LockMovement = false;
 				IsAimLocked = false;
@@ -93,5 +95,21 @@ namespace Game.Entities.AI
 		}
 
 		#endregion
+
+		private void OnDrawGizmos()
+		{
+			if (!Application.isPlaying)
+				return;
+			Gizmos.color = Color.red;
+			Gizmos.DrawSphere(NextAggressivePosition, 0.2f);
+
+			Gizmos.color = Color.green;
+			Gizmos.DrawSphere(NextPatrolPosition, 0.2f);
+
+			Gizmos.DrawWireSphere(transform.position, _aiSettings.AttackRange);
+
+			Gizmos.color = Color.magenta;
+			Gizmos.DrawWireSphere(transform.position, _aiSettings.TriggerRange);
+		}
 	}
 }
