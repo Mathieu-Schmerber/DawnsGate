@@ -19,8 +19,18 @@ namespace Game.Entities.Shared
 		public event Action OnArmorBroken;
 		public event Action OnArmorGained;
 
+		public event Action OnHealthChanged;
+		public event Action OnArmorChanged;
+
 		public bool IsInvulnerable { get; private set; }
-		public float CurrentHealth { get => _currentHealth; set => _currentHealth = Mathf.Clamp(value, 0, _stats.StartHealth); }
+
+		public float CurrentHealth { get => _currentHealth; 
+			set 
+			{
+				_currentHealth = Mathf.Clamp(value, 0, Stats.StartHealth);
+				OnHealthChanged?.Invoke();
+			}
+		}
 		public float CurrentArmor { get => _currentArmor; 
 			set
 			{
@@ -31,16 +41,24 @@ namespace Game.Entities.Shared
 					OnArmorBroken?.Invoke();
 				else if (_currentArmor > 0 && before == 0)
 					OnArmorGained?.Invoke();
+				OnArmorChanged?.Invoke();
 			}
 		}
-		public float CurrentSpeed => Scale(_stats.MovementSpeed, StatModifier.MovementSpeed);
-		public float CurrentDashRange => Scale(_stats.DashRange, StatModifier.DashRange);
-		public float CurrentDashCooldown => Scale(_stats.DashCooldown, StatModifier.DashCooldown);
+		public float MaxHealth => Scale(Stats.StartHealth, StatModifier.MaxHealth);
+		public float MaxArmor => Scale(MaxHealth, StatModifier.ArmorRatio);
+		public float CurrentSpeed => Scale(Stats.MovementSpeed, StatModifier.MovementSpeed);
+		public float CurrentDashRange => Scale(Stats.DashRange, StatModifier.DashRange);
+		public float CurrentDashCooldown => Scale(Stats.DashCooldown, StatModifier.DashCooldown);
 
 		public void ResetStats()
 		{
 			_cachedStat = _stats.Clone() as BaseStatData; // Clone scriptable object so that we can edit it
 			CurrentHealth = Stats.StartHealth;
+			CurrentArmor = Scale(Stats.StartHealth, StatModifier.ArmorRatio);
+		}
+
+		public void RefillArmor()
+		{
 			CurrentArmor = Scale(Stats.StartHealth, StatModifier.ArmorRatio);
 		}
 

@@ -37,20 +37,20 @@ namespace Game.Entities.Shared
 		{
 			Modifiers = new StatDictionary();
 
-			Modifiers.Add(StatModifier.MaxHealth, new StatLine(100));
-			Modifiers.Add(StatModifier.MovementSpeed, new StatLine(100));
-			Modifiers.Add(StatModifier.ArmorRatio, new StatLine(0));
-			Modifiers.Add(StatModifier.AttackDamage, new StatLine(100));
-			Modifiers.Add(StatModifier.LifeSteal, new StatLine(0));
-			Modifiers.Add(StatModifier.CriticalRate, new StatLine(0));
-			Modifiers.Add(StatModifier.CriticalDamage, new StatLine(150));
-			Modifiers.Add(StatModifier.ArmorDamage, new StatLine(100));
-			Modifiers.Add(StatModifier.AttackSpeed, new StatLine(100));
-			Modifiers.Add(StatModifier.KnockbackForce, new StatLine(100));
-			Modifiers.Add(StatModifier.KnockbackResistance, new StatLine(0));
-			Modifiers.Add(StatModifier.DashRange, new StatLine(100));
-			Modifiers.Add(StatModifier.DashCooldown, new StatLine(100));
-			Modifiers.Add(StatModifier.StunResistance, new StatLine(0));
+			Modifiers.Add(StatModifier.MaxHealth, new StatLineModifier(100));
+			Modifiers.Add(StatModifier.MovementSpeed, new StatLineModifier(100));
+			Modifiers.Add(StatModifier.ArmorRatio, new StatLineModifier(0));
+			Modifiers.Add(StatModifier.AttackDamage, new StatLineModifier(100));
+			Modifiers.Add(StatModifier.LifeSteal, new StatLineModifier(0));
+			Modifiers.Add(StatModifier.CriticalRate, new StatLineModifier(0));
+			Modifiers.Add(StatModifier.CriticalDamage, new StatLineModifier(150));
+			Modifiers.Add(StatModifier.ArmorDamage, new StatLineModifier(100));
+			Modifiers.Add(StatModifier.AttackSpeed, new StatLineModifier(100));
+			Modifiers.Add(StatModifier.KnockbackForce, new StatLineModifier(100));
+			Modifiers.Add(StatModifier.KnockbackResistance, new StatLineModifier(0));
+			Modifiers.Add(StatModifier.DashRange, new StatLineModifier(100));
+			Modifiers.Add(StatModifier.DashCooldown, new StatLineModifier(100));
+			Modifiers.Add(StatModifier.StunResistance, new StatLineModifier(0));
 		}
 	}
 }

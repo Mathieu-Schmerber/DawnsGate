@@ -5,12 +5,12 @@ using UnityEngine;
 namespace Game.Entities.Shared
 {
 	[Serializable, InlineProperty]
-	public class StatLine
+	public class StatLineModifier
 	{
 		/// <summary>
-		/// In Unit
+		/// Base modifier (in %)
 		/// </summary>
-		[SerializeField, HideLabel] private float _naturalUnit;
+		[SerializeField, HideLabel] private float _baseModifier;
 
 		/// <summary>
 		/// Additional stat active for an undefined time (in %).
@@ -27,15 +27,15 @@ namespace Game.Entities.Shared
 		/// <summary>
 		/// Total value, temporary buffs included
 		/// </summary>
-		public float Value => _naturalUnit + (BonusModifier + TemporaryModifier) / 100 * _naturalUnit;
+		public float Value => _baseModifier + BonusModifier + TemporaryModifier;
 
 		/// <summary>
 		/// Static value, temporary buffs excluded
 		/// </summary>
-		public float StaticValue => _naturalUnit + BonusModifier / 100 * _naturalUnit;
+		public float StaticValue => _baseModifier + BonusModifier;
 
-		public StatLine() { }
+		public StatLineModifier() { }
 
-		public StatLine(float baseValue) => _naturalUnit = baseValue;
+		public StatLineModifier(float baseValue) => _baseModifier = baseValue;
 	}
 }

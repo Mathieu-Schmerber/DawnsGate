@@ -120,7 +120,7 @@ namespace Game.Systems.Combat.Weapons
 			attack.OnStart(CurrentWeaponAttack.Attack.StartOffset, CurrentWeaponAttack.Attack.TravelDistance);
 
 			// Locks
-			_controller.IsAimLocked = CurrentWeaponAttack.Attack.LockAim;
+			_controller.LockAim = CurrentWeaponAttack.Attack.LockAim;
 			_controller.LockMovement = CurrentWeaponAttack.Attack.LockMovement;
 
 			// FX
@@ -147,7 +147,7 @@ namespace Game.Systems.Combat.Weapons
 			_controller.LockMovement = false;
 			if (_controller.State == EntityState.ATTACKING)
 				_controller.State = EntityState.IDLE;
-			_controller.IsAimLocked = false;
+			_controller.LockAim = false;
 		}
 
 		#endregion

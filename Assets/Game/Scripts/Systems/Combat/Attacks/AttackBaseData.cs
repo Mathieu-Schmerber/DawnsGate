@@ -8,15 +8,15 @@ using UnityEngine;
 
 namespace Game.Systems.Combat.Attacks
 {
+	public enum KnockbackDirection
+	{
+		FROM_CENTER,
+		FORWARD
+	}
+
 	public abstract class AttackBaseData : ScriptableObject
 	{
 		public const string ATTACK_PREFAB_FOLDER = "Assets/Game/Resources/Prefabs/Attacks";
-
-		public enum KnockbackDirection
-		{
-			FROM_CENTER,
-			FORWARD
-		}
 
 		[AssetsOnly, AssetSelector(Paths = ATTACK_PREFAB_FOLDER), ValidateInput("@Validate()", "@GetError()")]
 		public AttackBase Prefab;

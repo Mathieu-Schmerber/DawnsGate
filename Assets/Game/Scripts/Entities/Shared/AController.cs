@@ -31,6 +31,8 @@ namespace Game.Entities.Shared
 
 		[SerializeField] private float _rotationSpeed = 6f;
 
+		private Vector3 _lockedAim;
+
 		protected EntityIdentity _entity;
 		protected Rigidbody _rb;
 		protected Quaternion _desiredRotation;
@@ -38,6 +40,7 @@ namespace Game.Entities.Shared
 		protected Animator _gfxAnim;
 		private Transform _target;
 		private bool _lockMovement = false;
+		private bool _lockAim = false;
 
 		public event Action<DashParameters> OnDashStarted;
 
@@ -52,7 +55,15 @@ namespace Game.Entities.Shared
 		public Transform Graphics => _graphics.transform;
 		protected Transform _lockedTarget => _target;
 		[ShowInInspector, ReadOnly] public bool CanMove => !LockMovement && State != EntityState.DASH && State != EntityState.STUN;
-		[ShowInInspector, ReadOnly] public bool IsAimLocked { get; set; }
+		
+		[ShowInInspector, ReadOnly] public bool LockAim { get => _lockAim; 
+			set {
+				if (value)
+					_lockedAim = GetAimNormal();
+				_lockAim = value;
+			}
+		}
+
 		[ShowInInspector, ReadOnly] public EntityState State { get; set; }
 
 		#endregion
@@ -75,7 +86,7 @@ namespace Game.Entities.Shared
 		{
 			Vector3 dir = GetAimNormal();
 
-			if (_graphics && !IsAimLocked)
+			if (_graphics && !LockAim)
 				ApplySmoothRotation(_graphics.transform);
 
 			Vector3 inputs = GetMovementsInputs();
@@ -103,7 +114,9 @@ namespace Game.Entities.Shared
 
 		public Vector3 GetAimNormal()
 		{
-			if (_target != null)
+			if (LockAim)
+				return _lockedAim;
+			else if (_target != null)
 				return (_target.position - _rb.position).normalized;
 			return (GetTargetPosition() - _rb.position).normalized;
 		}

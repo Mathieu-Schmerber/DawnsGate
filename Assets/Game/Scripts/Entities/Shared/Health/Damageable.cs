@@ -23,7 +23,7 @@ namespace Game.Entities.Shared.Health
 		public bool IsDead => _identity.CurrentHealth <= 0;
 
 		public event Action OnDeath;
-		public event Action OnBeforeDamaging;
+		public event Action OnBeforeDamaged;
 		public event Action OnDamaged;
 
 		private void Awake()
@@ -42,7 +42,7 @@ namespace Game.Entities.Shared.Health
 		{
 			if (IsDead || _identity.IsInvulnerable) return;
 
-			OnBeforeDamaging?.Invoke();
+			OnBeforeDamaged?.Invoke();
 
 			float totalDamage = damage;
 

@@ -71,7 +71,7 @@ namespace Game.Entities.Player
 			Vector3 aimInput = GetMovementsInputs();
 			bool isAiming = aimInput.magnitude > 0;
 
-			if (IsAimLocked)
+			if (LockAim)
 				return _rb.position + _graphics.transform.forward;
 			else if (isAiming)
 				return _rb.position + aimInput;

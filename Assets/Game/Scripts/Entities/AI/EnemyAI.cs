@@ -27,8 +27,8 @@ namespace Game.Entities.AI
 		protected EnemyState _aiState;
 		protected Damageable _damageable;
 		protected EnemyStatData _aiSettings;
+		protected Timer _attackCooldown;
 
-		private Timer _attackCooldown;
 		private int _pathPointIndex;
 		private Vector3 _nextPatrolPosition;
 		private Vector3 _nextAggressivePosition;
@@ -76,6 +76,11 @@ namespace Game.Entities.AI
 
 			_attackCooldown.AutoReset = false;
 			_attackCooldown.Interval = _aiSettings.AttackCooldown;
+
+			UnlockTarget();
+			LockMovement = false;
+			LockAim = false;
+			OnAttackEnd();
 		}
 
 		protected override void Awake()
@@ -135,7 +140,9 @@ namespace Game.Entities.AI
 
 		protected void UpdatePathIndex()
 		{
-			if (Vector3.Distance(transform.position, _path.corners[_pathPointIndex].WithY(transform.position.y)) < 0.5f && _pathPointIndex < _path.corners.Length - 1)
+			if (_pathPointIndex >= _path.corners.Length)
+				return;
+			else if (Vector3.Distance(transform.position, _path.corners[_pathPointIndex].WithY(transform.position.y)) < 0.5f && _pathPointIndex < _path.corners.Length - 1)
 				_pathPointIndex++;
 		}
 
@@ -156,7 +163,6 @@ namespace Game.Entities.AI
 			_pathPointIndex = 0;
 			_cachedDestination = destination;
 
-			Debug.Log("New path");
 			NavMesh.CalculatePath(transform.position, _cachedDestination, NavMesh.AllAreas, _path);
 		}
 
@@ -217,21 +223,21 @@ namespace Game.Entities.AI
 
 		protected abstract void Attack();
 
-		private void TryAttacking()
+		protected virtual void TryAttacking()
 		{
 			float distance = Vector3.Distance(transform.position, GameManager.Player.transform.position.WithY(transform.position.y));
 
-			if (distance < _aiSettings.AttackRange && (_attackCooldown.IsOver() || !_attackCooldown.IsRunning) && State != EntityState.ATTACKING)
+			if (distance < _aiSettings.AttackRange && _attackCooldown.IsOver() && State == EntityState.IDLE)
 			{
 				State = EntityState.ATTACKING;
 				Attack();
-				_attackCooldown.Restart();
 			}
 		}
 
 		protected void OnAttackEnd()
 		{
 			State = EntityState.IDLE;
+			_attackCooldown.Restart();
 		}
 
 		#endregion

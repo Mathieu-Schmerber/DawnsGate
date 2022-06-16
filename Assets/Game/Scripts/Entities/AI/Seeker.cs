@@ -73,7 +73,7 @@ namespace Game.Entities.AI
 			{
 				Vector3 dir = GetAimNormal();
 
-				IsAimLocked = true;
+				LockAim = true;
 				UnlockTarget();
 				Dash(dir, _aiSettings.DashRange, 0.3f);
 				Awaiter.WaitAndExecute(0.3f, () => {
@@ -87,7 +87,7 @@ namespace Game.Entities.AI
 			if (stateInfo.IsName("EndCharge"))
 			{
 				LockMovement = false;
-				IsAimLocked = false;
+				LockAim = false;
 				OnAttackEnd();
 			}
 		}

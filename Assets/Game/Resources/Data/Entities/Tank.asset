@@ -9,59 +9,63 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2bd915908ab4a649bf4389d59ab13e1, type: 3}
+  m_Script: {fileID: 11500000, guid: 23ec327d7ac9f094db26d3973055ee7e, type: 3}
   m_Name: Tank
   m_EditorClassIdentifier: 
-  StartHealth: 50
+  StartHealth: 70
   MovementSpeed: 3
   DashRange: 12
   DashCooldown: 0
   Modifiers:
     keyData: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d000000
     valueData:
-    - _naturalUnit: 100
+    - _baseModifier: 100
       BonusModifier: 0
       TemporaryModifier: 0
-    - _naturalUnit: 100
+    - _baseModifier: 100
       BonusModifier: 0
       TemporaryModifier: 0
-    - _naturalUnit: 0
+    - _baseModifier: 0
       BonusModifier: 0
       TemporaryModifier: 0
-    - _naturalUnit: 100
+    - _baseModifier: 100
       BonusModifier: 0
       TemporaryModifier: 0
-    - _naturalUnit: 0
+    - _baseModifier: 0
       BonusModifier: 0
       TemporaryModifier: 0
-    - _naturalUnit: 0
+    - _baseModifier: 0
       BonusModifier: 0
       TemporaryModifier: 0
-    - _naturalUnit: 150
+    - _baseModifier: 150
       BonusModifier: 0
       TemporaryModifier: 0
-    - _naturalUnit: 100
+    - _baseModifier: 100
       BonusModifier: 0
       TemporaryModifier: 0
-    - _naturalUnit: 100
+    - _baseModifier: 100
       BonusModifier: 0
       TemporaryModifier: 0
-    - _naturalUnit: 100
+    - _baseModifier: 100
       BonusModifier: 0
       TemporaryModifier: 0
-    - _naturalUnit: 0
+    - _baseModifier: 0
       BonusModifier: 0
       TemporaryModifier: 0
-    - _naturalUnit: 100
+    - _baseModifier: 100
       BonusModifier: 0
       TemporaryModifier: 0
-    - _naturalUnit: 100
+    - _baseModifier: 100
       BonusModifier: 0
       TemporaryModifier: 0
-    - _naturalUnit: 0
+    - _baseModifier: 0
       BonusModifier: 0
       TemporaryModifier: 0
   TriggerRange: 7
   UntriggerRange: 10
-  AttackRange: 9
-  AttackCooldown: 3
+  AttackRange: 3.5
+  AttackCooldown: 2
+  ArmorGain: 50
+  KnockbackResistanceGain: 70
+  VibrationForce: 0.25
+  VibrationDuration: 0.2

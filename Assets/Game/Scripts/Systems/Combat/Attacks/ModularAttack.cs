@@ -73,8 +73,8 @@ namespace Game.Systems.Combat.Attacks
 				float knockbackForce = Caster.Scale(_attackData.BaseKnockbackForce, StatModifier.KnockbackForce);
 				float totalDamage = Caster.Scale(_attackData.BaseDamage, StatModifier.AttackDamage);
 
-				damageProcessor.ApplyKnockback(Caster, direction * knockbackForce);
 				damageProcessor.ApplyDamage(Caster, totalDamage);
+				damageProcessor.ApplyKnockback(Caster, direction * knockbackForce);
 				ObjectPooler.Get(_attackData.HitFx, collider.transform.position.WithY(transform.position.y), Quaternion.Euler(0, transform.rotation.eulerAngles.y + _attackData.HitYRotation, 0), null);
 			}
 		}
