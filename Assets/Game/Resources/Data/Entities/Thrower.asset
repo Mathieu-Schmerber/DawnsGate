@@ -9,12 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2bd915908ab4a649bf4389d59ab13e1, type: 3}
-  m_Name: Seeker
+  m_Script: {fileID: 11500000, guid: 229e9559c7722ef46a7eb36da451b9c0, type: 3}
+  m_Name: Thrower
   m_EditorClassIdentifier: 
   StartHealth: 70
-  MovementSpeed: 4
-  DashRange: 12
+  MovementSpeed: 6
+  DashRange: 0
   DashCooldown: 0
   Modifiers:
     keyData: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d000000
@@ -61,7 +61,12 @@ MonoBehaviour:
     - _baseModifier: 0
       BonusModifier: 0
       TemporaryModifier: 0
-  TriggerRange: 7
-  UntriggerRange: 10
-  AttackRange: 9
-  AttackCooldown: 3
+  TriggerRange: 9
+  UntriggerRange: 13
+  AttackRange: 12
+  AttackCooldown: 2
+  Projectile: {fileID: 3631914413587542351, guid: 9951e859b080a554aad3645d81a1ba1e,
+    type: 3}
+  TravelTime: 2
+  MaxAltitude: 4
+  AoeAttack: {fileID: 11400000, guid: 90b97105ce7ce4a468b6a3273d8d3611, type: 2}

@@ -32,6 +32,7 @@ namespace Game.Entities.Shared
 		[SerializeField] private float _rotationSpeed = 6f;
 
 		private Vector3 _lockedAim;
+		private Vector3 _gfxAnchor;
 
 		protected EntityIdentity _entity;
 		protected Rigidbody _rb;
@@ -78,6 +79,7 @@ namespace Game.Entities.Shared
 			_gfxAnim = GetComponentInChildren<Animator>();
 			_graphics = _gfxAnim?.gameObject;
 			_desiredRotation = transform.rotation;
+			_gfxAnchor = _graphics?.transform.localPosition ?? Vector3.zero;
 			State = EntityState.IDLE;
 		}
 
@@ -87,7 +89,7 @@ namespace Game.Entities.Shared
 			Vector3 dir = GetAimNormal();
 
 			if (_graphics && !LockAim)
-				ApplySmoothRotation(_graphics.transform);
+				ApplySmoothRotation(_graphics.transform, _gfxAnchor);
 
 			Vector3 inputs = GetMovementsInputs();
 
@@ -135,11 +137,11 @@ namespace Game.Entities.Shared
 		/// <summary>
 		/// Rotation angle calculation and lerping
 		/// </summary>
-		protected void ApplySmoothRotation(Transform tr)
+		protected void ApplySmoothRotation(Transform tr, Vector3 anchor)
 		{
 			_desiredRotation = Quaternion.LookRotation(GetAimNormal());
 			tr.rotation = Quaternion.Slerp(tr.transform.rotation, _desiredRotation, _rotationSpeed * Time.deltaTime);
-			tr.localPosition = Vector3.zero;
+			tr.localPosition = anchor;
 		}
 
 		/// <summary>

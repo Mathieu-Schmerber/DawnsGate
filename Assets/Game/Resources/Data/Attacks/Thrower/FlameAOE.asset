@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ca7a2bb00af2ff4fb311842a285deca, type: 3}
+  m_Name: FlameAOE
+  m_EditorClassIdentifier: 
+  Prefab: {fileID: 3623881684595140825, guid: 435e5eeffa82cda4c944ec403924075e, type: 3}
+  BaseDamage: 20
+  BaseKnockbackForce: 2
+  KnockbackDir: 0
+  HitFx: {fileID: 6826739793168019112, guid: 161ce196c6bae7843a3573a1fe4c5d5f, type: 3}
+  HitYRotation: 0
+  ActiveTime: 2
+  FollowCaster: 0
+  Range: 4
+  Effect: {fileID: 11400000, guid: d6b6ffb4ec06c65458cc632b0339ecc8, type: 2}
+  EffectDuration: 2

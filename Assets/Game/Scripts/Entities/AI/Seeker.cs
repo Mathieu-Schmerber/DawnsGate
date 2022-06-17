@@ -18,12 +18,6 @@ namespace Game.Entities.AI
 		[SerializeField] private float _waveAmplitude;
 		private Vector3? _sinPos;
 
-		protected override void Init(object data)
-		{
-			base.Init(data);
-			transform.Translate(new Vector3(0, 0.5f, 0));
-		}
-
 		#region Movement
 
 		protected override bool UsesPathfinding => false;
@@ -102,7 +96,7 @@ namespace Game.Entities.AI
 			Gizmos.DrawSphere(NextAggressivePosition, 0.2f);
 
 			Gizmos.color = Color.green;
-			Gizmos.DrawSphere(NextPatrolPosition, 0.2f);
+			Gizmos.DrawSphere(NextPassivePosition, 0.2f);
 
 			Gizmos.DrawWireSphere(transform.position, _aiSettings.AttackRange);
 

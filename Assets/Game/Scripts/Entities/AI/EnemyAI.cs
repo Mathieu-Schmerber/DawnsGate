@@ -35,7 +35,7 @@ namespace Game.Entities.AI
 		private Vector3 _cachedDestination;
 
 		protected abstract bool UsesPathfinding { get; }
-		protected Vector3 NextPatrolPosition { get => _nextPatrolPosition.WithY(transform.position.y); set => _nextPatrolPosition = value; }
+		protected Vector3 NextPassivePosition { get => _nextPatrolPosition.WithY(transform.position.y); set => _nextPatrolPosition = value; }
 		protected Vector3 NextAggressivePosition { get => _nextAggressivePosition.WithY(transform.position.y); set => _nextAggressivePosition = value; }
 
 		public event Action<EnemyState> OnStateChanged;
@@ -69,7 +69,7 @@ namespace Game.Entities.AI
 
 			_aiState = EnemyState.PASSIVE;
 			State = EntityState.IDLE;
-			NextPatrolPosition = transform.position;
+			NextPassivePosition = transform.position;
 
 			_entity.ResetStats();
 			_path.ClearCorners();
@@ -136,7 +136,7 @@ namespace Game.Entities.AI
 			return Vector3.zero;
 		}
 
-		protected virtual Vector3 GetPathfindingDestination() => _aiState == EnemyState.PASSIVE ? UpdatePatrolPoint() : UpdateAgressivePoint();
+		protected virtual Vector3 GetPathfindingDestination() => _aiState == EnemyState.PASSIVE ? UpdatePassivePoint() : UpdateAgressivePoint();
 
 		protected void UpdatePathIndex()
 		{
@@ -166,31 +166,39 @@ namespace Game.Entities.AI
 			NavMesh.CalculatePath(transform.position, _cachedDestination, NavMesh.AllAreas, _path);
 		}
 
-		protected virtual Vector3 UpdateAgressivePoint()
+		protected virtual Vector3 CalculateNextAggressivePoint()
+		{
+			var aroundPos = _room.Info.GetPositionsAround(GameManager.Player.transform.position, _aiSettings.AttackRange / 2);
+
+			if (aroundPos?.Length == 0)
+				return _room.Info.Data.SpawnablePositions.Random();
+			return aroundPos.Random();
+		}
+
+		protected virtual Vector3 CalculateNextPassivePoint()
+		{
+			var aroundPos = _room.Info.GetPositionsAround(NextPassivePosition, 5f);
+
+			if (aroundPos.Length == 0)
+				return _room.Info.Data.SpawnablePositions.Random();
+
+			float maxDistance = aroundPos.Max(x => Vector3.Distance(x, NextPassivePosition));
+
+			return aroundPos.Where(pos => Vector3.Distance(pos, NextPassivePosition) == maxDistance).Random();
+		}
+
+		protected Vector3 UpdateAgressivePoint()
 		{
 			if (Vector3.Distance(transform.position, NextAggressivePosition) < 0.5f)
-			{
-				var aroundPos = _room.Info.GetPositionsAround(GameManager.Player.transform.position, _aiSettings.AttackRange / 2);
-
-				NextAggressivePosition = aroundPos.Random();
-			}
+				NextAggressivePosition = CalculateNextAggressivePoint();
 			return NextAggressivePosition;
 		}
 
-		protected virtual Vector3 UpdatePatrolPoint()
+		protected Vector3 UpdatePassivePoint()
 		{
-			if (Vector3.Distance(transform.position, NextPatrolPosition) < 0.5f)
-			{
-				var aroundPos = _room.Info.GetPositionsAround(NextPatrolPosition, 5f);
-
-				if (aroundPos.Length == 0)
-					return NextPatrolPosition = _room.Info.Data.SpawnablePositions.Random();
-
-				float maxDistance = aroundPos.Max(x => Vector3.Distance(x, NextPatrolPosition));
-
-				NextPatrolPosition = aroundPos.Where(pos => Vector3.Distance(pos, NextPatrolPosition) == maxDistance).Random();
-			}
-			return NextPatrolPosition;
+			if (Vector3.Distance(transform.position, NextPassivePosition) < 0.5f)
+				NextPassivePosition = CalculateNextPassivePoint();
+			return NextPassivePosition;
 		}
 
 		#endregion
@@ -211,8 +219,8 @@ namespace Game.Entities.AI
 			else if (_aiState == EnemyState.AGGRESSIVE && distance > _aiSettings.UntriggerRange)
 			{
 				_aiState = EnemyState.PASSIVE;
-				NextPatrolPosition = transform.position;
-				UpdatePatrolPoint();
+				NextPassivePosition = transform.position;
+				UpdatePassivePoint();
 				OnStateChanged?.Invoke(_aiState);
 			}
 		}

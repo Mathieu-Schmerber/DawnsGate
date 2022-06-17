@@ -17,15 +17,22 @@ MonoBehaviour:
   Script: {fileID: 11500000, guid: ab790384dc304bd478352368cd7fc1e2, type: 3}
   Interval:
     Enabled: 1
-    _value: 1
+    _value: 0.5
   Actions:
-  - Action: 1
-    DamageAmount: 0
+  - Action: 0
+    DamageAmount: 5
     Modifiers:
       keyData: 01000000
       valueData:
-      - _naturalUnit: 10
+      - _baseModifier: 0
         BonusModifier: 0
         TemporaryModifier: 0
     Prefab: {fileID: 0}
     StickToEntity: 0
+  - Action: 2
+    DamageAmount: 0
+    Modifiers:
+      keyData: 
+      valueData: []
+    Prefab: {fileID: 0}
+    StickToEntity: 1

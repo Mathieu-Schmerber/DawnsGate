@@ -74,5 +74,18 @@ namespace Databases
             {
             }
         }
+        
+        public class Previsualisations
+        {
+            
+            public static UnityEngine.GameObject Circle = (UnityEngine.GameObject)Instance.DatabaseAsset.Sections[2].Assets[0].Prefab;
+            
+            public static IEnumerable<T> All<T>()
+                where T : UnityEngine.Object
+            {
+                UnityEngine.Object[] all = new UnityEngine.Object[1] {Circle};
+                return all.Where(x => x is T).Select(x => (T)x);
+            }
+        }
     }
 }

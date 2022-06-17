@@ -68,7 +68,10 @@ namespace Game.Systems.Combat.Effects
 					case EffectAction.SPAWN_OBJECT:
 						ObjectPooler.Get(action.Prefab, null, (GameObject go) => {
 							if (action.StickToEntity)
+							{
 								go.transform.parent = transform;
+								go.transform.localPosition = Vector3.zero;
+							}
 							_spawned.Add(go);
 						});
 						break;

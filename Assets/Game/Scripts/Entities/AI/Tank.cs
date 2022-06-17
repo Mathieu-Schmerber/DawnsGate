@@ -64,7 +64,7 @@ namespace Game.Entities.AI
 		protected override Vector3 GetPathfindingDestination()
 		{
 			if (_aiState == EnemyState.PASSIVE)
-				return UpdatePatrolPoint();
+				return UpdatePassivePoint();
 			return GameManager.Player.transform.position;
 		}
 
