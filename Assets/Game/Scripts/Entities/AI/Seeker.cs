@@ -69,7 +69,7 @@ namespace Game.Entities.AI
 
 				LockAim = true;
 				UnlockTarget();
-				Dash(dir, _aiSettings.DashRange, 0.3f);
+				Dash(dir, _aiSettings.DashRange, 0.3f, true);
 				Awaiter.WaitAndExecute(0.3f, () => {
 					_gfxAnim.Play("EndCharge");
 				});
@@ -82,6 +82,7 @@ namespace Game.Entities.AI
 			{
 				LockMovement = false;
 				LockAim = false;
+				UnlockTarget();
 				OnAttackEnd();
 			}
 		}

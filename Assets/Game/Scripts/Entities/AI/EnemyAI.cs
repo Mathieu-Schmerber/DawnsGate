@@ -27,7 +27,7 @@ namespace Game.Entities.AI
 		protected EnemyState _aiState;
 		protected Damageable _damageable;
 		protected EnemyStatData _aiSettings;
-		protected Timer _attackCooldown;
+		protected float _lastAttackTime;
 
 		private int _pathPointIndex;
 		private Vector3 _nextPatrolPosition;
@@ -74,8 +74,7 @@ namespace Game.Entities.AI
 			_entity.ResetStats();
 			_path.ClearCorners();
 
-			_attackCooldown.AutoReset = false;
-			_attackCooldown.Interval = _aiSettings.AttackCooldown;
+			_lastAttackTime = Time.time;
 
 			UnlockTarget();
 			LockMovement = false;
@@ -87,7 +86,6 @@ namespace Game.Entities.AI
 		{
 			base.Awake();
 			_path = new();
-			_attackCooldown = new();
 			_damageable = GetComponent<Damageable>();
 		}
 
@@ -235,7 +233,7 @@ namespace Game.Entities.AI
 		{
 			float distance = Vector3.Distance(transform.position, GameManager.Player.transform.position.WithY(transform.position.y));
 
-			if (distance < _aiSettings.AttackRange && _attackCooldown.IsOver() && State == EntityState.IDLE)
+			if (distance < _aiSettings.AttackRange && Time.time - _lastAttackTime >= _aiSettings.AttackCooldown && State == EntityState.IDLE)
 			{
 				State = EntityState.ATTACKING;
 				Attack();
@@ -245,14 +243,13 @@ namespace Game.Entities.AI
 		protected void OnAttackEnd()
 		{
 			State = EntityState.IDLE;
-			_attackCooldown.Restart();
+			_lastAttackTime = Time.time;
 		}
 
 		#endregion
 
 		protected virtual void OnDeath()
 		{
-			_attackCooldown.Stop();
 			_room.OnEnemyKilled(gameObject);
 			Release();
 		}

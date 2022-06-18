@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: Combats
   m_EditorClassIdentifier: 
   DelayBetweenWaves: 1
-  MinWaveNumber: 1
-  MaxWaveNumber: 1
-  MinEntityPerWave: 1
-  MaxEntityPerWave: 1
+  MinWaveNumber: 2
+  MaxWaveNumber: 3
+  MinEntityPerWave: 3
+  MaxEntityPerWave: 5
   Enemies:
+  - {fileID: 1398924161840144190, guid: 275728197f66c1d458d01ca159e1826a, type: 3}
+  - {fileID: 3725144683267054804, guid: a865cc47a3b0002478a184c57df1a78b, type: 3}
   - {fileID: 8217679923564704944, guid: 3fc3d3ba64c65744695f9a6c08c80c09, type: 3}

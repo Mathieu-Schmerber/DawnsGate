@@ -56,7 +56,7 @@ namespace Game.Entities.Player
 				Vector3 direction = GetMovementNormal().magnitude > 0 ? GetMovementNormal() : GetAimNormal();
 
 				_dashFx.Play(true);
-				Dash(direction, _entity.CurrentDashRange, _dashTime);
+				Dash(direction, _entity.CurrentDashRange, _dashTime, false);
 				_dashTimer.Interval = _entity.CurrentDashCooldown;
 				_dashTimer.Restart();
 			}

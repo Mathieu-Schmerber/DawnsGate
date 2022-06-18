@@ -22,6 +22,7 @@ namespace Game.Entities.Shared
 		public Vector3 Direction { get; set; }
 		public float Distance { get; set; }
 		public float Time { get; set; }
+		public bool CanDashThroughWalls { get; set; }
 	}
 
 	[RequireComponent(typeof(EntityIdentity))]
@@ -168,27 +169,41 @@ namespace Game.Entities.Shared
 				return;
 
 			Vector3 destination = (_rb.position + parameters.Direction * parameters.Distance).WithY(_rb.position.y);
+			float speed = parameters.Distance / parameters.Time;
 
 			OnDashStarted?.Invoke(parameters);
 			_entity.SetInvulnerable(parameters.Time); // Invulnerable during dash
 
-			Tween.Position(transform, destination, parameters.Time, 0,
+			if (!parameters.CanDashThroughWalls)
+			{
+				_rb.velocity = parameters.Direction.normalized * speed;
+				State = EntityState.DASH;
+				Awaiter.WaitAndExecute(parameters.Time, () =>
+				{
+					_rb.velocity = Vector3.zero;
+					State = EntityState.IDLE;
+				});
+			}
+			else
+			{
+				Tween.Position(transform, destination, parameters.Time, 0,
 				startCallback: () =>
 				{
 					State = EntityState.DASH;
 				},
-				completeCallback: () => 
+				completeCallback: () =>
 				{
 					State = EntityState.IDLE;
-				}
-			);
+				});
+			}
 		}
 
-		public void Dash(Vector3 direction, float distance, float time) => Dash(new DashParameters()
+		public void Dash(Vector3 direction, float distance, float time, bool canDashWalls) => Dash(new DashParameters()
 		{
 			Direction = direction,
 			Distance = distance,
-			Time = time
+			Time = time,
+			CanDashThroughWalls = canDashWalls
 		});
 
 		private void OnDrawGizmos()

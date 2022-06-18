@@ -1,3 +1,4 @@
+using Nawlian.Lib.Utils;
 using Pixelplacement;
 using Pixelplacement.TweenSystem;
 using System;
@@ -17,8 +18,8 @@ namespace Game.Entities.Shared.Health
 	public class Damageable : MonoBehaviour, IDamageProcessor
 	{
 		private EntityIdentity _identity;
-		private TweenBase _knockbackMotion = null;
 		private AController _controller;
+		private Rigidbody _rb;
 
 		public bool IsDead => _identity.CurrentHealth <= 0;
 
@@ -30,6 +31,7 @@ namespace Game.Entities.Shared.Health
 		{
 			_identity = GetComponent<EntityIdentity>();
 			_controller = GetComponent<AController>();
+			_rb = GetComponent<Rigidbody>();
 		}
 
 		/// <summary>
@@ -100,7 +102,6 @@ namespace Game.Entities.Shared.Health
 		/// </summary>
 		/// <param name="attacker"></param>
 		/// <param name="force"></param>
-		/// <param name="damage"></param>
 		public void ApplyKnockback(EntityIdentity attacker, Vector3 force, float knockbackTime)
 		{
 			if (IsDead) return;
@@ -108,9 +109,14 @@ namespace Game.Entities.Shared.Health
 			float resistanceRatio = Mathf.Clamp(_identity.Stats.Modifiers[StatModifier.KnockbackResistance]?.Value ?? 0, 0, 100);
 			Vector3 totalForce = force - (force * (resistanceRatio / 100));
 
-			if (_knockbackMotion != null)
-				_knockbackMotion.Stop();
-			_knockbackMotion = Tween.Position(transform, transform.position + totalForce, knockbackTime, 0, Tween.EaseOut);
+			if (totalForce == Vector3.zero)
+				return;
+
+			float speed = totalForce.magnitude / knockbackTime;
+			Vector3 velocity = speed * totalForce.normalized;
+
+			_rb.velocity = velocity;
+			Awaiter.WaitAndExecute(knockbackTime, () => _rb.velocity = Vector3.zero);
 		}
 
 		public void Kill(EntityIdentity attacker)
