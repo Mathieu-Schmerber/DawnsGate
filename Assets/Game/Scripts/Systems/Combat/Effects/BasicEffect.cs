@@ -39,18 +39,13 @@ namespace Game.Systems.Combat.Effects
 		private void ApplyModifiers(StatDictionary modifiers)
 		{
 			foreach (var item in modifiers)
-			{
 				_identity.Stats.Modifiers[item.Key].TemporaryModifier += item.Value.Value;
-				Debug.Log($"Add: {item.Value.Value}");
-			}
 		}
 
 		private void RemoveModifiers(StatDictionary modifiers)
 		{
-			foreach (var item in modifiers) {
+			foreach (var item in modifiers)
 				_identity.Stats.Modifiers[item.Key].TemporaryModifier -= item.Value.Value * _activations;
-				Debug.Log($"Remove: {item.Value.Value * _activations}");
-			}
 		}
 
 		protected override void OnActivation()

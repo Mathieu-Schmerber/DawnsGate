@@ -61,7 +61,6 @@ namespace Game.Systems.Run.Editor
 			string sceneName = Path.GetFileName(sceneFolderPath);
 			string soPath = Path.Combine(sceneFolderPath, $"{sceneName}.asset");
 
-			Debug.Log(soPath);
 			if (File.Exists(soPath))
 				File.Delete(soPath);
 			AssetDatabase.CreateAsset(asset, soPath);
