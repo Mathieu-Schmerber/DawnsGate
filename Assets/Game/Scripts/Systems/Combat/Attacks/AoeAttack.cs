@@ -84,15 +84,11 @@ namespace Game.Systems.Combat.Attacks
 		{
 			if (Time.time - _startTime <= 0.1f && !_hitColliders.Contains(collider))
 			{
-				Debug.Log("HIT");
-
 				IDamageProcessor damageProcessor = collider.GetComponent<IDamageProcessor>();
 
 				_hitColliders.Add(collider);
 				if (damageProcessor != null)
 				{
-					Debug.Log("KB");
-
 					Vector3 direction = _attackData.KnockbackDir == KnockbackDirection.FORWARD ? transform.forward : (collider.transform.position - transform.position).normalized.WithY(0);
 					float knockbackForce = Caster.Scale(_attackData.BaseKnockbackForce, StatModifier.KnockbackForce);
 					float totalDamage = Caster.Scale(_attackData.BaseDamage, StatModifier.AttackDamage);
