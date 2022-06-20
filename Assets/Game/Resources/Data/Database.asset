@@ -22,6 +22,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: f0e0dc58b8ce9614380971f060398ded, type: 2}
     - {fileID: 11400000, guid: 04ea171b4bb957244add218434c4b3e7, type: 2}
     - {fileID: 11400000, guid: 93057673fbee2454b8e5a5e5a3fc5e3f, type: 2}
+    - {fileID: 1061813334846856684, guid: 0e790ab11e75d3f4a9efc2c9e36c62c3, type: 3}
     - {fileID: 7944063403446872818, guid: c303688915f74d3409412fd03a820401, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
@@ -253,7 +254,7 @@ MonoBehaviour:
         Assembly-CSharp-firstpass]], mscorlib
     - Name: 
       Entry: 12
-      Data: 1
+      Data: 2
     - Name: 
       Entry: 7
       Data: 20|Nawlian.Lib.Utils.Database.DatabaseData+DatabaseAsset, Assembly-CSharp-firstpass
@@ -267,6 +268,18 @@ MonoBehaviour:
       Entry: 8
       Data: 
     - Name: 
+      Entry: 7
+      Data: 21|Nawlian.Lib.Utils.Database.DatabaseData+DatabaseAsset, Assembly-CSharp-firstpass
+    - Name: Name
+      Entry: 1
+      Data: LootedItem
+    - Name: Prefab
+      Entry: 10
+      Data: 6
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
       Entry: 13
       Data: 
     - Name: 
@@ -283,7 +296,7 @@ MonoBehaviour:
       Data: 
     - Name: Assets
       Entry: 7
-      Data: 21|System.Collections.Generic.List`1[[Nawlian.Lib.Utils.Database.DatabaseData+DatabaseAsset,
+      Data: 22|System.Collections.Generic.List`1[[Nawlian.Lib.Utils.Database.DatabaseData+DatabaseAsset,
         Assembly-CSharp-firstpass]], mscorlib
     - Name: 
       Entry: 12
@@ -299,7 +312,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 22|Nawlian.Lib.Utils.Database.DatabaseData+Section, Assembly-CSharp-firstpass
+      Data: 23|Nawlian.Lib.Utils.Database.DatabaseData+Section, Assembly-CSharp-firstpass
     - Name: Name
       Entry: 1
       Data: Previsualisations
@@ -308,7 +321,7 @@ MonoBehaviour:
       Data: 2
     - Name: Sections
       Entry: 7
-      Data: 23|System.Collections.Generic.List`1[[Nawlian.Lib.Utils.Database.DatabaseData+Section,
+      Data: 24|System.Collections.Generic.List`1[[Nawlian.Lib.Utils.Database.DatabaseData+Section,
         Assembly-CSharp-firstpass]], mscorlib
     - Name: 
       Entry: 12
@@ -321,20 +334,20 @@ MonoBehaviour:
       Data: 
     - Name: Assets
       Entry: 7
-      Data: 24|System.Collections.Generic.List`1[[Nawlian.Lib.Utils.Database.DatabaseData+DatabaseAsset,
+      Data: 25|System.Collections.Generic.List`1[[Nawlian.Lib.Utils.Database.DatabaseData+DatabaseAsset,
         Assembly-CSharp-firstpass]], mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 25|Nawlian.Lib.Utils.Database.DatabaseData+DatabaseAsset, Assembly-CSharp-firstpass
+      Data: 26|Nawlian.Lib.Utils.Database.DatabaseData+DatabaseAsset, Assembly-CSharp-firstpass
     - Name: Name
       Entry: 1
       Data: Circle
     - Name: Prefab
       Entry: 10
-      Data: 6
+      Data: 7
     - Name: 
       Entry: 8
       Data: 

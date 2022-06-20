@@ -1,17 +1,27 @@
 ﻿using Sirenix.OdinInspector;
 using Sirenix.Utilities.Editor;
 using System;
+using UnityEditor;
 using UnityEngine;
 
 namespace Game.Systems.Items
 {
-	public abstract class UpgradableItemBase<T> : ItemBase
+	public enum ItemType
 	{
+		STAT = 0,
+		PASSIVE,
+		ACTIVE
+	}
+
+	public abstract class ItemBaseData : ScriptableObject
+	{
+		public ItemType Type;
+		public bool IsLifeItem = false;
+		[ValidateInput(nameof(ValidateEditor), "Script needs to inherit AEquippedItem.")]
+		public MonoScript Script;
+
 		[OnInspectorGUI(nameof(DrawPreview), append: true)]
 		public Sprite Graphics;
-
-		[Space]
-		public T[] Stages;
 
 #if UNITY_EDITOR
 
@@ -48,16 +58,23 @@ namespace Game.Systems.Items
 
 		protected abstract void DrawItemDescriptionPreview();
 
-		[OnInspectorInit]
-		public void InitStages()
-		{
-			int nbStage = Databases.Database.Data.Item.Settings.NumberOfUpgrades;
 
-			if (Stages == null || Stages.Length == 0)
-				Stages = new T[nbStage];
-			else if (Stages.Length != nbStage)
-				Array.Resize(ref Stages, nbStage);
+		[OnInspectorInit]
+		private void AssignScript()
+		{
+			if (Script == null)
+				Script = GetDefaultScript();
 		}
+
+		private MonoScript GetDefaultScript() => Type switch
+		{
+			ItemType.STAT => Databases.Database.Data.Item.Settings.DefaultStatScript,
+			ItemType.PASSIVE => Databases.Database.Data.Item.Settings.DefaultStatScript,
+			ItemType.ACTIVE => Databases.Database.Data.Item.Settings.DefaultStatScript,
+			_ => null
+		};
+
+		private bool ValidateEditor() => Script != null && !Script.GetClass().IsAbstract && Script.GetClass().IsSubclassOf(typeof(AEquippedItem));
 
 #endif
 	}

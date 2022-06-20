@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33a9b64f172f3044d9470a871e6a07c3, type: 3}
   m_Name: Shaman's wrath
   m_EditorClassIdentifier: 
-  Graphics: {fileID: 21300000, guid: efdb07a1ed7a68948bc3b68e0e9b920c, type: 3}
+  Type: 0
+  IsLifeItem: 0
+  Script: {fileID: 11500000, guid: 08926e121668c91429746aa3d5ff809b, type: 3}
+  Graphics: {fileID: 21300000, guid: dd454ede4e10cea44b93700a3ed85be8, type: 3}
   Stages:
   - keyData: 03000000
     valueData:

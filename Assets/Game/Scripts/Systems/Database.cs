@@ -73,12 +73,14 @@ namespace Databases
             public class Item
             {
                 
-                public static Game.Systems.Items.ItemSettings Settings = (Game.Systems.Items.ItemSettings)Instance.DatabaseAsset.Sections[1].Sections[1].Assets[0].Prefab;
+                public static Game.Systems.Items.ItemSettingsData Settings = (Game.Systems.Items.ItemSettingsData)Instance.DatabaseAsset.Sections[1].Sections[1].Assets[0].Prefab;
+                
+                public static UnityEngine.GameObject LootedItem = (UnityEngine.GameObject)Instance.DatabaseAsset.Sections[1].Sections[1].Assets[1].Prefab;
                 
                 public static IEnumerable<T> All<T>()
                     where T : UnityEngine.Object
                 {
-                    UnityEngine.Object[] all = new UnityEngine.Object[1] {Settings};
+                    UnityEngine.Object[] all = new UnityEngine.Object[2] {Settings, LootedItem};
                     return all.Where(x => x is T).Select(x => (T)x);
                 }
             }

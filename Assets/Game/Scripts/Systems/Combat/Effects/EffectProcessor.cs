@@ -20,11 +20,12 @@ namespace Game.Systems.Combat.Effects
 		[System.Serializable] public class EffectDictionary : SerializedDictionary<AEffectBaseData, AEffect> { }
 		#endregion
 
+		[SerializeField] private GameObject _effectsParent;
 		[ShowInInspector, ReadOnly] private EffectDictionary _activeEffects = new();
 
 		private AEffect AddEffectToActive(AEffectBaseData data)
 		{
-			AEffect behaviour = gameObject.AddComponent(data.Script.GetClass()) as AEffect;
+			AEffect behaviour = _effectsParent.AddComponent(data.Script.GetClass()) as AEffect;
 
 			_activeEffects[data] = behaviour;
 			return behaviour;

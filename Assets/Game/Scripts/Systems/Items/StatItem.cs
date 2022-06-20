@@ -1,48 +1,38 @@
-﻿using Game.Entities.Shared;
-using Sirenix.OdinInspector;
-using Sirenix.Utilities.Editor;
-using UnityEngine;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Game.Systems.Items
 {
-	[CreateAssetMenu(menuName = "Data/Items/Stat item")]
-	public class StatItem : UpgradableItemBase<StatDictionary>
+	public class StatItem : AEquippedItem
 	{
-#if UNITY_EDITOR
+		private StatItemData _data;
 
-		[Button(Name = "Scale stage 1 to bottom", Style = ButtonStyle.FoldoutButton)]
-		public void ApplyScaling(float scalePercent = 50)
+		public override void OnEquipped(ItemBaseData data, int quality)
 		{
-			for (int i = 1; i < Stages.Length; i++)
-			{
-				Stages[i].Clear();
-				foreach (var key in Stages[0].Keys)
-				{
-					float value = i * scalePercent;
-					float result = Mathf.Ceil(Stages[0][key].Value * (value / 100) + Stages[0][key].Value);
+			base.OnEquipped(data, quality);
 
-					if (Stages[i].ContainsKey(key))
-						Stages[i][key] = new(result);
-					else
-						Stages[i].Add(key, new(result));
-				}
-			}
+			_data = data as StatItemData;
+			foreach (var key in _data.Stages[_quality].Keys)
+				_entity.Stats.Modifiers[key].BonusModifier += _data.Stages[_quality][key].Value;
 		}
 
-		protected override void DrawItemDescriptionPreview()
+		public override void OnUnequipped()
 		{
-			GUIStyle rich = new GUIStyle(GUI.skin.label);
-			rich.richText = true;
-
-			foreach (var key in Stages[0].Keys)
-			{
-				bool positive = Stages[0][key].Value > 0;
-				string color = positive ? "green" : "red";
-				string name = Databases.Database.Data.Item.Settings.StatGraphics[key].Name;
-
-				GUILayout.Label($"<color='{color}'>{(positive ? "+" : "-")}{Mathf.Abs(Stages[0][key].Value)}%</color> {name}", rich);
-			}
+			foreach (var key in _data.Stages[_quality].Keys)
+				_entity.Stats.Modifiers[key].BonusModifier -= _data.Stages[_quality][key].Value;
+			base.OnUnequipped();
 		}
-#endif
+
+		public override void OnUpgrade()
+		{
+			base.OnUpgrade();
+			foreach (var key in _data.Stages[_quality - 1].Keys)
+				_entity.Stats.Modifiers[key].BonusModifier -= _data.Stages[_quality][key].Value;
+			foreach (var key in _data.Stages[_quality].Keys)
+				_entity.Stats.Modifiers[key].BonusModifier += _data.Stages[_quality][key].Value;
+		}
 	}
 }

@@ -9,10 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 001f634f0165c2344a54f9112c9f6dc2, type: 3}
+  m_Script: {fileID: 11500000, guid: 7587eea19b98e774383105888713cb96, type: 3}
   m_Name: Settings
   m_EditorClassIdentifier: 
   NumberOfUpgrades: 3
+  DefaultStatScript: {fileID: 11500000, guid: 08926e121668c91429746aa3d5ff809b, type: 3}
+  DefaultActiveScript: {fileID: 0}
+  DefaultPassiveScript: {fileID: 0}
   StatGraphics:
     keyData: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d000000
     valueData:
@@ -28,5 +31,5 @@ MonoBehaviour:
     - Name: Knockback force
     - Name: Knockback resistance
     - Name: Dash range
-    - Name: Dash Cdr
+    - Name: Dash cooldown
     - Name: Stun resistance
