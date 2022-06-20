@@ -73,7 +73,7 @@ namespace Databases
             public class Item
             {
                 
-                public static Game.Systems.Scaling.ItemSettings Settings = (Game.Systems.Scaling.ItemSettings)Instance.DatabaseAsset.Sections[1].Sections[1].Assets[0].Prefab;
+                public static Game.Systems.Items.ItemSettings Settings = (Game.Systems.Items.ItemSettings)Instance.DatabaseAsset.Sections[1].Sections[1].Assets[0].Prefab;
                 
                 public static IEnumerable<T> All<T>()
                     where T : UnityEngine.Object
