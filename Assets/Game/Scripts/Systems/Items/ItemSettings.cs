@@ -3,7 +3,7 @@ using Nawlian.Lib.Utils;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Game.Systems.Scaling
+namespace Game.Systems.Items
 {
 	[CreateAssetMenu(menuName = "Data/Items/Settings")]
 	public class ItemSettings : ScriptableObject

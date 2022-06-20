@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace Game.Systems.Scaling
+namespace Game.Systems.Items
 {
 	public abstract class ItemBase : ScriptableObject{}
 }

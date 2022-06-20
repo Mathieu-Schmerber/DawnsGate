@@ -3,7 +3,7 @@ using Sirenix.Utilities.Editor;
 using System;
 using UnityEngine;
 
-namespace Game.Systems.Scaling
+namespace Game.Systems.Items
 {
 	public abstract class UpgradableItemBase<T> : ItemBase
 	{

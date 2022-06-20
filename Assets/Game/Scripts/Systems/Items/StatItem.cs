@@ -3,7 +3,7 @@ using Sirenix.OdinInspector;
 using Sirenix.Utilities.Editor;
 using UnityEngine;
 
-namespace Game.Systems.Scaling
+namespace Game.Systems.Items
 {
 	[CreateAssetMenu(menuName = "Data/Items/Stat item")]
 	public class StatItem : UpgradableItemBase<StatDictionary>
@@ -11,14 +11,15 @@ namespace Game.Systems.Scaling
 #if UNITY_EDITOR
 
 		[Button(Name = "Scale stage 1 to bottom", Style = ButtonStyle.FoldoutButton)]
-		public void ApplyScaling(float scalePercent)
+		public void ApplyScaling(float scalePercent = 50)
 		{
 			for (int i = 1; i < Stages.Length; i++)
 			{
+				Stages[i].Clear();
 				foreach (var key in Stages[0].Keys)
 				{
 					float value = i * scalePercent;
-					float result = Stages[0][key].Value * (value / 100) + Stages[0][key].Value;
+					float result = Mathf.Ceil(Stages[0][key].Value * (value / 100) + Stages[0][key].Value);
 
 					if (Stages[i].ContainsKey(key))
 						Stages[i][key] = new(result);
