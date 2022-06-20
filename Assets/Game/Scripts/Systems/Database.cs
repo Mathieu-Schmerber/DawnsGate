@@ -70,8 +70,17 @@ namespace Databases
                 }
             }
             
-            public class Boostrap
+            public class Item
             {
+                
+                public static Game.Systems.Scaling.ItemSettings Settings = (Game.Systems.Scaling.ItemSettings)Instance.DatabaseAsset.Sections[1].Sections[1].Assets[0].Prefab;
+                
+                public static IEnumerable<T> All<T>()
+                    where T : UnityEngine.Object
+                {
+                    UnityEngine.Object[] all = new UnityEngine.Object[1] {Settings};
+                    return all.Where(x => x is T).Select(x => (T)x);
+                }
             }
         }
         
