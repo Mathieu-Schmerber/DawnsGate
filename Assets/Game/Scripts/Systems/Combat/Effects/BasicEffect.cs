@@ -16,8 +16,8 @@ namespace Game.Systems.Combat.Effects
 
 		private void Awake()
 		{
-			_damageProcessor = GetComponent<IDamageProcessor>();
-			_identity = GetComponent<EntityIdentity>();
+			_damageProcessor = GetComponentInParent<IDamageProcessor>();
+			_identity = GetComponentInParent<EntityIdentity>();
 		}
 
 		public override void OnStart(float duration, AEffectBaseData data)

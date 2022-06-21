@@ -24,6 +24,7 @@ namespace Game.Systems.Items
 
 		[Title("General")]
 		public int NumberOfUpgrades;
+		public int InventorySlots;
 
 		[Title("Scripts")]
 		[ValidateInput(nameof(ValidateStatEditor), "Script needs to inherit AEquippedItem.")]

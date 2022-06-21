@@ -92,10 +92,11 @@ namespace Game.Entities.Shared
 			if (_graphics && !LockAim)
 				ApplySmoothRotation(_graphics.transform, _gfxAnchor);
 
-			Vector3 inputs = GetMovementsInputs();
+			Vector3 inputs = CanMove ? GetMovementsInputs() : Vector3.zero;
 
 			_gfxAnim?.SetFloat("Speed", inputs.magnitude);
-			_gfxAnim?.SetFloat("Angle", Vector3.Angle(inputs, dir));
+			if (!LockAim)
+				_gfxAnim?.SetFloat("Angle", Vector3.Angle(inputs, dir));
 
 			Move();
 		}

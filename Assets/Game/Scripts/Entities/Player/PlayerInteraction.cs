@@ -21,12 +21,12 @@ namespace Game.Entities.Player
 
 		private void OnEnable()
 		{
-			_inputs.OnInteractPressed += InteractWithClosest;
+			InputManager.OnInteractPressed += InteractWithClosest;
 		}
 
 		private void OnDisable()
 		{
-			_inputs.OnInteractPressed -= InteractWithClosest;
+			InputManager.OnInteractPressed -= InteractWithClosest;
 		}
 
 		private void Awake()

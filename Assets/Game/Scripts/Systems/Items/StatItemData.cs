@@ -36,6 +36,7 @@ namespace Game.Systems.Items
 
 			foreach (var key in Stages[0].Keys)
 			{
+
 				bool positive = Stages[0][key].Value > 0;
 				string color = positive ? "green" : "red";
 				string name = Databases.Database.Data.Item.Settings.StatGraphics[key].Name;

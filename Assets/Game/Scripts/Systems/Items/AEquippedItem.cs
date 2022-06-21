@@ -14,6 +14,7 @@ namespace Game.Systems.Items
 		protected int _quality;
 
 		public int Quality => _quality;
+		public abstract ItemBaseData Details { get; }
 
 		private void Awake()
 		{
@@ -35,5 +36,7 @@ namespace Game.Systems.Items
 			if (_quality < Databases.Database.Data.Item.Settings.NumberOfUpgrades - 1)
 				_quality++;
 		}
+
+		public abstract string GetDescription();
 	}
 }

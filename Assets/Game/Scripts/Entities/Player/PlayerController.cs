@@ -28,12 +28,12 @@ namespace Game.Entities.Player
 
 		private void OnEnable()
 		{
-			_inputs.OnDashPressed += OnDashInput;
+			InputManager.OnDashPressed += OnDashInput;
 		}
 
 		private void OnDisable()
 		{
-			_inputs.OnDashPressed -= OnDashInput;
+			InputManager.OnDashPressed -= OnDashInput;
 		}
 
 		protected override void Awake()

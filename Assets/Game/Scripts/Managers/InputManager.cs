@@ -16,8 +16,9 @@ namespace Game.Managers
 		public Vector2 MovementAxis => _controls.Player.Movement.ReadValue<Vector2>();
 		public bool IsAttackDown { get; private set; }
 
-		public event Action OnDashPressed;
-		public event Action OnInteractPressed;
+		public static event Action OnDashPressed;
+		public static event Action OnInteractPressed;
+		public static event Action OnInventoryPressed;
 
 		#region Unity builtins
 
@@ -33,6 +34,7 @@ namespace Game.Managers
 			_controls.Player.Attack.canceled += (ctx) => IsAttackDown = false;
 			_controls.Player.Dash.performed += (ctx) => OnDashPressed?.Invoke();
 			_controls.Player.Interact.performed += (ctx) => OnInteractPressed?.Invoke();
+			_controls.Player.Inventory.performed += (ctx) => OnInventoryPressed?.Invoke();
 		}
 
 		#endregion

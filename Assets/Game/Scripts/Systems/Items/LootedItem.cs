@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Game.Entities.Player;
+using Game.Entities.Player.Inventory;
 using Nawlian.Lib.Systems.Interaction;
 using Nawlian.Lib.Systems.Pooling;
 using UnityEngine;
@@ -67,6 +68,8 @@ namespace Game.Systems.Items
 		{
 			Inventory inventory = (actor as MonoBehaviour).GetComponent<Inventory>();
 
+			if (!inventory.HasAvailableSlot)
+				return;
 			inventory.EquipItem(_data, _quality);
 			actor.UnSuggestInteraction(this);
 			Release();
@@ -74,7 +77,7 @@ namespace Game.Systems.Items
 
 		public static void Create(Vector3 position, ItemBaseData data, int quality)
 		{
-			ObjectPooler.Get(Databases.Database.Data.Item.LootedItem, position, Quaternion.identity, new InitData() { 
+			ObjectPooler.Get(Databases.Database.Data.Item.LootedItem, position, Quaternion.Euler(0, 0, 0), new InitData() { 
 				Data = data,
 				Quality = quality
 			}, null);
