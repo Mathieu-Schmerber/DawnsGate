@@ -9,14 +9,13 @@ using UnityEngine.EventSystems;
 
 namespace Game.Entities.Player.Inventory
 {
-	public class InventoryUi : MonoBehaviour, IMenu
+	public class InventoryUi : AMenu
 	{
 		[SerializeField] private RectTransform _menuPanel;
 		[SerializeField] private Vector2 _openedPos;
 		[SerializeField] private Vector2 _closedPos;
 		[SerializeField] private float _animationTime;
 
-		private bool _isOpen;
 		private SlotUi[] _slots;
 
 		public SlotUi SelectedSlot => _slots.FirstOrDefault(x => x.Selected);
@@ -28,9 +27,7 @@ namespace Game.Entities.Player.Inventory
 
 		private void Start()
 		{
-			_slots.ForEach(x => x.interactable = _isOpen);
-			GameManager.Player.LockMovement = _isOpen;
-			GameManager.Player.LockAim = _isOpen;
+			_slots.ForEach(x => x.interactable = IsOpen);
 			_menuPanel.anchoredPosition = _closedPos;
 		}
 
@@ -55,27 +52,29 @@ namespace Game.Entities.Player.Inventory
 
 		private void OpenOrClose()
 		{
-			if (_isOpen)
-				Close();
+			if (IsOpen)
+				GuiManager.CloseMenu<InventoryUi>();
 			else
-				Open();
-			_isOpen = !_isOpen;
-			_slots.ForEach(x => x.interactable = _isOpen);
-			GameManager.Player.LockMovement = _isOpen;
-			GameManager.Player.LockAim = _isOpen;
+				GuiManager.OpenMenu<InventoryUi>();
 		}
 
-		public void Open()
+		public override void Open()
 		{
+			base.Open();
+
 			Tween.AnchoredPosition(_menuPanel, _closedPos, _openedPos, _animationTime, 0, Tween.EaseOut);
 			EventSystem.current.SetSelectedGameObject(_slots[0].gameObject);
+			_slots.ForEach(x => x.interactable = IsOpen);
 		}
 
-		public void Close()
+		public override void Close()
 		{
+			base.Close();
+
 			Tween.AnchoredPosition(_menuPanel, _openedPos, _closedPos, _animationTime, 0, Tween.EaseOut);
 			_slots.ForEach(x => x.Deselect());
 			EventSystem.current.SetSelectedGameObject(null);
+			_slots.ForEach(x => x.interactable = IsOpen);
 		}
 	}
 }
