@@ -100,8 +100,9 @@ namespace Game.Systems.Combat.Attacks
 			}
 
 			EffectProcessor processor = collider.GetComponent<EffectProcessor>();
+			EntityIdentity entity = collider.GetComponent<EntityIdentity>();
 
-			if (processor != null && collider.gameObject.layer != Caster.gameObject.layer)
+			if (processor != null && collider.gameObject.layer != Caster.gameObject.layer && entity != null && !entity.IsInvulnerable)
 				processor.ApplyEffect(_attackData.Effect, _attackData.EffectDuration);
 		}
 

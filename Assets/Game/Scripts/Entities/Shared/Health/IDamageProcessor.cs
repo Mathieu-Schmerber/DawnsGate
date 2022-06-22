@@ -12,7 +12,7 @@ public interface IDamageProcessor
 	/// </summary>
 	/// <param name="attacker"></param>
 	/// <param name="amount"></param>
-	void ApplyDamage(EntityIdentity attacker, float amount);
+	float ApplyDamage(EntityIdentity attacker, float amount);
 
 	/// <summary>
 	/// Applies indirect damages

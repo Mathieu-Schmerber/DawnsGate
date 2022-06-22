@@ -8,6 +8,7 @@ using Nawlian.Lib.Systems.Pooling;
 using Game.Entities.Shared;
 using static Game.Systems.Combat.Attacks.AttackBaseData;
 using System.Linq;
+using Game.Entities.Shared.Health;
 
 namespace Game.Systems.Combat.Attacks
 {
@@ -64,7 +65,7 @@ namespace Game.Systems.Combat.Attacks
 		{
 			if (_hitColliders.Contains(collider)) return;
 
-			IDamageProcessor damageProcessor = collider.GetComponent<IDamageProcessor>();
+			Damageable damageProcessor = collider.GetComponent<Damageable>();
 
 			_hitColliders.Add(collider);
 			if (damageProcessor != null)
@@ -72,11 +73,11 @@ namespace Game.Systems.Combat.Attacks
 				Vector3 direction = _attackData.KnockbackDir == KnockbackDirection.FORWARD ? transform.forward : (collider.transform.position - transform.position).normalized.WithY(0);
 				float knockbackForce = Caster.Scale(_attackData.BaseKnockbackForce, StatModifier.KnockbackForce);
 				float totalDamage = Caster.Scale(_attackData.BaseDamage, StatModifier.AttackDamage);
+				float applied = damageProcessor.ApplyDamage(Caster, totalDamage);
 
-				damageProcessor.ApplyDamage(Caster, totalDamage);
 				damageProcessor.ApplyKnockback(Caster, direction * knockbackForce);
 				ObjectPooler.Get(_attackData.HitFx, collider.transform.position.WithY(transform.position.y), Quaternion.Euler(0, transform.rotation.eulerAngles.y + _attackData.HitYRotation, 0), null);
-				OnAttackHitEvent?.Invoke(_data, collider);
+				OnAttackHitEvent?.Invoke(_data, damageProcessor, applied);
 			}
 		}
 

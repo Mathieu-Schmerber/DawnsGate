@@ -110,7 +110,7 @@ namespace Game.Systems.Combat.Weapons
 			AttackBase attack = _weaponManager.SpawnFromPool(CurrentWeaponAttack.Attack.AttackData, _controller.transform.position, Quaternion.identity);
 
 			// Notify weapon holder that the attack did hit
-			attack.OnAttackHitEvent = (data, victim) => _weaponManager.OnHit(data, victim, Data.IsHeavy(CurrentWeaponAttack));
+			attack.OnAttackHitEvent = (data, victim, damage) => _weaponManager.OnHit(data, victim, Data.IsHeavy(CurrentWeaponAttack), damage);
 
 			// Aim assist
 			if (CurrentWeaponAttack.Attack.AimAssist)

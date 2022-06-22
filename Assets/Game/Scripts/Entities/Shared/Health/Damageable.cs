@@ -40,9 +40,9 @@ namespace Game.Entities.Shared.Health
 		/// </summary>
 		/// <param name="attacker"></param>
 		/// <param name="damage"></param>
-		public void ApplyDamage(EntityIdentity attacker, float damage)
+		public float ApplyDamage(EntityIdentity attacker, float damage)
 		{
-			if (IsDead || _identity.IsInvulnerable) return;
+			if (IsDead || _identity.IsInvulnerable) return 0;
 
 			OnBeforeDamaged?.Invoke();
 
@@ -76,6 +76,7 @@ namespace Game.Entities.Shared.Health
 			// Death check
 			if (IsDead)
 				Kill(attacker);
+			return totalDamage;
 		}
 
 		public void ApplyPassiveDamage(float damage)
@@ -102,7 +103,7 @@ namespace Game.Entities.Shared.Health
 		/// </summary>
 		/// <param name="attacker"></param>
 		/// <param name="force"></param>
-		public void ApplyKnockback(EntityIdentity attacker, Vector3 force, float knockbackTime)
+		public void ApplyKnockback(EntityIdentity attacker, Vector3 force, float knockbackTime = 0.2f)
 		{
 			if (IsDead) return;
 

@@ -1,4 +1,5 @@
 using Game.Entities.Shared;
+using Game.Entities.Shared.Health;
 using Game.Managers;
 using Game.Systems.Combat.Attacks;
 using Game.Systems.Combat.Weapons;
@@ -17,7 +18,8 @@ namespace Game.Entities.Player
 		public class AttackHitEventArgs : EventArgs
 		{
 			public AttackBaseData Data { get; set; }
-			public Collider Victim { get; set; }
+			public Damageable Victim { get; set; }
+			public float DamageApplied { get; set; }
 			public bool IsHeavyAttack { get; set; }
 		}
 
@@ -32,6 +34,7 @@ namespace Game.Entities.Player
 		public WeaponData CurrentWeapon => _weapon.Data;
 
 		public event Action<AttackHitEventArgs> OnAttackHit;
+		public event Action OnAttackLaunched;
 
 		#region Unity builtins
 
@@ -127,9 +130,11 @@ namespace Game.Entities.Player
 			_animator.SetFloat("AttackSpeed", attackSpeed);
 			_attackTimer.Interval = attack.AttackAnimation.length / attackSpeed + _minTimeBetweenAttacks;
 			_animator.Play(attack.AttackAnimation.name);
+			OnAttackLaunched?.Invoke();
 		}
 
-		public void OnHit(AttackBaseData data, Collider collider, bool isHeavy) => OnAttackHit?.Invoke(new() {Data = data, Victim = collider, IsHeavyAttack = isHeavy});
+		public void OnHit(AttackBaseData data, Damageable collider, bool isHeavy, float damage) 
+			=> OnAttackHit?.Invoke(new() {Data = data, Victim = collider, IsHeavyAttack = isHeavy, DamageApplied = damage});
 
 		public void OnAnimationEvent(string animationArg) => _weapon.OnAnimationEvent(animationArg);
 

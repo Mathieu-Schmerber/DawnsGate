@@ -30,7 +30,7 @@ namespace Game.Systems.Combat.Attacks
 
 		protected EntityIdentity Caster { get; private set; }
 
-		public Action<AttackBaseData, Collider> OnAttackHitEvent { get; set; }
+		public Action<AttackBaseData, Damageable, float> OnAttackHitEvent { get; set; }
 
 		public override void Init(object data)
 		{

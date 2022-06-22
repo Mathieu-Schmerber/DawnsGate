@@ -15,20 +15,22 @@ MonoBehaviour:
   Type: 2
   IsLifeItem: 0
   Script: {fileID: 11500000, guid: 7f1e20b19c5e3be4f8c1b9e58cd53830, type: 3}
-  Graphics: {fileID: 0}
+  Graphics: {fileID: -3971448639319642843, guid: e6caa983b839db843807b2ba9e947efb,
+    type: 3}
   Stages:
-  - Damage: 0
+  - Damage: 10
     Duration: 0
     Amount: 0
     Range: 0
-  - Damage: 0
+  - Damage: 15
     Duration: 0
     Amount: 0
     Range: 0
-  - Damage: 0
+  - Damage: 20
     Duration: 0
     Amount: 0
     Range: 0
   SpawnPrefab: {fileID: 0}
   ApplyEffect: {fileID: 0}
-  Description: 
+  Description: Heavy attacks apply {Damage:%} more damage per enemy caught int the
+    area of effect.
