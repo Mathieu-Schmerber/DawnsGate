@@ -55,7 +55,7 @@ namespace Game.Systems.Combat.Effects
 				switch (action.Action)
 				{
 					case EffectAction.APPLY_DAMAGE:
-						_damageProcessor.ApplyPassiveDamage(action.DamageAmount);
+						_damageProcessor?.ApplyPassiveDamage(action.DamageAmount);
 						break;
 					case EffectAction.APPLY_MODIFIER:
 						ApplyModifiers(action.Modifiers);
