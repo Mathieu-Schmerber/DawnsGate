@@ -53,7 +53,7 @@ namespace Game.Systems.Combat.Attacks
 
 		public static void ApplyDamageLogic(EntityIdentity caster, Damageable target, KnockbackDirection knockbackDirection, float damage, float kbForce, GameObject hitFx = null)
 		{
-			if (target == null)
+			if (target == null || caster.gameObject.layer == target.gameObject.layer)
 				return;
 			Vector3 direction = knockbackDirection == KnockbackDirection.FORWARD ? caster.transform.forward : (target.transform.position - caster.transform.position).normalized.WithY(0);
 			float knockbackForce = caster.Scale(kbForce, StatModifier.KnockbackForce);

@@ -38,13 +38,13 @@ namespace Game.Entities.Miscellaneous
 		{
 			base.OnReleasing();
 
-			RaycastHit[] inRange = Physics.SphereCastAll(transform.position, _explosionRadius, transform.forward);
+			var inRange = Physics.OverlapSphere(transform.position, _explosionRadius);
 
 			foreach (var obj in inRange)
 			{
 				if (obj.transform.gameObject.layer != Caster.gameObject.layer)
 				{
-					Damageable dmg = obj.transform.GetComponent<Damageable>();
+					Damageable dmg = obj.GetComponent<Damageable>();
 
 					if (dmg == null)
 						continue;

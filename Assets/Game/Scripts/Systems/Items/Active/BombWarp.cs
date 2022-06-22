@@ -1,6 +1,7 @@
 ﻿using Game.Entities.Miscellaneous;
 using Game.Entities.Shared;
 using Nawlian.Lib.Systems.Pooling;
+using Nawlian.Lib.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,9 +11,8 @@ using UnityEngine;
 
 namespace Game.Systems.Items.Active
 {
-	public class BombWarp : AEquippedItem
+	public class BombWarp : AActiveItem
 	{
-		private ActiveItemData _data;
 		private AController _controller;
 
 		protected override void Awake()
@@ -23,13 +23,9 @@ namespace Game.Systems.Items.Active
 
 		#region AEquippedItem
 
-		public override ItemBaseData Details => _data;
-		public override string GetDescription() => _data.Description;
-
 		public override void OnEquipped(ItemBaseData data, int quality)
 		{
 			base.OnEquipped(data, quality);
-			_data = data as ActiveItemData;
 			_controller.OnDashStarted += OnDashStarted;
 		}
 

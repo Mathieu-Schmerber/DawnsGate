@@ -41,7 +41,8 @@ namespace Game.Systems.Items
 		protected override void DrawItemDescriptionPreview()
 		{
 			GUIStyle rich = new GUIStyle(GUI.skin.label);
-			string richDescription = Description.Replace("{Damage}", $"<color='red'>{Stages[0].Damage}</color>")
+			string richDescription = Description.Replace("{Damage:u}", $"<color='red'>{Stages[0].Damage}</color>")
+												.Replace("{Damage:%}", $"<color='red'>{Stages[0].Damage}%</color>")
 												.Replace("{Duration}", $"<color='yellow'>{Stages[0].Duration}</color>")
 												.Replace("{Amount}", $"<color='yellow'>{Stages[0].Amount}</color>");
 
