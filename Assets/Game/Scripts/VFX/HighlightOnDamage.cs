@@ -42,7 +42,7 @@ namespace Game.VFX
 			_renderer.materials = _defaultMaterials;
 		}
 
-		public void OnDamageDealt()
+		public void OnDamageDealt(float damage)
 		{
 			if (!_damageable.IsDead)
 				StartCoroutine(Highlight());

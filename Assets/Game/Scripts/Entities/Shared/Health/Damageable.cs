@@ -25,7 +25,7 @@ namespace Game.Entities.Shared.Health
 
 		public event Action OnDeath;
 		public event Action OnBeforeDamaged;
-		public event Action OnDamaged;
+		public event Action<float> OnDamaged;
 
 		private void Awake()
 		{
@@ -71,7 +71,7 @@ namespace Game.Entities.Shared.Health
 			attacker.CurrentHealth += attacker.Scale(totalDamage, StatModifier.LifeSteal);
 
 			// Triggering event
-			OnDamaged?.Invoke();
+			OnDamaged?.Invoke(totalDamage);
 
 			// Death check
 			if (IsDead)
@@ -89,7 +89,7 @@ namespace Game.Entities.Shared.Health
 				_identity.CurrentHealth -= damage;
 
 			// Triggering event
-			OnDamaged?.Invoke();
+			OnDamaged?.Invoke(damage);
 
 			// Death check
 			if (IsDead)

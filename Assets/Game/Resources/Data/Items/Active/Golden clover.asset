@@ -10,27 +10,25 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3c00e2102e52be468a9036eab55df31, type: 3}
-  m_Name: Sharpened blade
+  m_Name: Golden clover
   m_EditorClassIdentifier: 
   Type: 2
   IsLifeItem: 0
-  Script: {fileID: 11500000, guid: b3ade958f94d9d04db6adbd15810313e, type: 3}
-  Graphics: {fileID: -2222962917114677843, guid: ac257b2bf81251443a653beb03b4645b,
-    type: 3}
+  Script: {fileID: 11500000, guid: 7f1e20b19c5e3be4f8c1b9e58cd53830, type: 3}
+  Graphics: {fileID: 0}
   Stages:
-  - Damage: 5
+  - Damage: 0
     Duration: 0
     Amount: 0
     Range: 0
-  - Damage: 8
+  - Damage: 0
     Duration: 0
     Amount: 0
     Range: 0
-  - Damage: 10
+  - Damage: 0
     Duration: 0
     Amount: 0
     Range: 0
-  SpawnPrefab: {fileID: 6826739793168019112, guid: 161ce196c6bae7843a3573a1fe4c5d5f,
-    type: 3}
+  SpawnPrefab: {fileID: 0}
   ApplyEffect: {fileID: 0}
-  Description: Applies {Damage:u} damage to enemies you dash through.
+  Description: 

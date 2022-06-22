@@ -1,4 +1,6 @@
-﻿using Nawlian.Lib.Utils;
+﻿using Game.Entities.Shared.Health;
+using Nawlian.Lib.Extensions;
+using Nawlian.Lib.Utils;
 using Sirenix.OdinInspector;
 using System;
 using System.Collections.Generic;
@@ -22,6 +24,28 @@ namespace Game.Systems.Combat.Effects
 
 		[SerializeField] private GameObject _effectsParent;
 		[ShowInInspector, ReadOnly] private EffectDictionary _activeEffects = new();
+		private Damageable _damageable;
+
+		private void Awake()
+		{
+			_damageable = GetComponent<Damageable>();
+		}
+
+		private void OnEnable()
+		{
+			_damageable.OnDeath += ClearAllEffects;
+		}
+
+		private void OnDisable()
+		{
+			_damageable.OnDeath -= ClearAllEffects;
+		}
+
+		private void ClearAllEffects()
+		{
+			foreach (var key in _activeEffects.Keys.ToList())
+				RemoveEffect(key);
+		}
 
 		private AEffect AddEffectToActive(AEffectBaseData data)
 		{
@@ -43,7 +67,7 @@ namespace Game.Systems.Combat.Effects
 		public void RemoveEffect(AEffectBaseData data)
 		{
 			_activeEffects[data].Delete();
-			_activeEffects.Remove(data);
+			_activeEffects[data] = null;
 		}
 	}
 }

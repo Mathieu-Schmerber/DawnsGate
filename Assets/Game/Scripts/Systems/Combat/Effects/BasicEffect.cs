@@ -9,12 +9,12 @@ namespace Game.Systems.Combat.Effects
 	{
 		private BasicEffectData _data;
 		private IDamageProcessor _damageProcessor;
-		private EntityIdentity _identity;
-		private List<GameObject> _spawned = new();
+		protected EntityIdentity _identity;
+		protected List<GameObject> _spawned = new();
 
 		private int _activations { get; set; }
 
-		private void Awake()
+		protected virtual void Awake()
 		{
 			_damageProcessor = GetComponentInParent<IDamageProcessor>();
 			_identity = GetComponentInParent<EntityIdentity>();

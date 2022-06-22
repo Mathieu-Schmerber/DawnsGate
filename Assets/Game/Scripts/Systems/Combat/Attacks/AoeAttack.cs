@@ -101,7 +101,7 @@ namespace Game.Systems.Combat.Attacks
 
 			EffectProcessor processor = collider.GetComponent<EffectProcessor>();
 
-			if (processor != null)
+			if (processor != null && collider.gameObject.layer != Caster.gameObject.layer)
 				processor.ApplyEffect(_attackData.Effect, _attackData.EffectDuration);
 		}
 
