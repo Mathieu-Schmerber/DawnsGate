@@ -70,7 +70,12 @@ namespace Game.Entities.Player
 			return bestTarget;
 		}
 
-		private void InteractWithClosest() => _lastNearest?.GetComponent<IInteractable>().Interact(this);
+		private void InteractWithClosest()
+		{
+			if (GuiManager.IsMenuing)
+				return;
+			_lastNearest?.GetComponent<IInteractable>().Interact(this);
+		}
 
 		#region Interaction interface
 

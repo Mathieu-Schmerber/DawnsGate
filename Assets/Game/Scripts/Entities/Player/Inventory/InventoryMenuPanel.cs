@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using Game.Systems.Items;
+using TMPro;
 using UnityEngine;
 
 namespace Game.Entities.Player.Inventory
@@ -7,6 +8,9 @@ namespace Game.Entities.Player.Inventory
 	{
 		[SerializeField] private TextMeshProUGUI _itemName;
 		[SerializeField] private TextMeshProUGUI _itemDescription;
+		[SerializeField] private GameObject _effectPanel;
+		[SerializeField] private TextMeshProUGUI _effectName;
+		[SerializeField] private TextMeshProUGUI _effectDescription;
 
 		private void OnEnable()
 		{
@@ -22,6 +26,19 @@ namespace Game.Entities.Player.Inventory
 		{
 			_itemName.text = obj.Item == null ? "Empty slot" : obj.Item.Details.name;
 			_itemDescription.text = obj.Item == null ? "" : obj.Item.GetDescription();
+
+			_effectPanel.SetActive(false);
+			if (obj.Item.Details.Type != ItemType.STAT)
+			{
+				ActiveItemData data = obj.Item.Details as ActiveItemData;
+
+				if (data.ApplyEffect != null)
+				{
+					_effectPanel.SetActive(true);
+					_effectName.text = data.ApplyEffect.DisplayName;
+					_effectDescription.text = data.ApplyEffect.Description;
+				}
+			}
 		}
 	}
 }

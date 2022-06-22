@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Curse
   m_EditorClassIdentifier: 
   DisplayName: Curse
-  Description: When lifted, applies 10% of the total damage taken during the curse.
+  Description: When lifted, applies <color=red>10%</color> of the total damage taken
+    during the curse.
   Script: {fileID: 11500000, guid: b57eab239e8f14c44af8312ff5ae2b26, type: 3}
   Interval:
     Enabled: 0

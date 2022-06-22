@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Blood lust
   m_EditorClassIdentifier: 
   DisplayName: Blood lust
-  Description: Gains 1% critial rate and 10% critical damage every 0.5 second
+  Description: Gains <color=red>1%</color> critial rate and <color=red>10%</color>
+    critical damage every <color=yellow>0.5</color> second.
   Script: {fileID: 11500000, guid: ab790384dc304bd478352368cd7fc1e2, type: 3}
   Interval:
     Enabled: 1
@@ -29,6 +30,7 @@ MonoBehaviour:
         TemporaryModifier: 0
     Prefab: {fileID: 0}
     StickToEntity: 0
+    AllowDuplicates: 0
   - Action: 1
     DamageAmount: 0
     Modifiers:
@@ -39,6 +41,7 @@ MonoBehaviour:
         TemporaryModifier: 0
     Prefab: {fileID: 0}
     StickToEntity: 0
+    AllowDuplicates: 0
   - Action: 2
     DamageAmount: 0
     Modifiers:
@@ -47,3 +50,4 @@ MonoBehaviour:
     Prefab: {fileID: 3020888641643434651, guid: 7e1a5b37e92692a40a68315a8fe6140b,
       type: 3}
     StickToEntity: 1
+    AllowDuplicates: 0
