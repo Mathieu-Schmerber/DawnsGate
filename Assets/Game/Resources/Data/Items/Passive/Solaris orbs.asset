@@ -15,20 +15,23 @@ MonoBehaviour:
   Type: 1
   IsLifeItem: 0
   Script: {fileID: 11500000, guid: e50aeb9d33f9bc241bcd43fe116e46ce, type: 3}
-  Graphics: {fileID: 0}
+  Graphics: {fileID: 3907235176126722221, guid: c0707f6badf22974bad9ccc4098c3c4e,
+    type: 3}
   Stages:
-  - Damage: 0
+  - Damage: 5
     Duration: 0
-    Amount: 0
+    Amount: 1
     Range: 0
-  - Damage: 0
+  - Damage: 10
     Duration: 0
-    Amount: 0
+    Amount: 2
     Range: 0
-  - Damage: 0
+  - Damage: 15
     Duration: 0
-    Amount: 0
+    Amount: 3
     Range: 0
-  SpawnPrefab: {fileID: 0}
+  SpawnPrefab: {fileID: 3142937013312844739, guid: 4b364f2a870e931499d5c0969d19e13c,
+    type: 3}
   ApplyEffect: {fileID: 0}
-  Description: 
+  Description: '{Amount} orbs are constantly rotating around Solaris, each orb applies
+    {Damage:u} damage when touching an enemy'
