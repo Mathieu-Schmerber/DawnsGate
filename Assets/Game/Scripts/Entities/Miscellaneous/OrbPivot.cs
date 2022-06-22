@@ -8,7 +8,6 @@ namespace Game.Entities.Miscellaneous
 	public class OrbPivot : MonoBehaviour
 	{
 		[SerializeField] private float _rotationSpeed;
-		private SpecialItemData.Stage _data;
 		private Orb[] _orbs;
 
 		private void Awake()

@@ -7,7 +7,7 @@ namespace Nawlian.Lib.Systems.Pooling
 {
 	public class PoolableParticleSystem : BasicPoolableBehaviour
 	{
-		private List<ParticleSystem> _ps;
+		protected List<ParticleSystem> _ps;
 
 		private void Awake()
 		{
