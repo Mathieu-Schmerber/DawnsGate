@@ -26,7 +26,7 @@ namespace Nawlian.Lib.Systems.Pooling
 		}
 
 		/// <inheritdoc/>
-		public void Release()
+		public virtual void Release()
 		{
 			OnReleasing();
 			gameObject.SetActive(false);

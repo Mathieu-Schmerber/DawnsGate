@@ -33,20 +33,7 @@ namespace Game.Systems.Combat.Effects
 				if (action.Action == EffectAction.APPLY_MODIFIER)
 					RemoveModifiers(action.Modifiers);
 			}
-			DeleteSpawnedObjects();
-		}
-
-		private void DeleteSpawnedObjects()
-		{
-			foreach (var item in _spawned)
-			{
-				PoolableParticleSystem fx = item.GetComponent<PoolableParticleSystem>();
-
-				if (fx != null)
-					fx.SmoothRelease();
-				else
-					item.GetComponent<IPoolableObject>()?.Release();
-			}
+			_spawned.ForEach(x => x.GetComponent<IPoolableObject>()?.Release());
 		}
 
 		private void ApplyModifiers(StatDictionary modifiers)

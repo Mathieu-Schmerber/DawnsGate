@@ -14,12 +14,14 @@ namespace Nawlian.Lib.Systems.Pooling
 			_ps = transform.GetComponentsInChildren<ParticleSystem>(includeThis: true).ToList();
 		}
 
-		public void SmoothRelease()
+		public override void Release()
 		{
 			float time = _ps.Max(x => x.main.startLifetime.constantMax) + _ps.Max(x => x.main.startDelay.constantMax);
 
 			_ps.FirstOrDefault()?.Stop(true, ParticleSystemStopBehavior.StopEmitting);
-			Invoke(nameof(Release), time);
+			Invoke(nameof(TrueRelease), time);
 		}
+
+		private void TrueRelease() => base.Release();
 	}
 }

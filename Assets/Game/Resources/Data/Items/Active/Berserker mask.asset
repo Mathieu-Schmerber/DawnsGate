@@ -19,15 +19,15 @@ MonoBehaviour:
     type: 3}
   Stages:
   - Damage: 0
+    Duration: 0.5
+    Amount: 0
+    Range: 0
+  - Damage: 0
     Duration: 1
     Amount: 0
     Range: 0
   - Damage: 0
     Duration: 1.5
-    Amount: 0
-    Range: 0
-  - Damage: 0
-    Duration: 2
     Amount: 0
     Range: 0
   SpawnPrefab: {fileID: 0}
