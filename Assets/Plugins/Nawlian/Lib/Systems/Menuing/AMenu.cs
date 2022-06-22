@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Sirenix.OdinInspector;
+using UnityEngine;
 
 namespace Plugins.Nawlian.Lib.Systems.Menuing
 {
@@ -14,6 +15,18 @@ namespace Plugins.Nawlian.Lib.Systems.Menuing
 		}
 
 		public virtual void Open()
+		{
+			_isOpen = true;
+		}
+
+		[Button("Close")]
+		public virtual void CloseEditor()
+		{
+			_isOpen = false;
+		}
+
+		[Button("Open")]
+		public virtual void OpenEditor()
 		{
 			_isOpen = true;
 		}

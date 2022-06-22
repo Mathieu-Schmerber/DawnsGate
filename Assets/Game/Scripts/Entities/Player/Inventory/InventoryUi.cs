@@ -27,8 +27,8 @@ namespace Game.Entities.Player.Inventory
 
 		private void Start()
 		{
-			_slots.ForEach(x => x.interactable = IsOpen);
-			_menuPanel.anchoredPosition = _closedPos;
+			if (_menuPanel.anchoredPosition == _openedPos)
+				GuiManager.CloseMenu<InventoryUi>();
 		}
 
 		private void OnEnable()
@@ -76,5 +76,25 @@ namespace Game.Entities.Player.Inventory
 			EventSystem.current.SetSelectedGameObject(null);
 			_slots.ForEach(x => x.interactable = IsOpen);
 		}
+
+		#region Editor
+
+		public override void OpenEditor()
+		{
+			base.OpenEditor();
+			_menuPanel.anchoredPosition = _openedPos;
+			FindObjectOfType<EventSystem>().SetSelectedGameObject(GetComponentsInChildren<SlotUi>()[0].gameObject);
+			GetComponentsInChildren<SlotUi>().ForEach(x => x.interactable = IsOpen);
+		}
+
+		public override void CloseEditor()
+		{
+			base.CloseEditor();
+			_menuPanel.anchoredPosition = _closedPos;
+			FindObjectOfType<EventSystem>().SetSelectedGameObject(null);
+			GetComponentsInChildren<SlotUi>().ForEach(x => x.interactable = IsOpen);
+		}
+
+		#endregion
 	}
 }

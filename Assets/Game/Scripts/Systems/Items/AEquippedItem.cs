@@ -16,7 +16,7 @@ namespace Game.Systems.Items
 		public int Quality => _quality;
 		public abstract ItemBaseData Details { get; }
 
-		private void Awake()
+		protected virtual void Awake()
 		{
 			_entity = GetComponentInParent<EntityIdentity>();
 		}

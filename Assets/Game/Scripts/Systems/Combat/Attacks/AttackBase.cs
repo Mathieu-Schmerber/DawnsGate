@@ -1,4 +1,6 @@
 ﻿using Game.Entities.Shared;
+using Game.Entities.Shared.Health;
+using Nawlian.Lib.Extensions;
 using Nawlian.Lib.Systems.Pooling;
 using System.Collections.Generic;
 using UnityEngine;
@@ -47,6 +49,20 @@ namespace Game.Systems.Combat.Attacks
 			if (other.gameObject == Caster.gameObject)
 				return;
 			OnAttackHit(other);
+		}
+
+		public static void ApplyDamageLogic(EntityIdentity caster, Damageable target, KnockbackDirection knockbackDirection, float damage, float kbForce, GameObject hitFx = null)
+		{
+			if (target == null)
+				return;
+			Vector3 direction = knockbackDirection == KnockbackDirection.FORWARD ? caster.transform.forward : (target.transform.position - caster.transform.position).normalized.WithY(0);
+			float knockbackForce = caster.Scale(kbForce, StatModifier.KnockbackForce);
+			float totalDamage = caster.Scale(damage, StatModifier.AttackDamage);
+
+			target.ApplyDamage(caster, totalDamage);
+			target.ApplyKnockback(caster, direction * knockbackForce, .2f);
+			if (hitFx)
+				ObjectPooler.Get(hitFx, target.transform.position.WithY(caster.transform.position.y), Quaternion.Euler(0, caster.transform.rotation.eulerAngles.y, 0), null);
 		}
 	}
 }

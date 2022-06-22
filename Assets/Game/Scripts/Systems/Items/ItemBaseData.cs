@@ -69,8 +69,8 @@ namespace Game.Systems.Items
 		private MonoScript GetDefaultScript() => Type switch
 		{
 			ItemType.STAT => Databases.Database.Data.Item.Settings.DefaultStatScript,
-			ItemType.PASSIVE => Databases.Database.Data.Item.Settings.DefaultStatScript,
-			ItemType.ACTIVE => Databases.Database.Data.Item.Settings.DefaultStatScript,
+			ItemType.PASSIVE => Databases.Database.Data.Item.Settings.DefaultPassiveScript,
+			ItemType.ACTIVE => Databases.Database.Data.Item.Settings.DefaultActiveScript,
 			_ => null
 		};
 
