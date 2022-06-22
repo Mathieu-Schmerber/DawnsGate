@@ -33,7 +33,20 @@ namespace Game.Systems.Combat.Effects
 				if (action.Action == EffectAction.APPLY_MODIFIER)
 					RemoveModifiers(action.Modifiers);
 			}
-			_spawned.ForEach(x => x.GetComponent<IPoolableObject>()?.Release());
+			DeleteSpawnedObjects();
+		}
+
+		private void DeleteSpawnedObjects()
+		{
+			foreach (var item in _spawned)
+			{
+				PoolableParticleSystem fx = item.GetComponent<PoolableParticleSystem>();
+
+				if (fx != null)
+					fx.SmoothRelease();
+				else
+					item.GetComponent<IPoolableObject>()?.Release();
+			}
 		}
 
 		private void ApplyModifiers(StatDictionary modifiers)
@@ -61,6 +74,8 @@ namespace Game.Systems.Combat.Effects
 						ApplyModifiers(action.Modifiers);
 						break;
 					case EffectAction.SPAWN_OBJECT:
+						if (!action.AllowDuplicates && _activations > 0)
+							return;
 						ObjectPooler.Get(action.Prefab, null, (GameObject go) => {
 							if (action.StickToEntity)
 							{

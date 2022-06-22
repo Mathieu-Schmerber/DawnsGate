@@ -51,7 +51,7 @@ namespace Game.Entities.Player.Inventory
 			}
 			_item = item;
 			_itemImage.enabled = true;
-			_itemImage.sprite = _item.Details.Graphics;
+			_itemImage.sprite = _item?.Details.Graphics;
 			for (int i = 0; i < _stars.Length; i++)
 				_stars[i].gameObject.SetActive(i <= item.Quality);
 		}
