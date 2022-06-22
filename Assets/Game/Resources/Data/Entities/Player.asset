@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 566f1086d2203ac4b9ca93d086353bd1, type: 3}
   m_Name: Player
   m_EditorClassIdentifier: 
-  StartHealth: 999999
+  StartHealth: 100
   MovementSpeed: 6
   DashRange: 4
   DashCooldown: 1
@@ -25,7 +25,7 @@ MonoBehaviour:
     - _baseModifier: 100
       BonusModifier: 0
       TemporaryModifier: 0
-    - _baseModifier: 0
+    - _baseModifier: 100
       BonusModifier: 0
       TemporaryModifier: 0
     - _baseModifier: 100
