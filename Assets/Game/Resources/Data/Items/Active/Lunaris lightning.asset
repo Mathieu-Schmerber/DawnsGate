@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3c00e2102e52be468a9036eab55df31, type: 3}
+  m_Script: {fileID: 11500000, guid: 3453c080cf97d5b4493ae3569a2eac4d, type: 3}
   m_Name: Lunaris lightning
   m_EditorClassIdentifier: 
   Type: 2
@@ -20,19 +20,19 @@ MonoBehaviour:
   - Damage: 15
     Duration: 0
     Amount: 10
-    Range: 7
+    Range: 10
   - Damage: 15
     Duration: 0
     Amount: 15
-    Range: 7
+    Range: 10
   - Damage: 15
     Duration: 0
     Amount: 20
-    Range: 7
+    Range: 10
   SpawnPrefab: {fileID: 8951509771448486450, guid: e40dd47c2ebda204e8a7019f06051e92,
     type: 3}
   ApplyEffect: {fileID: 0}
-  Description: 'There is a {Amount}% chance of lightning bolts stricking nearby enemies
+  Description: 'There is a {Amount}% chance of lightnings falling on nearby enemies
     when hitting a target.
 
-    Lightning bolts apply {Damage:u} damages.'
+    Lightnings apply {Damage:u} damages'

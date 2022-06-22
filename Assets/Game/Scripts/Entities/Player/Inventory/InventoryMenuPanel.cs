@@ -30,7 +30,7 @@ namespace Game.Entities.Player.Inventory
 			_effectPanel.SetActive(false);
 			if (obj.Item.Details.Type != ItemType.STAT)
 			{
-				ActiveItemData data = obj.Item.Details as ActiveItemData;
+				SpecialItemData data = obj.Item.Details as SpecialItemData;
 
 				if (data.ApplyEffect != null)
 				{

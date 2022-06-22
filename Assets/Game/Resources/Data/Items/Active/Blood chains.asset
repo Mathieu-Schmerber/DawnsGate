@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3c00e2102e52be468a9036eab55df31, type: 3}
+  m_Script: {fileID: 11500000, guid: 3453c080cf97d5b4493ae3569a2eac4d, type: 3}
   m_Name: Blood chains
   m_EditorClassIdentifier: 
   Type: 2
@@ -17,20 +17,19 @@ MonoBehaviour:
   Script: {fileID: 11500000, guid: bf2bf4e2b53140144afefac7a3540fef, type: 3}
   Graphics: {fileID: 21300000, guid: bf8537a68608df34b969125d74621d6a, type: 3}
   Stages:
-  - Damage: 5
+  - Damage: 0
     Duration: 0
-    Amount: 0
-    Range: 5
-  - Damage: 10
+    Amount: 5
+    Range: 7
+  - Damage: 0
     Duration: 0
-    Amount: 0
-    Range: 5
-  - Damage: 15
+    Amount: 10
+    Range: 7
+  - Damage: 0
     Duration: 0
-    Amount: 0
-    Range: 5
+    Amount: 15
+    Range: 7
   SpawnPrefab: {fileID: 8504691158544362070, guid: f7eabf4c7925c1445b745328a3a095fb,
     type: 3}
   ApplyEffect: {fileID: 0}
-  Description: '{Damage:%} of the damage caused by light attacks are propagated to
-    nearby enemies'
+  Description: '{Amount}% of the light attacks damage are propagated to nearby enemies.'

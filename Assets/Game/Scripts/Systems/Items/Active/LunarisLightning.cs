@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Game.Systems.Items.Active
 {
-	public class LunarisLightning : AActiveItem
+	public class LunarisLightning : ASpecialItem
 	{
 		private PlayerWeapon _weaponHolder;
 

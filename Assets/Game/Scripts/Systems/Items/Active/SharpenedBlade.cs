@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Game.Systems.Items.Active
 {
-	public class SharpenedBlade : AActiveItem
+	public class SharpenedBlade : ASpecialItem
 	{
 		private AController _controller;
 		private bool _applyDamage;

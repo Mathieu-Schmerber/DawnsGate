@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3c00e2102e52be468a9036eab55df31, type: 3}
+  m_Script: {fileID: 11500000, guid: 3453c080cf97d5b4493ae3569a2eac4d, type: 3}
   m_Name: Bomb warp
   m_EditorClassIdentifier: 
   Type: 2
@@ -21,19 +21,19 @@ MonoBehaviour:
   - Damage: 10
     Duration: 1
     Amount: 0
-    Range: 2.5
+    Range: 5
   - Damage: 15
     Duration: 1
     Amount: 0
-    Range: 2.5
+    Range: 5
   - Damage: 20
     Duration: 1
     Amount: 0
-    Range: 2.5
+    Range: 5
   SpawnPrefab: {fileID: 868409571415310201, guid: 6b2970463ea618040b682994f919a1aa,
     type: 3}
   ApplyEffect: {fileID: 0}
-  Description: 'Drops a <b>Bomb</b> upon dashing.
+  Description: 'Drops a <b>Bomb</b> when dashing.
 
-    The bomb explodes after {Duration}
-    second dealing {Damage:u} damages within a small radius.'
+    Explodes after {Duration}
+    seconds, dealing {Damage:u} damage within a small radius.'

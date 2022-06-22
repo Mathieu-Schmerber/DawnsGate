@@ -3,7 +3,7 @@ using Game.Systems.Combat.Effects;
 
 namespace Game.Systems.Items.Active
 {
-	public class BerserkerMask : AActiveItem
+	public class BerserkerMask : ASpecialItem
 	{
 		private PlayerWeapon _weaponHolder;
 		private EffectProcessor _effectProcessor;

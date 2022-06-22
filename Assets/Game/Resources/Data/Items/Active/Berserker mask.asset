@@ -9,13 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3c00e2102e52be468a9036eab55df31, type: 3}
+  m_Script: {fileID: 11500000, guid: 3453c080cf97d5b4493ae3569a2eac4d, type: 3}
   m_Name: Berserker mask
   m_EditorClassIdentifier: 
   Type: 2
   IsLifeItem: 0
   Script: {fileID: 11500000, guid: 05eb460b2b204f142838a3b24c19c7d5, type: 3}
-  Graphics: {fileID: -5983078005227543334, guid: a2545d0a70f05524289f5eeeaa4870c8,
+  Graphics: {fileID: 3907235176126722221, guid: c0707f6badf22974bad9ccc4098c3c4e,
     type: 3}
   Stages:
   - Damage: 0
@@ -27,9 +27,9 @@ MonoBehaviour:
     Amount: 0
     Range: 0
   - Damage: 0
-    Duration: 1.5
+    Duration: 2
     Amount: 0
     Range: 0
   SpawnPrefab: {fileID: 0}
   ApplyEffect: {fileID: 11400000, guid: 4646f5533c45cba46a90e7474a675d68, type: 2}
-  Description: Hitting light attacks provides with {Effect} for {Duration} seconds.
+  Description: Hitting light attacks provides {Effect} for {Duration} seconds.

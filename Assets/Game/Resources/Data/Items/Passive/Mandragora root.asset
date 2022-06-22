@@ -10,27 +10,26 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3453c080cf97d5b4493ae3569a2eac4d, type: 3}
-  m_Name: Demon's eye
+  m_Name: Mandragora root
   m_EditorClassIdentifier: 
-  Type: 2
+  Type: 1
   IsLifeItem: 0
-  Script: {fileID: 11500000, guid: 429bccb132ba2ca4caef33b15592576a, type: 3}
-  Graphics: {fileID: 3649268020943697122, guid: c0707f6badf22974bad9ccc4098c3c4e,
+  Script: {fileID: 11500000, guid: 4ab6f8d9e8551704f878d9491ab2ed9f, type: 3}
+  Graphics: {fileID: -3017042825262443818, guid: e6caa983b839db843807b2ba9e947efb,
     type: 3}
   Stages:
   - Damage: 0
-    Duration: 3
-    Amount: 2
-    Range: 0
-  - Damage: 0
-    Duration: 3
+    Duration: 0
     Amount: 5
     Range: 0
   - Damage: 0
-    Duration: 3
+    Duration: 0
     Amount: 10
     Range: 0
+  - Damage: 0
+    Duration: 0
+    Amount: 15
+    Range: 0
   SpawnPrefab: {fileID: 0}
-  ApplyEffect: {fileID: 11400000, guid: 519d7686ad2fe734f96807e7b26411a8, type: 2}
-  Description: Heavy attacks have a {Amount}% chance of applying a {Effect} for {Duration}
-    seconds.
+  ApplyEffect: {fileID: 0}
+  Description: Restores {Amount}% of health upon clearing a room

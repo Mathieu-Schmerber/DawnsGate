@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Game.Systems.Items.Active
 {
-	public class DemonsEye : AActiveItem
+	public class DemonsEye : ASpecialItem
 	{
 		private PlayerWeapon _weaponHolder;
 

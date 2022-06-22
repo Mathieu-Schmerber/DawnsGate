@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Game.Systems.Items.Active
 {
-	public class SolarisBook : AActiveItem
+	public class SolarisBook : ASpecialItem
 	{
 		private PlayerWeapon _weaponHolder;
 

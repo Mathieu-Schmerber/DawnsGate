@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Game.Systems.Items.Active
 {
-	public class BloodChains : AActiveItem
+	public class BloodChains : ASpecialItem
 	{
 		private PlayerWeapon _weaponHolder;
 

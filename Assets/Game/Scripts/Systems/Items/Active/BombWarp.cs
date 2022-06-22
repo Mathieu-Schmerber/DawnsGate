@@ -11,7 +11,7 @@ using UnityEngine;
 
 namespace Game.Systems.Items.Active
 {
-	public class BombWarp : AActiveItem
+	public class BombWarp : ASpecialItem
 	{
 		private AController _controller;
 

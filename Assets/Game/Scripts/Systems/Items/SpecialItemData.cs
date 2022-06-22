@@ -9,11 +9,11 @@ using UnityEngine;
 
 namespace Game.Systems.Items
 {
-	[CreateAssetMenu(menuName = "Data/Items/Active item")]
-	public class ActiveItemData : UpgradableItemBaseData<ActiveItemData.ActiveStage>
+	[CreateAssetMenu(menuName = "Data/Items/Special item")]
+	public class SpecialItemData : UpgradableItemBaseData<SpecialItemData.Stage>
 	{
 		[Serializable]
-		public struct ActiveStage
+		public struct Stage
 		{
 			public float Damage;
 			public float Duration;
@@ -46,12 +46,13 @@ namespace Game.Systems.Items
 				return;
 
 			GUIStyle rich = new GUIStyle(GUI.skin.label);
-			string richDescription = Description.Replace("{Damage:u}", $"<color='red'>{Stages[0].Damage}</color>")
-												.Replace("{Damage:%}", $"<color='red'>{Stages[0].Damage}%</color>")
-												.Replace("{Duration}", $"<color='yellow'>{Stages[0].Duration}</color>")
-												.Replace("{Amount}", $"<color='yellow'>{Stages[0].Amount}</color>")
-												.Replace("{Range}", $"<color='yellow'>{Stages[0].Range}</color>")
-												.Replace("{Effect}", $"<color='green'><b>{(ApplyEffect == null ? "No Effect" : ApplyEffect.DisplayName)}</b></color>");
+			string richDescription = Description
+				.Replace("{Damage:u}", $"<color='red'>{Stages[0].Damage}</color>")
+				.Replace("{Damage:%}", $"<color='red'>{Stages[0].Damage}%</color>")
+				.Replace("{Duration}", $"<color='yellow'>{Stages[0].Duration}</color>")
+				.Replace("{Amount}", $"<color='yellow'>{Stages[0].Amount}</color>")
+				.Replace("{Range}", $"<color='yellow'>{Stages[0].Range}</color>")
+				.Replace("{Effect}", $"<color='green'><b>{(ApplyEffect == null ? "No Effect" : ApplyEffect.DisplayName)}</b></color>");
 
 			rich.richText = true;
 			GUILayout.Label(richDescription, rich);

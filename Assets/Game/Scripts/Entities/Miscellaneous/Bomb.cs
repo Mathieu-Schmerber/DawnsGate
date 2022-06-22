@@ -15,7 +15,7 @@ namespace Game.Entities.Miscellaneous
 		[SerializeField] private float _knockbackForce;
 		[SerializeField] private Transform _gfx;
 
-		private ActiveItemData.ActiveStage _data;
+		private SpecialItemData.Stage _data;
 		private EntityCircle _circle;
 
 		public EntityIdentity Caster { get; set; }
@@ -27,7 +27,7 @@ namespace Game.Entities.Miscellaneous
 
 		public override void Init(object data)
 		{
-			_data = (ActiveItemData.ActiveStage)data;
+			_data = (SpecialItemData.Stage)data;
 			_circle.transform.localScale = Vector3.one * _data.Range * 2;
 			Tween.LocalScale(_gfx, Vector3.one * .3f, Vector3.one * .7f, _data.Duration, 0, Tween.EaseBounce);
 			Invoke(nameof(Release), _data.Duration);
