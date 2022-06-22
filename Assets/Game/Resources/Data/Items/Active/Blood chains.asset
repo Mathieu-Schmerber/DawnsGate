@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3c00e2102e52be468a9036eab55df31, type: 3}
+  m_Name: Blood chains
+  m_EditorClassIdentifier: 
+  Type: 2
+  IsLifeItem: 0
+  Script: {fileID: 11500000, guid: bf2bf4e2b53140144afefac7a3540fef, type: 3}
+  Graphics: {fileID: 21300000, guid: ad30ee9163de34d4ebef75a3ba952edf, type: 3}
+  Stages:
+  - Damage: 5
+    Duration: 0
+    Amount: 0
+    Range: 4
+  - Damage: 10
+    Duration: 0
+    Amount: 0
+    Range: 4
+  - Damage: 15
+    Duration: 0
+    Amount: 0
+    Range: 4
+  SpawnPrefab: {fileID: 8504691158544362070, guid: f7eabf4c7925c1445b745328a3a095fb,
+    type: 3}
+  ApplyEffect: {fileID: 0}
+  Description: '{Damage:%} of the damage caused by light attacks are propagated to
+    nearby enemies'

@@ -76,6 +76,7 @@ namespace Game.Systems.Combat.Attacks
 				damageProcessor.ApplyDamage(Caster, totalDamage);
 				damageProcessor.ApplyKnockback(Caster, direction * knockbackForce);
 				ObjectPooler.Get(_attackData.HitFx, collider.transform.position.WithY(transform.position.y), Quaternion.Euler(0, transform.rotation.eulerAngles.y + _attackData.HitYRotation, 0), null);
+				OnAttackHitEvent?.Invoke(_data, collider);
 			}
 		}
 

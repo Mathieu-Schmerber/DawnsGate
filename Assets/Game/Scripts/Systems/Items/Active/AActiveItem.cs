@@ -12,7 +12,7 @@ namespace Game.Systems.Items.Active
 
 		public override ItemBaseData Details => _data;
 		public override string GetDescription() 
-			=> _data.Description.Replace("{Damage:u}", $"<color=red>{_entity.Scale(_data.Stages[Quality].Damage, Entities.Shared.StatModifier.AttackDamage)}</color>")
+			=> _data.Description.Replace("{Damage:u}", $"<color=red>{_data.Stages[Quality].Damage}</color><color=orange>(+{_entity.Scale(_data.Stages[Quality].Damage, Entities.Shared.StatModifier.AttackDamage) - _data.Stages[Quality].Damage})</color>")
 								.Replace("{Damage:%}", $"<color=red>{_data.Stages[Quality].Damage}%</color>")
 								.Replace("{Duration}", $"<color=yellow>{_data.Stages[Quality].Duration}</color>")
 								.Replace("{Amount}", $"<color=yellow>{_data.Stages[Quality].Amount}</color>");

@@ -12,7 +12,6 @@ namespace Game.Entities.Miscellaneous
 	public class Bomb : APoolableObject
 	{
 		[SerializeField] private GameObject _explosionFx;
-		[SerializeField] private float _explosionRadius;
 		[SerializeField] private float _knockbackForce;
 		[SerializeField] private Transform _gfx;
 
@@ -29,7 +28,7 @@ namespace Game.Entities.Miscellaneous
 		public override void Init(object data)
 		{
 			_data = (ActiveItemData.ActiveStage)data;
-			_circle.transform.localScale = Vector3.one * _explosionRadius * 2;
+			_circle.transform.localScale = Vector3.one * _data.Range * 2;
 			Tween.LocalScale(_gfx, Vector3.one * .3f, Vector3.one * .7f, _data.Duration, 0, Tween.EaseBounce);
 			Invoke(nameof(Release), _data.Duration);
 		}
@@ -38,7 +37,7 @@ namespace Game.Entities.Miscellaneous
 		{
 			base.OnReleasing();
 
-			var inRange = Physics.OverlapSphere(transform.position, _explosionRadius);
+			var inRange = Physics.OverlapSphere(transform.position, _data.Range);
 
 			foreach (var obj in inRange)
 			{

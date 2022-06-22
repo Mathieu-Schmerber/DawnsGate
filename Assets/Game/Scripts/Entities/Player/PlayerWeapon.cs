@@ -5,6 +5,7 @@ using Game.Systems.Combat.Weapons;
 using Nawlian.Lib.Systems.Animations;
 using Nawlian.Lib.Systems.Pooling;
 using Nawlian.Lib.Utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -13,6 +14,13 @@ namespace Game.Entities.Player
 {
 	public class PlayerWeapon : MonoBehaviour, IAnimationEventListener
 	{
+		public class AttackHitEventArgs : EventArgs
+		{
+			public AttackBaseData Data { get; set; }
+			public Collider Victim { get; set; }
+			public bool IsHeavyAttack { get; set; }
+		}
+
 		private EntityIdentity _identity;
 		private Animator _animator;
 		private InputManager _inputs;
@@ -22,6 +30,8 @@ namespace Game.Entities.Player
 		private Weapon _weapon;
 
 		public WeaponData CurrentWeapon => _weapon.Data;
+
+		public event Action<AttackHitEventArgs> OnAttackHit;
 
 		#region Unity builtins
 
@@ -118,6 +128,8 @@ namespace Game.Entities.Player
 			_attackTimer.Interval = attack.AttackAnimation.length / attackSpeed + _minTimeBetweenAttacks;
 			_animator.Play(attack.AttackAnimation.name);
 		}
+
+		public void OnHit(AttackBaseData data, Collider collider, bool isHeavy) => OnAttackHit?.Invoke(new() {Data = data, Victim = collider, IsHeavyAttack = isHeavy});
 
 		public void OnAnimationEvent(string animationArg) => _weapon.OnAnimationEvent(animationArg);
 
