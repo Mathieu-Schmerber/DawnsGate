@@ -19,7 +19,6 @@ namespace Game.Entities.AI
 		private bool _isDefending;
 		private new TankStatData _aiSettings;
 		private AnimatorStateInfo _currentState;
-		private float _lastAttackTime;
 		private float _restTime = 1f;
 
 		protected override void OnEnable()

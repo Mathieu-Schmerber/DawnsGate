@@ -10,6 +10,8 @@ namespace Game.Systems.Run.GPE
 {
 	public class ItemStand : ATriggerInteractable
 	{
+		public override string InteractionTitle => $"Buy";
+
 		public event Action OnItemPaid;
 
 		public override void Interact(IInteractionActor actor)

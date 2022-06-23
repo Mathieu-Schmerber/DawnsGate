@@ -12,6 +12,7 @@ namespace Game.Systems.Run.Lobby
 	public class Portal : MonoBehaviour, IInteractable
 	{
 		#region Interaction
+		public string InteractionTitle => $"Enter portal";
 
 		public void Interact(IInteractionActor actor)
 		{

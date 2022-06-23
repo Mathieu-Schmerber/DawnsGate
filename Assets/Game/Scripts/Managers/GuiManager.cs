@@ -16,7 +16,7 @@ namespace Game.Managers
 		public static event Action<IMenu> OnMenuOpened;
 		public static event Action<IMenu> OnMenuClosed;
 
-		[ShowInInspector, ReadOnly] public static bool IsMenuing => Instance?._menus.Any(x => x.IsOpen) ?? false;
+		[ShowInInspector, ReadOnly] public static bool IsMenuing => Instance?._menus?.Any(x => x.IsOpen && x.RequiresGameFocus) ?? false;
 
 		private void Awake()
 		{

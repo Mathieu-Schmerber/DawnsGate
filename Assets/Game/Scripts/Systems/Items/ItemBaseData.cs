@@ -23,6 +23,10 @@ namespace Game.Systems.Items
 		[OnInspectorGUI(nameof(DrawPreview), append: true)]
 		public Sprite Graphics;
 
+		public ItemTag Tags;
+
+		public abstract string GetRichDescription(int quality);
+
 #if UNITY_EDITOR
 
 		private void DrawPreview()

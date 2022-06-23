@@ -10,6 +10,7 @@ namespace Plugins.Nawlian.Lib.Systems.Menuing
 	public interface IMenu
 	{
 		bool IsOpen { get; }
+		bool RequiresGameFocus { get; }
 
 		public void Open();
 		public void Close();

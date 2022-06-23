@@ -23,8 +23,14 @@ namespace Game.Systems.Items
 
 		public GameObject SpawnPrefab;
 		public AEffectBaseData ApplyEffect;
-
 		[TextArea] public string Description;
+
+		public override string GetRichDescription(int quality) =>
+			Description.Replace("{Damage:u}", $"<color=red>{Stages[quality].Damage}</color>")
+						.Replace("{Damage:%}", $"<color=red>{Stages[quality].Damage}%</color>")
+						.Replace("{Duration}", $"<color=yellow>{Stages[quality].Duration}</color>")
+						.Replace("{Amount}", $"<color=yellow>{Stages[quality].Amount}</color>")
+						.Replace("{Effect}", $"<color=green><b>{(ApplyEffect == null ? "No Effect" : ApplyEffect.DisplayName)}</b></color>");
 
 #if UNITY_EDITOR
 
@@ -46,13 +52,7 @@ namespace Game.Systems.Items
 				return;
 
 			GUIStyle rich = new GUIStyle(GUI.skin.label);
-			string richDescription = Description
-				.Replace("{Damage:u}", $"<color='red'>{Stages[0].Damage}</color>")
-				.Replace("{Damage:%}", $"<color='red'>{Stages[0].Damage}%</color>")
-				.Replace("{Duration}", $"<color='yellow'>{Stages[0].Duration}</color>")
-				.Replace("{Amount}", $"<color='yellow'>{Stages[0].Amount}</color>")
-				.Replace("{Range}", $"<color='yellow'>{Stages[0].Range}</color>")
-				.Replace("{Effect}", $"<color='green'><b>{(ApplyEffect == null ? "No Effect" : ApplyEffect.DisplayName)}</b></color>");
+			string richDescription = GetRichDescription(0);
 
 			rich.richText = true;
 			GUILayout.Label(richDescription, rich);

@@ -28,7 +28,7 @@ namespace Game.Entities.Player.Inventory
 			_itemDescription.text = obj.Item == null ? "" : obj.Item.GetDescription();
 
 			_effectPanel.SetActive(false);
-			if (obj != null && obj.Item.Details.Type != ItemType.STAT)
+			if (obj != null && obj.Item != null && obj.Item.Details != null && obj.Item.Details.Type != ItemType.STAT)
 			{
 				SpecialItemData data = obj.Item.Details as SpecialItemData;
 

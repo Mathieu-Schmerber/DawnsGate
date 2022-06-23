@@ -16,6 +16,8 @@ namespace Game.Systems.Run.Lobby
 		public WeaponData Data { get => _weapon; private set => _weapon = value; }
 		public bool Empty => Data == null;
 
+		public string InteractionTitle => $"Pickup {(Data == null ? "" : Data.name)}";
+
 		private void Start()
 		{
 			// Update GFX

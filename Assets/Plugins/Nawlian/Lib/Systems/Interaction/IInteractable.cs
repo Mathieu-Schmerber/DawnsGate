@@ -11,6 +11,8 @@ namespace Nawlian.Lib.Systems.Interaction
 	/// </summary>
 	public interface IInteractable
 	{
+		public string InteractionTitle { get; }
+
 		/// <summary>
 		/// Interacts with the object.
 		/// </summary>

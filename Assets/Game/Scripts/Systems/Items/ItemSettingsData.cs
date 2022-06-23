@@ -34,6 +34,7 @@ namespace Game.Systems.Items
 		[ValidateInput(nameof(ValidatePassiveEditor), "Script needs to inherit AEquippedItem.")]
 		public MonoScript DefaultPassiveScript;
 
+
 		[Title("Graphics")]
 		public GfxStats StatGraphics;
 

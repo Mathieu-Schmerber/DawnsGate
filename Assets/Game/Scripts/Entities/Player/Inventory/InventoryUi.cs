@@ -12,22 +12,20 @@ namespace Game.Entities.Player.Inventory
 	public class InventoryUi : AMenu
 	{
 		[SerializeField] private RectTransform _menuPanel;
-		[SerializeField] private Vector2 _openedPos;
-		[SerializeField] private Vector2 _closedPos;
-		[SerializeField] private float _animationTime;
 
 		private SlotUi[] _slots;
 
 		public SlotUi SelectedSlot => _slots.FirstOrDefault(x => x.Selected);
 
-		private void Awake()
+		protected override void Awake()
 		{
+			base.Awake();
 			_slots = GetComponentsInChildren<SlotUi>();
 		}
 
 		private void Start()
 		{
-			if (_menuPanel.anchoredPosition == _openedPos)
+			if (_menuPanel.anchoredPosition == _openPosition)
 				GuiManager.CloseMenu<InventoryUi>();
 		}
 
@@ -60,18 +58,16 @@ namespace Game.Entities.Player.Inventory
 
 		public override void Open()
 		{
-			base.Open();
-
-			Tween.AnchoredPosition(_menuPanel, _closedPos, _openedPos, _animationTime, 0, Tween.EaseOut);
+			_isOpen = true;
+			Tween.AnchoredPosition(_menuPanel, _closePosition, _openPosition, _duration, 0, Tween.EaseOut);
 			EventSystem.current.SetSelectedGameObject(_slots[0].gameObject);
 			_slots.ForEach(x => x.interactable = IsOpen);
 		}
 
 		public override void Close()
 		{
-			base.Close();
-
-			Tween.AnchoredPosition(_menuPanel, _openedPos, _closedPos, _animationTime, 0, Tween.EaseOut);
+			_isOpen = false;
+			Tween.AnchoredPosition(_menuPanel, _openPosition, _closePosition, _duration, 0, Tween.EaseOut);
 			_slots.ForEach(x => x.Deselect());
 			EventSystem.current.SetSelectedGameObject(null);
 			_slots.ForEach(x => x.interactable = IsOpen);
@@ -79,18 +75,16 @@ namespace Game.Entities.Player.Inventory
 
 		#region Editor
 
-		public override void OpenEditor()
+		public override void OpenEditorButton()
 		{
-			base.OpenEditor();
-			_menuPanel.anchoredPosition = _openedPos;
+			_menuPanel.anchoredPosition = _openPosition;
 			FindObjectOfType<EventSystem>().SetSelectedGameObject(GetComponentsInChildren<SlotUi>()[0].gameObject);
 			GetComponentsInChildren<SlotUi>().ForEach(x => x.interactable = IsOpen);
 		}
 
-		public override void CloseEditor()
+		public override void CloseEditorButton()
 		{
-			base.CloseEditor();
-			_menuPanel.anchoredPosition = _closedPos;
+			_menuPanel.anchoredPosition = _closePosition;
 			FindObjectOfType<EventSystem>().SetSelectedGameObject(null);
 			GetComponentsInChildren<SlotUi>().ForEach(x => x.interactable = IsOpen);
 		}

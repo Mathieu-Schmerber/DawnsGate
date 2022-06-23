@@ -66,7 +66,7 @@ namespace Game.Systems.Combat.Effects
 
 		public void RemoveEffect(AEffectBaseData data)
 		{
-			_activeEffects[data].Delete();
+			_activeEffects[data]?.Delete();
 			_activeEffects[data] = null;
 		}
 	}

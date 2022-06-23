@@ -24,9 +24,14 @@ namespace Game.Systems.Items
 
 		private SpriteRenderer _spr;
 
+		public override string InteractionTitle => $"Pickup {(Data == null ? "item" : Data.name)}";
+		public int Quality => _quality;
+		public ItemBaseData Data => _data;
+
 		#region IPoolableObject
 
 		public bool Released => !gameObject.activeSelf;
+
 
 		public GameObject Get()
 		{

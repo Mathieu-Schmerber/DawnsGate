@@ -16,6 +16,8 @@ namespace Game.Systems.Run.GPE
 
 		public Room LeadToRoom { get; set; }
 
+		public string InteractionTitle => $"Open";
+
 		public void Activate()
 		{
 			// Cannot activate a dead-end
