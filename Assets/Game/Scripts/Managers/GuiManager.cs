@@ -1,4 +1,5 @@
-﻿using Nawlian.Lib.Utils;
+﻿using Game.UI;
+using Nawlian.Lib.Utils;
 using Plugins.Nawlian.Lib.Systems.Menuing;
 using Sirenix.OdinInspector;
 using System;
@@ -10,17 +11,17 @@ namespace Game.Managers
 	public class GuiManager : ManagerSingleton<GuiManager>
 	{
 		[SerializeField] private Canvas _canvas;
-
+		
 		private IMenu[] _menus;
-
-		public static event Action<IMenu> OnMenuOpened;
-		public static event Action<IMenu> OnMenuClosed;
+		private InventoryUi _inventoryUi;
 
 		[ShowInInspector, ReadOnly] public static bool IsMenuing => Instance?._menus?.Any(x => x.IsOpen && x.RequiresGameFocus) ?? false;
+		public static InventoryUi InventoryUI => Instance._inventoryUi;
 
 		private void Awake()
 		{
 			_menus = _canvas.GetComponentsInChildren<IMenu>();
+			_inventoryUi = _canvas.GetComponentInChildren<InventoryUi>();
 		}
 
 		public static void OpenMenu<T>() where T : IMenu
@@ -30,7 +31,6 @@ namespace Game.Managers
 			if (menu == null)
 				return;
 			menu.Open();
-			OnMenuOpened?.Invoke(menu);
 		}
 
 		public static void CloseMenu<T>() where T : IMenu
@@ -40,7 +40,6 @@ namespace Game.Managers
 			if (menu == null)
 				return;
 			menu.Close();
-			OnMenuClosed?.Invoke(menu);
 		}
 	}
 }

@@ -31,6 +31,7 @@ namespace Game.Systems.Items
 		public int NumberOfUpgrades;
 		public int InventorySlots;
 		public ItemCost ItemCosts;
+		public int PriceInflationPerUpgrade;
 
 		[Title("Scripts")]
 		[ValidateInput(nameof(ValidateStatEditor), "Script needs to inherit AEquippedItem.")]
@@ -38,6 +39,7 @@ namespace Game.Systems.Items
 
 		[Title("Graphics")]
 		public GfxStats StatGraphics;
+
 
 #if UNITY_EDITOR
 		private bool ValidateStatEditor() => DefaultStatScript != null && !DefaultStatScript.GetClass().IsAbstract && DefaultStatScript.GetClass().IsSubclassOf(typeof(AEquippedItem));

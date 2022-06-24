@@ -1,4 +1,4 @@
-﻿using Game.Entities.Player.Inventory;
+﻿using Game.Entities.Player;
 using Game.Managers;
 using Game.Systems.Items;
 using Game.Systems.Run.GPE;

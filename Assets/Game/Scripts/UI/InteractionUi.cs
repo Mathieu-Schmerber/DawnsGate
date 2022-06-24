@@ -1,4 +1,5 @@
-﻿using Nawlian.Lib.Systems.Interaction;
+﻿using Game.Entities.Player;
+using Nawlian.Lib.Systems.Interaction;
 using Pixelplacement;
 using Plugins.Nawlian.Lib.Systems.Menuing;
 using Sirenix.OdinInspector;
@@ -6,7 +7,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Game.Entities.Player.Interaction
+namespace Game.UI
 {
 	public class InteractionUi : AMenu
 	{

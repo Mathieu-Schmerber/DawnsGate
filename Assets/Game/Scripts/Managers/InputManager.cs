@@ -19,12 +19,21 @@ namespace Game.Managers
 		public static event Action OnDashPressed;
 		public static event Action OnInteractPressed;
 		public static event Action OnInventoryPressed;
+		public static event Action OnCancelPressed;
 
 		#region Unity builtins
 
-		private void OnEnable() => _controls.Player.Enable();
+		private void OnEnable()
+		{
+			_controls.Player.Enable();
+			_controls.UI.Enable();
+		}
 
-		private void OnDisable() => _controls.Player.Disable();
+		private void OnDisable()
+		{
+			_controls.Player.Disable();
+			_controls.UI.Disable();
+		}
 
 		private void Awake()
 		{
@@ -34,7 +43,8 @@ namespace Game.Managers
 			_controls.Player.Attack.canceled += (ctx) => IsAttackDown = false;
 			_controls.Player.Dash.performed += (ctx) => OnDashPressed?.Invoke();
 			_controls.Player.Interact.performed += (ctx) => OnInteractPressed?.Invoke();
-			_controls.Player.Inventory.performed += (ctx) => OnInventoryPressed?.Invoke();
+			_controls.UI.Inventory.performed += (ctx) => OnInventoryPressed?.Invoke();
+			_controls.UI.Cancel.performed += (ctx) => OnCancelPressed?.Invoke();
 		}
 
 		#endregion

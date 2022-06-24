@@ -1,19 +1,13 @@
-﻿using Game.Entities.Player.Interaction;
+﻿using Game.Entities.Player;
 using Game.Managers;
-using Nawlian.Lib.Extensions;
+using Game.Systems.Items;
 using Nawlian.Lib.Systems.Interaction;
-using Pixelplacement;
 using Plugins.Nawlian.Lib.Systems.Menuing;
 using Sirenix.OdinInspector;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 
-namespace Game.Systems.Items
+namespace Game.UI
 {
 	public class ItemTooltipUi : AMenu
 	{

@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using Game.Systems.Items;
+using UnityEngine;
 
-namespace Game.Systems.Items
+namespace Game.UI
 {
 	public class ItemTagUi : MonoBehaviour
 	{

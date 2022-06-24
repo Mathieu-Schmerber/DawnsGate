@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Game.Entities.Player.Interaction
+namespace Game.Entities.Player
 {
 	public class PlayerInteraction : MonoBehaviour, IInteractionActor
 	{

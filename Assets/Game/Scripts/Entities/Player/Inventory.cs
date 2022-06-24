@@ -1,4 +1,5 @@
-﻿using Game.Systems.Items;
+﻿using Game.Managers;
+using Game.Systems.Items;
 using Nawlian.Lib.Utils;
 using Sirenix.OdinInspector;
 using System;
@@ -8,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace Game.Entities.Player.Inventory
+namespace Game.Entities.Player
 {
 	public class Inventory : MonoBehaviour
 	{
@@ -24,7 +25,7 @@ namespace Game.Entities.Player.Inventory
 		public AEquippedItem[] Items => _items.Where(x => x.Value != null).Select(x => x.Value).ToArray();
 		public bool HasAvailableSlot => _occupiedSlots < _slotNumber;
 
-		public static Action<Inventory> OnUpdated;
+		public static event Action<Inventory> OnUpdated;
 
 		private void Awake()
 		{
@@ -56,6 +57,8 @@ namespace Game.Entities.Player.Inventory
 				OnUpdated?.Invoke(this);
 			}
 		}
+
+		public static void OnUpdate() => OnUpdated?.Invoke(GameManager.Player.GetComponent<Inventory>());
 
 		public void DropItem(ItemBaseData item)
 		{

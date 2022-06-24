@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Game.Entities.Player;
-using Game.Entities.Player.Inventory;
 using Nawlian.Lib.Systems.Interaction;
 using Nawlian.Lib.Systems.Pooling;
 using UnityEngine;

@@ -30,15 +30,11 @@ namespace Game.Entities.Player
 		private void OnEnable()
 		{
 			InputManager.OnDashPressed += OnDashInput;
-			GuiManager.OnMenuOpened += OnMenuOpenClose;
-			GuiManager.OnMenuClosed += OnMenuOpenClose;
 		}
 
 		private void OnDisable()
 		{
 			InputManager.OnDashPressed -= OnDashInput;
-			GuiManager.OnMenuOpened -= OnMenuOpenClose;
-			GuiManager.OnMenuClosed -= OnMenuOpenClose;
 		}
 
 		protected override void Awake()
@@ -52,13 +48,14 @@ namespace Game.Entities.Player
 			_dashTimer.Start(_entity.CurrentDashCooldown, false);
 		}
 
-		#endregion
-
-		private void OnMenuOpenClose(IMenu menu)
+		protected override void Update()
 		{
+			base.Update();
 			LockMovement = GuiManager.IsMenuing;
 			LockAim = GuiManager.IsMenuing;
 		}
+
+		#endregion
 
 		private void OnDashInput()
 		{

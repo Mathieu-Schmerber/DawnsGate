@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 3263666731155096304}
   - component: {fileID: 3263666731155096305}
   - component: {fileID: 1894705972466739675}
-  - component: {fileID: -5429392848528950301}
+  - component: {fileID: 2576248169638166604}
   m_Layer: 5
   m_Name: InventorySlot
   m_TagString: Untagged
@@ -168,10 +168,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EffectColor: {r: 1, g: 1, b: 1, a: 0.078431375}
+  m_EffectColor: {r: 1, g: 1, b: 1, a: 0.02745098}
   m_EffectDistance: {x: 3, y: -3}
   m_UseGraphicAlpha: 1
---- !u!114 &-5429392848528950301
+--- !u!114 &2576248169638166604
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -180,7 +180,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3263666731155096307}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93cef2d1c4124b04485632c35dff8000, type: 3}
+  m_Script: {fileID: 11500000, guid: 508e7a98a585a634dbf11b31cb75c2a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -214,8 +214,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3263666731155096305}
   _itemImage: {fileID: 763467314900354559}
   _starList: {fileID: 1574498535971664031}
-  _selectionColor: {r: 1, g: 0.69521624, b: 0, a: 0.48235294}
-  _unselectionColor: {r: 1, g: 1, b: 1, a: 0.078431375}
+  _selectionColor: {r: 1, g: 0.6745098, b: 0, a: 0.09803922}
+  _unselectionColor: {r: 1, g: 1, b: 1, a: 0.02745098}
 --- !u!1 &4689382168753297151
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,4 +1,5 @@
-﻿using Game.Managers;
+﻿using Game.Entities.Player;
+using Game.Managers;
 using Game.Systems.Items;
 using Nawlian.Lib.Extensions;
 using Plugins.Nawlian.Lib.Systems.Selection;
@@ -11,9 +12,9 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace Game.Entities.Player.Inventory
+namespace Game.UI
 {
-	public class SlotUi : Selectable, ISubmitHandler
+	public class InventorySlotUi : Selectable, ISubmitHandler
 	{
 		[SerializeField] private Image _itemImage;
 		[SerializeField] private Transform _starList;
@@ -25,9 +26,11 @@ namespace Game.Entities.Player.Inventory
 		private AEquippedItem _item;
 		private Inventory _inventory;
 
-		public static event Action<SlotUi> OnSelected;
+		public static event Action<InventorySlotUi> OnSubmitted;
+		public static event Action<InventorySlotUi> OnSelected;
 		public AEquippedItem Item => _item;
 		public bool Selected { get; private set; }
+		public bool IsEmpty => Item == null;
 
 		protected override void Awake()
 		{
@@ -80,8 +83,7 @@ namespace Game.Entities.Player.Inventory
 		{
 			if (_item == null || !interactable)
 				return;
-			_inventory.DropItem(_item.Details);
-			OnSelected?.Invoke(this);
+			OnSubmitted?.Invoke(this);
 		}
 	}
 }

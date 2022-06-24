@@ -2,16 +2,11 @@
 using Game.Managers;
 using Pixelplacement;
 using Sirenix.OdinInspector;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Game.Entities.Player
+namespace Game.UI
 {
 	public class PlayerUi : MonoBehaviour
 	{
@@ -33,6 +28,9 @@ namespace Game.Entities.Player
 		{
 			_runMoney.text = GameManager.RunMoney.ToString();
 			_lobbyMoney.text = GameManager.LobbyMoney.ToString();
+			_healthText.text = $"{_playerIdentity.CurrentHealth}/{_playerIdentity.MaxHealth}";
+			_healthFill.fillAmount = _playerIdentity.CurrentHealth / _playerIdentity.MaxHealth;
+			_armorFill.fillAmount = _playerIdentity.CurrentArmor / _playerIdentity.MaxArmor;
 		}
 
 		private void OnEnable()

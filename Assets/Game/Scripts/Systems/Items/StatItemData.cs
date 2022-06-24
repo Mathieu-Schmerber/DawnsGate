@@ -20,7 +20,7 @@ namespace Game.Systems.Items
 				string name = Databases.Database.Data.Item.Settings.StatGraphics[key].Name;
 				string newline = string.IsNullOrEmpty(result) ? "" : Environment.NewLine;
 
-				result = $"{result}{newline}<color='{color}'>{(positive ? "+" : "-")}{Mathf.Abs(Stages[quality][key].Value)}%</color> {name}";
+				result = $"{result}{newline}<color={color}>{(positive ? "+" : "-")}{Mathf.Abs(Stages[quality][key].Value)}%</color> {name}";
 			}
 			return result;
 		}
