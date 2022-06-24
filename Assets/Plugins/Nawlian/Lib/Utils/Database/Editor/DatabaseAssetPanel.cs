@@ -55,6 +55,7 @@ namespace Nawlian.Lib.Utils.Database.Editor
         private ReorderableList _reorderableList;
         private DatabaseData.Section _currentSection;
         private DatabaseData.DatabaseAsset _selectedAsset = null;
+        private string _loadFolderPath;
         private Vector2 _scrollPosition = Vector2.zero;
 
         private readonly int LIST_ELEMENT_HEIGHT = 23;
@@ -91,9 +92,7 @@ namespace Nawlian.Lib.Utils.Database.Editor
             using (new EditorGUI.DisabledScope(_currentSection == null))
             {
                 if (GUI.Button(buttonRect, PlusIcon, GUIStyle.none))
-                {
                     _currentSection.Assets.Add(new DatabaseData.DatabaseAsset());
-                }
                 buttonRect.x -= buttonRect.width + EditorGUIUtility.standardVerticalSpacing;
             }
         }
@@ -126,6 +125,17 @@ namespace Nawlian.Lib.Utils.Database.Editor
 
         private void DrawSectionBody(DatabaseData.Section section, Rect rect)
         {
+            int btnWidth = 150;
+            int btnPadding = 10;
+            Vector2 folderFieldSize = new Vector2(rect.width - btnWidth - btnPadding, EditorGUIUtility.singleLineHeight);
+            Rect loadBtnRect = new Rect(rect.x + folderFieldSize.x + btnPadding, rect.y, btnWidth, EditorGUIUtility.singleLineHeight);
+
+            _loadFolderPath = SirenixEditorFields.FolderPathField(new Rect(rect.position, folderFieldSize), _loadFolderPath, null, false, true);
+            if (GUI.Button(loadBtnRect, "Load folder content"))
+                LoadFolderContent(_loadFolderPath);
+
+            rect.y += loadBtnRect.height;
+            rect.height -= loadBtnRect.height;
             _scrollPosition = GUI.BeginScrollView(rect, _scrollPosition, new Rect(rect.position, new Vector2(rect.width - SCROLLBAR_W, LIST_ELEMENT_HEIGHT * _reorderableList.count + 10)), false, false);
             rect.width -= SCROLLBAR_W;
             _reorderableList.DoList(rect);
@@ -166,6 +176,21 @@ namespace Nawlian.Lib.Utils.Database.Editor
                         return;
                 }
                 uiEvent.Use();
+            }
+        }
+
+        private void LoadFolderContent(string path)
+		{
+            string[] guids = AssetDatabase.FindAssets("t:" + typeof(ScriptableObject).Name, new string[1] { path });
+
+            for (int i = 0; i < guids.Length; i++)
+            {
+                string sub = AssetDatabase.GUIDToAssetPath(guids[i]);
+                var asset = AssetDatabase.LoadAssetAtPath<ScriptableObject>(sub);
+
+                if (_currentSection.Assets.Any(x => x.Prefab == asset))
+                    continue;
+                _currentSection.Assets.Add(new DatabaseData.DatabaseAsset() { Name = asset.name, Prefab = asset});
             }
         }
 

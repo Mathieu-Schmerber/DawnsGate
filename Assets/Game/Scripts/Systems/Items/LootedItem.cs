@@ -19,14 +19,16 @@ namespace Game.Systems.Items
 			public int Quality { get; set; }
 		}
 
-		[SerializeField] private ItemBaseData _data;
-		[SerializeField] private int _quality;
+		[SerializeField] protected ItemBaseData _data;
+		[SerializeField] protected int _quality;
 
-		private SpriteRenderer _spr;
+		protected SpriteRenderer _spr;
 
 		public override string InteractionTitle => $"Pickup {(Data == null ? "item" : Data.name)}";
 		public int Quality => _quality;
 		public ItemBaseData Data => _data;
+
+		public event Action OnEquipped;
 
 		#region IPoolableObject
 
@@ -49,7 +51,7 @@ namespace Game.Systems.Items
 
 		#endregion
 
-		private void Awake()
+		protected virtual void Awake()
 		{
 			_spr = GetComponentInChildren<SpriteRenderer>();
 		}
@@ -64,20 +66,34 @@ namespace Game.Systems.Items
 		{
 			InitData init = (InitData)data;
 
-			_data = init.Data;
-			_quality = init.Quality;
+			SetItem(init.Data, init.Quality);
+		}
+
+		protected virtual bool TryEquipItem(IInteractionActor actor)
+		{
+			Inventory inventory = (actor as MonoBehaviour).GetComponent<Inventory>();
+
+			if (!inventory.HasAvailableSlot)
+				return false;
+			inventory.EquipItem(_data, _quality);
+			OnEquipped?.Invoke();
+			return true;
+		}
+
+		public virtual void SetItem(ItemBaseData item, int quality)
+		{
+			_data = item;
+			_quality = quality;
 			_spr.sprite = _data.Graphics;
 		}
 
 		public override void Interact(IInteractionActor actor)
 		{
-			Inventory inventory = (actor as MonoBehaviour).GetComponent<Inventory>();
-
-			if (!inventory.HasAvailableSlot)
-				return;
-			inventory.EquipItem(_data, _quality);
-			actor.UnSuggestInteraction(this);
-			Release();
+			if (TryEquipItem(actor))
+			{
+				actor.UnSuggestInteraction(this);
+				Release();
+			}
 		}
 
 		public static void Create(Vector3 position, ItemBaseData data, int quality)

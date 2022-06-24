@@ -14,9 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NumberOfUpgrades: 3
   InventorySlots: 7
+  ItemCosts:
+    keyData: 000000000100000002000000
+    valueData:
+    - {x: 100, y: 120}
+    - {x: 200, y: 220}
+    - {x: 180, y: 200}
   DefaultStatScript: {fileID: 11500000, guid: 08926e121668c91429746aa3d5ff809b, type: 3}
-  DefaultActiveScript: {fileID: 0}
-  DefaultPassiveScript: {fileID: 0}
   StatGraphics:
     keyData: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d000000
     valueData:

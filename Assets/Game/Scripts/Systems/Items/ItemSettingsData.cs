@@ -20,29 +20,27 @@ namespace Game.Systems.Items
 		[System.Serializable]
 		public class GfxStats : SerializedDictionary<StatModifier, StatGraphic> { }
 
+		[System.Serializable]
+		public class ItemCost : SerializedDictionary<ItemType, Vector2Int> {
+			public int RandomCost(ItemType type) => Random.Range(this[type].x, this[type].y + 1);
+		}
+
 		#endregion
 
 		[Title("General")]
 		public int NumberOfUpgrades;
 		public int InventorySlots;
+		public ItemCost ItemCosts;
 
 		[Title("Scripts")]
 		[ValidateInput(nameof(ValidateStatEditor), "Script needs to inherit AEquippedItem.")]
 		public MonoScript DefaultStatScript;
-		[ValidateInput(nameof(ValidateActiveEditor), "Script needs to inherit AEquippedItem.")]
-		public MonoScript DefaultActiveScript;
-		[ValidateInput(nameof(ValidatePassiveEditor), "Script needs to inherit AEquippedItem.")]
-		public MonoScript DefaultPassiveScript;
-
 
 		[Title("Graphics")]
 		public GfxStats StatGraphics;
 
 #if UNITY_EDITOR
 		private bool ValidateStatEditor() => DefaultStatScript != null && !DefaultStatScript.GetClass().IsAbstract && DefaultStatScript.GetClass().IsSubclassOf(typeof(AEquippedItem));
-		private bool ValidateActiveEditor() => DefaultActiveScript != null && !DefaultActiveScript.GetClass().IsAbstract && DefaultActiveScript.GetClass().IsSubclassOf(typeof(AEquippedItem));
-		private bool ValidatePassiveEditor() => DefaultPassiveScript != null && !DefaultPassiveScript.GetClass().IsAbstract && DefaultPassiveScript.GetClass().IsSubclassOf(typeof(AEquippedItem));
-
 #endif
 	}
 }
