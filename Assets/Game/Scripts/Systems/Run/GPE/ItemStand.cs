@@ -16,7 +16,7 @@ namespace Game.Systems.Run.GPE
 
 		public bool WasBought { get; set; }
 		public int Cost { get; set; }
-		public bool IsBuyable => GameManager.CanMoneyAfford(Cost);
+		public bool IsBuyable => GameManager.CanRunMoneyAfford(Cost);
 
 		public override string InteractionTitle => $"Buy";
 		public event Action OnItemPaid;
@@ -44,7 +44,7 @@ namespace Game.Systems.Run.GPE
 
 		private void PayItem()
 		{
-			GameManager.PayWithMoney(Cost);
+			GameManager.PayWithRunMoney(Cost);
 			OnItemPaid?.Invoke();
 			WasBought = true;
 		}

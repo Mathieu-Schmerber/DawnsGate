@@ -20,7 +20,7 @@ namespace Game.VFX
 
 		private void OnEnable()
 		{
-			GameManager.OnMoneyUpdated += UpdateItemPriceDisplay;
+			GameManager.OnRunMoneyUpdated += UpdateItemPriceDisplay;
 			ARoom.OnRoomActivated += ShowItem;
 			_stand.OnItemPaid += RemovePrice;
 			_stand.OnEquipped += HideItem;
@@ -28,7 +28,7 @@ namespace Game.VFX
 
 		private void OnDisable()
 		{
-			GameManager.OnMoneyUpdated -= UpdateItemPriceDisplay;
+			GameManager.OnRunMoneyUpdated -= UpdateItemPriceDisplay;
 			ARoom.OnRoomActivated -= ShowItem;
 			_stand.OnItemPaid -= RemovePrice;
 			_stand.OnEquipped -= HideItem;

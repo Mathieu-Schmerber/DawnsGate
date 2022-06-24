@@ -84,7 +84,7 @@ namespace Game.Systems.Items
 		{
 			_data = item;
 			_quality = quality;
-			_spr.sprite = _data.Graphics;
+			_spr.sprite = _data?.Graphics;
 		}
 
 		public override void Interact(IInteractionActor actor)

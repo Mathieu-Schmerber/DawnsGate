@@ -1,4 +1,6 @@
-﻿using Game.Systems.Items;
+﻿using Game.Entities.Player.Inventory;
+using Game.Managers;
+using Game.Systems.Items;
 using Game.Systems.Run.GPE;
 using Nawlian.Lib.Extensions;
 using System;
@@ -18,7 +20,10 @@ namespace Game.Systems.Run.Rooms
 		protected override void Awake()
 		{
 			base.Awake();
-			_items = Databases.Database.Data.Item.Items.All<ItemBaseData>().Where(x => x.IsLifeItem == _isLifeShop).ToArray();
+
+			Inventory inventory = GameManager.Player.GetComponent<Inventory>();
+
+			_items = Databases.Database.Data.Item.Items.All<ItemBaseData>().Where(x => x.IsLifeItem == _isLifeShop && !inventory.HasEquipped(x)).ToArray();
 		}
 
 		protected override void Start()
@@ -29,7 +34,7 @@ namespace Game.Systems.Run.Rooms
 
 		private void DefineItem(ItemStand x)
 		{
-			var item = _items.Random();
+			var item = _items?.Random();
 
 			x.SetItem(item, 0);
 			x.Cost = Databases.Database.Data.Item.Settings.ItemCosts.RandomCost(item.Type);

@@ -40,6 +40,8 @@ namespace Game.Entities.Player.Inventory
 			return behaviour;
 		}
 
+		public bool HasEquipped(ItemBaseData item) => _items.ContainsKey(item) && _items[item] != null;
+
 		public void EquipItem(ItemBaseData item, int quality)
 		{
 			if (!HasAvailableSlot)

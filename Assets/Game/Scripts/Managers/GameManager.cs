@@ -14,18 +14,31 @@ namespace Game.Managers
 	{
 		[SerializeField] private PlayerController _player;
 		[SerializeField] private CameraController _camera;
-		[SerializeField] private int _money;
+		[SerializeField] private int _runMoney;
+		[SerializeField] private int _lobbyMoney;
 
-		public static event Action<int, int> OnMoneyUpdated;
+		public static event Action<int, int> OnRunMoneyUpdated;
+		public static event Action<int, int> OnLobbyMoneyUpdated;
 
-		public static int Money => Instance._money;
-		public static bool CanMoneyAfford(int cost) => Money >= cost;
-		public static void PayWithMoney(int cost)
+		public static int RunMoney => Instance._runMoney;
+		public static int LobbyMoney => Instance._lobbyMoney;
+
+		public static bool CanRunMoneyAfford(int cost) => RunMoney >= cost;
+		public static void PayWithRunMoney(int cost)
 		{
-			int before = Instance._money;
+			int before = Instance._runMoney;
 
-			Instance._money -= cost;
-			OnMoneyUpdated?.Invoke(before, Instance._money);
+			Instance._runMoney -= cost;
+			OnRunMoneyUpdated?.Invoke(before, Instance._runMoney);
+		}
+
+		public static bool CanLobbyMoneyAfford(int cost) => LobbyMoney >= cost;
+		public static void PayWithLobbyMoney(int cost)
+		{
+			int before = Instance._lobbyMoney;
+
+			Instance._lobbyMoney -= cost;
+			OnLobbyMoneyUpdated?.Invoke(before, Instance._lobbyMoney);
 		}
 
 		public static PlayerController Player => Instance._player;
