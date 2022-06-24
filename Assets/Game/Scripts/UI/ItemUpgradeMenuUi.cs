@@ -1,5 +1,6 @@
 ﻿using Game.Managers;
 using Game.Tools;
+using Pixelplacement;
 using Plugins.Nawlian.Lib.Systems.Menuing;
 using Sirenix.OdinInspector;
 using System;
@@ -9,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Game.UI
 {
@@ -19,8 +21,39 @@ namespace Game.UI
 		[SerializeField] private SimpleDescriptorUi _nextItemStage;
 		[SerializeField] private TextMeshProUGUI _priceTxt;
 		[SerializeField] private Transform _interactionBox;
+		[Title("Feedback")]
+		[SerializeField] private Color _flashColor;
+		[SerializeField] private float _bumpIntensity;
+
+
+		private Color _currentDefaultColor;
+		private Color _nextDefaultColor;
+		private Image _currentRenderer;
+		private Image _nextRenderer;
+
+		protected override void Awake()
+		{
+			base.Awake();
+			_currentRenderer = _currentItemStage.GetComponent<Image>();
+			_nextRenderer = _nextItemStage.GetComponent<Image>();
+			_currentDefaultColor = _currentRenderer.color;
+			_nextDefaultColor = _nextRenderer.color;
+		}
 
 		#region Upgrade
+
+		private void Feedback()
+		{
+			// Flash
+			Tween.Value(_currentDefaultColor, _flashColor, (c) => _currentRenderer.color = c, _duration / 2, 0);
+			Tween.Value(_flashColor, _currentDefaultColor, (c) => _currentRenderer.color = c, _duration / 2, _duration / 2);
+			Tween.Value(_nextDefaultColor, _flashColor, (c) => _nextRenderer.color = c, _duration / 2, 0);
+			Tween.Value(_flashColor, _nextDefaultColor, (c) => _nextRenderer.color = c, _duration / 2, _duration / 2);
+
+			// Bump
+			Tween.LocalScale(_interactionBox, Vector3.one * _bumpIntensity, _duration / 2, 0, Tween.EaseBounce);
+			Tween.LocalScale(_interactionBox, Vector3.one, _duration / 2, _duration / 2, Tween.EaseBounce);
+		}
 
 		private void OnSlotSubmitted(InventorySlotUi slot)
 		{
@@ -30,6 +63,7 @@ namespace Game.UI
 				return;
 			slot.Item.OnUpgrade();
 			OnItemSelected(slot);
+			Feedback();
 		}
 
 		#endregion
