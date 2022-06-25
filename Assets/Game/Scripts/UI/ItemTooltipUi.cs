@@ -49,24 +49,13 @@ namespace Game.UI
 			}
 
 			Open();
-			_nameTxt.text = item.Data.name;
+			_nameTxt.text = item.Item.name;
 			foreach (var tag in _tags)
-				tag.gameObject.SetActive((item.Data.Tags & tag.Tag) == tag.Tag);
-		}
-
-		private void PlaceOnCanvas(Transform item)
-		{
-			Vector3 canvasPos = WorldToViewPosition(item.position + item.up, _cam, _rect);
-			_rect.anchoredPosition = canvasPos;
-		}
-
-		private Vector3 WorldToViewPosition(Vector3 worldPos, Camera camera, RectTransform viewport)
-		{
-			Vector2 screenOffset = new Vector2(viewport.sizeDelta.x / 2f, viewport.sizeDelta.y / 2f);
-			Vector2 ViewportPosition = camera.WorldToViewportPoint(worldPos);
-			Vector2 proportionalPosition = new Vector2(ViewportPosition.x * viewport.sizeDelta.x, ViewportPosition.y * viewport.sizeDelta.y);
-
-			return proportionalPosition - screenOffset;
+			{
+				tag.gameObject.SetActive((item.Item.Tags & tag.Tag) == tag.Tag);
+				if (!tag.gameObject.activeSelf && item.Summary.isMerged)
+					tag.gameObject.SetActive((item.Summary.Merge.Data.Tags & tag.Tag) == tag.Tag);
+			}
 		}
 	}
 }

@@ -21,9 +21,9 @@ namespace Game.Systems.Items.Active
 
 		#region AEquippedItem
 
-		public override void OnEquipped(ItemBaseData data, int quality)
+		public override void OnEquipped(ItemSummary item)
 		{
-			base.OnEquipped(data, quality);
+			base.OnEquipped(item);
 			_controller.OnDashStarted += OnDashStarted;
 		}
 

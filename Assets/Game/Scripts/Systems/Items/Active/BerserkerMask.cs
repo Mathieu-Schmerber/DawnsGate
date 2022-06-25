@@ -15,9 +15,9 @@ namespace Game.Systems.Items.Active
 			_effectProcessor = GetComponentInParent<EffectProcessor>();
 		}
 
-		public override void OnEquipped(ItemBaseData data, int quality)
+		public override void OnEquipped(ItemSummary item)
 		{
-			base.OnEquipped(data, quality);
+			base.OnEquipped(item);
 			_weaponHolder.OnAttackHit += OnAttackHit;
 		}
 

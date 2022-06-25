@@ -17,9 +17,9 @@ namespace Game.Systems.Items.Active
 			_weaponHolder = GetComponentInParent<PlayerWeapon>();
 		}
 
-		public override void OnEquipped(ItemBaseData data, int quality)
+		public override void OnEquipped(ItemSummary item)
 		{
-			base.OnEquipped(data, quality);
+			base.OnEquipped(item);
 			_weaponHolder.OnAttackHit += OnAttackHit;
 		}
 

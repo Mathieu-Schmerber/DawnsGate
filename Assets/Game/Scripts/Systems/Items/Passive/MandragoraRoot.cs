@@ -10,9 +10,9 @@ namespace Game.Systems.Items.Passive
 {
 	public class MandragoraRoot : ASpecialItem
 	{
-		public override void OnEquipped(ItemBaseData data, int quality)
+		public override void OnEquipped(ItemSummary item)
 		{
-			base.OnEquipped(data, quality);
+			base.OnEquipped(item);
 			ARoom.OnRoomCleared += OnRoomCleared;
 		}
 

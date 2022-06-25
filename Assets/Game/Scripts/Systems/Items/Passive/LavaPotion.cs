@@ -9,9 +9,9 @@ namespace Game.Systems.Items.Passive
 	{
 		private Timer _timer;
 
-		public override void OnEquipped(ItemBaseData data, int quality)
+		public override void OnEquipped(ItemSummary item)
 		{
-			base.OnEquipped(data, quality);
+			base.OnEquipped(item);
 			_timer = new();
 			_timer.Start(_data.Stages[Quality].Duration, true, OnTick);
 		}

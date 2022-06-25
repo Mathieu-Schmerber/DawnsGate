@@ -23,9 +23,9 @@ namespace Game.Systems.Items.Active
 
 		#region AEquippedItem
 
-		public override void OnEquipped(ItemBaseData data, int quality)
+		public override void OnEquipped(ItemSummary item)
 		{
-			base.OnEquipped(data, quality);
+			base.OnEquipped(item);
 			_controller.OnDashStarted += OnDashStarted;
 		}
 
@@ -39,7 +39,7 @@ namespace Game.Systems.Items.Active
 
 		private void OnDashStarted(DashParameters dash)
 		{
-			ObjectPooler.Get(_data.SpawnPrefab, _controller.transform.position, Quaternion.Euler(0, 0, 0), _data.Stages[_quality], 
+			ObjectPooler.Get(_data.SpawnPrefab, _controller.transform.position, Quaternion.Euler(0, 0, 0), _data.Stages[Quality], 
 				(bomb) => bomb.GetComponent<Bomb>().Caster = _entity);
 		}
 	}

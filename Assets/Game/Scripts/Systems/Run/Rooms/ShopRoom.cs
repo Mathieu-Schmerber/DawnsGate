@@ -3,7 +3,7 @@ using Game.Managers;
 using Game.Systems.Items;
 using Game.Systems.Run.GPE;
 using Nawlian.Lib.Extensions;
-using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -14,7 +14,7 @@ namespace Game.Systems.Run.Rooms
 		[SerializeField] private bool _isLifeShop;
 		[SerializeField] private ItemStand[] _stands;
 
-		private ItemBaseData[] _items;
+		private List<ItemBaseData> _items;
 
 
 		protected override void Awake()
@@ -23,7 +23,7 @@ namespace Game.Systems.Run.Rooms
 
 			Inventory inventory = GameManager.Player.GetComponent<Inventory>();
 
-			_items = Databases.Database.Data.Item.Items.All<ItemBaseData>().Where(x => x.IsLifeItem == _isLifeShop && !inventory.HasEquipped(x)).ToArray();
+			_items = Databases.Database.Data.Item.Items.All<ItemBaseData>().Where(x => x.IsLifeItem == _isLifeShop && !inventory.HasEquipped(x)).ToList();
 		}
 
 		protected override void Start()
@@ -36,7 +36,8 @@ namespace Game.Systems.Run.Rooms
 		{
 			var item = _items?.Random();
 
-			x.SetItem(item, 0);
+			_items.Remove(item);
+			x.SetItem(new ItemSummary() {Data = item, Quality = 0});
 			x.Cost = Databases.Database.Data.Item.Settings.ItemCosts.RandomCost(item.Type);
 		}
 	}

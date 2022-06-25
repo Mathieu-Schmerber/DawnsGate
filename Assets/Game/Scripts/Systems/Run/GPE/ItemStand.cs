@@ -51,7 +51,7 @@ namespace Game.Systems.Run.GPE
 
 		protected override void OnSuggesting(IInteractionActor actor)
 		{
-			if (_canBeSuggested && _data != null)
+			if (_canBeSuggested && Item != null)
 				base.OnSuggesting(actor);
 		}
 	}

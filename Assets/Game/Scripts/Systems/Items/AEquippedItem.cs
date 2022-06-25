@@ -13,15 +13,17 @@ namespace Game.Systems.Items
 	public abstract class AEquippedItem : MonoBehaviour
 	{
 		protected EntityIdentity _entity;
-		protected int _quality;
 		protected ItemSettingsData _settings;
 
-		public int Quality => _quality;
-		public abstract ItemBaseData Details { get; }
-		public bool HasUpgrade => Quality < Databases.Database.Data.Item.Settings.NumberOfUpgrades - 1 && !Details.IsLifeItem;
+		public int Quality { get => Summary.Quality; private set { Summary.Quality = value; } }
+		public ItemBaseData Details => Summary.Data;
+		public bool HasUpgrade => Quality < Databases.Database.Data.Item.Settings.NumberOfUpgrades - 1 && !Details.IsLifeItem && !Summary.isMerged;
 		public bool IsAffordable => GameManager.CanRunMoneyAfford(NextUpgradePrice);
-		public int NextUpgradePrice => _minimumPrice + ((_minimumPrice / 100) * (_quality + 1)) * _settings.PriceInflationPerUpgrade;
+		public int NextUpgradePrice => _minimumPrice + (_minimumPrice / 100) * (Quality + 1) * _settings.PriceInflationPerUpgrade;
 		private int _minimumPrice => _settings.ItemCosts[Details.Type].x;
+
+		public ItemSummary Summary { get; private set; }
+		public AEquippedItem MergedBehaviour { get; set; }
 
 		protected virtual void Awake()
 		{
@@ -29,9 +31,9 @@ namespace Game.Systems.Items
 			_settings = Databases.Database.Data.Item.Settings;
 		}
 
-		public virtual void OnEquipped(ItemBaseData data, int quality)
+		public virtual void OnEquipped(ItemSummary summary)
 		{
-			_quality = quality;
+			Summary = summary;
 		}
 
 		public virtual void OnUnequipped()
@@ -44,11 +46,26 @@ namespace Game.Systems.Items
 			if (HasUpgrade && IsAffordable)
 			{
 				GameManager.PayWithRunMoney(NextUpgradePrice);
-				_quality++;
+				Quality++;
 				Inventory.OnUpdate();
 			}
 		}
 
-		public abstract string GetDescription();
+		protected abstract string GetItemDescription(int quality);
+
+		public string GetDescription(int quality = -1)
+		{
+			int stage = quality == -1 ? Quality : quality;
+
+			if (Summary.isMerged)
+			{
+				int mergedStage = quality == -1 ? MergedBehaviour.Quality : quality;
+				string stat = Details.Type == ItemType.STAT ? GetItemDescription(stage) : MergedBehaviour.GetItemDescription(mergedStage);
+				string other = Details.Type == ItemType.STAT ? MergedBehaviour.GetItemDescription(mergedStage) : GetItemDescription(stage);
+
+				return $"{stat}{Environment.NewLine}{other}";
+			}
+			return GetItemDescription(stage);
+		}
 	}
 }

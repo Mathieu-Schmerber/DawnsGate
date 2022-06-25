@@ -49,19 +49,19 @@ namespace Game.UI
 			DisplayItemDetails(slot);
 		}
 
-		private void DisplayItemDetails(InventorySlotUi obj)
+		private void DisplayItemDetails(InventorySlotUi slot)
 		{
-			_itemDescription.Describe(obj?.Item?.Details, obj?.Item?.Quality ?? 0);
+			_itemDescription.DescribeItem(slot.Item);
 
 			_effectDescription.gameObject.SetActive(false);
-			if (obj != null && obj.Item != null && obj.Item.Details != null && obj.Item.Details.Type != ItemType.STAT)
+			if (slot != null && slot.Item != null && slot.Item.Details != null && slot.Item.Details.Type != ItemType.STAT)
 			{
-				SpecialItemData data = obj.Item.Details as SpecialItemData;
+				SpecialItemData data = slot.Item.Details as SpecialItemData;
 
 				if (data.ApplyEffect != null)
 				{
 					_effectDescription.gameObject.SetActive(true);
-					_effectDescription.Describe(data.ApplyEffect);
+					_effectDescription.DescribeEffect(data.ApplyEffect);
 				}
 			}
 		}

@@ -8,9 +8,9 @@ namespace Game.Systems.Items.Passive
 	{
 		private OrbPivot _orbPivot;
 
-		public override void OnEquipped(ItemBaseData data, int quality)
+		public override void OnEquipped(ItemSummary item)
 		{
-			base.OnEquipped(data, quality);
+			base.OnEquipped(item);
 
 			// Here we instantiate, because we don't want this to be released on scene change
 			_orbPivot = Instantiate(_data.SpawnPrefab, _entity.transform).GetComponent<OrbPivot>();

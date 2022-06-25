@@ -74,15 +74,15 @@ namespace Game.UI
 		{
 			if (slot.IsEmpty)
 			{
-				_currentItemStage.Describe(null, 0);
-				_nextItemStage.Describe(null, 0);
+				_currentItemStage.DescribeItem(null);
+				_nextItemStage.DescribeItem(null);
 				return;
 			}
-			_currentItemStage.Describe(slot.Item.Details, slot.Item.Quality);
+			_currentItemStage.DescribeItem(slot.Item);
 			if (slot.Item.HasUpgrade)
-				_nextItemStage.Describe(slot.Item.Details, slot.Item.Quality + 1);
+				_nextItemStage.DescribeItem(slot.Item, slot.Item.Quality + 1);
 			else
-				_nextItemStage.Describe(slot.Item.Details, "Maximum quality reached.");
+				_nextItemStage.Describe(slot.Item.Details.name, "Maximum quality reached.", 0);
 		}
 
 		private void DisplayInteractionBox(InventorySlotUi slot)

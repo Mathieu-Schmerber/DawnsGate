@@ -32,28 +32,37 @@ namespace Game.Entities.Player
 			_slotNumber = Databases.Database.Data.Item.Settings.InventorySlots;
 		}
 
-		private AEquippedItem AddItemToInventory(ItemBaseData data)
+		private void AddItemToInventory(ItemSummary item)
 		{
-			AEquippedItem behaviour = _inventoryParent.AddComponent(data.Script.GetClass()) as AEquippedItem;
+			AEquippedItem behaviour = _inventoryParent.AddComponent(item.Data.Script.GetClass()) as AEquippedItem;
 
 			_occupiedSlots++;
-			_items[data] = behaviour;
-			return behaviour;
+			_items[item.Data] = behaviour;
+			behaviour.OnEquipped(item);
+
+			if (item.isMerged)
+			{
+				AEquippedItem mergedBehaviour = _inventoryParent.AddComponent(item.Merge.Data.Script.GetClass()) as AEquippedItem;
+				mergedBehaviour.OnEquipped(item.Merge);
+				behaviour.MergedBehaviour = mergedBehaviour;
+			}
 		}
 
-		public bool HasEquipped(ItemBaseData item) => _items.ContainsKey(item) && _items[item] != null;
+		public bool HasEquipped(ItemBaseData item) => 
+			_items.ContainsKey(item) && // The inventory has the item key
+			_items[item] != null &&		// The inventory has the item value
+			!_items.Values.Any(x => x.Summary.isMerged && x.Summary.Merge.Data == item); // No merged item contains the item
 
-		public void EquipItem(ItemBaseData item, int quality)
+		public void EquipItem(ItemSummary summary)
 		{
 			if (!HasAvailableSlot)
 				return;
 
-			AEquippedItem exists = _items.ContainsKey(item) ? _items[item] : null;
+			AEquippedItem exists = _items.ContainsKey(summary.Data) ? _items[summary.Data] : null;
 
 			if (exists == null)
 			{
-				exists = AddItemToInventory(item);
-				exists.OnEquipped(item, quality);
+				AddItemToInventory(summary);
 				OnUpdated?.Invoke(this);
 			}
 		}
@@ -62,13 +71,44 @@ namespace Game.Entities.Player
 
 		public void DropItem(ItemBaseData item)
 		{
-			int quality = _items[item].Quality;
+			ItemSummary summary = _items[item].Summary;
 
 			_occupiedSlots--;
+			if (summary.isMerged)
+				_items[item].MergedBehaviour.OnUnequipped();
 			_items[item].OnUnequipped();
-			_items.Remove(item);
+			_items.Remove(_items[item].Details);
 			OnUpdated?.Invoke(this);
-			LootedItem.Create(transform.position, item, quality);
+			LootedItem.Create(transform.position, summary);
 		}
+
+		public bool TryMergeItems(AEquippedItem a, AEquippedItem b)
+		{
+			int cost = GetMergeCost(a, b);
+
+			if (!CanBeMerged(a, b) || !GameManager.CanRunMoneyAfford(cost))
+				return false;
+
+			// Set merged state
+			a.Summary.Merge = b.Summary;
+			a.MergedBehaviour = b;
+
+			// Remove b's data from inventory, without removing its behaviour
+			_occupiedSlots--;
+			_items.Remove(b.Details);
+			OnUpdated?.Invoke(this);
+
+			GameManager.PayWithRunMoney(cost);
+			return true;
+		}
+
+		public static bool CanBeMerged(AEquippedItem a, AEquippedItem b)
+		{
+			AEquippedItem[] equips = { a, b };
+
+			return !equips.Any(x => x.Details.IsLifeItem) && equips.Any(x => x.Details.Type == ItemType.STAT) && !equips.Any(x => x.Summary.isMerged);
+		}
+
+		public static int GetMergeCost(AEquippedItem a, AEquippedItem b) => a.NextUpgradePrice + b.NextUpgradePrice;
 	}
 }

@@ -32,16 +32,18 @@ namespace Game.UI
 			}
 		}
 
-		public void Describe(ItemBaseData item, int quality)
+		public void DescribeItem(AEquippedItem item, int quality = -1)
 		{
 			if (item != null)
 			{
-				_nameText.text = item.name;
-				_descriptionText.text = item.GetRichDescription(quality);
+				int stage = quality == -1 ? item.Quality : quality;
+
+				_nameText.text = item.Details.name;
+				_descriptionText.text = item.GetDescription(stage);
 				if (_stars != null)
 				{
 					for (int i = 0; i < _stars.Length; i++)
-						_stars[i].gameObject.SetActive(i <= quality);
+						_stars[i].gameObject.SetActive(i <= item.Quality);
 				}
 			} else
 			{
@@ -52,21 +54,18 @@ namespace Game.UI
 			}
 		}
 
-		public void Describe(ItemBaseData item, string forcedDescription)
+		public void Describe(string title, string description, int quality)
 		{
-			if (item != null)
+			_nameText.text = title;
+			_descriptionText.text = description;
+			if (_stars != null)
 			{
-				_nameText.text = item.name;
-				_descriptionText.text = forcedDescription;
-			}
-			else
-			{
-				_nameText.text = "Empty slot";
-				_descriptionText.text = "";
+				for (int i = 0; i < _stars.Length; i++)
+					_stars[i].gameObject.SetActive(i <= quality);
 			}
 		}
 
-		public void Describe(AEffectBaseData effect)
+		public void DescribeEffect(AEffectBaseData effect)
 		{
 			if (effect != null)
 			{

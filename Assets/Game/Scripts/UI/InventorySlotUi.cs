@@ -24,7 +24,6 @@ namespace Game.UI
 		private Image[] _stars;
 		private Outline _outline;
 		private AEquippedItem _item;
-		private Inventory _inventory;
 
 		public static event Action<InventorySlotUi> OnSubmitted;
 		public static event Action<InventorySlotUi> OnSelected;
@@ -39,7 +38,6 @@ namespace Game.UI
 			_itemImage.enabled = false;
 			_stars = _starList.GetComponentsInChildren<Image>(true);
 			_stars.ForEach(x => x.gameObject.SetActive(false));
-			_inventory = GameManager.Player.GetComponent<Inventory>();
 			_outline.effectColor = _unselectionColor;
 		}
 
