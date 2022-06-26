@@ -52,14 +52,14 @@ namespace Game.UI
 		private void UpdateHealthDisplay()
 		{
 			float ratio = _playerIdentity.CurrentHealth / _playerIdentity.MaxHealth;
-		
+
 			_healthText.text = $"{_playerIdentity.CurrentHealth}/{_playerIdentity.MaxHealth}";
 			Tween.Value(_healthFill.fillAmount, ratio, (v) => _healthFill.fillAmount = v, 0.2f, 0, Tween.EaseOut);
 		}
 
 		private void UpdateArmorDisplay()
 		{
-			float ratio = _playerIdentity.CurrentArmor / _playerIdentity.MaxArmor;
+			float ratio = _playerIdentity.MaxArmor == 0 ? 0 : _playerIdentity.CurrentArmor / _playerIdentity.MaxArmor;
 
 			Tween.Value(_armorFill.fillAmount, ratio, (v) => _armorFill.fillAmount = v, 0.2f, 0, Tween.EaseOut);
 		}

@@ -76,19 +76,19 @@ namespace Game.UI
 
 		public override void Open()
 		{
-			if (InventoryUi.IsInUse)
+			if (InventorySlotSelector.IsInUse)
 				return;
 			base.Open();
-			InventoryUi.StartUsing();
+			InventorySlotSelector.StartUsing();
 			InventorySlotUi.OnSelected += DisplayItemDetails;
 			InventorySlotUi.OnSubmitted += OnSlotSubmitted;
-			DisplayItemDetails(InventoryUi.SelectedSlot);
+			DisplayItemDetails(InventorySlotSelector.SelectedSlot);
 		}
 
 		public override void Close()
 		{
 			base.Close();
-			InventoryUi.EndUsing();
+			InventorySlotSelector.EndUsing();
 			InventorySlotUi.OnSelected -= DisplayItemDetails;
 			InventorySlotUi.OnSubmitted -= OnSlotSubmitted;
 		}

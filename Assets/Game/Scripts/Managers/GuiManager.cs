@@ -13,15 +13,15 @@ namespace Game.Managers
 		[SerializeField] private Canvas _canvas;
 		
 		private IMenu[] _menus;
-		private InventoryUi _inventoryUi;
+		private InventorySlotSelector _inventoryUi;
 
 		[ShowInInspector, ReadOnly] public static bool IsMenuing => Instance?._menus?.Any(x => x.IsOpen && x.RequiresGameFocus) ?? false;
-		public static InventoryUi InventoryUI => Instance._inventoryUi;
+		public static InventorySlotSelector InventoryUI => Instance._inventoryUi;
 
 		private void Awake()
 		{
 			_menus = _canvas.GetComponentsInChildren<IMenu>();
-			_inventoryUi = _canvas.GetComponentInChildren<InventoryUi>();
+			_inventoryUi = _canvas.GetComponentInChildren<InventorySlotSelector>();
 		}
 
 		public static void OpenMenu<T>() where T : IMenu

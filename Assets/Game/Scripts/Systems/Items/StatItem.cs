@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Game.Entities.Shared;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -31,25 +32,44 @@ namespace Game.Systems.Items
 		{
 			base.OnEquipped(item);
 
+			float healthRatio = _entity.CurrentHealth / _entity.MaxHealth;
+			float armorRatio = _entity.MaxArmor == 0 ? 1 : _entity.CurrentArmor / _entity.MaxArmor;
+
 			_data = item.Data as StatItemData;
 			foreach (var key in _data.Stages[Quality].Keys)
 				_entity.Stats.Modifiers[key].BonusModifier += _data.Stages[Quality][key].Value;
+
+			_entity.CurrentHealth = _entity.MaxHealth * healthRatio;
+			_entity.CurrentArmor = _entity.MaxArmor * armorRatio;
 		}
 
 		public override void OnUnequipped()
 		{
+			float healthRatio = _entity.CurrentHealth / _entity.MaxHealth;
+			float armorRatio = _entity.MaxArmor == 0 ? 1 : _entity.CurrentArmor / _entity.MaxArmor;
+
 			foreach (var key in _data.Stages[Quality].Keys)
 				_entity.Stats.Modifiers[key].BonusModifier -= _data.Stages[Quality][key].Value;
+
+			_entity.CurrentHealth = _entity.MaxHealth * healthRatio;
+			_entity.CurrentArmor = _entity.MaxArmor * armorRatio;
 			base.OnUnequipped();
 		}
 
 		public override void OnUpgrade()
 		{
 			base.OnUpgrade();
+
+			float healthRatio = _entity.CurrentHealth / _entity.MaxHealth;
+			float armorRatio = _entity.MaxArmor == 0 ? 1 : _entity.CurrentArmor / _entity.MaxArmor;
+
 			foreach (var key in _data.Stages[Quality - 1].Keys)
-				_entity.Stats.Modifiers[key].BonusModifier -= _data.Stages[Quality][key].Value;
+				_entity.Stats.Modifiers[key].BonusModifier -= _data.Stages[Quality - 1][key].Value;
 			foreach (var key in _data.Stages[Quality].Keys)
 				_entity.Stats.Modifiers[key].BonusModifier += _data.Stages[Quality][key].Value;
+
+			_entity.CurrentHealth = _entity.MaxHealth * healthRatio;
+			_entity.CurrentArmor = _entity.MaxArmor * armorRatio;
 		}
 	}
 }

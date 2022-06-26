@@ -1,4 +1,5 @@
-﻿using Game.Managers;
+﻿using Game.Entities.Shared;
+using Game.Managers;
 using Nawlian.Lib.Extensions;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ namespace Game.Systems.Run.Rooms
 	public abstract class ARoom : MonoBehaviour, IRoom
 	{
 		private RoomInfo _info;
+		protected EntityIdentity _player;
 
 		public static event Action OnRoomActivated;
 		public static event Action OnRoomCleared;
@@ -27,6 +29,7 @@ namespace Game.Systems.Run.Rooms
 		protected virtual void Awake()
 		{
 			_info = GetComponent<RoomInfo>();
+			_player = GameManager.Player.GetComponent<EntityIdentity>();
 		}
 
 		protected virtual void Start()
@@ -43,12 +46,14 @@ namespace Game.Systems.Run.Rooms
 
 		public void Activate()
 		{
+			_player.RefillArmor();
 			OnRoomActivated?.Invoke();
 			OnActivate();
 		}
 
 		public void Clear()
 		{
+			_player.RefillArmor();
 			OnRoomCleared?.Invoke();
 			Cleared = true;
 			OnClear();

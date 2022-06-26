@@ -102,11 +102,13 @@ namespace Game.Entities.Player
 			return true;
 		}
 
+		public static bool CanBeMerged(AEquippedItem a) => !a.Details.IsLifeItem && !a.Summary.isMerged;
+
 		public static bool CanBeMerged(AEquippedItem a, AEquippedItem b)
 		{
 			AEquippedItem[] equips = { a, b };
 
-			return !equips.Any(x => x.Details.IsLifeItem) && equips.Any(x => x.Details.Type == ItemType.STAT) && !equips.Any(x => x.Summary.isMerged);
+			return CanBeMerged(a) && CanBeMerged(b) && equips.Any(x => x.Details.Type == ItemType.STAT);
 		}
 
 		public static int GetMergeCost(AEquippedItem a, AEquippedItem b) => a.NextUpgradePrice + b.NextUpgradePrice;

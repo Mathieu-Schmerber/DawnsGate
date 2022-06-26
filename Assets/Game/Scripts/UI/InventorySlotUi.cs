@@ -20,15 +20,27 @@ namespace Game.UI
 		[SerializeField] private Transform _starList;
 		[SerializeField] private Color _selectionColor;
 		[SerializeField] private Color _unselectionColor;
+		[SerializeField] private Color _disabledColor;
 
 		private Image[] _stars;
 		private Outline _outline;
 		private AEquippedItem _item;
+		private bool _usable;
 
 		public static event Action<InventorySlotUi> OnSubmitted;
 		public static event Action<InventorySlotUi> OnSelected;
 		public AEquippedItem Item => _item;
 		public bool Selected { get; private set; }
+		public bool Usable
+		{
+			get => _usable; 
+			set
+			{
+				_usable = value;
+				if (value == false)
+					_outline.effectColor = _disabledColor;
+			}
+		}
 		public bool IsEmpty => Item == null;
 
 		protected override void Awake()
@@ -74,7 +86,7 @@ namespace Game.UI
 		{
 			Selected = false;
 			base.OnDeselect(eventData);
-			_outline.effectColor = _unselectionColor;
+			_outline.effectColor = Usable ? _unselectionColor : _disabledColor;
 		}
 
 		public void OnSubmit(BaseEventData eventData)

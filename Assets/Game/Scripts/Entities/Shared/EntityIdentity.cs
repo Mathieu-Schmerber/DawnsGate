@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
+using ReadOnlyAttribute = Sirenix.OdinInspector.ReadOnlyAttribute;
 
 namespace Game.Entities.Shared
 {
@@ -24,19 +25,22 @@ namespace Game.Entities.Shared
 
 		public bool IsInvulnerable { get; private set; }
 
+		[ShowInInspector, ReadOnly]
 		public float CurrentHealth { get => _currentHealth; 
 			set 
 			{
-				_currentHealth = Mathf.Clamp(value, 0, Stats.StartHealth);
+				_currentHealth = Mathf.Clamp(value, 0, MaxHealth);
 				OnHealthChanged?.Invoke();
 			}
 		}
+
+		[ShowInInspector, ReadOnly]
 		public float CurrentArmor { get => _currentArmor; 
 			set
 			{
 				float before = _currentArmor;
 
-				_currentArmor = Mathf.Clamp(value, 0, Scale(Stats.StartHealth, StatModifier.ArmorRatio));
+				_currentArmor = Mathf.Clamp(value, 0, MaxArmor);
 				if (_currentArmor == 0 && before > _currentArmor)
 					OnArmorBroken?.Invoke();
 				else if (_currentArmor > 0 && before == 0)
@@ -53,13 +57,13 @@ namespace Game.Entities.Shared
 		public void ResetStats()
 		{
 			_cachedStat = _stats.Clone() as BaseStatData; // Clone scriptable object so that we can edit it
-			CurrentHealth = Stats.StartHealth;
-			CurrentArmor = Scale(Stats.StartHealth, StatModifier.ArmorRatio);
+			CurrentHealth = MaxHealth;
+			CurrentArmor = MaxArmor;
 		}
 
 		public void RefillArmor()
 		{
-			CurrentArmor = Scale(Stats.StartHealth, StatModifier.ArmorRatio);
+			CurrentArmor = MaxArmor;
 		}
 
 		public BaseStatData Stats => _cachedStat;

@@ -16,6 +16,8 @@ namespace Game.UI
 	public class ItemMergeMenuUi : AClosableMenu
 	{
 		[Title("References")]
+		[SerializeField] private Transform _globalPanel;
+		[SerializeField] private Transform _emptyPanel;
 		[SerializeField] private SimpleDescriptorUi _resultItem;
 		[SerializeField] private TextMeshProUGUI _priceTxt;
 		[SerializeField] private Transform _interactionBox;
@@ -109,14 +111,7 @@ namespace Game.UI
 				_resultItem.Describe("No result", "Select two items to be merged", 0);
 			else
 			{
-				if (!_isAdditionCorrect)
-				{
-					_resultItem.Describe(
-						$"Incompatible items",
-						$"These items cannot be merged together.{Environment.NewLine}Try another equation.",
-						_additionSlots[0].Item.Quality);
-				}
-				else
+				if (_isAdditionReady || _additionSlots.Count(x => x.IsEmpty) == 1)
 				{
 					string description = _additionSlots[0].Item.GetDescription();
 
@@ -124,10 +119,17 @@ namespace Game.UI
 						description = $"{description}{Environment.NewLine}{_additionSlots[1].Item.GetDescription()}";
 					_resultItem.Describe(_additionSlots[0].name, description, _additionSlots[0].Item.Quality);
 				}
+				else if (!_isAdditionCorrect)
+				{
+					_resultItem.Describe(
+						$"Incompatible items",
+						$"These items cannot be merged together.{Environment.NewLine}Try another equation.",
+						_additionSlots[0].Item.Quality);
+				}
 			}
 		}
 
-		private void DisplayInteraction() => _interactionBox.gameObject.SetActive(_isAdditionReady);
+		private void DisplayInteraction() => _interactionBox.gameObject.SetActive(_isAdditionReady && _isAdditionCorrect);
 
 		private void DisplayPrice()
 		{
@@ -146,6 +148,12 @@ namespace Game.UI
 
 		private void RefreshUi()
 		{
+			if (!InventorySlotSelector.HasUsableSlot)
+			{
+				_globalPanel.gameObject.SetActive(false);
+				_emptyPanel.gameObject.SetActive(true);
+				return;
+			}
 			DisplayAdditionResult();
 			DisplayInteraction();
 			DisplayPrice();
@@ -168,19 +176,21 @@ namespace Game.UI
 
 		public override void Open()
 		{
-			if (InventoryUi.IsInUse)
+			if (InventorySlotSelector.IsInUse)
 				return;
 			base.Open();
+			_globalPanel.gameObject.SetActive(InventorySlotSelector.HasUsableSlot);
+			_emptyPanel.gameObject.SetActive(!InventorySlotSelector.HasUsableSlot);
 			ResetAddition();
 			RefreshUi();
-			InventoryUi.StartUsing();
+			InventorySlotSelector.StartUsing(x => !x.IsEmpty && Inventory.CanBeMerged(x.Item));
 			InventorySlotUi.OnSubmitted += OnSlotSubmitted;
 		}
 
 		public override void Close()
 		{
 			base.Close();
-			InventoryUi.EndUsing();
+			InventorySlotSelector.EndUsing();
 			InventorySlotUi.OnSubmitted -= OnSlotSubmitted;
 		}
 

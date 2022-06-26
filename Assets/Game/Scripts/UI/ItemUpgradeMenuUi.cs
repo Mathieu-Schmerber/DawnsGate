@@ -17,6 +17,8 @@ namespace Game.UI
 	public class ItemUpgradeMenuUi : AClosableMenu
 	{
 		[Title("References")]
+		[SerializeField] private Transform _globalPanel;
+		[SerializeField] private Transform _emptyPanel;
 		[SerializeField] private SimpleDescriptorUi _currentItemStage;
 		[SerializeField] private SimpleDescriptorUi _nextItemStage;
 		[SerializeField] private TextMeshProUGUI _priceTxt;
@@ -103,6 +105,10 @@ namespace Game.UI
 
 		private void OnItemSelected(InventorySlotUi slot)
 		{
+			_globalPanel.gameObject.SetActive(InventorySlotSelector.HasUsableSlot);
+			_emptyPanel.gameObject.SetActive(!InventorySlotSelector.HasUsableSlot);
+			if (slot == null)
+				return;
 			DisplayStages(slot);
 			DisplayPrice(slot);
 			DisplayInteractionBox(slot);
@@ -112,19 +118,21 @@ namespace Game.UI
 
 		public override void Open()
 		{
-			if (InventoryUi.IsInUse)
+			if (InventorySlotSelector.IsInUse)
 				return;
 			base.Open();
-			InventoryUi.StartUsing();
+			_globalPanel.gameObject.SetActive(InventorySlotSelector.HasUsableSlot);
+			_emptyPanel.gameObject.SetActive(!InventorySlotSelector.HasUsableSlot);
+			InventorySlotSelector.StartUsing(x => !x.IsEmpty && x.Item.HasUpgrade);
 			InventorySlotUi.OnSelected += OnItemSelected;
 			InventorySlotUi.OnSubmitted += OnSlotSubmitted;
-			OnItemSelected(InventoryUi.SelectedSlot);
+			OnItemSelected(InventorySlotSelector.SelectedSlot);
 		}
 
 		public override void Close()
 		{
 			base.Close();
-			InventoryUi.EndUsing();
+			InventorySlotSelector.EndUsing();
 			InventorySlotUi.OnSelected -= OnItemSelected;
 			InventorySlotUi.OnSubmitted -= OnSlotSubmitted;
 		}
