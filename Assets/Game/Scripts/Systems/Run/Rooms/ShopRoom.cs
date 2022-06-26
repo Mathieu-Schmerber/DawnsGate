@@ -23,7 +23,7 @@ namespace Game.Systems.Run.Rooms
 
 			Inventory inventory = GameManager.Player.GetComponent<Inventory>();
 
-			_items = Databases.Database.Data.Item.Items.All<ItemBaseData>().Where(x => x.IsLifeItem == _isLifeShop && !inventory.HasEquipped(x)).ToList();
+			_items = Databases.Database.Data.Item.All<ItemBaseData>().Where(x => x.IsLifeItem == _isLifeShop && !inventory.HasEquipped(x)).ToList();
 		}
 
 		protected override void Start()

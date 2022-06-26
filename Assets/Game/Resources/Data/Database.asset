@@ -21,6 +21,8 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 2bc6e1748ec08414b85ae98cf4dacdf9, type: 2}
     - {fileID: 11400000, guid: f0e0dc58b8ce9614380971f060398ded, type: 2}
     - {fileID: 11400000, guid: 04ea171b4bb957244add218434c4b3e7, type: 2}
+    - {fileID: 11400000, guid: 93057673fbee2454b8e5a5e5a3fc5e3f, type: 2}
+    - {fileID: 1061813334846856684, guid: 0e790ab11e75d3f4a9efc2c9e36c62c3, type: 3}
     - {fileID: 11400000, guid: a3a0a01d7e968544687ef02fd2f7beef, type: 2}
     - {fileID: 11400000, guid: 5d74ee8a0b12b1e42976069709b58a06, type: 2}
     - {fileID: 11400000, guid: faa5a7d194f045847973199969b260c7, type: 2}
@@ -33,7 +35,6 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 1ac6cfdd44de2644a9cda524acf76a2a, type: 2}
     - {fileID: 11400000, guid: 8ffd7066a7f183449b8333e171af528c, type: 2}
     - {fileID: 11400000, guid: 6f700592d2bd4084789e5c0fbf36c975, type: 2}
-    - {fileID: 11400000, guid: 93057673fbee2454b8e5a5e5a3fc5e3f, type: 2}
     - {fileID: 11400000, guid: b96d2dcccdd7abb4da9d2022a19d877a, type: 2}
     - {fileID: 11400000, guid: a5b5f354b2727b94e903a62154623504, type: 2}
     - {fileID: 11400000, guid: c4e90bd2e0846134da3ceb8003356d59, type: 2}
@@ -52,12 +53,11 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 134131e5a59633a40ae63e45cbdf4ccb, type: 2}
     - {fileID: 11400000, guid: 305e71bd7f2a7964bb7956e18f082126, type: 2}
     - {fileID: 11400000, guid: d5e2267ebb7ab304e95052f4e4d7eca4, type: 2}
-    - {fileID: 11400000, guid: e8aab8841df30aa48b76dcf7cf08e61e, type: 2}
-    - {fileID: 11400000, guid: b6bfec871ef682242969d87ab3becfc4, type: 2}
-    - {fileID: 11400000, guid: 59aed92efcd379442aa74531cbef3819, type: 2}
     - {fileID: 11400000, guid: 191fc32f79e93854bbc730700e9b41d9, type: 2}
     - {fileID: 11400000, guid: 7e0044cd71c16af4fb23fbca682976d0, type: 2}
-    - {fileID: 1061813334846856684, guid: 0e790ab11e75d3f4a9efc2c9e36c62c3, type: 3}
+    - {fileID: 11400000, guid: 59aed92efcd379442aa74531cbef3819, type: 2}
+    - {fileID: 11400000, guid: e8aab8841df30aa48b76dcf7cf08e61e, type: 2}
+    - {fileID: 11400000, guid: b6bfec871ef682242969d87ab3becfc4, type: 2}
     - {fileID: 7944063403446872818, guid: c303688915f74d3409412fd03a820401, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
@@ -276,22 +276,6 @@ MonoBehaviour:
         Assembly-CSharp-firstpass]], mscorlib
     - Name: 
       Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 7
-      Data: 19|Nawlian.Lib.Utils.Database.DatabaseData+Section, Assembly-CSharp-firstpass
-    - Name: Name
-      Entry: 1
-      Data: Items
-    - Name: GraphPath
-      Entry: 1
-      Data: 1.1.0
-    - Name: Sections
-      Entry: 7
-      Data: 20|System.Collections.Generic.List`1[[Nawlian.Lib.Utils.Database.DatabaseData+Section,
-        Assembly-CSharp-firstpass]], mscorlib
-    - Name: 
-      Entry: 12
       Data: 0
     - Name: 
       Entry: 13
@@ -301,11 +285,35 @@ MonoBehaviour:
       Data: 
     - Name: Assets
       Entry: 7
-      Data: 21|System.Collections.Generic.List`1[[Nawlian.Lib.Utils.Database.DatabaseData+DatabaseAsset,
+      Data: 19|System.Collections.Generic.List`1[[Nawlian.Lib.Utils.Database.DatabaseData+DatabaseAsset,
         Assembly-CSharp-firstpass]], mscorlib
     - Name: 
       Entry: 12
-      Data: 36
+      Data: 37
+    - Name: 
+      Entry: 7
+      Data: 20|Nawlian.Lib.Utils.Database.DatabaseData+DatabaseAsset, Assembly-CSharp-firstpass
+    - Name: Name
+      Entry: 1
+      Data: Settings
+    - Name: Prefab
+      Entry: 10
+      Data: 5
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 21|Nawlian.Lib.Utils.Database.DatabaseData+DatabaseAsset, Assembly-CSharp-firstpass
+    - Name: Name
+      Entry: 1
+      Data: LootedItem
+    - Name: Prefab
+      Entry: 10
+      Data: 6
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: 
       Entry: 7
       Data: 22|Nawlian.Lib.Utils.Database.DatabaseData+DatabaseAsset, Assembly-CSharp-firstpass
@@ -314,7 +322,7 @@ MonoBehaviour:
       Data: BerserkerMask
     - Name: Prefab
       Entry: 10
-      Data: 5
+      Data: 7
     - Name: 
       Entry: 8
       Data: 
@@ -326,7 +334,7 @@ MonoBehaviour:
       Data: BloodChains
     - Name: Prefab
       Entry: 10
-      Data: 6
+      Data: 8
     - Name: 
       Entry: 8
       Data: 
@@ -338,7 +346,7 @@ MonoBehaviour:
       Data: BombWarp
     - Name: Prefab
       Entry: 10
-      Data: 7
+      Data: 9
     - Name: 
       Entry: 8
       Data: 
@@ -350,7 +358,7 @@ MonoBehaviour:
       Data: DemonsEye
     - Name: Prefab
       Entry: 10
-      Data: 8
+      Data: 10
     - Name: 
       Entry: 8
       Data: 
@@ -362,7 +370,7 @@ MonoBehaviour:
       Data: GoldenClover
     - Name: Prefab
       Entry: 10
-      Data: 9
+      Data: 11
     - Name: 
       Entry: 8
       Data: 
@@ -374,7 +382,7 @@ MonoBehaviour:
       Data: LunarisLightning
     - Name: Prefab
       Entry: 10
-      Data: 10
+      Data: 12
     - Name: 
       Entry: 8
       Data: 
@@ -386,7 +394,7 @@ MonoBehaviour:
       Data: SharpenedBlade
     - Name: Prefab
       Entry: 10
-      Data: 11
+      Data: 13
     - Name: 
       Entry: 8
       Data: 
@@ -398,7 +406,7 @@ MonoBehaviour:
       Data: SolarisBook
     - Name: Prefab
       Entry: 10
-      Data: 12
+      Data: 14
     - Name: 
       Entry: 8
       Data: 
@@ -410,7 +418,7 @@ MonoBehaviour:
       Data: ArcaneIngot
     - Name: Prefab
       Entry: 10
-      Data: 13
+      Data: 15
     - Name: 
       Entry: 8
       Data: 
@@ -422,7 +430,7 @@ MonoBehaviour:
       Data: LavaPotion
     - Name: Prefab
       Entry: 10
-      Data: 14
+      Data: 16
     - Name: 
       Entry: 8
       Data: 
@@ -434,7 +442,7 @@ MonoBehaviour:
       Data: MandragoraRoot
     - Name: Prefab
       Entry: 10
-      Data: 15
+      Data: 17
     - Name: 
       Entry: 8
       Data: 
@@ -446,7 +454,7 @@ MonoBehaviour:
       Data: SolarisOrbs
     - Name: Prefab
       Entry: 10
-      Data: 16
+      Data: 18
     - Name: 
       Entry: 8
       Data: 
@@ -455,31 +463,7 @@ MonoBehaviour:
       Data: 34|Nawlian.Lib.Utils.Database.DatabaseData+DatabaseAsset, Assembly-CSharp-firstpass
     - Name: Name
       Entry: 1
-      Data: Settings
-    - Name: Prefab
-      Entry: 10
-      Data: 17
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 35|Nawlian.Lib.Utils.Database.DatabaseData+DatabaseAsset, Assembly-CSharp-firstpass
-    - Name: Name
-      Entry: 1
       Data: ArmorScraps
-    - Name: Prefab
-      Entry: 10
-      Data: 18
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 36|Nawlian.Lib.Utils.Database.DatabaseData+DatabaseAsset, Assembly-CSharp-firstpass
-    - Name: Name
-      Entry: 1
-      Data: AssasinsBane
     - Name: Prefab
       Entry: 10
       Data: 19
@@ -488,10 +472,10 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 37|Nawlian.Lib.Utils.Database.DatabaseData+DatabaseAsset, Assembly-CSharp-firstpass
+      Data: 35|Nawlian.Lib.Utils.Database.DatabaseData+DatabaseAsset, Assembly-CSharp-firstpass
     - Name: Name
       Entry: 1
-      Data: BatBat
+      Data: AssasinsBane
     - Name: Prefab
       Entry: 10
       Data: 20
@@ -500,10 +484,10 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 38|Nawlian.Lib.Utils.Database.DatabaseData+DatabaseAsset, Assembly-CSharp-firstpass
+      Data: 36|Nawlian.Lib.Utils.Database.DatabaseData+DatabaseAsset, Assembly-CSharp-firstpass
     - Name: Name
       Entry: 1
-      Data: BrokenWatch
+      Data: BatBat
     - Name: Prefab
       Entry: 10
       Data: 21
@@ -512,10 +496,10 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 39|Nawlian.Lib.Utils.Database.DatabaseData+DatabaseAsset, Assembly-CSharp-firstpass
+      Data: 37|Nawlian.Lib.Utils.Database.DatabaseData+DatabaseAsset, Assembly-CSharp-firstpass
     - Name: Name
       Entry: 1
-      Data: DawnsBelt
+      Data: BrokenWatch
     - Name: Prefab
       Entry: 10
       Data: 22
@@ -524,10 +508,10 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 40|Nawlian.Lib.Utils.Database.DatabaseData+DatabaseAsset, Assembly-CSharp-firstpass
+      Data: 38|Nawlian.Lib.Utils.Database.DatabaseData+DatabaseAsset, Assembly-CSharp-firstpass
     - Name: Name
       Entry: 1
-      Data: ExecutionBlade
+      Data: DawnsBelt
     - Name: Prefab
       Entry: 10
       Data: 23
@@ -536,10 +520,10 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 41|Nawlian.Lib.Utils.Database.DatabaseData+DatabaseAsset, Assembly-CSharp-firstpass
+      Data: 39|Nawlian.Lib.Utils.Database.DatabaseData+DatabaseAsset, Assembly-CSharp-firstpass
     - Name: Name
       Entry: 1
-      Data: GloriousBoulder
+      Data: ExecutionBlade
     - Name: Prefab
       Entry: 10
       Data: 24
@@ -548,10 +532,10 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 42|Nawlian.Lib.Utils.Database.DatabaseData+DatabaseAsset, Assembly-CSharp-firstpass
+      Data: 40|Nawlian.Lib.Utils.Database.DatabaseData+DatabaseAsset, Assembly-CSharp-firstpass
     - Name: Name
       Entry: 1
-      Data: HolyGrail
+      Data: GloriousBoulder
     - Name: Prefab
       Entry: 10
       Data: 25
@@ -560,10 +544,10 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 43|Nawlian.Lib.Utils.Database.DatabaseData+DatabaseAsset, Assembly-CSharp-firstpass
+      Data: 41|Nawlian.Lib.Utils.Database.DatabaseData+DatabaseAsset, Assembly-CSharp-firstpass
     - Name: Name
       Entry: 1
-      Data: LuckyStar
+      Data: HolyGrail
     - Name: Prefab
       Entry: 10
       Data: 26
@@ -572,10 +556,10 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 44|Nawlian.Lib.Utils.Database.DatabaseData+DatabaseAsset, Assembly-CSharp-firstpass
+      Data: 42|Nawlian.Lib.Utils.Database.DatabaseData+DatabaseAsset, Assembly-CSharp-firstpass
     - Name: Name
       Entry: 1
-      Data: LunarisRing
+      Data: LuckyStar
     - Name: Prefab
       Entry: 10
       Data: 27
@@ -584,10 +568,10 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 45|Nawlian.Lib.Utils.Database.DatabaseData+DatabaseAsset, Assembly-CSharp-firstpass
+      Data: 43|Nawlian.Lib.Utils.Database.DatabaseData+DatabaseAsset, Assembly-CSharp-firstpass
     - Name: Name
       Entry: 1
-      Data: MaliceShard
+      Data: LunarisRing
     - Name: Prefab
       Entry: 10
       Data: 28
@@ -596,10 +580,10 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 46|Nawlian.Lib.Utils.Database.DatabaseData+DatabaseAsset, Assembly-CSharp-firstpass
+      Data: 44|Nawlian.Lib.Utils.Database.DatabaseData+DatabaseAsset, Assembly-CSharp-firstpass
     - Name: Name
       Entry: 1
-      Data: MeltingPot
+      Data: MaliceShard
     - Name: Prefab
       Entry: 10
       Data: 29
@@ -608,10 +592,10 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 47|Nawlian.Lib.Utils.Database.DatabaseData+DatabaseAsset, Assembly-CSharp-firstpass
+      Data: 45|Nawlian.Lib.Utils.Database.DatabaseData+DatabaseAsset, Assembly-CSharp-firstpass
     - Name: Name
       Entry: 1
-      Data: OminousStick
+      Data: MeltingPot
     - Name: Prefab
       Entry: 10
       Data: 30
@@ -620,10 +604,10 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 48|Nawlian.Lib.Utils.Database.DatabaseData+DatabaseAsset, Assembly-CSharp-firstpass
+      Data: 46|Nawlian.Lib.Utils.Database.DatabaseData+DatabaseAsset, Assembly-CSharp-firstpass
     - Name: Name
       Entry: 1
-      Data: PhoenixFeather
+      Data: OminousStick
     - Name: Prefab
       Entry: 10
       Data: 31
@@ -632,10 +616,10 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 49|Nawlian.Lib.Utils.Database.DatabaseData+DatabaseAsset, Assembly-CSharp-firstpass
+      Data: 47|Nawlian.Lib.Utils.Database.DatabaseData+DatabaseAsset, Assembly-CSharp-firstpass
     - Name: Name
       Entry: 1
-      Data: SevenleagueBoots
+      Data: PhoenixFeather
     - Name: Prefab
       Entry: 10
       Data: 32
@@ -644,10 +628,10 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 50|Nawlian.Lib.Utils.Database.DatabaseData+DatabaseAsset, Assembly-CSharp-firstpass
+      Data: 48|Nawlian.Lib.Utils.Database.DatabaseData+DatabaseAsset, Assembly-CSharp-firstpass
     - Name: Name
       Entry: 1
-      Data: ShamansWrath
+      Data: SevenleagueBoots
     - Name: Prefab
       Entry: 10
       Data: 33
@@ -656,10 +640,10 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 51|Nawlian.Lib.Utils.Database.DatabaseData+DatabaseAsset, Assembly-CSharp-firstpass
+      Data: 49|Nawlian.Lib.Utils.Database.DatabaseData+DatabaseAsset, Assembly-CSharp-firstpass
     - Name: Name
       Entry: 1
-      Data: SteelHammer
+      Data: ShamansWrath
     - Name: Prefab
       Entry: 10
       Data: 34
@@ -668,10 +652,10 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 52|Nawlian.Lib.Utils.Database.DatabaseData+DatabaseAsset, Assembly-CSharp-firstpass
+      Data: 50|Nawlian.Lib.Utils.Database.DatabaseData+DatabaseAsset, Assembly-CSharp-firstpass
     - Name: Name
       Entry: 1
-      Data: StoneBeads
+      Data: SteelHammer
     - Name: Prefab
       Entry: 10
       Data: 35
@@ -680,10 +664,10 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 53|Nawlian.Lib.Utils.Database.DatabaseData+DatabaseAsset, Assembly-CSharp-firstpass
+      Data: 51|Nawlian.Lib.Utils.Database.DatabaseData+DatabaseAsset, Assembly-CSharp-firstpass
     - Name: Name
       Entry: 1
-      Data: VampiresTooth
+      Data: StoneBeads
     - Name: Prefab
       Entry: 10
       Data: 36
@@ -692,10 +676,10 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 54|Nawlian.Lib.Utils.Database.DatabaseData+DatabaseAsset, Assembly-CSharp-firstpass
+      Data: 52|Nawlian.Lib.Utils.Database.DatabaseData+DatabaseAsset, Assembly-CSharp-firstpass
     - Name: Name
       Entry: 1
-      Data: WarriorsMight
+      Data: Test1
     - Name: Prefab
       Entry: 10
       Data: 37
@@ -704,10 +688,10 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 55|Nawlian.Lib.Utils.Database.DatabaseData+DatabaseAsset, Assembly-CSharp-firstpass
+      Data: 53|Nawlian.Lib.Utils.Database.DatabaseData+DatabaseAsset, Assembly-CSharp-firstpass
     - Name: Name
       Entry: 1
-      Data: Test
+      Data: Test2
     - Name: Prefab
       Entry: 10
       Data: 38
@@ -716,10 +700,10 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 56|Nawlian.Lib.Utils.Database.DatabaseData+DatabaseAsset, Assembly-CSharp-firstpass
+      Data: 54|Nawlian.Lib.Utils.Database.DatabaseData+DatabaseAsset, Assembly-CSharp-firstpass
     - Name: Name
       Entry: 1
-      Data: Test1
+      Data: Test
     - Name: Prefab
       Entry: 10
       Data: 39
@@ -728,10 +712,10 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 57|Nawlian.Lib.Utils.Database.DatabaseData+DatabaseAsset, Assembly-CSharp-firstpass
+      Data: 55|Nawlian.Lib.Utils.Database.DatabaseData+DatabaseAsset, Assembly-CSharp-firstpass
     - Name: Name
       Entry: 1
-      Data: Test2
+      Data: VampiresTooth
     - Name: Prefab
       Entry: 10
       Data: 40
@@ -739,45 +723,11 @@ MonoBehaviour:
       Entry: 8
       Data: 
     - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: Assets
       Entry: 7
-      Data: 58|System.Collections.Generic.List`1[[Nawlian.Lib.Utils.Database.DatabaseData+DatabaseAsset,
-        Assembly-CSharp-firstpass]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 2
-    - Name: 
-      Entry: 7
-      Data: 59|Nawlian.Lib.Utils.Database.DatabaseData+DatabaseAsset, Assembly-CSharp-firstpass
+      Data: 56|Nawlian.Lib.Utils.Database.DatabaseData+DatabaseAsset, Assembly-CSharp-firstpass
     - Name: Name
       Entry: 1
-      Data: Settings
-    - Name: Prefab
-      Entry: 10
-      Data: 17
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 60|Nawlian.Lib.Utils.Database.DatabaseData+DatabaseAsset, Assembly-CSharp-firstpass
-    - Name: Name
-      Entry: 1
-      Data: LootedItem
+      Data: WarriorsMight
     - Name: Prefab
       Entry: 10
       Data: 41
@@ -801,7 +751,7 @@ MonoBehaviour:
       Data: 
     - Name: Assets
       Entry: 7
-      Data: 61|System.Collections.Generic.List`1[[Nawlian.Lib.Utils.Database.DatabaseData+DatabaseAsset,
+      Data: 57|System.Collections.Generic.List`1[[Nawlian.Lib.Utils.Database.DatabaseData+DatabaseAsset,
         Assembly-CSharp-firstpass]], mscorlib
     - Name: 
       Entry: 12
@@ -817,7 +767,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 62|Nawlian.Lib.Utils.Database.DatabaseData+Section, Assembly-CSharp-firstpass
+      Data: 58|Nawlian.Lib.Utils.Database.DatabaseData+Section, Assembly-CSharp-firstpass
     - Name: Name
       Entry: 1
       Data: Previsualisations
@@ -826,7 +776,7 @@ MonoBehaviour:
       Data: 2
     - Name: Sections
       Entry: 7
-      Data: 63|System.Collections.Generic.List`1[[Nawlian.Lib.Utils.Database.DatabaseData+Section,
+      Data: 59|System.Collections.Generic.List`1[[Nawlian.Lib.Utils.Database.DatabaseData+Section,
         Assembly-CSharp-firstpass]], mscorlib
     - Name: 
       Entry: 12
@@ -839,14 +789,14 @@ MonoBehaviour:
       Data: 
     - Name: Assets
       Entry: 7
-      Data: 64|System.Collections.Generic.List`1[[Nawlian.Lib.Utils.Database.DatabaseData+DatabaseAsset,
+      Data: 60|System.Collections.Generic.List`1[[Nawlian.Lib.Utils.Database.DatabaseData+DatabaseAsset,
         Assembly-CSharp-firstpass]], mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 65|Nawlian.Lib.Utils.Database.DatabaseData+DatabaseAsset, Assembly-CSharp-firstpass
+      Data: 61|Nawlian.Lib.Utils.Database.DatabaseData+DatabaseAsset, Assembly-CSharp-firstpass
     - Name: Name
       Entry: 1
       Data: Circle

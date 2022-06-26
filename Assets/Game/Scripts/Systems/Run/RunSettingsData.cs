@@ -96,9 +96,9 @@ namespace Game.Systems.Run
             public void Refresh() => Values.ForEach(x => x.Refresh());
         }
 
-		#endregion
+        #endregion
 
-		[Title("General", "Essentials settings and room scene setups")]
+        [Title("General", "Essentials settings and room scene setups")]
 
         [@Tooltip("Maximum number of doors that can be activated in a room")]
         [MinValue(0)] public int MaxExitNumber;
@@ -106,6 +106,9 @@ namespace Game.Systems.Run
         [OnInspectorGUI(nameof(ValidateFolders))]
         public string LobbySceneName;
         public RoomFolderDictionary RoomFolders;
+
+        [Title("Run")]
+        [MinValue(0)] public Vector2Int RoomMoneyReward;
 
         [Title("Rules", "Run generation rules")]
 

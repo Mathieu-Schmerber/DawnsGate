@@ -24,6 +24,15 @@ namespace Game.Managers
 		public static int LobbyMoney => Instance._lobbyMoney;
 
 		public static bool CanRunMoneyAfford(int cost) => RunMoney >= cost;
+
+		public static void RewardWithRunMoney(int amount)
+		{
+			int before = Instance._runMoney;
+
+			Instance._runMoney += amount;
+			OnRunMoneyUpdated?.Invoke(before, Instance._runMoney);
+		}
+
 		public static void PayWithRunMoney(int cost)
 		{
 			int before = Instance._runMoney;
