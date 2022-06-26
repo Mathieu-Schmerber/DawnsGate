@@ -1,4 +1,5 @@
-﻿using Game.Managers;
+﻿using Game.Entities.Shared;
+using Game.Managers;
 using Game.Systems.Items;
 using Nawlian.Lib.Systems.Interaction;
 using System;
@@ -16,7 +17,7 @@ namespace Game.Systems.Run.GPE
 
 		public bool WasBought { get; set; }
 		public int Cost { get; set; }
-		public bool IsBuyable => GameManager.CanRunMoneyAfford(Cost);
+		public bool IsBuyable => GameManager.CanRunMoneyAfford(Cost) || Item.IsLifeItem;
 
 		public override string InteractionTitle => $"Buy";
 		public event Action OnItemPaid;
@@ -39,12 +40,20 @@ namespace Game.Systems.Run.GPE
 				_canBeSuggested = false;
 				actor.UnSuggestInteraction(this);
 			}
-
 		}
 
 		private void PayItem()
 		{
-			GameManager.PayWithRunMoney(Cost);
+			if (!Item.IsLifeItem)
+				GameManager.PayWithRunMoney(Cost);
+			else
+			{
+				var entity = GameManager.Player.GetComponent<EntityIdentity>();
+				float healthRatio = entity.CurrentHealth / entity.MaxHealth;
+
+				entity.Stats.Modifiers[StatModifier.MaxHealth].BonusModifier -= Item.LifeCost;
+				entity.CurrentHealth = Mathf.Max(1, entity.MaxHealth * healthRatio);
+			}
 			OnItemPaid?.Invoke();
 			WasBought = true;
 		}

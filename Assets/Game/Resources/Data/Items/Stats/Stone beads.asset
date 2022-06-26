@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: Stone beads
   m_EditorClassIdentifier: 
   Type: 0
-  IsLifeItem: 0
   Script: {fileID: 11500000, guid: 08926e121668c91429746aa3d5ff809b, type: 3}
   Graphics: {fileID: 21300000, guid: dd454ede4e10cea44b93700a3ed85be8, type: 3}
   Tags: 3
+  IsLifeItem: 0
+  LifeCost: 0
   Stages:
   - keyData: 0000000002000000
     valueData:

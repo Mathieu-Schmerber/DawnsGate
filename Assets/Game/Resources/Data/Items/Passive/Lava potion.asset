@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: Lava potion
   m_EditorClassIdentifier: 
   Type: 1
-  IsLifeItem: 0
   Script: {fileID: 11500000, guid: b2dbd51fbc98bb04cbd191d617e1c0ba, type: 3}
   Graphics: {fileID: 3907235176126722221, guid: c0707f6badf22974bad9ccc4098c3c4e,
     type: 3}
   Tags: 108
+  IsLifeItem: 0
+  LifeCost: 80
   Stages:
   - Damage: 1
     Duration: 0.1

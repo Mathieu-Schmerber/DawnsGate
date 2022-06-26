@@ -11,7 +11,9 @@ namespace Game.Systems.Items
 	{
 		public override string GetRichDescription(int quality)
 		{
-			string result = string.Empty;
+			string maxHealth = Databases.Database.Data.Item.Settings.StatGraphics[StatModifier.MaxHealth].Name;
+			string lifeDescription = IsLifeItem ? $"<color=red>-{LifeCost}%</color> {maxHealth}" : string.Empty;
+			string result = lifeDescription;
 
 			foreach (var key in Stages[quality].Keys)
 			{

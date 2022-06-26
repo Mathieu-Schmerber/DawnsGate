@@ -1,4 +1,5 @@
-﻿using Game.Systems.Combat.Effects;
+﻿using Game.Entities.Shared;
+using Game.Systems.Combat.Effects;
 using Sirenix.OdinInspector;
 using System;
 using System.Collections.Generic;
@@ -25,12 +26,18 @@ namespace Game.Systems.Items
 		public AEffectBaseData ApplyEffect;
 		[TextArea] public string Description;
 
-		public override string GetRichDescription(int quality) =>
-			Description.Replace("{Damage:u}", $"<color=red>{Stages[quality].Damage}</color>")
-						.Replace("{Damage:%}", $"<color=red>{Stages[quality].Damage}%</color>")
-						.Replace("{Duration}", $"<color=yellow>{Stages[quality].Duration}</color>")
-						.Replace("{Amount}", $"<color=yellow>{Stages[quality].Amount}</color>")
-						.Replace("{Effect}", $"<color=green><b>{(ApplyEffect == null ? "No Effect" : ApplyEffect.DisplayName)}</b></color>");
+		public override string GetRichDescription(int quality)
+		{
+			string maxHealth = Databases.Database.Data.Item.Settings.StatGraphics[StatModifier.MaxHealth].Name;
+			string lifeDescription = IsLifeItem ? $"<color=red>-{LifeCost}%</color> {maxHealth}{Environment.NewLine}" : string.Empty;
+			string result = $"{lifeDescription}{Description}";
+
+			return result.Replace("{Damage:u}", $"<color=red>{Stages[quality].Damage}</color>")
+						   .Replace("{Damage:%}", $"<color=red>{Stages[quality].Damage}%</color>")
+						   .Replace("{Duration}", $"<color=yellow>{Stages[quality].Duration}</color>")
+						   .Replace("{Amount}", $"<color=yellow>{Stages[quality].Amount}</color>")
+						   .Replace("{Effect}", $"<color=green><b>{(ApplyEffect == null ? "No Effect" : ApplyEffect.DisplayName)}</b></color>");
+		}
 
 #if UNITY_EDITOR
 

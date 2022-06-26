@@ -48,7 +48,7 @@ namespace Game.Entities.Shared
 				OnArmorChanged?.Invoke();
 			}
 		}
-		public float MaxHealth => Scale(Stats.StartHealth, StatModifier.MaxHealth);
+		public float MaxHealth => Mathf.Max(1, Scale(Stats.StartHealth, StatModifier.MaxHealth));
 		public float MaxArmor => Scale(MaxHealth, StatModifier.ArmorRatio);
 		public float CurrentSpeed => Scale(Stats.MovementSpeed, StatModifier.MovementSpeed);
 		public float CurrentDashRange => Scale(Stats.DashRange, StatModifier.DashRange);

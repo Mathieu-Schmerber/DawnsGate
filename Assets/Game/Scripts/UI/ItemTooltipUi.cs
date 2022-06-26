@@ -14,16 +14,15 @@ namespace Game.UI
 		[Title("References")]
 		[SerializeField] private TextMeshProUGUI _nameTxt;
 		[SerializeField] private RectTransform _panelRect;
+		[SerializeField] private TextMeshProUGUI _descriptionText;
 
-		private Camera _cam;
-		private ItemTagUi[] _tags;
+ 		private ItemTagUi[] _tags;
 
 		public override bool RequiresGameFocus => false;
 
 		protected override void Awake()
 		{
 			base.Awake();
-			_cam = GameManager.Camera.GetComponentInChildren<Camera>();
 			_tags = GetComponentsInChildren<ItemTagUi>(true);
 		}
 
@@ -50,11 +49,23 @@ namespace Game.UI
 
 			Open();
 			_nameTxt.text = item.Item.name;
+			if (item.Item.IsLifeItem)
+			{
+				_descriptionText.gameObject.SetActive(true);
+				_descriptionText.text = item.Item.GetRichDescription(item.Quality);
+			}
+			else
+				_descriptionText.gameObject.SetActive(false);
 			foreach (var tag in _tags)
 			{
-				tag.gameObject.SetActive((item.Item.Tags & tag.Tag) == tag.Tag);
-				if (!tag.gameObject.activeSelf && item.Summary.isMerged)
-					tag.gameObject.SetActive((item.Summary.Merge.Data.Tags & tag.Tag) == tag.Tag);
+				if (item.Item.IsLifeItem)
+					tag.gameObject.SetActive(false);
+				else
+				{
+					tag.gameObject.SetActive((item.Item.Tags & tag.Tag) == tag.Tag);
+					if (!tag.gameObject.activeSelf && item.Summary.isMerged)
+						tag.gameObject.SetActive((item.Summary.Merge.Data.Tags & tag.Tag) == tag.Tag);
+				}
 			}
 		}
 	}

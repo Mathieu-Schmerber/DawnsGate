@@ -3,6 +3,7 @@ using Game.Systems.Run.GPE;
 using Game.Systems.Run.Rooms;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Game.VFX
 {
@@ -16,6 +17,7 @@ namespace Game.VFX
 		{
 			_stand = GetComponentInParent<ItemStand>();
 			_itemGfx.SetActive(false);
+			RemovePrice();
 		}
 
 		private void OnEnable()
@@ -34,7 +36,11 @@ namespace Game.VFX
 			_stand.OnEquipped -= HideItem;
 		}
 
-		private void UpdateItemPriceDisplay(int before, int now) => _price.color = _stand.IsBuyable ? Color.white : Color.red;
+		private void UpdateItemPriceDisplay(int before, int now)
+		{
+			_price.text = $"{ _stand.Cost}{(_stand.Item.IsLifeItem ? "<color=red>♥</color>" : "")}";
+			_price.color = _stand.IsBuyable ? Color.white : Color.red;
+		}
 
 		private void RemovePrice()
 		{
@@ -44,8 +50,10 @@ namespace Game.VFX
 		private void ShowItem()
 		{
 			// TODO: Show item on the stand in a smooth way
+			if (_stand.Item == null)
+				return;
+			_price.gameObject.SetActive(true);
 			_itemGfx.SetActive(true);
-			_price.text = _stand.Cost.ToString();
 			UpdateItemPriceDisplay(0, 0);
 		}
 

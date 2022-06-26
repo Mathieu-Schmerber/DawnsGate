@@ -39,7 +39,7 @@ namespace Game.Systems.Items
 			foreach (var key in _data.Stages[Quality].Keys)
 				_entity.Stats.Modifiers[key].BonusModifier += _data.Stages[Quality][key].Value;
 
-			_entity.CurrentHealth = _entity.MaxHealth * healthRatio;
+			_entity.CurrentHealth = Mathf.Max(1, _entity.MaxHealth * healthRatio);
 			_entity.CurrentArmor = _entity.MaxArmor * armorRatio;
 		}
 
@@ -51,7 +51,7 @@ namespace Game.Systems.Items
 			foreach (var key in _data.Stages[Quality].Keys)
 				_entity.Stats.Modifiers[key].BonusModifier -= _data.Stages[Quality][key].Value;
 
-			_entity.CurrentHealth = _entity.MaxHealth * healthRatio;
+			_entity.CurrentHealth = Mathf.Max(1, _entity.MaxHealth * healthRatio);
 			_entity.CurrentArmor = _entity.MaxArmor * armorRatio;
 			base.OnUnequipped();
 		}
@@ -68,7 +68,7 @@ namespace Game.Systems.Items
 			foreach (var key in _data.Stages[Quality].Keys)
 				_entity.Stats.Modifiers[key].BonusModifier += _data.Stages[Quality][key].Value;
 
-			_entity.CurrentHealth = _entity.MaxHealth * healthRatio;
+			_entity.CurrentHealth = Mathf.Max(1, _entity.MaxHealth * healthRatio);
 			_entity.CurrentArmor = _entity.MaxArmor * armorRatio;
 		}
 	}

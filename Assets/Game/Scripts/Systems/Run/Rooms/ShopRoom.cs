@@ -34,11 +34,25 @@ namespace Game.Systems.Run.Rooms
 
 		private void DefineItem(ItemStand x)
 		{
+			if (_items.Count == 0)
+			{
+				x.SetItem(null);
+				return;
+			}
+
 			var item = _items?.Random();
 
 			_items.Remove(item);
-			x.SetItem(new ItemSummary() {Data = item, Quality = 0});
-			x.Cost = Databases.Database.Data.Item.Settings.ItemCosts.RandomCost(item.Type);
+			if (item.IsLifeItem)
+			{
+				x.SetItem(new ItemSummary() { Data = item, Quality = Databases.Database.Data.Item.Settings.NumberOfUpgrades - 1 });
+				x.Cost = (int)item.LifeCost;
+			}
+			else
+			{
+				x.SetItem(new ItemSummary() { Data = item, Quality = 0 });
+				x.Cost = Databases.Database.Data.Item.Settings.ItemCosts.RandomCost(item.Type);
+			}
 		}
 	}
 }

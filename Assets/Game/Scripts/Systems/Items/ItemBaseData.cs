@@ -16,7 +16,7 @@ namespace Game.Systems.Items
 	public abstract class ItemBaseData : ScriptableObject
 	{
 		public ItemType Type;
-		public bool IsLifeItem = false;
+
 		[ValidateInput(nameof(ValidateEditor), "Script needs to inherit AEquippedItem.")]
 		public MonoScript Script;
 
@@ -24,6 +24,9 @@ namespace Game.Systems.Items
 		public Sprite Graphics;
 
 		public ItemTag Tags;
+
+		public bool IsLifeItem = false;
+		[ShowIf(nameof(IsLifeItem)), MinValue(0), MaxValue(100)] public float LifeCost;
 
 		public abstract string GetRichDescription(int quality);
 

@@ -153,10 +153,16 @@ namespace Databases
                     
                     public static Game.Systems.Items.StatItemData WarriorsMight = (Game.Systems.Items.StatItemData)Instance.DatabaseAsset.Sections[1].Sections[1].Sections[0].Assets[32].Prefab;
                     
+                    public static Game.Systems.Items.StatItemData Test = (Game.Systems.Items.StatItemData)Instance.DatabaseAsset.Sections[1].Sections[1].Sections[0].Assets[33].Prefab;
+                    
+                    public static Game.Systems.Items.StatItemData Test1 = (Game.Systems.Items.StatItemData)Instance.DatabaseAsset.Sections[1].Sections[1].Sections[0].Assets[34].Prefab;
+                    
+                    public static Game.Systems.Items.StatItemData Test2 = (Game.Systems.Items.StatItemData)Instance.DatabaseAsset.Sections[1].Sections[1].Sections[0].Assets[35].Prefab;
+                    
                     public static IEnumerable<T> All<T>()
                         where T : UnityEngine.Object
                     {
-                        UnityEngine.Object[] all = new UnityEngine.Object[33] {BerserkerMask, BloodChains, BombWarp, DemonsEye, GoldenClover, LunarisLightning, SharpenedBlade, SolarisBook, ArcaneIngot, LavaPotion, MandragoraRoot, SolarisOrbs, Settings, ArmorScraps, AssasinsBane, BatBat, BrokenWatch, DawnsBelt, ExecutionBlade, GloriousBoulder, HolyGrail, LuckyStar, LunarisRing, MaliceShard, MeltingPot, OminousStick, PhoenixFeather, SevenleagueBoots, ShamansWrath, SteelHammer, StoneBeads, VampiresTooth, WarriorsMight};
+                        UnityEngine.Object[] all = new UnityEngine.Object[36] {BerserkerMask, BloodChains, BombWarp, DemonsEye, GoldenClover, LunarisLightning, SharpenedBlade, SolarisBook, ArcaneIngot, LavaPotion, MandragoraRoot, SolarisOrbs, Settings, ArmorScraps, AssasinsBane, BatBat, BrokenWatch, DawnsBelt, ExecutionBlade, GloriousBoulder, HolyGrail, LuckyStar, LunarisRing, MaliceShard, MeltingPot, OminousStick, PhoenixFeather, SevenleagueBoots, ShamansWrath, SteelHammer, StoneBeads, VampiresTooth, WarriorsMight, Test, Test1, Test2};
                         return all.Where(x => x is T).Select(x => (T)x);
                     }
                 }
