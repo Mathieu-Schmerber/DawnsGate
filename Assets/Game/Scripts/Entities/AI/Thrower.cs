@@ -17,14 +17,14 @@ namespace Game.Entities.AI
 {
 	public class Thrower : EnemyAI, IAnimationEventListener
 	{
-		private new ThrowerStatData _aiSettings;
+		private ThrowerStatData _stats;
 		private NavMeshPath _previsionPath;
 		private Vector3 _lastHitPos;
 
 		protected override void Init(object data)
 		{
 			base.Init(data);
-			_aiSettings = _entity.Stats as ThrowerStatData;
+			_stats = _entity.Stats as ThrowerStatData;
 		}
 
 		protected override void Awake()
@@ -54,7 +54,7 @@ namespace Game.Entities.AI
 		protected override Vector3 CalculateNextAggressivePoint()
 		{
 			var center = GameManager.Player.transform.position;
-			var aroundPos = _room.Info.GetPositionsAround(center, _aiSettings.AttackRange);
+			var aroundPos = _room.Info.GetPositionsAround(center, _stats.AttackRange);
 
 			if (aroundPos?.Length == 0)
 				return _room.Info.Data.SpawnablePositions.Random();
@@ -73,17 +73,15 @@ namespace Game.Entities.AI
 			InitData init = new InitData()
 			{
 				Caster = _entity,
-				Data = _aiSettings.AoeAttack
+				Data = _stats.AoeAttack
 			};
 
-			ObjectPooler.Get(_aiSettings.AoeAttack.Prefab.gameObject, _lastHitPos, Quaternion.identity, init,
+			ObjectPooler.Get(_stats.AoeAttack.Prefab.gameObject, _lastHitPos, Quaternion.identity, init,
 				(go) =>
 				{
 					var attack = go.GetComponent<AttackBase>();
-
 					attack.OnStart(Vector3.zero, Vector3.zero);
-				}
-			);
+				});
 		}
 
 		public void OnAnimationEvent(string animationArg)
@@ -91,14 +89,14 @@ namespace Game.Entities.AI
 			if (animationArg == "Attack")
 			{
 				_lastHitPos = GameManager.Player.transform.position;
-				ObjectPooler.Get(_aiSettings.Projectile, transform.position, Quaternion.identity, new ProjectileParameters()
+				ObjectPooler.Get(_stats.Projectile, transform.position, Quaternion.identity, new ProjectileParameters()
 				{
-					Lifetime = _aiSettings.TravelTime,
-					MaxAltitude = _aiSettings.MaxAltitude,
+					Lifetime = _stats.TravelTime,
+					MaxAltitude = _stats.MaxAltitude,
 					Destination = _lastHitPos
 				}, null);
-				Previsualisation.ShowCircle(_lastHitPos, _aiSettings.AoeAttack.Range / 2, _aiSettings.TravelTime);
-				Invoke(nameof(SpawnAOE), _aiSettings.TravelTime);
+				Previsualisation.ShowCircle(_lastHitPos, _stats.AoeAttack.Range / 2, _stats.TravelTime);
+				Invoke(nameof(SpawnAOE), _stats.TravelTime);
 			}
 		}
 

@@ -17,7 +17,7 @@ namespace Game.Entities.AI
 		[SerializeField, Required] private EnemyAttack _basicAttack;
 
 		private bool _isDefending;
-		private new TankStatData _aiSettings;
+		private TankStatData _stats;
 		private AnimatorStateInfo _currentState;
 		private float _restTime = 1f;
 
@@ -38,7 +38,7 @@ namespace Game.Entities.AI
 		protected override void Init(object data)
 		{
 			base.Init(data);
-			_aiSettings = _entity.Stats as TankStatData;
+			_stats = _entity.Stats as TankStatData;
 			_isDefending = false;
 		}
 
@@ -48,7 +48,7 @@ namespace Game.Entities.AI
 
 		protected override Vector3 GetMovementsInputs()
 		{
-			if (Vector3.Distance(transform.position, GameManager.Player.transform.position) < (_aiSettings.AttackRange / 2f))
+			if (Vector3.Distance(transform.position, GameManager.Player.transform.position) < (_stats.AttackRange / 2f))
 				return Vector3.zero;
 			return base.GetMovementsInputs();
 		}
@@ -78,8 +78,8 @@ namespace Game.Entities.AI
 				return;
 			else if (_entity.CurrentArmor == 0)
 			{
-				_entity.Stats.Modifiers[StatModifier.KnockbackResistance].TemporaryModifier = _aiSettings.KnockbackResistanceGain;
-				_entity.Stats.Modifiers[StatModifier.ArmorRatio].TemporaryModifier = _aiSettings.ArmorGain;
+				_entity.Stats.Modifiers[StatModifier.KnockbackResistance].TemporaryModifier = _stats.KnockbackResistanceGain;
+				_entity.Stats.Modifiers[StatModifier.ArmorRatio].TemporaryModifier = _stats.ArmorGain;
 				_entity.RefillArmor(); // Give max armor
 			}
 			_gfxAnim.Play("Block", 0, 0);
@@ -87,8 +87,8 @@ namespace Game.Entities.AI
 
 		private void OnArmorBroken()
 		{
-			_entity.Stats.Modifiers[StatModifier.KnockbackResistance].TemporaryModifier -= _aiSettings.KnockbackResistanceGain;
-			_entity.Stats.Modifiers[StatModifier.ArmorRatio].TemporaryModifier -= _aiSettings.ArmorGain;
+			_entity.Stats.Modifiers[StatModifier.KnockbackResistance].TemporaryModifier -= _stats.KnockbackResistanceGain;
+			_entity.Stats.Modifiers[StatModifier.ArmorRatio].TemporaryModifier -= _stats.ArmorGain;
 
 			// Cannot defend against an attack if not idle
 			if (State == EntityState.IDLE)
@@ -131,8 +131,8 @@ namespace Game.Entities.AI
 				return;
 			if (_currentState.IsName("Slam"))
 			{
-				InputManager.VibrateController(_aiSettings.VibrationForce, _aiSettings.VibrationDuration);
-				GameManager.Camera.Shake(Vector3.one * _aiSettings.VibrationForce, _aiSettings.VibrationDuration);
+				InputManager.VibrateController(_stats.VibrationForce, _stats.VibrationDuration);
+				GameManager.Camera.Shake(Vector3.one * _stats.VibrationForce, _stats.VibrationDuration);
 				_basicAttack.gameObject.SetActive(true);
 			}
 		}

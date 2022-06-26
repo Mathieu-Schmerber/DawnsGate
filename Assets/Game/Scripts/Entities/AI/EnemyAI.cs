@@ -64,6 +64,8 @@ namespace Game.Entities.AI
 
 		protected virtual void Init(object data)
 		{
+			_entity.ResetStats();
+
 			_room = (CombatRoom)data;
 			_aiSettings = (EnemyStatData)_entity.Stats;
 
@@ -71,7 +73,6 @@ namespace Game.Entities.AI
 			State = EntityState.IDLE;
 			NextPassivePosition = transform.position;
 
-			_entity.ResetStats();
 			_path.ClearCorners();
 
 			_lastAttackTime = Time.time;

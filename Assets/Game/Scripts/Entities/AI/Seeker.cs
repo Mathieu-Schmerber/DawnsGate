@@ -1,4 +1,6 @@
-﻿using Game.Managers;
+﻿using Game.Entities.Shared.Health;
+using Game.Managers;
+using Game.Systems.Combat.Attacks;
 using Nawlian.Lib.Extensions;
 using Nawlian.Lib.Systems.Animations;
 using Nawlian.Lib.Utils;
@@ -16,7 +18,16 @@ namespace Game.Entities.AI
 	{
 		[SerializeField] private float _mesurePerMeter;
 		[SerializeField] private float _waveAmplitude;
+
+		private SeekerStatData _stats;
 		private Vector3? _sinPos;
+		private bool _startDamageCheck = false;
+
+		protected override void Init(object data)
+		{
+			base.Init(data);
+			_stats = _entity.Stats as SeekerStatData;
+		}
 
 		#region Movement
 
@@ -34,6 +45,8 @@ namespace Game.Entities.AI
 		protected override void Update()
 		{
 			GenerateSinPath();
+			if (_startDamageCheck)
+				ApplyDashDamage();
 			base.Update();
 		}
 
@@ -52,6 +65,26 @@ namespace Game.Entities.AI
 
 		#region Attack
 
+		private void ApplyDashDamage()
+		{
+			if (Vector3.Distance(transform.position, GameManager.Player.transform.position) <= _stats.AttackRadius)
+				Attack(GameManager.Player.gameObject);
+		}
+
+		private void Attack(GameObject obj)
+		{
+			if (!_startDamageCheck)
+				return;
+
+			Damageable damageable = obj.GetComponent<Damageable>();
+
+			if (damageable != null)
+			{
+				AttackBase.ApplyDamageLogic(_entity, damageable, KnockbackDirection.FROM_CENTER, _stats.BaseDamage, _stats.BaseKnockBackForce, _stats.HitFx);
+				_startDamageCheck = false;
+			}
+		}
+
 		protected override void Attack()
 		{
 			LockMovement = true;
@@ -69,9 +102,11 @@ namespace Game.Entities.AI
 
 				LockAim = true;
 				UnlockTarget();
-				Dash(dir, _aiSettings.DashRange, 0.3f, true);
+				Dash(dir, _stats.DashRange, 0.3f, true);
+				_startDamageCheck = true;
 				Awaiter.WaitAndExecute(0.3f, () => {
 					_gfxAnim.Play("EndCharge");
+					_startDamageCheck = false;
 				});
 			}
 		}
@@ -99,10 +134,10 @@ namespace Game.Entities.AI
 			Gizmos.color = Color.green;
 			Gizmos.DrawSphere(NextPassivePosition, 0.2f);
 
-			Gizmos.DrawWireSphere(transform.position, _aiSettings.AttackRange);
+			Gizmos.DrawWireSphere(transform.position, _stats.AttackRange);
 
 			Gizmos.color = Color.magenta;
-			Gizmos.DrawWireSphere(transform.position, _aiSettings.TriggerRange);
+			Gizmos.DrawWireSphere(transform.position, _stats.TriggerRange);
 		}
 	}
 }
