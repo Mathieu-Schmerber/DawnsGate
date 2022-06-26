@@ -13,7 +13,6 @@ namespace Game.Systems.Run
         EVENT,
         SHOP,
         LIFE_SHOP,
-        UPGRADE,
         BOSS
     }
 

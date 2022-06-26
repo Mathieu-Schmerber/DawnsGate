@@ -35,6 +35,8 @@ namespace Game.Managers
 		public static string CurrentRoomScene;
 		public static RunState RunState => Instance._runState;
 
+		public List<string> ReachedRooms = new();
+
 		#endregion
 
 		private void Awake()
@@ -42,7 +44,6 @@ namespace Game.Managers
 			_scenes.Add(RoomType.COMBAT, Directory.GetFiles(RunSettings.RoomFolders[RoomType.COMBAT].Folder, "*.unity", SearchOption.AllDirectories));
 			_scenes.Add(RoomType.EVENT, Directory.GetFiles(RunSettings.RoomFolders[RoomType.EVENT].Folder, "*.unity", SearchOption.AllDirectories));
 			_scenes.Add(RoomType.SHOP, Directory.GetFiles(RunSettings.RoomFolders[RoomType.SHOP].Folder, "*.unity", SearchOption.AllDirectories));
-			_scenes.Add(RoomType.UPGRADE, Directory.GetFiles(RunSettings.RoomFolders[RoomType.UPGRADE].Folder, "*.unity", SearchOption.AllDirectories));
 			_scenes.Add(RoomType.LIFE_SHOP, Directory.GetFiles(RunSettings.RoomFolders[RoomType.LIFE_SHOP].Folder, "*.unity", SearchOption.AllDirectories));
 			_scenes.Add(RoomType.BOSS, Directory.GetFiles(RunSettings.RoomFolders[RoomType.BOSS].Folder, "*.unity", SearchOption.AllDirectories));
 		}
@@ -51,6 +52,7 @@ namespace Game.Managers
 
 		public static void StartNewRun()
 		{
+			Instance.ReachedRooms.Clear();
 			Instance._currentRoom = 0;
 			Instance._room = new() {
 				Type = RunSettings.FirstRoom.Type,
@@ -98,6 +100,8 @@ namespace Game.Managers
 
 		private static void ChangeScene(string sceneName)
 		{
+			Instance.ReachedRooms.Add(sceneName);
+
 			ObjectPooler.ReleaseAll();
 			SceneManager.UnloadSceneAsync(Instance._currentRoomScene);
 			SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);

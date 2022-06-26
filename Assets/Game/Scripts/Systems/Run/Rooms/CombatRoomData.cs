@@ -1,4 +1,5 @@
 ﻿using Game.Entities.AI;
+using Game.Entities.Shared;
 using Nawlian.Lib.Systems.Pooling;
 using Sirenix.OdinInspector;
 using System.Linq;
@@ -19,6 +20,9 @@ namespace Game.Systems.Run.Rooms
 		[Title("Spawnables")]
 		[Required, AssetsOnly, ValidateInput("@GetError().Item1", "@GetError().Item2")]
 		public GameObject[] Enemies;
+
+		[Title("Run Scaling", "Additional stats given to enemies per cleared room")]
+		public StatDictionary EnemyStatScalePerRoom;
 
 #if UNITY_EDITOR
 

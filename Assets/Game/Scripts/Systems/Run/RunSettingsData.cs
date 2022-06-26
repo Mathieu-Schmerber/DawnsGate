@@ -1,3 +1,4 @@
+using Game.Entities.Shared;
 using Game.Scripts.Tools;
 using Game.Systems.Run.Rooms;
 using Nawlian.Lib.Extensions;
@@ -101,13 +102,9 @@ namespace Game.Systems.Run
 
         [@Tooltip("Maximum number of doors that can be activated in a room")]
         [MinValue(0)] public int MaxExitNumber;
-
         [Sirenix.OdinInspector.FilePath(RequireExistingPath = true)] public string BootScenePath;
-
         [OnInspectorGUI(nameof(ValidateFolders))]
-
         public string LobbySceneName;
-
         public RoomFolderDictionary RoomFolders;
 
         [Title("Rules", "Run generation rules")]

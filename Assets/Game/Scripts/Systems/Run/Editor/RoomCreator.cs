@@ -18,7 +18,6 @@ namespace Game.Systems.Run.Editor
 		[MenuItem("Tools/Game/Create Room/Event room", false)] public static void CreateE() => CreateRoom(RoomType.EVENT);
 		[MenuItem("Tools/Game/Create Room/Shop room", false)] public static void CreateS() => CreateRoom(RoomType.SHOP);
 		[MenuItem("Tools/Game/Create Room/Life shop room", false)] public static void CreateLS() => CreateRoom(RoomType.LIFE_SHOP);
-		[MenuItem("Tools/Game/Create Room/Upgrade room", false)] public static void CreateU() => CreateRoom(RoomType.UPGRADE);
 		[MenuItem("Tools/Game/Create Room/Boss room", false)] public static void CreateB() => CreateRoom(RoomType.BOSS);
 
 		private static void CreateRoom(RoomType type)

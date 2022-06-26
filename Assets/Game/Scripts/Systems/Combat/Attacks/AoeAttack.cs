@@ -82,7 +82,9 @@ namespace Game.Systems.Combat.Attacks
 
 		protected override void OnAttackHit(Collider collider)
 		{
-			if (Time.time - _startTime <= 0.1f && !_hitColliders.Contains(collider))
+			if (collider.gameObject.layer == Caster.gameObject.layer)
+				return;
+			else if (Time.time - _startTime <= 0.1f && !_hitColliders.Contains(collider))
 			{
 				IDamageProcessor damageProcessor = collider.GetComponent<IDamageProcessor>();
 
@@ -102,7 +104,7 @@ namespace Game.Systems.Combat.Attacks
 			EffectProcessor processor = collider.GetComponent<EffectProcessor>();
 			EntityIdentity entity = collider.GetComponent<EntityIdentity>();
 
-			if (processor != null && collider.gameObject.layer != Caster.gameObject.layer && entity != null && !entity.IsInvulnerable)
+			if (processor != null && entity != null && !entity.IsInvulnerable)
 				processor.ApplyEffect(_attackData.Effect, _attackData.EffectDuration);
 		}
 

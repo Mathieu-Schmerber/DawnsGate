@@ -1,4 +1,6 @@
-﻿using Nawlian.Lib.Extensions;
+﻿using Game.Entities.Shared;
+using Game.Managers;
+using Nawlian.Lib.Extensions;
 using Nawlian.Lib.Systems.Pooling;
 using System.Collections;
 using System.Collections.Generic;
@@ -35,8 +37,21 @@ namespace Game.Systems.Run.Rooms
 		{
 			GameObject enemy = _settings.Enemies.Random();
 			Vector3 spawnPos = Info.Data.SpawnablePositions.Random();
+			GameObject instance = ObjectPooler.Get(enemy, spawnPos, Quaternion.identity, this);
 
-			_wave.Add(ObjectPooler.Get(enemy, spawnPos, Quaternion.identity, this));
+			ScaleEnemyStats(instance.GetComponent<EntityIdentity>());
+			_wave.Add(instance);
+		}
+
+		public void ScaleEnemyStats(EntityIdentity enemy)
+		{
+			if (enemy == null)
+				return;
+
+			int factor = RunManager.Instance.ReachedRooms.Count - 1; // we don't want the enemies to scale on the first room
+
+			foreach (var stat in _settings.EnemyStatScalePerRoom)
+				enemy.Stats.Modifiers[stat.Key].BonusModifier += stat.Value.Value * factor;
 		}
 
 		private IEnumerator SpawnWave()
