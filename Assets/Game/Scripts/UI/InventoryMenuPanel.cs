@@ -11,7 +11,7 @@ using UnityEngine.EventSystems;
 
 namespace Game.UI
 {
-	public class InventoryMenuPanel : AClosableMenu
+	public class InventoryMenuPanel : ACloseableMenu
 	{
 		[Title("References")]
 		[SerializeField] private SimpleDescriptorUi _itemDescription;

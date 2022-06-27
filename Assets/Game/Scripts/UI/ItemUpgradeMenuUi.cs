@@ -14,7 +14,7 @@ using UnityEngine.UI;
 
 namespace Game.UI
 {
-	public class ItemUpgradeMenuUi : AClosableMenu
+	public class ItemUpgradeMenuUi : ACloseableMenu
 	{
 		[Title("References")]
 		[SerializeField] private Transform _globalPanel;

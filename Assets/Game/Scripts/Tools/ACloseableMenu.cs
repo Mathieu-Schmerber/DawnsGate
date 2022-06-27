@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Game.Tools
 {
-	public abstract class AClosableMenu : AMenu
+	public abstract class ACloseableMenu : AMenu
 	{
 		protected virtual void OnEnable()
 		{

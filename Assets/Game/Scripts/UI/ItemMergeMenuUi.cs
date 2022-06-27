@@ -13,7 +13,7 @@ using UnityEngine.UI;
 
 namespace Game.UI
 {
-	public class ItemMergeMenuUi : AClosableMenu
+	public class ItemMergeMenuUi : ACloseableMenu
 	{
 		[Title("References")]
 		[SerializeField] private Transform _globalPanel;

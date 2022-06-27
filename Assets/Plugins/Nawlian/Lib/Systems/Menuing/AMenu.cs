@@ -1,4 +1,5 @@
-﻿using Pixelplacement;
+﻿using Nawlian.Lib.Utils;
+using Pixelplacement;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -31,7 +32,7 @@ namespace Plugins.Nawlian.Lib.Systems.Menuing
 			if (_rect != null)
 				Tween.AnchoredPosition(_rect, _openPosition, _closePosition, _duration, 0, Tween.EaseIn);
 			if (_grp != null)
-				Tween.CanvasGroupAlpha(_grp, 1, 0, _duration, 0, Tween.EaseIn);
+				Tween.CanvasGroupAlpha(_grp, 1, 0, _duration, 0, Tween.EaseIn, startCallback: () => _grp.interactable = false);
 		}
 
 		public virtual void Open()
@@ -40,7 +41,7 @@ namespace Plugins.Nawlian.Lib.Systems.Menuing
 			if (_rect != null)
 				Tween.AnchoredPosition(_rect, _closePosition, _openPosition, _duration, 0, Tween.EaseOut);
 			if (_grp != null)
-				Tween.CanvasGroupAlpha(_grp, 0, 1, _duration, 0, Tween.EaseOut);
+				Tween.CanvasGroupAlpha(_grp, 0, 1, _duration, 0, Tween.EaseOut, completeCallback: () => _grp.interactable = true);
 		}
 
 #if UNITY_EDITOR
