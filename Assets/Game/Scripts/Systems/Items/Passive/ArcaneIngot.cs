@@ -1,4 +1,5 @@
-﻿using Nawlian.Lib.Utils;
+﻿using Game.Entities.Shared;
+using Nawlian.Lib.Utils;
 using System;
 
 namespace Game.Systems.Items.Passive

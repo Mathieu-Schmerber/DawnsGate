@@ -137,20 +137,20 @@ namespace Databases
                 
                 public static Game.Systems.Items.StatItemData StoneBeads = (Game.Systems.Items.StatItemData)Instance.DatabaseAsset.Sections[1].Sections[1].Assets[31].Prefab;
                 
-                public static Game.Systems.Items.StatItemData Test1 = (Game.Systems.Items.StatItemData)Instance.DatabaseAsset.Sections[1].Sections[1].Assets[32].Prefab;
+                public static Game.Systems.Items.StatItemData VampiresTooth = (Game.Systems.Items.StatItemData)Instance.DatabaseAsset.Sections[1].Sections[1].Assets[32].Prefab;
                 
-                public static Game.Systems.Items.StatItemData Test2 = (Game.Systems.Items.StatItemData)Instance.DatabaseAsset.Sections[1].Sections[1].Assets[33].Prefab;
+                public static Game.Systems.Items.StatItemData WarriorsMight = (Game.Systems.Items.StatItemData)Instance.DatabaseAsset.Sections[1].Sections[1].Assets[33].Prefab;
                 
-                public static Game.Systems.Items.StatItemData Test = (Game.Systems.Items.StatItemData)Instance.DatabaseAsset.Sections[1].Sections[1].Assets[34].Prefab;
+                public static Game.Systems.Items.StatItemData SolarisResolve = (Game.Systems.Items.StatItemData)Instance.DatabaseAsset.Sections[1].Sections[1].Assets[34].Prefab;
                 
-                public static Game.Systems.Items.StatItemData VampiresTooth = (Game.Systems.Items.StatItemData)Instance.DatabaseAsset.Sections[1].Sections[1].Assets[35].Prefab;
+                public static Game.Systems.Items.SpecialItemData LunarisResolve = (Game.Systems.Items.SpecialItemData)Instance.DatabaseAsset.Sections[1].Sections[1].Assets[35].Prefab;
                 
-                public static Game.Systems.Items.StatItemData WarriorsMight = (Game.Systems.Items.StatItemData)Instance.DatabaseAsset.Sections[1].Sections[1].Assets[36].Prefab;
+                public static Game.Systems.Items.SpecialItemData LastResolve = (Game.Systems.Items.SpecialItemData)Instance.DatabaseAsset.Sections[1].Sections[1].Assets[36].Prefab;
                 
                 public static IEnumerable<T> All<T>()
                     where T : UnityEngine.Object
                 {
-                    UnityEngine.Object[] all = new UnityEngine.Object[37] {Settings, LootedItem, BerserkerMask, BloodChains, BombWarp, DemonsEye, GoldenClover, LunarisLightning, SharpenedBlade, SolarisBook, ArcaneIngot, LavaPotion, MandragoraRoot, SolarisOrbs, ArmorScraps, AssasinsBane, BatBat, BrokenWatch, DawnsBelt, ExecutionBlade, GloriousBoulder, HolyGrail, LuckyStar, LunarisRing, MaliceShard, MeltingPot, OminousStick, PhoenixFeather, SevenleagueBoots, ShamansWrath, SteelHammer, StoneBeads, Test1, Test2, Test, VampiresTooth, WarriorsMight};
+                    UnityEngine.Object[] all = new UnityEngine.Object[37] {Settings, LootedItem, BerserkerMask, BloodChains, BombWarp, DemonsEye, GoldenClover, LunarisLightning, SharpenedBlade, SolarisBook, ArcaneIngot, LavaPotion, MandragoraRoot, SolarisOrbs, ArmorScraps, AssasinsBane, BatBat, BrokenWatch, DawnsBelt, ExecutionBlade, GloriousBoulder, HolyGrail, LuckyStar, LunarisRing, MaliceShard, MeltingPot, OminousStick, PhoenixFeather, SevenleagueBoots, ShamansWrath, SteelHammer, StoneBeads, VampiresTooth, WarriorsMight, SolarisResolve, LunarisResolve, LastResolve};
                     return all.Where(x => x is T).Select(x => (T)x);
                 }
             }

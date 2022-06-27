@@ -23,7 +23,7 @@ namespace Game.Entities.Shared.Health
 
 		public bool IsDead => _identity.CurrentHealth <= 0;
 
-		public event Action OnDeath;
+		public static event Action<Damageable> OnDeath;
 		public event Action OnBeforeDamaged;
 		public event Action<float> OnDamaged;
 
@@ -122,7 +122,7 @@ namespace Game.Entities.Shared.Health
 
 		public void Kill(EntityIdentity attacker)
 		{
-			OnDeath?.Invoke();
+			OnDeath?.Invoke(this);
 			_identity.CurrentHealth = 0;
 			_identity.CurrentArmor = 0;
 		}

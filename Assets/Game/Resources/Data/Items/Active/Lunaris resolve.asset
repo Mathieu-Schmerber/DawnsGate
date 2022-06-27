@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3453c080cf97d5b4493ae3569a2eac4d, type: 3}
+  m_Name: Lunaris resolve
+  m_EditorClassIdentifier: 
+  Type: 2
+  Script: {fileID: 11500000, guid: 811d8d5442e7a0943af931a378d196fb, type: 3}
+  Graphics: {fileID: 3907235176126722221, guid: c0707f6badf22974bad9ccc4098c3c4e,
+    type: 3}
+  Tags: 8
+  IsLifeItem: 1
+  LifeCost: 80
+  Stages:
+  - Damage: 15
+    Duration: 0
+    Amount: 0
+    Range: 0
+  - Damage: 15
+    Duration: 0
+    Amount: 0
+    Range: 0
+  - Damage: 15
+    Duration: 0
+    Amount: 0
+    Range: 0
+  SpawnPrefab: {fileID: 8951509771448486450, guid: e40dd47c2ebda204e8a7019f06051e92,
+    type: 3}
+  ApplyEffect: {fileID: 0}
+  Description: 'Killing an enemy causes, every enemy to be striked by lightnings.
+
+    Lightnings
+    apply {Damage:u} damages.'

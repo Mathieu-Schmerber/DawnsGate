@@ -92,12 +92,12 @@ namespace Game.Entities.AI
 
 		protected virtual void OnEnable()
 		{
-			_damageable.OnDeath += OnDeath;
+			Damageable.OnDeath += OnDeath;
 		}
 
 		protected virtual void OnDisable()
 		{
-			_damageable.OnDeath -= OnDeath;
+			Damageable.OnDeath -= OnDeath;
 		}
 
 		protected override void Update()
@@ -249,10 +249,13 @@ namespace Game.Entities.AI
 
 		#endregion
 
-		protected virtual void OnDeath()
+		protected virtual void OnDeath(Damageable damageable)
 		{
-			_room.OnEnemyKilled(gameObject);
-			Release();
+			if (damageable == _damageable)
+			{
+				_room.OnEnemyKilled(gameObject);
+				Release();
+			}
 		}
 	}
 }

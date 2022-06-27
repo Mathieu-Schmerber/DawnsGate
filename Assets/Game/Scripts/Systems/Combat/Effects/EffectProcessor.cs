@@ -33,18 +33,21 @@ namespace Game.Systems.Combat.Effects
 
 		private void OnEnable()
 		{
-			_damageable.OnDeath += ClearAllEffects;
+			Damageable.OnDeath += ClearAllEffects;
 		}
 
 		private void OnDisable()
 		{
-			_damageable.OnDeath -= ClearAllEffects;
+			Damageable.OnDeath -= ClearAllEffects;
 		}
 
-		private void ClearAllEffects()
+		private void ClearAllEffects(Damageable damageable)
 		{
-			foreach (var key in _activeEffects.Keys.ToList())
-				RemoveEffect(key);
+			if (damageable == _damageable)
+			{
+				foreach (var key in _activeEffects.Keys.ToList())
+					RemoveEffect(key);
+			}
 		}
 
 		private AEffect AddEffectToActive(AEffectBaseData data)
