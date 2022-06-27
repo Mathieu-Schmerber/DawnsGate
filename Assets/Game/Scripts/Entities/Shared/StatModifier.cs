@@ -73,6 +73,16 @@ namespace Game.Entities.Shared
 		/// <summary>
 		/// Resistance to stun
 		/// </summary>
-		[LabelText("Stun Res. (%)")] StunResistance
+		[LabelText("Stun Res. (%)")] StunResistance,
+
+		/// <summary>
+		/// Amount of gold gained per room cleared
+		/// </summary>
+		[LabelText("Gold gain. (%)")] GoldGain,
+
+		/// <summary>
+		/// Health when revived
+		/// </summary>
+		[LabelText("Revive Health (%)")] ReviveHealth
 	}
 }

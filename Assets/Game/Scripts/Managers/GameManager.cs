@@ -1,5 +1,7 @@
 ﻿using Game.Entities.Camera;
 using Game.Entities.Player;
+using Game.Entities.Shared;
+using Game.Systems.Run.Lobby;
 using Nawlian.Lib.Utils;
 using System;
 using System.Collections.Generic;
@@ -13,9 +15,56 @@ namespace Game.Managers
 	public class GameManager : ManagerSingleton<GameManager>
 	{
 		[SerializeField] private PlayerController _player;
+		[SerializeField] private EntityIdentity _playerEntity;
 		[SerializeField] private CameraController _camera;
 		[SerializeField] private int _runMoney;
 		[SerializeField] private int _lobbyMoney;
+
+		#region Traits
+
+		private Dictionary<TraitUpgradeData, int> _traitUpgrades = new();
+
+		public static int GetTraitUpgradeCost(TraitUpgradeData trait)
+		{
+			if (Instance._traitUpgrades.ContainsKey(trait))
+				return Mathf.RoundToInt(trait.BasePrice * (1 + (Instance._traitUpgrades[trait] * trait.PriceInflationPerUpgrade / 100)));
+			return trait.BasePrice;
+		}
+
+		public static bool IsUpgradable(TraitUpgradeData trait)
+			=> !Instance._traitUpgrades.ContainsKey(trait) || Instance._traitUpgrades[trait] < trait.NumberOfUpgrades;
+
+		public static int GetTraitUpgradeCount(TraitUpgradeData trait)
+		{
+			if (Instance._traitUpgrades.ContainsKey(trait))
+				return Instance._traitUpgrades[trait];
+			return 0;
+		}
+
+		public static bool UpgradeTrait(TraitUpgradeData trait)
+		{
+			int cost = GetTraitUpgradeCost(trait);
+			float healthRatio = Instance._playerEntity.CurrentHealth / Instance._playerEntity.MaxHealth;
+			float armorRatio = Instance._playerEntity.MaxArmor == 0 ? 1 : Instance._playerEntity.CurrentArmor / Instance._playerEntity.MaxArmor;
+
+			if (!CanLobbyMoneyAfford(cost) || !IsUpgradable(trait))
+				return false;
+			else if (Instance._traitUpgrades.ContainsKey(trait))
+				Instance._traitUpgrades[trait]++;
+			else
+				Instance._traitUpgrades.Add(trait, 1);
+			Instance._playerEntity.Stats.Modifiers[trait.StatModified].BonusModifier += trait.IncrementPerUpgrade;
+			PayWithLobbyMoney(cost);
+
+			Instance._playerEntity.CurrentHealth = Mathf.Max(1, Instance._playerEntity.MaxHealth * healthRatio);
+			Instance._playerEntity.CurrentArmor = Instance._playerEntity.MaxArmor * armorRatio;
+
+			return true;
+		}
+
+		#endregion
+
+		#region Currencies
 
 		public static event Action<int, int> OnRunMoneyUpdated;
 		public static event Action<int, int> OnLobbyMoneyUpdated;
@@ -50,7 +99,14 @@ namespace Game.Managers
 			OnLobbyMoneyUpdated?.Invoke(before, Instance._lobbyMoney);
 		}
 
+		#endregion
+
+		#region References
+
 		public static PlayerController Player => Instance._player;
+		public static EntityIdentity PlayerIdentity => Instance._playerEntity;
 		public static CameraController Camera => Instance._camera;
+
+		#endregion
 	}
 }

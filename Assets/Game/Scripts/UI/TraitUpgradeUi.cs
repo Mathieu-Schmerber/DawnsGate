@@ -1,5 +1,7 @@
 ﻿using Game.Managers;
+using Game.Systems.Run.Lobby;
 using Game.Tools;
+using Nawlian.Lib.Extensions;
 using Sirenix.OdinInspector;
 using System;
 using System.Linq;
@@ -20,16 +22,40 @@ namespace Game.UI
 			_descriptors = GetComponentsInChildren<TraitDescriptorUi>();
 		}
 
+		private void Refresh(TraitDescriptorUi x)
+		{
+			TraitUpgradeData trait = x.Trait;
+			int cost = GameManager.GetTraitUpgradeCost(trait);
+
+			x.UpdatePrice(cost);
+			x.SetStatsText($"{trait.StatName}: {GameManager.PlayerIdentity.Stats.Modifiers[trait.StatModified].Value}%<color=green>(+{trait.IncrementPerUpgrade}%)</color>");
+			x.Interactable = GameManager.CanLobbyMoneyAfford(cost) && GameManager.IsUpgradable(trait);
+		}
+
+		private void OnSubmitted(TraitDescriptorUi descriptorUi)
+		{
+			if (GameManager.UpgradeTrait(descriptorUi.Trait))
+			{
+				_descriptors.ForEach(x => Refresh(x));
+				descriptorUi.Interact();
+				if (!descriptorUi.Interactable)
+					EventSystem.current.SetSelectedGameObject(_descriptors.FirstOrDefault(x => x.Interactable)?.gameObject);
+			}
+		}
+
 		public override void Open()
 		{
 			base.Open();
-			EventSystem.current.SetSelectedGameObject(_descriptors.FirstOrDefault()?.gameObject);
+			_descriptors.ForEach(x => Refresh(x));
+			EventSystem.current.SetSelectedGameObject(_descriptors.FirstOrDefault(x => x.Interactable)?.gameObject);
+			TraitDescriptorUi.OnTraitClicked += OnSubmitted;
 		}
 
 		public override void Close()
 		{
 			base.Close();
 			EventSystem.current.SetSelectedGameObject(null);
+			TraitDescriptorUi.OnTraitClicked -= OnSubmitted;
 		}
 	}
 }

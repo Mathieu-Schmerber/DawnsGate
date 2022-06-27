@@ -51,6 +51,8 @@ namespace Game.Entities.Shared
 			Modifiers.Add(StatModifier.DashRange, new StatLineModifier(100));
 			Modifiers.Add(StatModifier.DashCooldown, new StatLineModifier(100));
 			Modifiers.Add(StatModifier.StunResistance, new StatLineModifier(0));
+			Modifiers.Add(StatModifier.GoldGain, new StatLineModifier(100));
+			Modifiers.Add(StatModifier.ReviveHealth, new StatLineModifier(0));
 		}
 	}
 }

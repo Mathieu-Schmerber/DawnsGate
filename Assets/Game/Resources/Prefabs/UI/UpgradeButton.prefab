@@ -147,7 +147,6 @@ GameObject:
   - component: {fileID: 8040317141148700529}
   - component: {fileID: 4144579448085473551}
   - component: {fileID: 6545604658618296429}
-  - component: {fileID: 6378395743463267244}
   - component: {fileID: 1416132721272729668}
   m_Layer: 5
   m_Name: UpgradeButton
@@ -233,7 +232,7 @@ MonoBehaviour:
   m_EffectColor: {r: 1, g: 1, b: 1, a: 0.07058824}
   m_EffectDistance: {x: 2, y: -2}
   m_UseGraphicAlpha: 1
---- !u!114 &6378395743463267244
+--- !u!114 &1416132721272729668
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -242,23 +241,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 875241226045585484}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: c10a6d7926434ae4a9ff215eacffdb29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 2
+    m_Mode: 4
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 0
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.22555876, g: 1, b: 0, a: 1}
-    m_SelectedColor: {r: 0.6981132, g: 0.28671226, b: 0.04244292, a: 0.7529412}
-    m_DisabledColor: {r: 0.3207547, g: 0, b: 0, a: 0.5019608}
+    m_PressedColor: {r: 0.22745098, g: 1, b: 0, a: 1}
+    m_SelectedColor: {r: 0.69803923, g: 0.28627452, b: 0.043137256, a: 0.7529412}
+    m_DisabledColor: {r: 0.32156864, g: 0, b: 0, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -274,23 +273,16 @@ MonoBehaviour:
     m_DisabledTrigger: Disabled
   m_Interactable: 1
   m_TargetGraphic: {fileID: 4144579448085473551}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!114 &1416132721272729668
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 875241226045585484}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c10a6d7926434ae4a9ff215eacffdb29, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  _traitData: {fileID: 0}
+  _title: {fileID: 8189605917390080524}
+  _description: {fileID: 7650698004270348007}
   _stats: {fileID: 984229905070569563}
   _price: {fileID: 3685289797667517483}
+  _duration: 0.15
+  _selectedColor: {r: 0.69803923, g: 0.28627452, b: 0.043137256, a: 0.7529412}
+  _disabledColor: {r: 0.32156864, g: 0, b: 0, a: 0.5019608}
+  _flashColor: {r: 1, g: 1, b: 1, a: 1}
+  _bumpIntensity: 1.1
 --- !u!1 &1513599674508574500
 GameObject:
   m_ObjectHideFlags: 0

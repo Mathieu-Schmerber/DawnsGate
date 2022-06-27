@@ -21,7 +21,9 @@ namespace Game.Systems.Run.Rooms
 			switch (RoomData.Reward)
 			{
 				case RoomRewardType.STARS:
-					GameManager.RewardWithRunMoney(UnityEngine.Random.Range(RunManager.RunSettings.RoomMoneyReward.x, RunManager.RunSettings.RoomMoneyReward.y + 1));
+					int money = UnityEngine.Random.Range(RunManager.RunSettings.RoomMoneyReward.x, RunManager.RunSettings.RoomMoneyReward.y + 1);
+					money = Mathf.RoundToInt(_player.Scale(money, Entities.Shared.StatModifier.GoldGain));
+					GameManager.RewardWithRunMoney(money);
 					break;
 				case RoomRewardType.ITEM:
 					var inventory = _player.GetComponent<Inventory>();
