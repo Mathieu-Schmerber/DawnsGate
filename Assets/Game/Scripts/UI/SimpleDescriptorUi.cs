@@ -43,7 +43,7 @@ namespace Game.UI
 				if (_stars != null)
 				{
 					for (int i = 0; i < _stars.Length; i++)
-						_stars[i].gameObject.SetActive(i <= item.Quality);
+						_stars[i].gameObject.SetActive(i <= stage);
 				}
 			} else
 			{

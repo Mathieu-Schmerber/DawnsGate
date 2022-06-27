@@ -117,7 +117,7 @@ namespace Game.UI
 
 					if (!_additionSlots[1].IsEmpty)
 						description = $"{description}{Environment.NewLine}{_additionSlots[1].Item.GetDescription()}";
-					_resultItem.Describe(_additionSlots[0].name, description, _additionSlots[0].Item.Quality);
+					_resultItem.Describe(_additionSlots[0].Item.Details.name, description, _additionSlots[0].Item.Quality);
 				}
 				else if (!_isAdditionCorrect)
 				{
