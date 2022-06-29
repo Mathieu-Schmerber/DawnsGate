@@ -47,8 +47,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af5a925dd790db34bb616e29d14c0ccc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _data: {fileID: 11400000, guid: 54cf1990a64228540a20ae7dcd1598d6, type: 2}
-  _quality: 2
+  _item:
+    Data: {fileID: 0}
+    Quality: 0
 --- !u!135 &1646379653
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -159,7 +160,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e87d8825967f54429049b3d54eb65d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _amplitude: 0.4
+  _amplitude: 0.2
 --- !u!1001 &4020201373512382939
 PrefabInstance:
   m_ObjectHideFlags: 0
