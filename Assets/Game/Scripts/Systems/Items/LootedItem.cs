@@ -86,5 +86,15 @@ namespace Game.Systems.Items
 		{
 			ObjectPooler.Get(Databases.Database.Data.Item.LootedItem, position, Quaternion.Euler(0, 0, 0), summary, null);
 		}
+
+#if UNITY_EDITOR
+
+		private void OnValidate()
+		{
+			if (!Application.isPlaying)
+				GetComponentInChildren<SpriteRenderer>().sprite = Item?.Graphics;
+		}
+
+#endif
 	}
 }
