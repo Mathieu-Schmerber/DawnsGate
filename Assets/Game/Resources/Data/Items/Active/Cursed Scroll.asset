@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3453c080cf97d5b4493ae3569a2eac4d, type: 3}
-  m_Name: Golden clover
+  m_Name: Cursed Scroll
   m_EditorClassIdentifier: 
   Type: 2
-  IsLifeItem: 0
   Script: {fileID: 11500000, guid: 7f1e20b19c5e3be4f8c1b9e58cd53830, type: 3}
-  Graphics: {fileID: 3907235176126722221, guid: c0707f6badf22974bad9ccc4098c3c4e,
-    type: 3}
+  Graphics: {fileID: 21300000, guid: e45bdb494c2686b48baaed8e63d0f2e2, type: 3}
   Tags: 104
+  IsLifeItem: 0
+  LifeCost: 0
   Stages:
   - Damage: 0
     Duration: 0

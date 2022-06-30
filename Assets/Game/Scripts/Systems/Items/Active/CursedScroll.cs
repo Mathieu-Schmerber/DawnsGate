@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Game.Systems.Items.Active
 {
-	public class GoldenClover : ASpecialItem
+	public class CursedScroll : ASpecialItem
 	{
 		private PlayerWeapon _weaponHolder;
 		private int _consecutiveHits;
