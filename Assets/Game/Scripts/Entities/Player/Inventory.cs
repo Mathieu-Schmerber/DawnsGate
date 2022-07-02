@@ -3,10 +3,7 @@ using Game.Systems.Items;
 using Nawlian.Lib.Utils;
 using Sirenix.OdinInspector;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Game.Entities.Player
@@ -27,9 +24,19 @@ namespace Game.Entities.Player
 
 		public static event Action<Inventory> OnUpdated;
 
+		#region Unity Builtins
+
 		private void Awake()
 		{
 			_slotNumber = Databases.Database.Data.Item.Settings.InventorySlots;
+		}
+
+		#endregion
+
+		public void RemoveAllItems()
+		{
+			_items.ToList().ForEach(x => RemoveItemFromInventory(x.Key));
+			OnUpdated?.Invoke(this);
 		}
 
 		private void AddItemToInventory(ItemSummary item)
@@ -47,6 +54,19 @@ namespace Game.Entities.Player
 				behaviour.MergedBehaviour = mergedBehaviour;
 			}
 		}
+
+		private void RemoveItemFromInventory(ItemBaseData item)
+		{
+			ItemSummary summary = _items[item].Summary;
+
+			_occupiedSlots--;
+			if (summary.isMerged)
+				_items[item].MergedBehaviour.OnUnequipped();
+			_items[item].OnUnequipped();
+			_items.Remove(_items[item].Details);
+		}
+
+		#region Public access
 
 		public bool HasEquipped(ItemBaseData item) => 
 			_items.ContainsKey(item) && // The inventory has the item key
@@ -71,15 +91,9 @@ namespace Game.Entities.Player
 
 		public void DropItem(ItemBaseData item)
 		{
-			ItemSummary summary = _items[item].Summary;
-
-			_occupiedSlots--;
-			if (summary.isMerged)
-				_items[item].MergedBehaviour.OnUnequipped();
-			_items[item].OnUnequipped();
-			_items.Remove(_items[item].Details);
+			LootedItem.Create(transform.position, _items[item].Summary);
+			RemoveItemFromInventory(item);
 			OnUpdated?.Invoke(this);
-			LootedItem.Create(transform.position, summary);
 		}
 
 		public bool TryMergeItems(AEquippedItem a, AEquippedItem b)
@@ -112,5 +126,7 @@ namespace Game.Entities.Player
 		}
 
 		public static int GetMergeCost(AEquippedItem a, AEquippedItem b) => a.NextUpgradePrice + b.NextUpgradePrice;
+
+		#endregion
 	}
 }

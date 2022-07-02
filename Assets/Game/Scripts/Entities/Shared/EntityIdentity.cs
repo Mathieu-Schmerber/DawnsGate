@@ -1,3 +1,4 @@
+using Nawlian.Lib.Extensions;
 using Nawlian.Lib.Utils;
 using Sirenix.OdinInspector;
 using System;
@@ -11,9 +12,9 @@ namespace Game.Entities.Shared
 {
 	public class EntityIdentity : MonoBehaviour
 	{
-		[SerializeField] private BaseStatData _stats;
+		[SerializeField] protected BaseStatData _stats;
 
-		private BaseStatData _cachedStat;
+		protected BaseStatData _cachedStat;
 		private float _currentHealth;
 		private float _currentArmor;
 
@@ -54,9 +55,17 @@ namespace Game.Entities.Shared
 		public float CurrentDashRange => Scale(Stats.DashRange, StatModifier.DashRange);
 		public float CurrentDashCooldown => Scale(Stats.DashCooldown, StatModifier.DashCooldown);
 
-		public void ResetStats()
+		public virtual void ResetStats()
 		{
-			_cachedStat = _stats.Clone() as BaseStatData; // Clone scriptable object so that we can edit it
+			if (_cachedStat == null)
+				_cachedStat = _stats.Clone() as BaseStatData; // Clone scriptable object so that we can edit it
+			else
+			{
+				_cachedStat.Modifiers.ForEach(x => {
+					x.Value.BonusModifier = 0;
+					x.Value.TemporaryModifier = 0;
+				});
+			}
 			CurrentHealth = MaxHealth;
 			CurrentArmor = MaxArmor;
 		}
@@ -68,7 +77,7 @@ namespace Game.Entities.Shared
 
 		public BaseStatData Stats => _cachedStat;
 
-		private void Awake() => ResetStats();
+		protected virtual void Awake() => ResetStats();
 
 		public float Scale(float baseValue, StatModifier modifier)
 		{

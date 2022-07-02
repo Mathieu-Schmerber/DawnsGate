@@ -1,4 +1,5 @@
 ﻿using Game.Entities.Shared.Health;
+using Game.Managers;
 using Nawlian.Lib.Extensions;
 using Nawlian.Lib.Utils;
 using Sirenix.OdinInspector;
@@ -33,21 +34,24 @@ namespace Game.Systems.Combat.Effects
 
 		private void OnEnable()
 		{
-			Damageable.OnDeath += ClearAllEffects;
+			Damageable.OnDeath += CheckAndClear;
 		}
 
 		private void OnDisable()
 		{
-			Damageable.OnDeath -= ClearAllEffects;
+			Damageable.OnDeath -= CheckAndClear;
 		}
 
-		private void ClearAllEffects(Damageable damageable)
+		private void CheckAndClear(Damageable damageable)
 		{
 			if (damageable == _damageable)
-			{
-				foreach (var key in _activeEffects.Keys.ToList())
-					RemoveEffect(key);
-			}
+				ClearAllEffects();
+		}
+
+		public void ClearAllEffects()
+		{
+			foreach (var key in _activeEffects.Keys.ToList())
+				RemoveEffect(key);
 		}
 
 		private AEffect AddEffectToActive(AEffectBaseData data)

@@ -1,4 +1,5 @@
-﻿using Game.Systems.Run;
+﻿using Game.Entities.Player;
+using Game.Systems.Run;
 using Nawlian.Lib.Extensions;
 using Nawlian.Lib.Systems.Pooling;
 using Nawlian.Lib.Utils;
@@ -29,6 +30,7 @@ namespace Game.Managers
 		private Room _room;
 		private RunState _runState = RunState.LOBBY;
 		private Dictionary<RoomType, string[]> _scenes = new();
+		private PlayerDamageable _damageable;
 
 		public static Room CurrentRoom => Instance._room;
 		public static bool IsLastRoom => Instance._currentRoom == RunSettings.RoomRules.Length - 1;
@@ -36,6 +38,8 @@ namespace Game.Managers
 		public static RunState RunState => Instance._runState;
 
 		public List<string> ReachedRooms = new();
+
+		public static event Action OnRunEnded;
 
 		#endregion
 
@@ -46,6 +50,17 @@ namespace Game.Managers
 			_scenes.Add(RoomType.SHOP, Directory.GetFiles(RunSettings.RoomFolders[RoomType.SHOP].Folder, "*.unity", SearchOption.AllDirectories));
 			_scenes.Add(RoomType.LIFE_SHOP, Directory.GetFiles(RunSettings.RoomFolders[RoomType.LIFE_SHOP].Folder, "*.unity", SearchOption.AllDirectories));
 			_scenes.Add(RoomType.BOSS, Directory.GetFiles(RunSettings.RoomFolders[RoomType.BOSS].Folder, "*.unity", SearchOption.AllDirectories));
+			_damageable = GameManager.Player.GetComponent<PlayerDamageable>();
+		}
+
+		private void OnEnable()
+		{
+			_damageable.OnPlayerDeath += EndRun;
+		}
+
+		private void OnDisable()
+		{
+			_damageable.OnPlayerDeath -= EndRun;
 		}
 
 		#region Tools
@@ -87,6 +102,7 @@ namespace Game.Managers
 		{
 			ChangeScene(RunSettings.LobbySceneName);
 			Instance._runState = RunState.LOBBY;
+			OnRunEnded?.Invoke();
 		}
 
 		private static string GetRandomRoomScene(RoomType type) => Path.GetFileNameWithoutExtension(Instance._scenes[type].Random());

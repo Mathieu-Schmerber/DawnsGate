@@ -17,9 +17,9 @@ namespace Game.Entities.Shared.Health
 	[RequireComponent(typeof(EntityIdentity))]
 	public class Damageable : MonoBehaviour, IDamageProcessor
 	{
-		private EntityIdentity _identity;
-		private AController _controller;
-		private Rigidbody _rb;
+		protected EntityIdentity _identity;
+		protected AController _controller;
+		protected Rigidbody _rb;
 
 		public bool IsDead => _identity.CurrentHealth <= 0;
 
@@ -120,7 +120,7 @@ namespace Game.Entities.Shared.Health
 			Awaiter.WaitAndExecute(knockbackTime, () => _rb.velocity = Vector3.zero);
 		}
 
-		public void Kill(EntityIdentity attacker)
+		public virtual void Kill(EntityIdentity attacker)
 		{
 			OnDeath?.Invoke(this);
 			_identity.CurrentHealth = 0;

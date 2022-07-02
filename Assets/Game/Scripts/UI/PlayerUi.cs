@@ -17,49 +17,42 @@ namespace Game.UI
 		[SerializeField] private Image _healthFill;
 		[SerializeField] private Image _armorFill;
 
-		private EntityIdentity _playerIdentity;
-
-		private void Awake()
-		{
-			_playerIdentity = GameManager.Player.GetComponent<EntityIdentity>();
-		}
-
 		private void Start()
 		{
 			_runMoney.text = GameManager.RunMoney.ToString();
 			_lobbyMoney.text = GameManager.LobbyMoney.ToString();
-			_healthText.text = $"{_playerIdentity.CurrentHealth}/{_playerIdentity.MaxHealth}";
-			_healthFill.fillAmount = _playerIdentity.CurrentHealth / _playerIdentity.MaxHealth;
-			_armorFill.fillAmount = _playerIdentity.CurrentArmor / _playerIdentity.MaxArmor;
+			_healthText.text = $"{GameManager.PlayerIdentity.CurrentHealth}/{GameManager.PlayerIdentity.MaxHealth}";
+			_healthFill.fillAmount = GameManager.PlayerIdentity.CurrentHealth / GameManager.PlayerIdentity.MaxHealth;
+			_armorFill.fillAmount = 0;
 		}
 
 		private void OnEnable()
 		{
-			_playerIdentity.OnHealthChanged += UpdateHealthDisplay;
-			_playerIdentity.OnArmorChanged += UpdateArmorDisplay;
+			GameManager.PlayerIdentity.OnHealthChanged += UpdateHealthDisplay;
+			GameManager.PlayerIdentity.OnArmorChanged += UpdateArmorDisplay;
 			GameManager.OnLobbyMoneyUpdated += UpdateLobbyMoneyDisplay;
 			GameManager.OnRunMoneyUpdated += UpdateRunMoneyDisplay; ;
 		}
 
 		private void OnDisable()
 		{
-			_playerIdentity.OnHealthChanged -= UpdateHealthDisplay;
-			_playerIdentity.OnArmorChanged -= UpdateArmorDisplay;
+			GameManager.PlayerIdentity.OnHealthChanged -= UpdateHealthDisplay;
+			GameManager.PlayerIdentity.OnArmorChanged -= UpdateArmorDisplay;
 			GameManager.OnLobbyMoneyUpdated -= UpdateLobbyMoneyDisplay;
 			GameManager.OnRunMoneyUpdated -= UpdateRunMoneyDisplay; ;
 		}
 
 		private void UpdateHealthDisplay()
 		{
-			float ratio = _playerIdentity.CurrentHealth / _playerIdentity.MaxHealth;
+			float ratio = GameManager.PlayerIdentity.CurrentHealth / GameManager.PlayerIdentity.MaxHealth;
 
-			_healthText.text = $"{_playerIdentity.CurrentHealth}/{_playerIdentity.MaxHealth}";
+			_healthText.text = $"{GameManager.PlayerIdentity.CurrentHealth}/{GameManager.PlayerIdentity.MaxHealth}";
 			Tween.Value(_healthFill.fillAmount, ratio, (v) => _healthFill.fillAmount = v, 0.2f, 0, Tween.EaseOut);
 		}
 
 		private void UpdateArmorDisplay()
 		{
-			float ratio = _playerIdentity.MaxArmor == 0 ? 0 : _playerIdentity.CurrentArmor / _playerIdentity.MaxArmor;
+			float ratio = GameManager.PlayerIdentity.MaxArmor == 0 ? 0 : GameManager.PlayerIdentity.CurrentArmor / GameManager.PlayerIdentity.MaxArmor;
 
 			Tween.Value(_armorFill.fillAmount, ratio, (v) => _armorFill.fillAmount = v, 0.2f, 0, Tween.EaseOut);
 		}

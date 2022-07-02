@@ -70,6 +70,9 @@ namespace Game.Entities.AI
 
 		private void SpawnAOE()
 		{
+			if (RunManager.RunState != RunState.IN_RUN)
+				return;
+
 			InitData init = new InitData()
 			{
 				Caster = _entity,
