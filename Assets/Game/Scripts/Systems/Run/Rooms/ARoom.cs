@@ -36,8 +36,11 @@ namespace Game.Systems.Run.Rooms
 		{
 			SceneManager.SetActiveScene(gameObject.scene);
 
-			for (int i = 0; i < RoomData.NextRooms.Count; i++)
-				_info.Doors[i].LeadToRoom = RoomData.NextRooms[i];
+			if (RoomData.NextRooms != null && RoomData.NextRooms.Count > 0)
+			{
+				for (int i = 0; i < Mathf.Min(RoomData.NextRooms.Count, _info.Doors.Length); i++)
+					_info.Doors[i].LeadToRoom = RoomData.NextRooms[i];
+			}
 		}
 
 		protected abstract void OnActivate();

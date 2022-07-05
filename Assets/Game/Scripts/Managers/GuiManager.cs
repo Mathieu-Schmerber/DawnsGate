@@ -24,13 +24,14 @@ namespace Game.Managers
 			_inventoryUi = _canvas.GetComponentInChildren<InventorySlotSelector>();
 		}
 
-		public static void OpenMenu<T>() where T : IMenu
+		public static T OpenMenu<T>() where T : IMenu
 		{
 			IMenu menu = Instance._menus.FirstOrDefault(x => x is T);
 
 			if (menu == null)
-				return;
+				return default(T);
 			menu.Open();
+			return (T)menu;
 		}
 
 		public static void CloseMenu<T>() where T : IMenu

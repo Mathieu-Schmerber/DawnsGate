@@ -24,6 +24,8 @@ namespace Game.Entities.Shared
 		public event Action OnHealthChanged;
 		public event Action OnArmorChanged;
 
+		public string DisplayName => _stats.DisplayName;
+
 		public bool IsInvulnerable { get; private set; }
 
 		[ShowInInspector, ReadOnly]

@@ -8,6 +8,8 @@ namespace Game.Entities.Shared
 	[CreateAssetMenu(menuName = "Data/Entity/Stats/Base")]
 	public class BaseStatData : ScriptableObject, ICloneable
 	{
+		public string DisplayName;
+
 		/// <summary>
 		/// Maximum health of an entity
 		/// </summary>
@@ -53,6 +55,13 @@ namespace Game.Entities.Shared
 			Modifiers.Add(StatModifier.StunResistance, new StatLineModifier(0));
 			Modifiers.Add(StatModifier.GoldGain, new StatLineModifier(100));
 			Modifiers.Add(StatModifier.ReviveHealth, new StatLineModifier(0));
+		}
+
+		[OnInspectorInit]
+		private void Init()
+		{
+			if (string.IsNullOrEmpty(DisplayName))
+				DisplayName = name;
 		}
 	}
 }

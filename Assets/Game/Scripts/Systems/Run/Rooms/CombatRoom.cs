@@ -10,10 +10,10 @@ namespace Game.Systems.Run.Rooms
 {
 	public class CombatRoom : ARewardRoom
 	{
-		private CombatRoomData _settings;
-		private int _waveNumber;
-		private int _currentWave = 0;
-		private List<GameObject> _wave = new();
+		protected CombatRoomData _settings;
+		protected int _waveNumber;
+		protected int _currentWave = 0;
+		protected List<GameObject> _wave = new();
 
 		public override bool RequiresNavBaking => true;
 
@@ -66,7 +66,7 @@ namespace Game.Systems.Run.Rooms
 			_currentWave++;
 		}
 
-		public void OnEnemyKilled(GameObject gameObject)
+		public virtual void OnEnemyKilled(GameObject gameObject)
 		{
 			_wave.Remove(gameObject);
 			if (_wave.Count == 0 && _currentWave < _waveNumber)
