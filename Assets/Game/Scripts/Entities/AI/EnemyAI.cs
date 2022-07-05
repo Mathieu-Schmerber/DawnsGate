@@ -50,7 +50,7 @@ namespace Game.Entities.AI
 			return gameObject;
 		}
 
-		public void Release()
+		public virtual void Release()
 		{
 			gameObject.SetActive(false);
 			gameObject.transform.SetParent(ObjectPooler.Instance.transform);

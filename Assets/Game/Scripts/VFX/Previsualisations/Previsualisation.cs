@@ -16,8 +16,20 @@ namespace Game.VFX.Previsualisations
 		{
 			ObjectPooler.Get(Circle, position, Quaternion.identity, new PrevisuParameters()
 			{
+				Position = position,
 				Duration = duration,
-				Size = radius * 2
+				Size = radius * 2,
+			}, null);
+		}
+
+		public static void ShowCircle(Vector3 position, float radius, float duration, Action<PrevisuParameters> OnRelease)
+		{
+			ObjectPooler.Get(Circle, position, Quaternion.identity, new PrevisuParameters()
+			{
+				Position = position,
+				Duration = duration,
+				Size = radius * 2,
+				OnRelease = OnRelease
 			}, null);
 		}
 	}

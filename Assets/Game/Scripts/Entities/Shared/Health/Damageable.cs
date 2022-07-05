@@ -27,7 +27,7 @@ namespace Game.Entities.Shared.Health
 		public event Action OnBeforeDamaged;
 		public event Action<float> OnDamaged;
 
-		private void Awake()
+		protected virtual void Awake()
 		{
 			_identity = GetComponent<EntityIdentity>();
 			_controller = GetComponent<AController>();

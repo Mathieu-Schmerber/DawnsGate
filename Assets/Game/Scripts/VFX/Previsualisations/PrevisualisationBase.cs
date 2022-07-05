@@ -11,5 +11,11 @@ namespace Game.VFX.Previsualisations
 			_params = (PrevisuParameters)data;
 			Invoke(nameof(Release), _params.Duration);
 		}
+
+		protected override void OnReleasing()
+		{
+			base.OnReleasing();
+			_params.OnRelease(_params);
+		}
 	}
 }

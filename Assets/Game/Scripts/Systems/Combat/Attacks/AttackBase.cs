@@ -71,5 +71,10 @@ namespace Game.Systems.Combat.Attacks
 			if (hitFx)
 				ObjectPooler.Get(hitFx, target.transform.position.WithY(caster.transform.position.y), Quaternion.Euler(0, caster.transform.rotation.eulerAngles.y, 0), null);
 		}
+
+		public static void Spawn<T>(T attack, Vector3 position, Quaternion rotation, InitData init) where T : AttackBaseData
+		{
+			ObjectPooler.Get(attack.Prefab.gameObject, position, rotation, init);
+		}
 	}
 }
