@@ -40,6 +40,15 @@ namespace Game.Entities.AI
 
 		public event Action<EnemyState> OnStateChanged;
 
+		#region Settings
+
+		protected virtual float AttackRange => _aiSettings.AttackRange;
+		protected virtual float AttackCooldown => _aiSettings.AttackCooldown;
+		protected virtual float TriggerRange => _aiSettings.TriggerRange;
+		protected virtual float UnTriggerRange => _aiSettings.UntriggerRange;
+
+		#endregion
+
 		#region IPoolableObject
 
 		public bool Released => !gameObject.activeSelf;
@@ -67,7 +76,7 @@ namespace Game.Entities.AI
 			_entity.ResetStats();
 
 			_room = (CombatRoom)data;
-			_aiSettings = (EnemyStatData)_entity.Stats;
+			_aiSettings = _entity.Stats as EnemyStatData;
 
 			_aiState = EnemyState.PASSIVE;
 			State = EntityState.IDLE;
@@ -116,7 +125,7 @@ namespace Game.Entities.AI
 			// Move
 			base.Update();
 		}
-		
+
 		#endregion
 
 		#region Movement system
@@ -167,7 +176,7 @@ namespace Game.Entities.AI
 
 		protected virtual Vector3 CalculateNextAggressivePoint()
 		{
-			var aroundPos = _room.Info.GetPositionsAround(GameManager.Player.transform.position, _aiSettings.AttackRange / 2);
+			var aroundPos = _room.Info.GetPositionsAround(GameManager.Player.transform.position, AttackRange / 2);
 
 			if (aroundPos?.Length == 0)
 				return _room.Info.Data.SpawnablePositions.Random();
@@ -204,18 +213,18 @@ namespace Game.Entities.AI
 
 		#region State
 
-		private void UpdateAiState()
+		protected virtual void UpdateAiState()
 		{
 			float distance = Vector3.Distance(transform.position, GameManager.Player.transform.position.WithY(transform.position.y));
 
-			if (_aiState == EnemyState.PASSIVE && distance < _aiSettings.TriggerRange)
+			if (_aiState == EnemyState.PASSIVE && distance < TriggerRange)
 			{
 				_aiState = EnemyState.AGGRESSIVE;
 				NextAggressivePosition = transform.position;
 				UpdateAgressivePoint();
 				OnStateChanged?.Invoke(_aiState);
 			}
-			else if (_aiState == EnemyState.AGGRESSIVE && distance > _aiSettings.UntriggerRange)
+			else if (_aiState == EnemyState.AGGRESSIVE && distance > UnTriggerRange)
 			{
 				_aiState = EnemyState.PASSIVE;
 				NextPassivePosition = transform.position;
@@ -234,7 +243,7 @@ namespace Game.Entities.AI
 		{
 			float distance = Vector3.Distance(transform.position, GameManager.Player.transform.position.WithY(transform.position.y));
 
-			if (distance < _aiSettings.AttackRange && Time.time - _lastAttackTime >= _aiSettings.AttackCooldown && State == EntityState.IDLE)
+			if (distance < AttackRange && Time.time - _lastAttackTime >= AttackCooldown && State == EntityState.IDLE)
 			{
 				State = EntityState.ATTACKING;
 				Attack();

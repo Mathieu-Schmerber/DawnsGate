@@ -21,6 +21,18 @@ namespace Game.Systems.Run.Rooms
 			_waveNumber = 1;
 		}
 
+		private void OnEnable()
+		{
+			RunManager.OnRunEnded += CloseBossUi;
+		}
+
+		private void OnDisable()
+		{
+			RunManager.OnRunEnded -= CloseBossUi;
+		}
+
+		private void CloseBossUi() => _bossBar.Close();
+
 		protected override void OnActivate()
 		{
 			GameObject instance = ObjectPooler.Get(_boss, _bossSpawn.position, _bossSpawn.rotation, this);

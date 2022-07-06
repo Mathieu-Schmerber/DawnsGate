@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82f373d89c13403408984db0860618ef, type: 3}
+  m_Name: 360Slash
+  m_EditorClassIdentifier: 
+  Prefab: {fileID: 353677936852187588, guid: ee1f525e73053774698d6551ea091acd, type: 3}
+  BaseDamage: 30
+  BaseKnockbackForce: 2
+  KnockbackDir: 0
+  HitFx: {fileID: 6826739793168019112, guid: 161ce196c6bae7843a3573a1fe4c5d5f, type: 3}
+  HitYRotation: 0
+  ActiveTime: 0.4
+  FollowCaster: 1
+  Range: 4

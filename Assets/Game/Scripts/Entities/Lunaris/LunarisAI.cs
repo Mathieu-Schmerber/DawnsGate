@@ -15,7 +15,14 @@ namespace Game.Entities.Lunaris
 		private LunarisStatData _stats;
 		private Timer _passiveTimer = new();
 
-		private LunarisStatData.PhaseSettings _currentPhase => _stats.Phases[_phase];
+		private LunarisStatData.PhaseSettings _currentPhase =>
+			_phase switch
+			{
+				LunarisPhase.SCYTHE => _stats.ScythePhase,
+				LunarisPhase.KATANA => _stats.KatanaPhase,
+				LunarisPhase.STAFF => _stats.StaffPhase,
+				_ => throw new ArgumentOutOfRangeException(nameof(_phase), $"Not expected value: {_phase}"),
+			};
 
 		#region Unity builtins
 
@@ -27,7 +34,7 @@ namespace Game.Entities.Lunaris
 		protected override void Init(object data)
 		{
 			base.Init(data);
-			_stats = _aiSettings as LunarisStatData;
+			_stats = _entity.Stats as LunarisStatData;
 			_passiveTimer.Start(_currentPhase.SpawnRate, true, OnPassiveTick);
 		}
 
@@ -66,6 +73,8 @@ namespace Game.Entities.Lunaris
 		#region Movement
 
 		protected override bool UsesPathfinding => true;
+		protected override float TriggerRange => Mathf.Infinity;
+		protected override float UnTriggerRange => Mathf.Infinity;
 
 		#endregion
 
@@ -109,6 +118,9 @@ namespace Game.Entities.Lunaris
 		#endregion
 
 		#region Attack
+
+		protected override float AttackRange => _currentPhase.LightAttack.Range; // TODO: set attack properly
+		protected override float AttackCooldown => 1; // TODO: set propertly
 
 		protected override void Attack()
 		{

@@ -8,7 +8,7 @@ namespace Game.Entities.Shared
 	[CreateAssetMenu(menuName = "Data/Entity/Stats/Base")]
 	public class BaseStatData : ScriptableObject, ICloneable
 	{
-		public string DisplayName;
+		[TitleGroup("Main")] public string DisplayName;
 
 		/// <summary>
 		/// Maximum health of an entity
@@ -58,7 +58,7 @@ namespace Game.Entities.Shared
 		}
 
 		[OnInspectorInit]
-		private void Init()
+		protected virtual void Init()
 		{
 			if (string.IsNullOrEmpty(DisplayName))
 				DisplayName = name;

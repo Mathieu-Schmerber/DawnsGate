@@ -1,30 +1,32 @@
-﻿using Game.Entities.AI;
+﻿using Game.Entities.Shared;
 using Game.Systems.Combat.Attacks;
-using Nawlian.Lib.Utils;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Game.Entities.Lunaris
 {
 	[CreateAssetMenu(menuName = "Data/Entity/Stats/Lunaris")]
-	public class LunarisStatData : EnemyStatData
+	public class LunarisStatData : BaseStatData
 	{
 		#region Types
 
-		[System.Serializable]
+		[System.Serializable, InlineProperty, HideLabel]
 		public class PhaseSettings
 		{
-			[FoldoutGroup("Passive")] public float SpawnRate;
-			[FoldoutGroup("Passive")] public float PrevisualisationDuration;
-			[FoldoutGroup("Passive")] public float PassiveSpread;
-		}
+			[TabGroup("Passive")] public float SpawnRate;
+			[TabGroup("Passive")] public float PrevisualisationDuration;
+			[TabGroup("Passive")] public float PassiveSpread;
 
-		[System.Serializable]
-		public class PhaseDictionary : SerializedDictionary<LunarisPhase, PhaseSettings> { }
+			[TabGroup("Attack"), InlineEditor] public ModularAttackData LightAttack;
+			[TabGroup("Attack"), InlineEditor] public ModularAttackData HeavyAttack;
+		}
 
 		#endregion
 
-		public PhaseDictionary Phases;
+		[Title("Phases")]
 		[InlineEditor] public ModularAttackData PassiveAttack;
+		[FoldoutGroup("Phase 1: Scythe")] public PhaseSettings ScythePhase = new();
+		[FoldoutGroup("Phase 2: Katana")] public PhaseSettings KatanaPhase = new();
+		[FoldoutGroup("Phase 3: Staff")] public PhaseSettings StaffPhase = new();
 	}
 }

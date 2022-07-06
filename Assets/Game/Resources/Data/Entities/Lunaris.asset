@@ -68,20 +68,22 @@ MonoBehaviour:
     - _baseModifier: 0
       BonusModifier: 0
       TemporaryModifier: 0
-  TriggerRange: 0
-  UntriggerRange: 0
-  AttackRange: 0
-  AttackCooldown: 0
-  Phases:
-    keyData: 000000000100000002000000
-    valueData:
-    - SpawnRate: 2
-      PrevisualisationDuration: 1.5
-      PassiveSpread: 0
-    - SpawnRate: 1
-      PrevisualisationDuration: 0.5
-      PassiveSpread: 2
-    - SpawnRate: 0.5
-      PrevisualisationDuration: 0.5
-      PassiveSpread: 2
   PassiveAttack: {fileID: 11400000, guid: c1e6ba64d76ab3743872e20c32139e6d, type: 2}
+  ScythePhase:
+    SpawnRate: 2
+    PrevisualisationDuration: 0.5
+    PassiveSpread: 0
+    LightAttack: {fileID: 11400000, guid: eb0dbd117b0a26e4eafce17cbc6e9481, type: 2}
+    HeavyAttack: {fileID: 11400000, guid: 913665cc2b320f3409aab545e35d9fe1, type: 2}
+  KatanaPhase:
+    SpawnRate: 1
+    PrevisualisationDuration: 0.5
+    PassiveSpread: 2
+    LightAttack: {fileID: 11400000, guid: eb0dbd117b0a26e4eafce17cbc6e9481, type: 2}
+    HeavyAttack: {fileID: 11400000, guid: 913665cc2b320f3409aab545e35d9fe1, type: 2}
+  StaffPhase:
+    SpawnRate: 1
+    PrevisualisationDuration: 0.5
+    PassiveSpread: 2
+    LightAttack: {fileID: 11400000, guid: eb0dbd117b0a26e4eafce17cbc6e9481, type: 2}
+    HeavyAttack: {fileID: 11400000, guid: 913665cc2b320f3409aab545e35d9fe1, type: 2}
