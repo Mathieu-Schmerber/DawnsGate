@@ -10,6 +10,16 @@ namespace Game.Entities.Lunaris
 	{
 		#region Types
 
+		[System.Serializable]
+		public class PhaseAttack
+		{
+			public AnimationClip Animation;
+			public float AttackSpeed;
+			public ModularAttackData AttackData;
+			public Vector3 StartOffset;
+			public Vector3 TravelDistance;
+		}
+
 		[System.Serializable, InlineProperty, HideLabel]
 		public class PhaseSettings
 		{
@@ -17,8 +27,13 @@ namespace Game.Entities.Lunaris
 			[TabGroup("Passive")] public float PrevisualisationDuration;
 			[TabGroup("Passive")] public float PassiveSpread;
 
-			[TabGroup("Attack"), InlineEditor] public ModularAttackData LightAttack;
-			[TabGroup("Attack"), InlineEditor] public ModularAttackData HeavyAttack;
+			[TabGroup("Attack")] public PhaseAttack LightAttack;
+			[TabGroup("Attack")] public PhaseAttack HeavyAttack;
+
+			[TabGroup("Settings")] public Vector2Int LightBeforeHeavyNumber;
+			[TabGroup("Settings")] public Mesh Weapon;
+			[TabGroup("Settings")] public float AttackCooldown;
+			[TabGroup("Settings")] public float RestingTime;
 		}
 
 		#endregion

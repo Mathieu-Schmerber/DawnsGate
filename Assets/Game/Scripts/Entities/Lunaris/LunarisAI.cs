@@ -3,17 +3,19 @@ using Game.Managers;
 using Game.Systems.Combat.Attacks;
 using Game.VFX.Previsualisations;
 using Nawlian.Lib.Extensions;
+using Nawlian.Lib.Systems.Animations;
 using Nawlian.Lib.Utils;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace Game.Entities.Lunaris
 {
-	public class LunarisAI : EnemyAI
+	public class LunarisAI : EnemyAI, IAnimationEventListener
 	{
+		[SerializeField] private MeshFilter _weaponMesh;
 		private LunarisStatData _stats;
-		private Timer _passiveTimer = new();
 
 		private LunarisStatData.PhaseSettings _currentPhase =>
 			_phase switch
@@ -35,7 +37,10 @@ namespace Game.Entities.Lunaris
 		{
 			base.Init(data);
 			_stats = _entity.Stats as LunarisStatData;
-			_passiveTimer.Start(_currentPhase.SpawnRate, true, OnPassiveTick);
+
+			OnPhaseSet();
+			// TODO: uncoment, test purpose
+			//_passiveTimer.Start(_currentPhase.SpawnRate, true, OnPassiveTick);
 		}
 
 		protected override void OnEnable()
@@ -64,8 +69,15 @@ namespace Game.Entities.Lunaris
 		internal void SetNextPhase()
 		{
 			_phase++;
+			OnPhaseSet();
+		}
+
+		internal void OnPhaseSet()
+		{
 			_passiveTimer.Interval = _currentPhase.SpawnRate;
-			_passiveTimer.Restart();
+			// TODO: uncomment
+			//_passiveTimer.Restart();
+			_weaponMesh.mesh = _currentPhase.Weapon;
 		}
 
 		#endregion
@@ -79,6 +91,8 @@ namespace Game.Entities.Lunaris
 		#endregion
 
 		#region Passive
+
+		private Timer _passiveTimer = new();
 
 		private void OnPassiveTick()
 		{
@@ -119,12 +133,112 @@ namespace Game.Entities.Lunaris
 
 		#region Attack
 
-		protected override float AttackRange => _currentPhase.LightAttack.Range; // TODO: set attack properly
-		protected override float AttackCooldown => 1; // TODO: set propertly
+		#region General
+
+		private enum AttackType
+		{
+			LIGHT,
+			HEAVY
+		}
+
+		private Stack<AttackType> _attackStack = new();
+		private AttackType _currentAttackType;
+		private LunarisStatData.PhaseAttack _currentAttack;
+		protected override float AttackCooldown => _currentPhase.AttackCooldown;
+		protected override float AttackRange => _currentAttack.AttackData.Range;
+
+		private void RefillAttackStack()
+		{
+			int lightNumber = Random.Range(_currentPhase.LightBeforeHeavyNumber.x, _currentPhase.LightBeforeHeavyNumber.y + 1);
+
+			_attackStack.Push(AttackType.HEAVY); // Always end stack with heavy attack
+			for (int i = 0; i < lightNumber; i++)
+				_attackStack.Push(AttackType.LIGHT);
+		}
 
 		protected override void Attack()
 		{
-			OnAttackEnd();
+			if (_attackStack.Count == 0)
+				RefillAttackStack();
+
+			_currentAttackType = _attackStack.Pop();
+			_currentAttack = _currentAttackType == AttackType.HEAVY ? _currentPhase.HeavyAttack : _currentPhase.LightAttack;
+			_gfxAnim.SetFloat("AttackSpeed", _entity.Scale(_currentAttack.AttackSpeed, Shared.StatModifier.AttackSpeed));
+			_gfxAnim.Play(_currentAttack.Animation.name);
+		}
+
+		public void OnAnimationEvent(string animationArg)
+		{
+			if (animationArg == "Attack")
+			{
+				LockTarget(GameManager.Player.transform, true);
+				LockAim = true;
+
+				ModularAttack instance = AttackBase.Spawn(_currentAttack.AttackData, transform.position, Quaternion.LookRotation(GetAimNormal()), new()
+				{
+					Caster = _entity,
+					Data = _currentAttack.AttackData
+				}).GetComponent<ModularAttack>();
+
+				instance.OnStart(_currentAttack.StartOffset, _currentAttack.TravelDistance);
+
+				if (_phase == LunarisPhase.KATANA && _currentAttackType == AttackType.HEAVY)
+					ThrustAttack();
+			}
+		}
+
+		public void OnAnimationEnter(AnimatorStateInfo stateInfo)
+		{
+			// Global behaviour
+			if (stateInfo.IsName(_currentAttack.Animation.name))
+			{
+				LockTarget(GameManager.Player.transform);
+				LockMovement = true;
+			}
+			// Light attack specifics
+			if (stateInfo.IsName(_currentPhase.LightAttack.Animation.name))
+			{
+			}
+			// Heavy attack specifics
+			else if (stateInfo.IsName(_currentPhase.HeavyAttack.Animation.name))
+			{
+			}
+		}
+
+		public void OnAnimationExit(AnimatorStateInfo stateInfo)
+		{
+			// Global behaviour
+			if (stateInfo.IsName(_currentAttack.Animation.name))
+			{
+				UnlockTarget();
+				LockAim = false;
+				LockMovement = false;
+				OnAttackEnd();
+			}
+			// Light attack specifics
+			if (stateInfo.IsName(_currentPhase.LightAttack.Animation.name))
+			{
+			}
+			// Heavy attack specifics
+			else if (stateInfo.IsName(_currentPhase.HeavyAttack.Animation.name))
+			{
+				PutToRest();
+			}
+		}
+
+		#endregion
+
+		private void PutToRest()
+		{
+			// TODO: make lunaris rest for _currentPhase.RestingTime
+			// making lunaris unable to move nor aim nor attack during this time
+			// make it into an animation ?
+		}
+
+		private void ThrustAttack()
+		{
+			// TODO: make dash to closest wall
+			// TODO: spawn explosion at impact
 		}
 
 		#endregion

@@ -141,7 +141,8 @@ namespace Game.Entities.Shared
 		/// </summary>
 		protected void ApplySmoothRotation(Transform tr, Vector3 anchor)
 		{
-			_desiredRotation = Quaternion.LookRotation(GetAimNormal());
+			if (GetAimNormal() != Vector3.zero)
+				_desiredRotation = Quaternion.LookRotation(GetAimNormal());
 			tr.rotation = Quaternion.Slerp(tr.transform.rotation, _desiredRotation, _rotationSpeed * Time.deltaTime);
 			tr.localPosition = anchor;
 		}
