@@ -18,10 +18,7 @@ namespace Game.Entities.Lunaris
 			if (_ai.IsLastPhase)
 				base.Kill(attacker);
 			else
-			{
 				_ai.SetNextPhase();
-				_identity.CurrentHealth = _identity.MaxHealth;
-			}
 		}
 	}
 }

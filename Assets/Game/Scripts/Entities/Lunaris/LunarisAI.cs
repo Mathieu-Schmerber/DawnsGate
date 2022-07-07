@@ -69,6 +69,7 @@ namespace Game.Entities.Lunaris
 		internal void SetNextPhase()
 		{
 			_phase++;
+			_entity.CurrentHealth = _entity.MaxHealth;
 			OnPhaseSet();
 		}
 
@@ -145,7 +146,7 @@ namespace Game.Entities.Lunaris
 		private AttackType _currentAttackType;
 		private LunarisStatData.PhaseAttack _currentAttack;
 		protected override float AttackCooldown => _currentPhase.AttackCooldown;
-		protected override float AttackRange => _currentAttack.AttackData.Range;
+		protected override float AttackRange => _currentAttack?.AttackData.Range ?? _currentPhase.LightAttack.AttackData.Range;
 
 		private void RefillAttackStack()
 		{
@@ -230,9 +231,16 @@ namespace Game.Entities.Lunaris
 
 		private void PutToRest()
 		{
-			// TODO: make lunaris rest for _currentPhase.RestingTime
-			// making lunaris unable to move nor aim nor attack during this time
-			// make it into an animation ?
+			LockAim = true;
+			_gfxAnim.SetBool("IsTired", true);
+			_gfxAnim.Play(_stats.RestAnimation.name);
+			State = Shared.EntityState.STUN;
+			Awaiter.WaitAndExecute(_currentPhase.RestingTime, () =>
+			{
+				_gfxAnim.SetBool("IsTired", false);
+				State = Shared.EntityState.IDLE;
+				LockAim = false;
+			});
 		}
 
 		private void ThrustAttack()
