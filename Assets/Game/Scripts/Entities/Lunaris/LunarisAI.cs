@@ -1,6 +1,7 @@
 ﻿using Game.Entities.AI;
 using Game.Managers;
 using Game.Systems.Combat.Attacks;
+using Game.Systems.Run.Rooms;
 using Game.VFX.Previsualisations;
 using Nawlian.Lib.Extensions;
 using Nawlian.Lib.Systems.Animations;
@@ -37,21 +38,20 @@ namespace Game.Entities.Lunaris
 		{
 			base.Init(data);
 			_stats = _entity.Stats as LunarisStatData;
-
-			OnPhaseSet();
-			// TODO: uncoment, test purpose
-			//_passiveTimer.Start(_currentPhase.SpawnRate, true, OnPassiveTick);
+			State = Shared.EntityState.STUN;
 		}
 
 		protected override void OnEnable()
 		{
 			base.OnEnable();
+			ARoom.OnRoomActivated += EngageFight;
 		}
 
 		protected override void OnDisable()
 		{
 			base.OnDisable();
 			_passiveTimer.Stop();
+			ARoom.OnRoomActivated -= EngageFight;
 		}
 
 		protected override void Update()
@@ -66,6 +66,12 @@ namespace Game.Entities.Lunaris
 		private readonly LunarisPhase LAST_PHASE = LunarisPhase.STAFF;
 		private LunarisPhase _phase = 0;
 		internal bool IsLastPhase => _phase == LAST_PHASE;
+
+		public void EngageFight()
+		{
+			OnPhaseSet();
+		}
+
 		internal void SetNextPhase()
 		{
 			_phase++;
@@ -92,6 +98,9 @@ namespace Game.Entities.Lunaris
 
 		private void OnReadyToStartNewPhase()
 		{
+			if (RunManager.RunState == RunState.LOBBY)
+				return;
+
 			// Spawn explosion
 			AttackBase.Spawn(_stats.PhaseSwitchAttack, transform.position.WithY(_room.GroundLevel), Quaternion.identity, new()
 			{

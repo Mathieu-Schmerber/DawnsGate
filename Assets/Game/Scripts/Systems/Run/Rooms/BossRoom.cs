@@ -2,6 +2,7 @@
 using Game.Managers;
 using Game.UI;
 using Nawlian.Lib.Systems.Pooling;
+using Nawlian.Lib.Utils;
 using UnityEngine;
 
 namespace Game.Systems.Run.Rooms
@@ -11,6 +12,7 @@ namespace Game.Systems.Run.Rooms
 		[SerializeField] private GameObject _boss;
 		[SerializeField] private Transform _bossSpawn;
 
+		private EntityIdentity _bossIdentity;
 		private BossBarUi _bossBar;
 
 		public override bool RequiresNavBaking => true;
@@ -31,14 +33,20 @@ namespace Game.Systems.Run.Rooms
 			RunManager.OnRunEnded -= CloseBossUi;
 		}
 
+		protected override void Start()
+		{
+			_bossIdentity = ObjectPooler.Get(_boss, _bossSpawn.position, _bossSpawn.rotation, this).GetComponent<EntityIdentity>();
+
+			// TODO: wait time according to some animation ?
+			Awaiter.WaitAndExecute(1f, Activate);
+		}
+
 		private void CloseBossUi() => _bossBar.Close();
 
 		protected override void OnActivate()
 		{
-			GameObject instance = ObjectPooler.Get(_boss, _bossSpawn.position, _bossSpawn.rotation, this);
-
 			_bossBar = GuiManager.OpenMenu<BossBarUi>();
-			_bossBar.Bind(instance.GetComponent<EntityIdentity>());
+			_bossBar.Bind(_bossIdentity);
 		}
 
 		public override void OnEnemyKilled(GameObject gameObject)
