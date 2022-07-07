@@ -98,7 +98,7 @@ namespace Game.Entities.AI
 					MaxAltitude = _stats.MaxAltitude,
 					Destination = _lastHitPos
 				}, null);
-				Previsualisation.ShowCircle(_lastHitPos, _stats.AoeAttack.Range / 2, _stats.TravelTime);
+				Previsualisation.Show(_stats.AoeAttack.Previsualisation, _lastHitPos, _stats.AoeAttack.Range / 2, _stats.TravelTime);
 				Invoke(nameof(SpawnAOE), _stats.TravelTime);
 			}
 		}

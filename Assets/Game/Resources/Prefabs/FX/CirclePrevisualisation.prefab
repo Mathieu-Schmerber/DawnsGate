@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 629792098627335983}
   - component: {fileID: 4291730902960195662}
   - component: {fileID: 3984458742709782960}
-  - component: {fileID: 4607830485550648566}
+  - component: {fileID: 8134988624244144373}
   m_Layer: 0
   m_Name: CirclePrevisualisation
   m_TagString: Untagged
@@ -4872,7 +4872,7 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!114 &4607830485550648566
+--- !u!114 &8134988624244144373
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4881,6 +4881,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 7944063403446872818}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f803332aa8cd8843b52829744febddb, type: 3}
+  m_Script: {fileID: 11500000, guid: 805cfa29ada5ca74cb789a7a99c6d459, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _controlDuration: 1
+  _controlScale: 1

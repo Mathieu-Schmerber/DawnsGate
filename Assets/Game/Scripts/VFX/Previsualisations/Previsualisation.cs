@@ -10,11 +10,15 @@ namespace Game.VFX.Previsualisations
 {
 	public static class Previsualisation
 	{
-		public static GameObject Circle => Databases.Database.Previsualisations.Circle;
-
-		public static void ShowCircle(Vector3 position, float radius, float duration)
+		public static void Show(PrevisualisationBase previsualisation, Vector3 position, float radius, float duration)
 		{
-			ObjectPooler.Get(Circle, position, Quaternion.identity, new PrevisuParameters()
+			if (previsualisation == null)
+			{
+				Debug.LogError("Cannot display a null previsualisation.");
+				return;
+			}
+
+			ObjectPooler.Get(previsualisation.gameObject, position, Quaternion.identity, new PrevisuParameters()
 			{
 				Position = position,
 				Duration = duration,
@@ -22,9 +26,15 @@ namespace Game.VFX.Previsualisations
 			}, null);
 		}
 
-		public static void ShowCircle(Vector3 position, float radius, float duration, Action<PrevisuParameters> OnRelease)
+		public static void Show(PrevisualisationBase previsualisation, Vector3 position, float radius, float duration, Action<PrevisuParameters> OnRelease)
 		{
-			ObjectPooler.Get(Circle, position, Quaternion.identity, new PrevisuParameters()
+			if (previsualisation == null)
+			{
+				Debug.LogError("Cannot display a null previsualisation.");
+				return;
+			}
+
+			ObjectPooler.Get(previsualisation.gameObject, position, Quaternion.identity, new PrevisuParameters()
 			{
 				Position = position,
 				Duration = duration,

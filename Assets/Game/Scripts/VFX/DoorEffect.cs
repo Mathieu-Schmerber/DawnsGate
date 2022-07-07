@@ -35,7 +35,10 @@ namespace Game.VFX
 		private void OnActivated()
 		{
 			_meshRenderer.material = _activatedMaterial;
-			_text.text = $"{_door.LeadToRoom.Type}{System.Environment.NewLine}{_door.LeadToRoom.Reward}";
+			if (_door.LeadToRoom != null)
+				_text.text = $"{_door.LeadToRoom.Type}{System.Environment.NewLine}{_door.LeadToRoom.Reward}";
+			else
+				_text.text = "End run";
 		}
 	}
 }

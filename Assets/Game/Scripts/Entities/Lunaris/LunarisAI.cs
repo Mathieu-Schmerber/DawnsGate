@@ -1,4 +1,5 @@
 ﻿using Game.Entities.AI;
+using Game.Entities.Shared.Health;
 using Game.Managers;
 using Game.Systems.Combat.Attacks;
 using Game.Systems.Run.Rooms;
@@ -18,13 +19,13 @@ namespace Game.Entities.Lunaris
 		[SerializeField] private MeshFilter _weaponMesh;
 		private LunarisStatData _stats;
 
-		private LunarisStatData.PhaseSettings _currentPhase =>
-			_phase switch
+		private LunarisStatData.PhaseSettings _phase =>
+			_phaseIndex switch
 			{
 				LunarisPhase.SCYTHE => _stats.ScythePhase,
 				LunarisPhase.KATANA => _stats.KatanaPhase,
 				LunarisPhase.STAFF => _stats.StaffPhase,
-				_ => throw new ArgumentOutOfRangeException(nameof(_phase), $"Not expected value: {_phase}"),
+				_ => throw new ArgumentOutOfRangeException(nameof(_phaseIndex), $"Not expected value: {_phaseIndex}"),
 			};
 
 		#region Unity builtins
@@ -38,6 +39,8 @@ namespace Game.Entities.Lunaris
 		{
 			base.Init(data);
 			_stats = _entity.Stats as LunarisStatData;
+			ResetStates();
+			_phaseIndex = 0;
 			State = Shared.EntityState.STUN;
 		}
 
@@ -56,7 +59,8 @@ namespace Game.Entities.Lunaris
 
 		protected override void Update()
 		{
-			base.Update();
+			if (!_damageable.IsDead)
+				base.Update();
 		}
 
 		#endregion
@@ -64,8 +68,8 @@ namespace Game.Entities.Lunaris
 		#region States
 
 		private readonly LunarisPhase LAST_PHASE = LunarisPhase.STAFF;
-		private LunarisPhase _phase = 0;
-		internal bool IsLastPhase => _phase == LAST_PHASE;
+		private LunarisPhase _phaseIndex = 0;
+		internal bool IsLastPhase => _phaseIndex == LAST_PHASE;
 
 		public void EngageFight()
 		{
@@ -74,7 +78,7 @@ namespace Game.Entities.Lunaris
 
 		internal void SetNextPhase()
 		{
-			_phase++;
+			_phaseIndex++;
 			OnPhaseSet();
 		}
 
@@ -92,7 +96,7 @@ namespace Game.Entities.Lunaris
 			State = Shared.EntityState.STUN;
 
 			// Executing the switched state code after waiting for a while
-			Previsualisation.ShowCircle(transform.position.WithY(_room.GroundLevel), _stats.PhaseSwitchAttack.Range, _stats.PhaseSwitchTime);
+			Previsualisation.Show(_stats.PassiveAttack.Previsualisation, transform.position.WithY(_room.GroundLevel), _stats.PhaseSwitchAttack.Range, _stats.PhaseSwitchTime);
 			Awaiter.WaitAndExecute(_stats.PhaseSwitchTime, OnReadyToStartNewPhase);
 		}
 
@@ -109,7 +113,7 @@ namespace Game.Entities.Lunaris
 			});
 
 			// Reactivating the passive
-			_passiveTimer.Start(_currentPhase.SpawnRate, true, OnPassiveTick);
+			_passiveTimer.Start(_phase.SpawnRate, true, OnPassiveTick);
 
 			// We can hurt the boss again
 			_entity.CurrentHealth = _entity.MaxHealth;
@@ -119,7 +123,7 @@ namespace Game.Entities.Lunaris
 			ResetStates();
 
 			// Graphics update
-			_weaponMesh.mesh = _currentPhase.Weapon;
+			_weaponMesh.mesh = _phase.Weapon;
 		}
 
 		private void ResetStates()
@@ -147,23 +151,25 @@ namespace Game.Entities.Lunaris
 
 		private void OnPassiveTick()
 		{
-			Vector3 pos = transform.position.WithY(_room.GroundLevel);
+			Vector3 pos = GameManager.Player.transform.position.WithY(_room.GroundLevel);
 
-			for (int i = 0; i <= (int)_phase; i++)
-				Previsualisation.ShowCircle(
-					pos + Random.insideUnitSphere.WithY(pos.y) * _currentPhase.PassiveSpread,
+			for (int i = 0; i <= (int)_phaseIndex; i++)
+				Previsualisation.Show(
+					_stats.PassiveAttack.Previsualisation,
+					pos + Random.insideUnitSphere.WithY(pos.y) * _phase.PassiveSpread,
 					_stats.PassiveAttack.Range,
-					_currentPhase.PrevisualisationDuration,
+					_phase.PrevisualisationDuration,
 					SpawnPassive);
 
 			if (IsLastPhase)
 			{
 				for (int i = 0; i < 3; i++)
 				{
-					Previsualisation.ShowCircle(
+					Previsualisation.Show(
+					_stats.PassiveAttack.Previsualisation,
 					_room.Info.Data.SpawnablePositions.Random(),
 					_stats.PassiveAttack.Range,
-					_currentPhase.PrevisualisationDuration,
+					_phase.PrevisualisationDuration,
 					SpawnPassive);
 				}
 			}
@@ -197,12 +203,12 @@ namespace Game.Entities.Lunaris
 		private Stack<AttackType> _attackStack = new();
 		private AttackType _currentAttackType;
 		private LunarisStatData.PhaseAttack _currentAttack;
-		protected override float AttackCooldown => _currentPhase.AttackCooldown;
-		protected override float AttackRange => _currentAttack?.AttackData.Range ?? _currentPhase.LightAttack.AttackData.Range;
+		protected override float AttackCooldown => _phase.AttackCooldown;
+		protected override float AttackRange => _currentAttack?.AttackData.Range ?? _phase.LightAttack.AttackData.Range;
 
 		private void RefillAttackStack()
 		{
-			int lightNumber = Random.Range(_currentPhase.LightBeforeHeavyNumber.x, _currentPhase.LightBeforeHeavyNumber.y + 1);
+			int lightNumber = Random.Range(_phase.LightBeforeHeavyNumber.x, _phase.LightBeforeHeavyNumber.y + 1);
 
 			_attackStack.Push(AttackType.HEAVY); // Always end stack with heavy attack
 			for (int i = 0; i < lightNumber; i++)
@@ -215,7 +221,7 @@ namespace Game.Entities.Lunaris
 				RefillAttackStack();
 
 			_currentAttackType = _attackStack.Pop();
-			_currentAttack = _currentAttackType == AttackType.HEAVY ? _currentPhase.HeavyAttack : _currentPhase.LightAttack;
+			_currentAttack = _currentAttackType == AttackType.HEAVY ? _phase.HeavyAttack : _phase.LightAttack;
 			_gfxAnim.SetFloat("AttackSpeed", _entity.Scale(_currentAttack.AttackSpeed, Shared.StatModifier.AttackSpeed));
 			_gfxAnim.Play(_currentAttack.Animation.name);
 		}
@@ -235,7 +241,7 @@ namespace Game.Entities.Lunaris
 
 				instance.OnStart(_currentAttack.StartOffset, _currentAttack.TravelDistance);
 
-				if (_phase == LunarisPhase.KATANA && _currentAttackType == AttackType.HEAVY)
+				if (_phaseIndex == LunarisPhase.KATANA && _currentAttackType == AttackType.HEAVY)
 					ThrustAttack();
 			}
 		}
@@ -249,11 +255,11 @@ namespace Game.Entities.Lunaris
 				LockMovement = true;
 			}
 			// Light attack specifics
-			if (stateInfo.IsName(_currentPhase.LightAttack.Animation.name))
+			if (stateInfo.IsName(_phase.LightAttack.Animation.name))
 			{
 			}
 			// Heavy attack specifics
-			else if (stateInfo.IsName(_currentPhase.HeavyAttack.Animation.name))
+			else if (stateInfo.IsName(_phase.HeavyAttack.Animation.name))
 			{
 			}
 		}
@@ -268,11 +274,11 @@ namespace Game.Entities.Lunaris
 				OnAttackEnd();
 			}
 			// Light attack specifics
-			if (stateInfo.IsName(_currentPhase.LightAttack.Animation.name))
+			if (stateInfo.IsName(_phase.LightAttack.Animation.name))
 			{
 			}
 			// Heavy attack specifics
-			else if (stateInfo.IsName(_currentPhase.HeavyAttack.Animation.name))
+			else if (stateInfo.IsName(_phase.HeavyAttack.Animation.name))
 			{
 				if (State != Shared.EntityState.STUN)
 					PutToRest();
@@ -287,7 +293,7 @@ namespace Game.Entities.Lunaris
 			_gfxAnim.SetBool("IsTired", true);
 			_gfxAnim.Play(_stats.RestAnimation.name);
 			State = Shared.EntityState.STUN;
-			Awaiter.WaitAndExecute(_currentPhase.RestingTime, ResetStates);
+			Awaiter.WaitAndExecute(_phase.RestingTime, ResetStates);
 		}
 
 		private void ThrustAttack()
@@ -297,5 +303,16 @@ namespace Game.Entities.Lunaris
 		}
 
 		#endregion
+
+		protected override void OnDeath(Damageable damageable)
+		{
+			if (damageable != _damageable)
+				return;
+
+			State = Shared.EntityState.STUN;
+			_passiveTimer.Stop();
+			_gfxAnim.Play(_stats.DeathAnimation.name);
+			_room.OnEnemyKilled(gameObject);
+		}
 	}
 }

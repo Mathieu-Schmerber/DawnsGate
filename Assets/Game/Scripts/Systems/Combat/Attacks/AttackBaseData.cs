@@ -1,4 +1,5 @@
-﻿using Sirenix.OdinInspector;
+﻿using Game.VFX.Previsualisations;
+using Sirenix.OdinInspector;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +21,8 @@ namespace Game.Systems.Combat.Attacks
 
 		[AssetsOnly, AssetSelector(Paths = ATTACK_PREFAB_FOLDER), ValidateInput("@Validate()", "@GetError()")]
 		public AttackBase Prefab;
+
+		public PrevisualisationBase Previsualisation;
 
 		[Title("Attack stats")]
 		public int BaseDamage;

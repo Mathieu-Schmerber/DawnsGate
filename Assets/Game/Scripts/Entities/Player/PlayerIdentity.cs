@@ -21,11 +21,13 @@ namespace Game.Entities.Player
 		private void OnEnable()
 		{
 			_damageable.OnPlayerDeath += OnRunEnded;
+			RunManager.OnRunEnded += OnRunEnded;
 		}
 
 		private void OnDisable()
 		{
 			_damageable.OnPlayerDeath -= OnRunEnded;
+			RunManager.OnRunEnded -= OnRunEnded;
 		}
 
 		#region Run Ending management 

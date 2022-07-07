@@ -98,7 +98,7 @@ namespace Game.Managers
 			}
 		}
 
-		private static void EndRun()
+		public static void EndRun()
 		{
 			ChangeScene(RunSettings.LobbySceneName);
 			Instance._runState = RunState.LOBBY;

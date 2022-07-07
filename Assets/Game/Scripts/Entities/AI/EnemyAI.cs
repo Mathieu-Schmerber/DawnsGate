@@ -252,7 +252,8 @@ namespace Game.Entities.AI
 
 		protected void OnAttackEnd()
 		{
-			State = EntityState.IDLE;
+			if (State != EntityState.STUN)
+				State = EntityState.IDLE;
 			_lastAttackTime = Time.time;
 		}
 

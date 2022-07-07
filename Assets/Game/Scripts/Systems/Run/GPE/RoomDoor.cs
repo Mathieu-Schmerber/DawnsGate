@@ -11,25 +11,30 @@ namespace Game.Systems.Run.GPE
 {
 	public class RoomDoor : MonoBehaviour, IInteractable
 	{
-		private bool _active = false;
+		protected bool _active = false;
 		public event Action OnActivated;
 
 		public Room LeadToRoom { get; set; }
 
 		public string InteractionTitle => $"Open";
 
-		public void Activate()
+		public virtual void Activate()
 		{
 			// Cannot activate a dead-end
 			if (LeadToRoom == null)
 				return;
+			OnActivate();
+		}
+
+		protected void OnActivate()
+		{
 			_active = true;
 			OnActivated?.Invoke();
 		}
 
 		#region Interaction
 
-		public void Interact(IInteractionActor actor)
+		public virtual void Interact(IInteractionActor actor)
 		{
 			actor.UnSuggestInteraction(this);
 			RunManager.SelectNextRoom(LeadToRoom);

@@ -39,12 +39,14 @@ namespace Game.Entities.Lunaris
 		#endregion
 
 		[Title("Phases")]
-		public AnimationClip RestAnimation;
 		public float PhaseSwitchTime;
+		public AnimationClip RestAnimation;
+		public AnimationClip DeathAnimation;
 		[InlineEditor] public ModularAttackData PassiveAttack;
 		[InlineEditor] public ModularAttackData PhaseSwitchAttack;
 		[FoldoutGroup("Phase 1: Scythe")] public PhaseSettings ScythePhase = new();
 		[FoldoutGroup("Phase 2: Katana")] public PhaseSettings KatanaPhase = new();
 		[FoldoutGroup("Phase 3: Staff")] public PhaseSettings StaffPhase = new();
+
 	}
 }

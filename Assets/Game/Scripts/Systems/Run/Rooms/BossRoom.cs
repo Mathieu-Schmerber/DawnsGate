@@ -49,10 +49,12 @@ namespace Game.Systems.Run.Rooms
 			_bossBar.Bind(_bossIdentity);
 		}
 
-		public override void OnEnemyKilled(GameObject gameObject)
+		protected override void OnClear()
 		{
+			base.OnClear();
 			_bossBar.Close();
-			Clear();
 		}
+
+		public override void OnEnemyKilled(GameObject gameObject) => Clear();
 	}
 }
