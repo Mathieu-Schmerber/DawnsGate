@@ -19,6 +19,9 @@ namespace Game.Entities.Lunaris
 	{
 		[SerializeField] private MeshFilter _weaponMesh;
 		private LunarisStatData _stats;
+		private Timer _dashTimer = new();
+
+		private bool _canDash => CanMove && _dashTimer.IsOver();
 
 		private LunarisStatData.PhaseSettings _phase =>
 			_phaseIndex switch
@@ -74,6 +77,7 @@ namespace Game.Entities.Lunaris
 
 		public void EngageFight()
 		{
+			_dashTimer.Start(_stats.DashCooldown, false);
 			OnPhaseSet();
 		}
 
@@ -210,6 +214,34 @@ namespace Game.Entities.Lunaris
 			_attackStack.Push(AttackType.HEAVY); // Always end stack with heavy attack
 			for (int i = 0; i < lightNumber; i++)
 				_attackStack.Push(AttackType.LIGHT);
+		}
+
+		protected override void TryAttacking()
+		{
+			float distance = Vector3.Distance(transform.position, GameManager.Player.transform.position.WithY(transform.position.y));
+
+			if (Time.time - _lastAttackTime >= AttackCooldown && State == Shared.EntityState.IDLE)
+			{
+				if (distance < AttackRange)
+				{
+					State = Shared.EntityState.ATTACKING;
+					Attack();
+				}
+				else
+				{
+					var dir = (GameManager.Player.transform.position.WithY(transform.position.y) - transform.position).normalized;
+					var dashPoint = transform.position + dir * _stats.DashRange;
+
+					Debug.DrawLine(transform.position, dashPoint, Color.white);
+
+					// Dash to be at range
+					if (Vector3.Distance(GameManager.Player.transform.position.WithY(transform.position.y), dashPoint) < AttackRange / 2 && _canDash) 
+					{
+						Dash(dir, _stats.DashRange, 0.2f, false);
+						_dashTimer.Restart();
+					}
+				}
+			}
 		}
 
 		protected override void Attack()
