@@ -103,6 +103,7 @@ namespace Game.Systems.Run.Rooms
 				}
 			}
 			Data.SpawnablePositions.RemoveAll(pos => pos.y > lowerGround);
+			Data.GroundLevel = lowerGround;
 			_drawGizmos = true;
 			EditorUtility.SetDirty(Data);
 			AssetDatabase.SaveAssets();

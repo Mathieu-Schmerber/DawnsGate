@@ -15,7 +15,7 @@ namespace Game.VFX.Previsualisations
 		protected override void OnReleasing()
 		{
 			base.OnReleasing();
-			_params.OnRelease(_params);
+			_params.OnRelease?.Invoke(_params);
 		}
 	}
 }

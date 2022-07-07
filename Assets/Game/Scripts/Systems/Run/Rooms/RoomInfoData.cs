@@ -13,6 +13,7 @@ namespace Game.Systems.Run.Rooms
 	{
 		[HideInInspector] public bool HasErrors;
 		[ReadOnly] public NavMeshData NavMesh;
+		[ReadOnly] public float GroundLevel;
 		public List<Vector3> SpawnablePositions;
 	}
 }

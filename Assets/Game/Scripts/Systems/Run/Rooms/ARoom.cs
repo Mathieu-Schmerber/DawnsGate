@@ -22,6 +22,7 @@ namespace Game.Systems.Run.Rooms
 		public RoomInfo Info => _info;
 		public bool Cleared { get; protected set; }
 		public abstract bool RequiresNavBaking { get; }
+		public float GroundLevel => _info.Data.GroundLevel;
 
 		public Room RoomData => RunManager.CurrentRoom;
 

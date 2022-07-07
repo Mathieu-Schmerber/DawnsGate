@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 82f373d89c13403408984db0860618ef, type: 3}
-  m_Name: LightningAttack
+  m_Name: SwitchAttack
   m_EditorClassIdentifier: 
   Prefab: {fileID: -2639488009653684992, guid: c13d8d842c93d394ab8cf069c4e87fa3, type: 3}
   BaseDamage: 10
-  BaseKnockbackForce: 1
+  BaseKnockbackForce: 3
   KnockbackDir: 0
   HitFx: {fileID: 6826739793168019112, guid: 161ce196c6bae7843a3573a1fe4c5d5f, type: 3}
   HitYRotation: 0
   ActiveTime: 0.3
   FollowCaster: 0
-  Range: 1.5
+  Range: 2.5

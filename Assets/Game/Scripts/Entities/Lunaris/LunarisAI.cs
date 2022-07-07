@@ -82,14 +82,23 @@ namespace Game.Entities.Lunaris
 
 			// Restricting the boss from doing anything
 			ResetStates();
+			_gfxAnim.StopPlayback();
 			State = Shared.EntityState.STUN;
 
 			// Executing the switched state code after waiting for a while
+			Previsualisation.ShowCircle(transform.position.WithY(_room.GroundLevel), _stats.PhaseSwitchAttack.Range, _stats.PhaseSwitchTime);
 			Awaiter.WaitAndExecute(_stats.PhaseSwitchTime, OnReadyToStartNewPhase);
 		}
 
 		private void OnReadyToStartNewPhase()
 		{
+			// Spawn explosion
+			AttackBase.Spawn(_stats.PhaseSwitchAttack, transform.position.WithY(_room.GroundLevel), Quaternion.identity, new()
+			{
+				Caster = _entity,
+				Data = _stats.PhaseSwitchAttack
+			});
+
 			// Reactivating the passive
 			_passiveTimer.Start(_currentPhase.SpawnRate, true, OnPassiveTick);
 
@@ -129,9 +138,11 @@ namespace Game.Entities.Lunaris
 
 		private void OnPassiveTick()
 		{
+			Vector3 pos = transform.position.WithY(_room.GroundLevel);
+
 			for (int i = 0; i <= (int)_phase; i++)
 				Previsualisation.ShowCircle(
-					GameManager.Player.transform.position + Random.insideUnitSphere.WithY(GameManager.Player.transform.position.y) * _currentPhase.PassiveSpread,
+					pos + Random.insideUnitSphere.WithY(pos.y) * _currentPhase.PassiveSpread,
 					_stats.PassiveAttack.Range,
 					_currentPhase.PrevisualisationDuration,
 					SpawnPassive);
@@ -243,7 +254,8 @@ namespace Game.Entities.Lunaris
 			// Global behaviour
 			if (stateInfo.IsName(_currentAttack.Animation.name))
 			{
-				ResetStates();
+				if (State != Shared.EntityState.STUN)
+					ResetStates();
 				OnAttackEnd();
 			}
 			// Light attack specifics
@@ -253,7 +265,8 @@ namespace Game.Entities.Lunaris
 			// Heavy attack specifics
 			else if (stateInfo.IsName(_currentPhase.HeavyAttack.Animation.name))
 			{
-				PutToRest();
+				if (State != Shared.EntityState.STUN)
+					PutToRest();
 			}
 		}
 
