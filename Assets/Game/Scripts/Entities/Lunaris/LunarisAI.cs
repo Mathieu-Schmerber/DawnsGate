@@ -61,7 +61,7 @@ namespace Game.Entities.Lunaris
 
 		#endregion
 
-		#region Phases
+		#region States
 
 		private readonly LunarisPhase LAST_PHASE = LunarisPhase.STAFF;
 		private LunarisPhase _phase = 0;
@@ -69,16 +69,48 @@ namespace Game.Entities.Lunaris
 		internal void SetNextPhase()
 		{
 			_phase++;
-			_entity.CurrentHealth = _entity.MaxHealth;
 			OnPhaseSet();
 		}
 
 		internal void OnPhaseSet()
 		{
-			_passiveTimer.Interval = _currentPhase.SpawnRate;
-			// TODO: uncomment
-			//_passiveTimer.Restart();
+			// Stop passive from spawning while switching phase
+			_passiveTimer.Stop();
+
+			// Cannot damage the boss any further
+			_entity.SetInvulnerable(true);
+
+			// Restricting the boss from doing anything
+			ResetStates();
+			State = Shared.EntityState.STUN;
+
+			// Executing the switched state code after waiting for a while
+			Awaiter.WaitAndExecute(_stats.PhaseSwitchTime, OnReadyToStartNewPhase);
+		}
+
+		private void OnReadyToStartNewPhase()
+		{
+			// Reactivating the passive
+			_passiveTimer.Start(_currentPhase.SpawnRate, true, OnPassiveTick);
+
+			// We can hurt the boss again
+			_entity.CurrentHealth = _entity.MaxHealth;
+			_entity.SetInvulnerable(false);
+
+			// The boss can return to an active state
+			ResetStates();
+
+			// Graphics update
 			_weaponMesh.mesh = _currentPhase.Weapon;
+		}
+
+		private void ResetStates()
+		{
+			State = Shared.EntityState.IDLE;
+			LockAim = false;
+			LockMovement = false;
+			UnlockTarget();
+			_gfxAnim.SetBool("IsTired", false);
 		}
 
 		#endregion
@@ -211,9 +243,7 @@ namespace Game.Entities.Lunaris
 			// Global behaviour
 			if (stateInfo.IsName(_currentAttack.Animation.name))
 			{
-				UnlockTarget();
-				LockAim = false;
-				LockMovement = false;
+				ResetStates();
 				OnAttackEnd();
 			}
 			// Light attack specifics
@@ -235,12 +265,7 @@ namespace Game.Entities.Lunaris
 			_gfxAnim.SetBool("IsTired", true);
 			_gfxAnim.Play(_stats.RestAnimation.name);
 			State = Shared.EntityState.STUN;
-			Awaiter.WaitAndExecute(_currentPhase.RestingTime, () =>
-			{
-				_gfxAnim.SetBool("IsTired", false);
-				State = Shared.EntityState.IDLE;
-				LockAim = false;
-			});
+			Awaiter.WaitAndExecute(_currentPhase.RestingTime, ResetStates);
 		}
 
 		private void ThrustAttack()

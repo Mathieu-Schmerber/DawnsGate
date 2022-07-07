@@ -93,5 +93,7 @@ namespace Game.Entities.Shared
 			IsInvulnerable = true;
 			Awaiter.WaitAndExecute(duration, () => IsInvulnerable = false);
 		}
+
+		public void SetInvulnerable(bool state) => IsInvulnerable = state;
 	}
 }
