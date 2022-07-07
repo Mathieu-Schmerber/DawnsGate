@@ -156,6 +156,9 @@ namespace Game.Entities.Lunaris
 
 		private void OnPassiveTick()
 		{
+			// TODO: delete the following line
+			return;
+
 			Vector3 pos = GameManager.Player.transform.position.WithY(_room.GroundLevel);
 
 			for (int i = 0; i <= (int)_phaseIndex; i++)
@@ -267,7 +270,6 @@ namespace Game.Entities.Lunaris
 					Caster = _entity,
 					Data = _currentAttack.AttackData
 				}).GetComponent<ModularAttack>();
-
 				instance.OnStart(_currentAttack.StartOffset, _currentAttack.TravelDistance);
 
 				if (_phaseIndex == LunarisPhase.KATANA && _currentAttackType == AttackType.HEAVY)
