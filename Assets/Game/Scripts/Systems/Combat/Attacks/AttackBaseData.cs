@@ -29,6 +29,8 @@ namespace Game.Systems.Combat.Attacks
 		public int BaseKnockbackForce;
 		public KnockbackDirection KnockbackDir;
 
+		public abstract float AttackRange { get; }
+
 #if UNITY_EDITOR
 
 		private string GetError()

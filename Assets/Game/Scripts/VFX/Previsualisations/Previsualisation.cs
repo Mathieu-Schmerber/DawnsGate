@@ -10,7 +10,7 @@ namespace Game.VFX.Previsualisations
 {
 	public static class Previsualisation
 	{
-		public static void Show(PrevisualisationBase previsualisation, Vector3 position, float radius, float duration)
+		public static void Show(PrevisualisationBase previsualisation, Vector3 position, float radius, float duration, Action<PrevisuParameters> OnRelease = null)
 		{
 			if (previsualisation == null)
 			{
@@ -23,10 +23,11 @@ namespace Game.VFX.Previsualisations
 				Position = position,
 				Duration = duration,
 				Size = radius * 2,
+				OnRelease = OnRelease
 			}, null);
 		}
 
-		public static void Show(PrevisualisationBase previsualisation, Vector3 position, float radius, float duration, Action<PrevisuParameters> OnRelease)
+		public static void Show(PrevisualisationBase previsualisation, Vector3 position, Quaternion rotation, float radius, float duration, Action<PrevisuParameters> OnRelease)
 		{
 			if (previsualisation == null)
 			{
@@ -34,7 +35,7 @@ namespace Game.VFX.Previsualisations
 				return;
 			}
 
-			ObjectPooler.Get(previsualisation.gameObject, position, Quaternion.identity, new PrevisuParameters()
+			ObjectPooler.Get(previsualisation.gameObject, position, rotation, new PrevisuParameters()
 			{
 				Position = position,
 				Duration = duration,

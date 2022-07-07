@@ -9,6 +9,7 @@ using Nawlian.Lib.Systems.Animations;
 using Nawlian.Lib.Utils;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -18,6 +19,9 @@ namespace Game.Entities.Lunaris
 	{
 		[SerializeField] private MeshFilter _weaponMesh;
 		private LunarisStatData _stats;
+		private Timer _dashTimer = new();
+
+		private bool _canDash => CanMove && _dashTimer.IsOver();
 
 		private LunarisStatData.PhaseSettings _phase =>
 			_phaseIndex switch
@@ -73,6 +77,7 @@ namespace Game.Entities.Lunaris
 
 		public void EngageFight()
 		{
+			_dashTimer.Start(_stats.DashCooldown, false);
 			OnPhaseSet();
 		}
 
@@ -96,7 +101,7 @@ namespace Game.Entities.Lunaris
 			State = Shared.EntityState.STUN;
 
 			// Executing the switched state code after waiting for a while
-			Previsualisation.Show(_stats.PassiveAttack.Previsualisation, transform.position.WithY(_room.GroundLevel), _stats.PhaseSwitchAttack.Range, _stats.PhaseSwitchTime);
+			AttackBase.ShowAttackPrevisu(_stats.PhaseSwitchAttack, transform.position.WithY(_room.GroundLevel), _stats.PhaseSwitchTime);
 			Awaiter.WaitAndExecute(_stats.PhaseSwitchTime, OnReadyToStartNewPhase);
 		}
 
@@ -151,13 +156,14 @@ namespace Game.Entities.Lunaris
 
 		private void OnPassiveTick()
 		{
+			// TODO: delete the following line
+			return;
+
 			Vector3 pos = GameManager.Player.transform.position.WithY(_room.GroundLevel);
 
 			for (int i = 0; i <= (int)_phaseIndex; i++)
-				Previsualisation.Show(
-					_stats.PassiveAttack.Previsualisation,
+				AttackBase.ShowAttackPrevisu(_stats.PassiveAttack, 
 					pos + Random.insideUnitSphere.WithY(pos.y) * _phase.PassiveSpread,
-					_stats.PassiveAttack.Range,
 					_phase.PrevisualisationDuration,
 					SpawnPassive);
 
@@ -165,12 +171,10 @@ namespace Game.Entities.Lunaris
 			{
 				for (int i = 0; i < 3; i++)
 				{
-					Previsualisation.Show(
-					_stats.PassiveAttack.Previsualisation,
-					_room.Info.Data.SpawnablePositions.Random(),
-					_stats.PassiveAttack.Range,
-					_phase.PrevisualisationDuration,
-					SpawnPassive);
+					AttackBase.ShowAttackPrevisu(_stats.PassiveAttack,
+						_room.Info.Data.SpawnablePositions.Random(),
+						_phase.PrevisualisationDuration,
+						SpawnPassive);
 				}
 			}
 
@@ -215,6 +219,34 @@ namespace Game.Entities.Lunaris
 				_attackStack.Push(AttackType.LIGHT);
 		}
 
+		protected override void TryAttacking()
+		{
+			float distance = Vector3.Distance(transform.position, GameManager.Player.transform.position.WithY(transform.position.y));
+
+			if (Time.time - _lastAttackTime >= AttackCooldown && State == Shared.EntityState.IDLE)
+			{
+				if (distance < AttackRange)
+				{
+					State = Shared.EntityState.ATTACKING;
+					Attack();
+				}
+				else
+				{
+					var dir = (GameManager.Player.transform.position.WithY(transform.position.y) - transform.position).normalized;
+					var dashPoint = transform.position + dir * _stats.DashRange;
+
+					Debug.DrawLine(transform.position, dashPoint, Color.white);
+
+					// Dash to be at range
+					if (Vector3.Distance(GameManager.Player.transform.position.WithY(transform.position.y), dashPoint) < AttackRange / 2 && _canDash) 
+					{
+						Dash(dir, _stats.DashRange, 0.2f, false);
+						_dashTimer.Restart();
+					}
+				}
+			}
+		}
+
 		protected override void Attack()
 		{
 			if (_attackStack.Count == 0)
@@ -238,7 +270,6 @@ namespace Game.Entities.Lunaris
 					Caster = _entity,
 					Data = _currentAttack.AttackData
 				}).GetComponent<ModularAttack>();
-
 				instance.OnStart(_currentAttack.StartOffset, _currentAttack.TravelDistance);
 
 				if (_phaseIndex == LunarisPhase.KATANA && _currentAttackType == AttackType.HEAVY)
@@ -248,11 +279,17 @@ namespace Game.Entities.Lunaris
 
 		public void OnAnimationEnter(AnimatorStateInfo stateInfo)
 		{
+			float previsuTime;
+
 			// Global behaviour
 			if (stateInfo.IsName(_currentAttack.Animation.name))
 			{
 				LockTarget(GameManager.Player.transform);
 				LockMovement = true;
+
+				// Show previsualisation
+				previsuTime = _currentAttack.Animation.events.FirstOrDefault(x => x.stringParameter == "Attack").time;
+				AttackBase.ShowAttackPrevisu(_currentAttack.AttackData, transform.position, Quaternion.LookRotation(GetAimNormal()), previsuTime);
 			}
 			// Light attack specifics
 			if (stateInfo.IsName(_phase.LightAttack.Animation.name))

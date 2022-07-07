@@ -1,5 +1,6 @@
 ﻿using Game.Entities.Shared;
 using Game.Entities.Shared.Health;
+using Game.VFX.Previsualisations;
 using Nawlian.Lib.Extensions;
 using Nawlian.Lib.Systems.Pooling;
 using System;
@@ -74,5 +75,11 @@ namespace Game.Systems.Combat.Attacks
 
 		public static GameObject Spawn<T>(T attack, Vector3 position, Quaternion rotation, InitData init) where T : AttackBaseData
 			=> ObjectPooler.Get(attack.Prefab.gameObject, position, rotation, init);
+
+		public static void ShowAttackPrevisu<T>(T attack, Vector3 position, Quaternion rotation, float duration, Action<PrevisuParameters> OnRelease = null) where T : AttackBaseData
+			=> Previsualisation.Show(attack.Previsualisation, position, rotation, attack.AttackRange, duration, OnRelease);
+
+		public static void ShowAttackPrevisu<T>(T attack, Vector3 position, float duration, Action<PrevisuParameters> OnRelease = null) where T : AttackBaseData
+			=> Previsualisation.Show(attack.Previsualisation, position, Quaternion.identity, attack.AttackRange, duration, OnRelease);
 	}
 }
