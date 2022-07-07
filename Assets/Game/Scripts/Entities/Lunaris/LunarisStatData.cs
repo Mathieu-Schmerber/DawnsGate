@@ -15,7 +15,7 @@ namespace Game.Entities.Lunaris
 		{
 			public AnimationClip Animation;
 			public float AttackSpeed;
-			public ModularAttackData AttackData;
+			[InlineEditor] public ModularAttackData AttackData;
 			public Vector3 StartOffset;
 			public Vector3 TravelDistance;
 		}

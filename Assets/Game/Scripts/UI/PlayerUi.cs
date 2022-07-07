@@ -36,8 +36,11 @@ namespace Game.UI
 
 		private void OnDisable()
 		{
-			GameManager.PlayerIdentity.OnHealthChanged -= UpdateHealthDisplay;
-			GameManager.PlayerIdentity.OnArmorChanged -= UpdateArmorDisplay;
+			if (GameManager.PlayerIdentity != null)
+			{
+				GameManager.PlayerIdentity.OnHealthChanged -= UpdateHealthDisplay;
+				GameManager.PlayerIdentity.OnArmorChanged -= UpdateArmorDisplay;
+			}
 			GameManager.OnLobbyMoneyUpdated -= UpdateLobbyMoneyDisplay;
 			GameManager.OnRunMoneyUpdated -= UpdateRunMoneyDisplay; ;
 		}
