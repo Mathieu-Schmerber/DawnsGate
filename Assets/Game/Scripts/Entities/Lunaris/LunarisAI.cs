@@ -17,9 +17,11 @@ namespace Game.Entities.Lunaris
 {
 	public class LunarisAI : EnemyAI, IAnimationEventListener
 	{
+		[SerializeField] private LayerMask _wallMask;
 		[SerializeField] private MeshFilter _weaponMesh;
 		private LunarisStatData _stats;
 		private Timer _dashTimer = new();
+		private bool _isThrusting = false;
 
 		private bool _canDash => CanMove && _dashTimer.IsOver();
 
@@ -137,8 +139,10 @@ namespace Game.Entities.Lunaris
 			State = Shared.EntityState.IDLE;
 			LockAim = false;
 			LockMovement = false;
+			_isThrusting = false;
 			UnlockTarget();
 			_gfxAnim.SetBool("IsTired", false);
+			_gfxAnim.SetBool("IsThrusting", false);
 		}
 
 		#endregion
@@ -295,7 +299,7 @@ namespace Game.Entities.Lunaris
 		public void OnAnimationExit(AnimatorStateInfo stateInfo)
 		{
 			// Global behaviour
-			if (stateInfo.IsName(_currentAttack.Animation.name))
+			if (stateInfo.IsName(_currentAttack.Animation.name) && !_isThrusting)
 			{
 				if (State != Shared.EntityState.STUN)
 					ResetStates();
@@ -306,7 +310,7 @@ namespace Game.Entities.Lunaris
 			{
 			}
 			// Heavy attack specifics
-			else if (stateInfo.IsName(_phase.HeavyAttack.Animation.name))
+			else if (stateInfo.IsName(_phase.HeavyAttack.Animation.name) && !_isThrusting)
 			{
 				if (State != Shared.EntityState.STUN)
 					PutToRest();
@@ -341,11 +345,43 @@ namespace Game.Entities.Lunaris
 			}
 		}
 
+		#region Thrust
+
+		private float GetDistanceToWall()
+		{
+			if (Physics.Raycast(transform.position, GetAimNormal(), out RaycastHit hit, Mathf.Infinity, _wallMask))
+				return Vector3.Distance(transform.position.WithY(_room.GroundLevel), hit.point.WithY(_room.GroundLevel));
+			return 0;
+		}
+
 		private void ThrustAttack()
 		{
-			// TODO: make dash to closest wall
-			// TODO: spawn explosion at impact
+			const float SPEED = 50f; // 5m in 0.1s
+			float distanceToWall = GetDistanceToWall();
+			float dashTime = distanceToWall / SPEED;
+
+			Debug.Log($"Dash {distanceToWall}m in {dashTime}s");
+
+			LockAim = true;
+			_isThrusting = true;
+			_gfxAnim.SetBool("IsThrusting", _isThrusting);
+			Dash(GetAimNormal(), distanceToWall, dashTime, false);
+			Awaiter.WaitAndExecute(dashTime, () => {
+				if (_isThrusting && State != Shared.EntityState.STUN)
+				{
+					_isThrusting = false;
+					_gfxAnim.SetBool("IsThrusting", _isThrusting);
+					AttackBase.Spawn(_stats.PhaseSwitchAttack, transform.position, Quaternion.identity, new()
+					{
+						Caster = _entity,
+						Data = _stats.PhaseSwitchAttack
+					});
+					PutToRest();
+				}
+			});
 		}
+
+		#endregion
 
 		#endregion
 

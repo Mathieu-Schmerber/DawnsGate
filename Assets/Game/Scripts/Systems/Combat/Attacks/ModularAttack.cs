@@ -21,10 +21,17 @@ namespace Game.Systems.Combat.Attacks
 		/// TODO: calculate range from particle system and sh*t rather than affecting it manually
 		public override float Range => _attackData?.Range ?? 0;
 
+		private bool _isOff = false;
+
 		private List<Collider> _hitColliders = new List<Collider>();
 		private float _startTime;
 		private Vector3 _baseOffset;
-		private Vector3 _velocity;
+		private ParticleSystem[] _pss;
+
+		private void Awake()
+		{
+			_pss = GetComponentsInChildren<ParticleSystem>(true);
+		}
 
 		public override void Init(object data)
 		{
@@ -32,6 +39,7 @@ namespace Game.Systems.Combat.Attacks
 			_startTime = Time.time;
 			_hitColliders.Clear();
 			_attackData = _data as ModularAttackData;
+			_isOff = false;
 		}
 
 		public override void OnStart(Vector3 offset, float travelDistance)
@@ -53,7 +61,9 @@ namespace Game.Systems.Combat.Attacks
 
 		private void Update()
 		{
-			if (Time.time - _startTime >= _attackData.ActiveTime)
+			if (_isOff)
+				return;
+			else if (Time.time - _startTime >= _attackData.ActiveTime)
 				Release();
 			else if (FollowCaster)
 			{
@@ -66,7 +76,7 @@ namespace Game.Systems.Combat.Attacks
 
 		protected override void OnAttackHit(Collider collider)
 		{
-			if (_hitColliders.Contains(collider)) return;
+			if (_hitColliders.Contains(collider) && _isOff) return;
 
 			Damageable damageProcessor = collider.GetComponent<Damageable>();
 
@@ -82,6 +92,18 @@ namespace Game.Systems.Combat.Attacks
 				ObjectPooler.Get(_attackData.HitFx, collider.transform.position.WithY(transform.position.y), Quaternion.Euler(0, transform.rotation.eulerAngles.y + _attackData.HitYRotation, 0), null);
 				OnAttackHitEvent?.Invoke(_data, damageProcessor, applied);
 			}
+		}
+
+		private void SmoothRelease()
+		{
+			_isOff = true;
+			if (_pss?.Length > 0)
+			{
+				float time = _pss.Max(x => x.main.startLifetime.constantMax) + _pss.Max(x => x.main.startDelay.constantMax);
+				Invoke(nameof(Release), time);
+			}
+			else
+				Release();
 		}
 
 		private void OnDrawGizmos()
