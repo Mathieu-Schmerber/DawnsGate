@@ -91,6 +91,7 @@ namespace Game.Entities.Lunaris
 		{
 			// Stop passive from spawning while switching phase
 			_passiveTimer.Stop();
+			_attackStack.Clear();
 
 			// Cannot damage the boss any further
 			_entity.SetInvulnerable(true);
@@ -203,6 +204,7 @@ namespace Game.Entities.Lunaris
 		private enum AttackType
 		{
 			LIGHT,
+			LIGHT2,
 			HEAVY
 		}
 
@@ -218,7 +220,7 @@ namespace Game.Entities.Lunaris
 
 			_attackStack.Push(AttackType.HEAVY); // Always end stack with heavy attack
 			for (int i = 0; i < lightNumber; i++)
-				_attackStack.Push(AttackType.LIGHT);
+				_attackStack.Push(i % 2 == 0 ? AttackType.LIGHT : AttackType.LIGHT2);
 		}
 
 		protected override void TryAttacking()
@@ -227,25 +229,13 @@ namespace Game.Entities.Lunaris
 
 			if (Time.time - _lastAttackTime >= AttackCooldown && State == Shared.EntityState.IDLE)
 			{
-				if (distance < AttackRange)
+				if (distance < AttackRange * 0.8f) // Making sure we attack with soem freedom to hit
 				{
 					State = Shared.EntityState.ATTACKING;
 					Attack();
 				}
 				else
-				{
-					var dir = (GameManager.Player.transform.position.WithY(transform.position.y) - transform.position).normalized;
-					var dashPoint = transform.position + dir * _stats.DashRange;
-
-					Debug.DrawLine(transform.position, dashPoint, Color.white);
-
-					// Dash to be at range
-					if (Vector3.Distance(GameManager.Player.transform.position.WithY(transform.position.y), dashPoint) < AttackRange / 2 && _canDash) 
-					{
-						Dash(dir, _stats.DashRange, 0.2f, false);
-						_dashTimer.Restart();
-					}
-				}
+					TryDash();
 			}
 		}
 
@@ -255,7 +245,7 @@ namespace Game.Entities.Lunaris
 				RefillAttackStack();
 
 			_currentAttackType = _attackStack.Pop();
-			_currentAttack = _currentAttackType == AttackType.HEAVY ? _phase.HeavyAttack : _phase.LightAttack;
+			_currentAttack = _currentAttackType == AttackType.HEAVY ? _phase.HeavyAttack : (_currentAttackType == AttackType.LIGHT ? _phase.LightAttack : _phase.LightAttack2);
 			_gfxAnim.SetFloat("AttackSpeed", _entity.Scale(_currentAttack.AttackSpeed, Shared.StatModifier.AttackSpeed));
 			_gfxAnim.Play(_currentAttack.Animation.name);
 		}
@@ -273,6 +263,7 @@ namespace Game.Entities.Lunaris
 
 				if (_phaseIndex == LunarisPhase.KATANA && _currentAttackType == AttackType.HEAVY)
 					ThrustAttack();
+				LockAim = false;
 			}
 		}
 
@@ -292,7 +283,7 @@ namespace Game.Entities.Lunaris
 				AttackBase.ShowAttackPrevisu(_currentAttack.AttackData, transform.position, previsuTime, this);
 			}
 			// Light attack specifics
-			if (stateInfo.IsName(_phase.LightAttack.Animation.name))
+			if (stateInfo.IsName(_phase.LightAttack.Animation.name) || stateInfo.IsName(_phase.LightAttack2.Animation.name))
 			{
 			}
 			// Heavy attack specifics
@@ -311,7 +302,7 @@ namespace Game.Entities.Lunaris
 				OnAttackEnd();
 			}
 			// Light attack specifics
-			if (stateInfo.IsName(_phase.LightAttack.Animation.name))
+			if (stateInfo.IsName(_phase.LightAttack.Animation.name) || stateInfo.IsName(_phase.LightAttack2.Animation.name))
 			{
 			}
 			// Heavy attack specifics
@@ -322,8 +313,6 @@ namespace Game.Entities.Lunaris
 			}
 		}
 
-		#endregion
-
 		private void PutToRest()
 		{
 			LockAim = true;
@@ -331,6 +320,25 @@ namespace Game.Entities.Lunaris
 			_gfxAnim.Play(_stats.RestAnimation.name);
 			State = Shared.EntityState.STUN;
 			Awaiter.WaitAndExecute(_phase.RestingTime, ResetStates);
+		}
+
+		#endregion
+
+		private void TryDash()
+		{
+			// Scythe phase specific
+			if (_phaseIndex != LunarisPhase.SCYTHE)
+				return;
+
+			var dir = (GameManager.Player.transform.position.WithY(transform.position.y) - transform.position).normalized;
+			var dashPoint = transform.position + dir * _stats.DashRange;
+
+			// Dash to be at range
+			if (Vector3.Distance(GameManager.Player.transform.position.WithY(transform.position.y), dashPoint) < AttackRange / 2 && _canDash)
+			{
+				Dash(dir, _stats.DashRange, 0.2f, false);
+				_dashTimer.Restart();
+			}
 		}
 
 		private void ThrustAttack()

@@ -87,10 +87,10 @@ namespace Game.Systems.Combat.Attacks
 		private void OnDrawGizmos()
 		{
 			Gizmos.color = Color.red;
-			Gizmos.DrawWireCube(transform.position + Vector3.up * 0.5f - transform.forward * 1.75f, new Vector3(0.4f, 2, .4f));
+			Gizmos.DrawWireCube(transform.position + Vector3.up * 0.5f, new Vector3(0.4f, 2, .4f));
 
 			Gizmos.color = Color.white;
-			Gizmos.DrawRay(transform.position - transform.forward * 1.75f, transform.forward * Range);
+			Gizmos.DrawRay(transform.position, transform.forward * Range);
 		}
 
 #if UNITY_EDITOR

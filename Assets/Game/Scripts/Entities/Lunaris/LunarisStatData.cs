@@ -28,6 +28,7 @@ namespace Game.Entities.Lunaris
 			[TabGroup("Passive")] public float PassiveSpread;
 
 			[TabGroup("Attack")] public PhaseAttack LightAttack;
+			[TabGroup("Attack")] public PhaseAttack LightAttack2;
 			[TabGroup("Attack")] public PhaseAttack HeavyAttack;
 
 			[TabGroup("Settings")] public Vector2Int LightBeforeHeavyNumber;

@@ -130,8 +130,8 @@ namespace Game.Entities.Shared
 		public void LockTarget(Transform target, bool forceRotation = false)
 		{
 			_target = target;
-			if (forceRotation)
-				_graphics.transform.rotation = Quaternion.LookRotation(GetAimNormal());
+			if (forceRotation && (_target.position - _rb.position).normalized != Vector3.zero)
+				_graphics.transform.rotation = Quaternion.LookRotation((_target.position - _rb.position).normalized);
 		}
 
 		public void UnlockTarget() => _target = null;

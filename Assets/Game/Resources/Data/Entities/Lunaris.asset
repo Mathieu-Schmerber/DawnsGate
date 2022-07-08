@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Lunaris
   m_EditorClassIdentifier: 
   DisplayName: Lunaris
-  StartHealth: 50
+  StartHealth: 10
   MovementSpeed: 6
   DashRange: 5
   DashCooldown: 1
@@ -83,26 +83,12 @@ MonoBehaviour:
       AttackData: {fileID: 11400000, guid: 98df4169ecc8d6642adb8d4c604dc4c0, type: 2}
       StartOffset: {x: 0, y: 1, z: 0}
       TravelDistance: 2
-    HeavyAttack:
-      Animation: {fileID: 7400000, guid: 4c0cca327adbb4e47bcee541f868a9b8, type: 2}
+    LightAttack2:
+      Animation: {fileID: 7400000, guid: c1a35dc06e78ad143929fcd2e91a0648, type: 2}
       AttackSpeed: 1
-      AttackData: {fileID: 11400000, guid: 913665cc2b320f3409aab545e35d9fe1, type: 2}
+      AttackData: {fileID: 11400000, guid: 98df4169ecc8d6642adb8d4c604dc4c0, type: 2}
       StartOffset: {x: 0, y: 1, z: 0}
-      TravelDistance: 0
-    LightBeforeHeavyNumber: {x: 1, y: 1}
-    Weapon: {fileID: 4300000, guid: f2892d73e025a2e4fa946c585e58c9ad, type: 3}
-    AttackCooldown: 1
-    RestingTime: 2
-  KatanaPhase:
-    SpawnRate: 1
-    PrevisualisationDuration: 0.5
-    PassiveSpread: 2
-    LightAttack:
-      Animation: {fileID: 7400000, guid: f2f80e8c3abe135449b9aa7e5378bcd5, type: 2}
-      AttackSpeed: 1
-      AttackData: {fileID: 11400000, guid: eb0dbd117b0a26e4eafce17cbc6e9481, type: 2}
-      StartOffset: {x: 0, y: 1, z: 2}
-      TravelDistance: 0
+      TravelDistance: 2
     HeavyAttack:
       Animation: {fileID: 7400000, guid: 4c0cca327adbb4e47bcee541f868a9b8, type: 2}
       AttackSpeed: 1
@@ -110,8 +96,34 @@ MonoBehaviour:
       StartOffset: {x: 0, y: 1, z: 0}
       TravelDistance: 0
     LightBeforeHeavyNumber: {x: 1, y: 3}
+    Weapon: {fileID: 4300000, guid: f2892d73e025a2e4fa946c585e58c9ad, type: 3}
+    AttackCooldown: 0.5
+    RestingTime: 1.5
+  KatanaPhase:
+    SpawnRate: 1
+    PrevisualisationDuration: 0.5
+    PassiveSpread: 2
+    LightAttack:
+      Animation: {fileID: 7400000, guid: 533a16217f3f9404dba614ce03bb25b9, type: 2}
+      AttackSpeed: 1
+      AttackData: {fileID: 11400000, guid: eb0dbd117b0a26e4eafce17cbc6e9481, type: 2}
+      StartOffset: {x: 0, y: 1, z: 0}
+      TravelDistance: 0
+    LightAttack2:
+      Animation: {fileID: 7400000, guid: e0ce77b8f39859749b08ffabf55e7edb, type: 2}
+      AttackSpeed: 1
+      AttackData: {fileID: 11400000, guid: 539ae80a7564842439851cc93ef39233, type: 2}
+      StartOffset: {x: 0, y: 1, z: 0}
+      TravelDistance: 0
+    HeavyAttack:
+      Animation: {fileID: 7400000, guid: 4c0cca327adbb4e47bcee541f868a9b8, type: 2}
+      AttackSpeed: 1
+      AttackData: {fileID: 11400000, guid: 913665cc2b320f3409aab545e35d9fe1, type: 2}
+      StartOffset: {x: 0, y: 1, z: 0}
+      TravelDistance: 0
+    LightBeforeHeavyNumber: {x: 3, y: 3}
     Weapon: {fileID: 4300000, guid: c18e53470c75ac743a8a092906d0e2f2, type: 3}
-    AttackCooldown: 1
+    AttackCooldown: 0.1
     RestingTime: 2
   StaffPhase:
     SpawnRate: 1
@@ -122,6 +134,12 @@ MonoBehaviour:
       AttackSpeed: 1
       AttackData: {fileID: 11400000, guid: eb0dbd117b0a26e4eafce17cbc6e9481, type: 2}
       StartOffset: {x: 0, y: 1, z: 2}
+      TravelDistance: 0
+    LightAttack2:
+      Animation: {fileID: 0}
+      AttackSpeed: 0
+      AttackData: {fileID: 0}
+      StartOffset: {x: 0, y: 0, z: 0}
       TravelDistance: 0
     HeavyAttack:
       Animation: {fileID: 7400000, guid: 4c0cca327adbb4e47bcee541f868a9b8, type: 2}
