@@ -14,8 +14,10 @@ GameObject:
   - component: {fileID: 8506789082174183526}
   - component: {fileID: 2759807244746849921}
   - component: {fileID: 4276830530149806702}
+  - component: {fileID: 6768310131739159863}
+  - component: {fileID: 8795032693375529528}
   m_Layer: 6
-  m_Name: Lunaris_LSlash
+  m_Name: StaffRSlash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48,7 +50,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17e5775844e65f84f9514b819ac7d21a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _attackData: {fileID: 11400000, guid: eb0dbd117b0a26e4eafce17cbc6e9481, type: 2}
+  _attackData: {fileID: 11400000, guid: adc31d8af869ac6469799ea0ecd264aa, type: 2}
 --- !u!198 &8506789082174183527
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -301,7 +303,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 5.06
+      scalar: 7
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -354,7 +356,7 @@ ParticleSystem:
     startSizeY:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 10
+      scalar: 7
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -4882,7 +4884,7 @@ ParticleSystemRenderer:
   m_ShadowBias: 0
   m_RenderAlignment: 2
   m_Pivot: {x: 0, y: 0, z: 0}
-  m_Flip: {x: 0, y: 0, z: 0}
+  m_Flip: {x: 1, y: 0, z: 0}
   m_UseCustomVertexStreams: 0
   m_EnableGPUInstancing: 1
   m_ApplyActiveColorSpace: 1
@@ -4910,8 +4912,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 4.432625, y: 25.56, z: 1.8771486}
-  m_Center: {x: -0.01697731, y: 0, z: 1.4528155}
+  m_Size: {x: 6.265188, y: 25.56, z: 2.4047046}
+  m_Center: {x: 0.010788918, y: 0, z: 1.1890376}
 --- !u!135 &4276830530149806702
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -4923,5 +4925,31 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.7
-  m_Center: {x: 0, y: 0, z: 2.26}
+  m_Radius: 1.7832985
+  m_Center: {x: 0, y: 0, z: 1.67}
+--- !u!135 &6768310131739159863
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8506789082174183545}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.48
+  m_Center: {x: -1.32, y: 0, z: 1.67}
+--- !u!135 &8795032693375529528
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8506789082174183545}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.48
+  m_Center: {x: 1.32, y: 0, z: 1.67}

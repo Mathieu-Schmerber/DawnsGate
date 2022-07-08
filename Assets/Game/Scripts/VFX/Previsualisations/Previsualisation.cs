@@ -13,10 +13,7 @@ namespace Game.VFX.Previsualisations
 		public static void Show(PrevisualisationBase previsualisation, Vector3 position, float radius, float duration, Action<PrevisuParameters> OnRelease = null)
 		{
 			if (previsualisation == null)
-			{
-				Debug.LogError("Cannot display a null previsualisation.");
 				return;
-			}
 
 			ObjectPooler.Get(previsualisation.gameObject, position, Quaternion.identity, new PrevisuParameters()
 			{
@@ -30,10 +27,7 @@ namespace Game.VFX.Previsualisations
 		public static void Show(PrevisualisationBase previsualisation, Vector3 position, Quaternion rotation, float radius, float duration, Action<PrevisuParameters> OnRelease = null, Action<PrevisuParameters> OnUpdate = null)
 		{
 			if (previsualisation == null)
-			{
-				Debug.LogError("Cannot display a null previsualisation.");
 				return;
-			}
 
 			ObjectPooler.Get(previsualisation.gameObject, position, rotation, new PrevisuParameters()
 			{

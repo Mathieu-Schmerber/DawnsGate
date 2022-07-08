@@ -12,6 +12,9 @@ namespace Game.Systems.Combat.Attacks
 	[CreateAssetMenu(menuName = "Data/Attacks/ModularAttack")]
 	public class ModularAttackData : AttackBaseData
 	{
+		public bool ScaleOverLifetime;
+		[ShowIf(nameof(ScaleOverLifetime))] public Vector3 EndScale;
+		
 		[Title("Game feel")]
 		[ValidateInput(nameof(EditorValidate), "HitFx needs an IPoolableObject component.")] public GameObject HitFx;
 		public float HitYRotation;

@@ -10,18 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 82f373d89c13403408984db0860618ef, type: 3}
-  m_Name: SwitchAttack
+  m_Name: KatanaRSlash
   m_EditorClassIdentifier: 
-  Prefab: {fileID: -2639488009653684992, guid: c13d8d842c93d394ab8cf069c4e87fa3, type: 3}
-  Previsualisation: {fileID: 8134988624244144373, guid: c303688915f74d3409412fd03a820401,
+  Prefab: {fileID: -7109925867012405211, guid: 19775b0bbaba990448d8c078821a4c85, type: 3}
+  Previsualisation: {fileID: 8134988624244144373, guid: 090f1101c6e3bf6408f16eefbc28fe08,
     type: 3}
   BaseDamage: 10
-  BaseKnockbackForce: 3
-  KnockbackDir: 0
-  ScaleOverLifetime: 0
-  EndScale: {x: 0, y: 0, z: 0}
+  BaseKnockbackForce: 1
+  KnockbackDir: 1
   HitFx: {fileID: 6826739793168019112, guid: 161ce196c6bae7843a3573a1fe4c5d5f, type: 3}
   HitYRotation: 0
-  ActiveTime: 0.3
+  ActiveTime: 0.4
   FollowCaster: 0
-  Range: 2.6
+  Range: 4.1

@@ -26,6 +26,7 @@ namespace Game.Systems.Combat.Attacks
 		private List<Collider> _hitColliders = new List<Collider>();
 		private float _startTime;
 		private Vector3 _baseOffset;
+		private Vector3 _baseScale = Vector3.zero;
 		private ParticleSystem[] _pss;
 
 		private void Awake()
@@ -40,11 +41,15 @@ namespace Game.Systems.Combat.Attacks
 			_hitColliders.Clear();
 			_attackData = _data as ModularAttackData;
 			_isOff = false;
+
+			if (_baseScale != Vector3.zero)
+				transform.localScale = _baseScale;
 		}
 
 		public override void OnStart(Vector3 offset, float travelDistance)
 		{
 			_baseOffset = offset;
+			_baseScale = transform.localScale;
 
 			Vector3 localOffsetDir = transform.InverseTransformDirection(_baseOffset);
 			localOffsetDir.x *= -1;
@@ -54,9 +59,11 @@ namespace Game.Systems.Combat.Attacks
 			{
 				Vector3 travelDest = transform.position + transform.forward * travelDistance;
 
-				Debug.DrawRay(transform.position, transform.forward * travelDistance, Color.magenta, _attackData.ActiveTime);
 				Tween.LocalPosition(transform, travelDest, _attackData.ActiveTime, 0, Tween.EaseLinear);
 			}
+
+			if (_attackData.ScaleOverLifetime)
+				Tween.LocalScale(transform, _attackData.EndScale, _attackData.ActiveTime, 0, Tween.EaseLinear);
 		}
 
 		private void Update()
@@ -76,7 +83,7 @@ namespace Game.Systems.Combat.Attacks
 
 		protected override void OnAttackHit(Collider collider)
 		{
-			if (_hitColliders.Contains(collider) && _isOff) return;
+			if (_hitColliders.Contains(collider) || _isOff) return;
 
 			Damageable damageProcessor = collider.GetComponent<Damageable>();
 

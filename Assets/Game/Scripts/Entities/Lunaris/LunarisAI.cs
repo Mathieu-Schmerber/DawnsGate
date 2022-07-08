@@ -161,9 +161,6 @@ namespace Game.Entities.Lunaris
 
 		private void OnPassiveTick()
 		{
-			// TODO: delete the following line
-			return;
-
 			Vector3 pos = GameManager.Player.transform.position.WithY(_room.GroundLevel);
 
 			for (int i = 0; i <= (int)_phaseIndex; i++)
@@ -283,7 +280,7 @@ namespace Game.Entities.Lunaris
 				LockAim = true;
 
 				// Show previsualisation
-				previsuTime = _currentAttack.Animation.events.FirstOrDefault(x => x.stringParameter == "Attack").time;
+				previsuTime = _currentAttack.Animation.events.FirstOrDefault(x => x.stringParameter == "Attack").time / _currentAttack.AttackSpeed;
 				AttackBase.ShowAttackPrevisu(_currentAttack.AttackData, transform.position, previsuTime, this);
 			}
 			// Light attack specifics
@@ -359,8 +356,6 @@ namespace Game.Entities.Lunaris
 			const float SPEED = 50f; // 5m in 0.1s
 			float distanceToWall = GetDistanceToWall();
 			float dashTime = distanceToWall / SPEED;
-
-			Debug.Log($"Dash {distanceToWall}m in {dashTime}s");
 
 			LockAim = true;
 			_isThrusting = true;
