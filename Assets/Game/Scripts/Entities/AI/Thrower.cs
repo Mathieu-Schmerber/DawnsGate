@@ -83,7 +83,7 @@ namespace Game.Entities.AI
 				(go) =>
 				{
 					var attack = go.GetComponent<AttackBase>();
-					attack.OnStart(Vector3.zero, Vector3.zero);
+					attack.OnStart(Vector3.zero, 0);
 				});
 		}
 

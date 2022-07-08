@@ -1,4 +1,5 @@
-﻿using Game.Entities.Shared;
+﻿using Game.Entities.Lunaris;
+using Game.Entities.Shared;
 using Game.Entities.Shared.Health;
 using Game.VFX.Previsualisations;
 using Nawlian.Lib.Extensions;
@@ -41,7 +42,7 @@ namespace Game.Systems.Combat.Attacks
 			Caster = init.Caster;
 		}
 
-		public abstract void OnStart(Vector3 offset, Vector3 travelDistance);
+		public abstract void OnStart(Vector3 offset, float travelDistance);
 
 #if UNITY_EDITOR
 		protected abstract void OnAttackHit(Collider collider);
@@ -76,10 +77,31 @@ namespace Game.Systems.Combat.Attacks
 		public static GameObject Spawn<T>(T attack, Vector3 position, Quaternion rotation, InitData init) where T : AttackBaseData
 			=> ObjectPooler.Get(attack.Prefab.gameObject, position, rotation, init);
 
-		public static void ShowAttackPrevisu<T>(T attack, Vector3 position, Quaternion rotation, float duration, Action<PrevisuParameters> OnRelease = null) where T : AttackBaseData
-			=> Previsualisation.Show(attack.Previsualisation, position, rotation, attack.AttackRange, duration, OnRelease);
-
-		public static void ShowAttackPrevisu<T>(T attack, Vector3 position, float duration, Action<PrevisuParameters> OnRelease = null) where T : AttackBaseData
-			=> Previsualisation.Show(attack.Previsualisation, position, Quaternion.identity, attack.AttackRange, duration, OnRelease);
+		public static void ShowAttackPrevisu<T>(T attack, Vector3 position, float duration, AController caster, Action<PrevisuParameters> OnRelease = null, bool stickToCaster = false) where T : AttackBaseData
+		{
+			if (attack.StickToCaster || stickToCaster)
+			{
+				Previsualisation.Show(attack.Previsualisation,
+					position,
+					Quaternion.identity,
+					attack.AttackRange,
+					duration, 
+					OnRelease,
+					OnUpdate: (PrevisuParameters previsu) =>
+					{
+						previsu.Transform.position = caster.transform.position;
+						previsu.Transform.rotation = Quaternion.LookRotation(caster.GetAimNormal());
+					});
+			}
+			else
+			{
+				Previsualisation.Show(attack.Previsualisation, 
+					position,
+					Quaternion.LookRotation(caster.GetAimNormal()), 
+					attack.AttackRange, 
+					duration, 
+					OnRelease);
+			}
+		}
 	}
 }

@@ -27,7 +27,7 @@ namespace Game.VFX.Previsualisations
 			}, null);
 		}
 
-		public static void Show(PrevisualisationBase previsualisation, Vector3 position, Quaternion rotation, float radius, float duration, Action<PrevisuParameters> OnRelease)
+		public static void Show(PrevisualisationBase previsualisation, Vector3 position, Quaternion rotation, float radius, float duration, Action<PrevisuParameters> OnRelease = null, Action<PrevisuParameters> OnUpdate = null)
 		{
 			if (previsualisation == null)
 			{
@@ -38,9 +38,11 @@ namespace Game.VFX.Previsualisations
 			ObjectPooler.Get(previsualisation.gameObject, position, rotation, new PrevisuParameters()
 			{
 				Position = position,
+				Rotation = rotation,
 				Duration = duration,
 				Size = radius * 2,
-				OnRelease = OnRelease
+				OnRelease = OnRelease,
+				OnUpdate = OnUpdate
 			}, null);
 		}
 	}

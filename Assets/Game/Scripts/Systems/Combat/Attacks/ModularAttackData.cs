@@ -22,6 +22,7 @@ namespace Game.Systems.Combat.Attacks
 		public float Range;
 
 		public override float AttackRange => Range;
+		public override bool StickToCaster => FollowCaster;
 
 		private bool EditorValidate() => HitFx != null && HitFx.GetComponent<IPoolableObject>() != null;
 	}

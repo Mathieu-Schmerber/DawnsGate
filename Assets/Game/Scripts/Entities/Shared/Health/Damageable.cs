@@ -105,7 +105,7 @@ namespace Game.Entities.Shared.Health
 		/// <param name="force"></param>
 		public void ApplyKnockback(EntityIdentity attacker, Vector3 force, float knockbackTime = 0.2f)
 		{
-			if (IsDead) return;
+			if (IsDead || _identity.IsInvulnerable) return;
 
 			float resistanceRatio = Mathf.Clamp(_identity.Stats.Modifiers[StatModifier.KnockbackResistance]?.Value ?? 0, 0, 100);
 			Vector3 totalForce = force - (force * (resistanceRatio / 100));

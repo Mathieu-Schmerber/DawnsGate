@@ -19,9 +19,10 @@ namespace Game.Systems.Combat.Attacks
 	{
 		public const string ATTACK_PREFAB_FOLDER = "Assets/Game/Resources/Prefabs/Attacks";
 
-		[AssetsOnly, AssetSelector(Paths = ATTACK_PREFAB_FOLDER), ValidateInput("@Validate()", "@GetError()")]
+		[AssetsOnly, AssetSelector, ValidateInput("@Validate()", "@GetError()")]
 		public AttackBase Prefab;
 
+		[AssetsOnly, AssetSelector]
 		public PrevisualisationBase Previsualisation;
 
 		[Title("Attack stats")]
@@ -30,6 +31,7 @@ namespace Game.Systems.Combat.Attacks
 		public KnockbackDirection KnockbackDir;
 
 		public abstract float AttackRange { get; }
+		public abstract bool StickToCaster { get; }
 
 #if UNITY_EDITOR
 

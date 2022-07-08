@@ -101,7 +101,7 @@ namespace Game.Entities.Lunaris
 			State = Shared.EntityState.STUN;
 
 			// Executing the switched state code after waiting for a while
-			AttackBase.ShowAttackPrevisu(_stats.PhaseSwitchAttack, transform.position.WithY(_room.GroundLevel), _stats.PhaseSwitchTime);
+			AttackBase.ShowAttackPrevisu(_stats.PhaseSwitchAttack, transform.position.WithY(_room.GroundLevel), _stats.PhaseSwitchTime, this);
 			Awaiter.WaitAndExecute(_stats.PhaseSwitchTime, OnReadyToStartNewPhase);
 		}
 
@@ -165,6 +165,7 @@ namespace Game.Entities.Lunaris
 				AttackBase.ShowAttackPrevisu(_stats.PassiveAttack, 
 					pos + Random.insideUnitSphere.WithY(pos.y) * _phase.PassiveSpread,
 					_phase.PrevisualisationDuration,
+					this,
 					SpawnPassive);
 
 			if (IsLastPhase)
@@ -174,6 +175,7 @@ namespace Game.Entities.Lunaris
 					AttackBase.ShowAttackPrevisu(_stats.PassiveAttack,
 						_room.Info.Data.SpawnablePositions.Random(),
 						_phase.PrevisualisationDuration,
+						this,
 						SpawnPassive);
 				}
 			}
@@ -262,9 +264,6 @@ namespace Game.Entities.Lunaris
 		{
 			if (animationArg == "Attack")
 			{
-				LockTarget(GameManager.Player.transform, true);
-				LockAim = true;
-
 				ModularAttack instance = AttackBase.Spawn(_currentAttack.AttackData, transform.position, Quaternion.LookRotation(GetAimNormal()), new()
 				{
 					Caster = _entity,
@@ -284,12 +283,13 @@ namespace Game.Entities.Lunaris
 			// Global behaviour
 			if (stateInfo.IsName(_currentAttack.Animation.name))
 			{
-				LockTarget(GameManager.Player.transform);
+				LockTarget(GameManager.Player.transform, true);
 				LockMovement = true;
+				LockAim = true;
 
 				// Show previsualisation
 				previsuTime = _currentAttack.Animation.events.FirstOrDefault(x => x.stringParameter == "Attack").time;
-				AttackBase.ShowAttackPrevisu(_currentAttack.AttackData, transform.position, Quaternion.LookRotation(GetAimNormal()), previsuTime);
+				AttackBase.ShowAttackPrevisu(_currentAttack.AttackData, transform.position, previsuTime, this);
 			}
 			// Light attack specifics
 			if (stateInfo.IsName(_phase.LightAttack.Animation.name))

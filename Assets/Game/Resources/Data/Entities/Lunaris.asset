@@ -81,14 +81,14 @@ MonoBehaviour:
       Animation: {fileID: 7400000, guid: 0bb557bdf28d75744b73310677851fba, type: 2}
       AttackSpeed: 1
       AttackData: {fileID: 11400000, guid: 98df4169ecc8d6642adb8d4c604dc4c0, type: 2}
-      StartOffset: {x: 0, y: 1, z: 1}
-      TravelDistance: {x: 0, y: 0, z: 3}
+      StartOffset: {x: 0, y: 1, z: 0}
+      TravelDistance: 2
     HeavyAttack:
       Animation: {fileID: 7400000, guid: 4c0cca327adbb4e47bcee541f868a9b8, type: 2}
       AttackSpeed: 1
       AttackData: {fileID: 11400000, guid: 913665cc2b320f3409aab545e35d9fe1, type: 2}
       StartOffset: {x: 0, y: 1, z: 0}
-      TravelDistance: {x: 0, y: 0, z: 0}
+      TravelDistance: 0
     LightBeforeHeavyNumber: {x: 1, y: 1}
     Weapon: {fileID: 4300000, guid: f2892d73e025a2e4fa946c585e58c9ad, type: 3}
     AttackCooldown: 1
@@ -102,13 +102,13 @@ MonoBehaviour:
       AttackSpeed: 1
       AttackData: {fileID: 11400000, guid: eb0dbd117b0a26e4eafce17cbc6e9481, type: 2}
       StartOffset: {x: 0, y: 1, z: 2}
-      TravelDistance: {x: 0, y: 0, z: 3}
+      TravelDistance: 0
     HeavyAttack:
       Animation: {fileID: 7400000, guid: 4c0cca327adbb4e47bcee541f868a9b8, type: 2}
       AttackSpeed: 1
       AttackData: {fileID: 11400000, guid: 913665cc2b320f3409aab545e35d9fe1, type: 2}
       StartOffset: {x: 0, y: 1, z: 0}
-      TravelDistance: {x: 0, y: 0, z: 0}
+      TravelDistance: 0
     LightBeforeHeavyNumber: {x: 1, y: 3}
     Weapon: {fileID: 4300000, guid: c18e53470c75ac743a8a092906d0e2f2, type: 3}
     AttackCooldown: 1
@@ -122,13 +122,13 @@ MonoBehaviour:
       AttackSpeed: 1
       AttackData: {fileID: 11400000, guid: eb0dbd117b0a26e4eafce17cbc6e9481, type: 2}
       StartOffset: {x: 0, y: 1, z: 2}
-      TravelDistance: {x: 0, y: 0, z: 3}
+      TravelDistance: 0
     HeavyAttack:
       Animation: {fileID: 7400000, guid: 4c0cca327adbb4e47bcee541f868a9b8, type: 2}
       AttackSpeed: 1
       AttackData: {fileID: 11400000, guid: 913665cc2b320f3409aab545e35d9fe1, type: 2}
       StartOffset: {x: 0, y: 1, z: 0}
-      TravelDistance: {x: 0, y: 0, z: 0}
+      TravelDistance: 0
     LightBeforeHeavyNumber: {x: 1, y: 3}
     Weapon: {fileID: 4300000, guid: 69c3ba73285f94e489e8cd5a6b07da3c, type: 3}
     AttackCooldown: 1

@@ -17,7 +17,7 @@ namespace Game.Entities.Lunaris
 			public float AttackSpeed;
 			[InlineEditor] public ModularAttackData AttackData;
 			public Vector3 StartOffset;
-			public Vector3 TravelDistance;
+			public float TravelDistance;
 		}
 
 		[System.Serializable, InlineProperty, HideLabel]

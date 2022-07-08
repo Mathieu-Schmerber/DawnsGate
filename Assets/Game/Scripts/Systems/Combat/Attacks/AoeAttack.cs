@@ -2,6 +2,7 @@
 using Game.Systems.Combat.Effects;
 using Nawlian.Lib.Extensions;
 using Nawlian.Lib.Systems.Pooling;
+using Pixelplacement;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -50,7 +51,7 @@ namespace Game.Systems.Combat.Attacks
 			_particleSystem = GetComponentInChildren<ParticleSystem>();
 		}
 
-		public override void OnStart(Vector3 offset, Vector3 travelDistance)
+		public override void OnStart(Vector3 offset, float travelDistance)
 		{
 			_baseOffset = offset;
 
@@ -60,10 +61,9 @@ namespace Game.Systems.Combat.Attacks
 				localOffsetDir.x *= -1;
 				transform.position = Caster.transform.position + localOffsetDir;
 			}
+			Vector3 travelDest = transform.forward * travelDistance;
+			Tween.LocalPosition(transform, travelDest, _attackData.ActiveTime, 0, Tween.EaseLinear);
 
-			Vector3 localTravelDir = transform.InverseTransformDirection(travelDistance);
-			localTravelDir.x *= -1;
-			_velocity = localTravelDir / _attackData.ActiveTime;
 		}
 
 		private void Update()
@@ -77,7 +77,7 @@ namespace Game.Systems.Combat.Attacks
 				localOffsetDir.x *= -1;
 				transform.position = Caster.transform.position + localOffsetDir;
 			}
-			transform.position += _velocity * Time.deltaTime;
+			//transform.position += _velocity * Time.deltaTime;
 		}
 
 		protected override void OnAttackHit(Collider collider)

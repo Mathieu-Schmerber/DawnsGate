@@ -22,7 +22,7 @@ namespace Game.Systems.Combat.Weapons
 		{
 			public AttackBaseData AttackData;
 			[@Tooltip("Where to spawn the attack, relative to the player (Z being in front of the player)")] public Vector3 StartOffset;
-			[@Tooltip("The distance that the attack will travel, relative to the attack (Z being the front of the attack)")] public Vector3 TravelDistance;
+			[@Tooltip("The distance that the attack will travel, relative to the attack Z")] public float TravelDistance;
 			[@Tooltip("Should this move be aim assisted ?")] public bool AimAssist;
 			[@Tooltip("Can the player rotate during the attack ?")] public bool LockAim;
 			[@Tooltip("Can the player move during the attack ?")] public bool LockMovement;

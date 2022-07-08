@@ -34,7 +34,7 @@ namespace Game.Systems.Combat.Attacks
 			_attackData = _data as ModularAttackData;
 		}
 
-		public override void OnStart(Vector3 offset, Vector3 travelDistance)
+		public override void OnStart(Vector3 offset, float travelDistance)
 		{
 			_baseOffset = offset;
 
@@ -42,9 +42,13 @@ namespace Game.Systems.Combat.Attacks
 			localOffsetDir.x *= -1;
 			transform.position = Caster.transform.position + localOffsetDir;
 
-			Vector3 localTravelDir = transform.InverseTransformDirection(travelDistance);
-			localTravelDir.x *= -1;
-			_velocity = localTravelDir / _attackData.ActiveTime;
+			if (travelDistance != 0)
+			{
+				Vector3 travelDest = transform.position + transform.forward * travelDistance;
+
+				Debug.DrawRay(transform.position, transform.forward * travelDistance, Color.magenta, _attackData.ActiveTime);
+				Tween.LocalPosition(transform, travelDest, _attackData.ActiveTime, 0, Tween.EaseLinear);
+			}
 		}
 
 		private void Update()
@@ -58,7 +62,6 @@ namespace Game.Systems.Combat.Attacks
 				localOffsetDir.x *= -1;
 				transform.position = Caster.transform.position + localOffsetDir;
 			}
-			transform.position += _velocity * Time.deltaTime;
 		}
 
 		protected override void OnAttackHit(Collider collider)
