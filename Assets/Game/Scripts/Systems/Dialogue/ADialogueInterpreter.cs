@@ -77,7 +77,7 @@ namespace Game.Systems.Dialogue
 		protected void CloseDialogue()
 		{
 			GuiManager.OpenMenu<PlayerUi>();
-			_uiMenu?.Close();
+			GuiManager.CloseMenu<DialogueUi>();
 			_uiMenu.OnSubmitted -= OnSubmission;
 		}
 

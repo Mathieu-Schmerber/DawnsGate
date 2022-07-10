@@ -12,11 +12,15 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
+using Random = UnityEngine.Random;
+
 namespace Game.UI
 {
 	public class DialogueUi : ACloseableMenu
 	{
 		private readonly int DEFAULT_SPEED = 20;
+		private readonly int WAVE_AMP = 5;
+		private readonly int WAVE_SPEED = 5;
 
 		[Title("References")]
 		[SerializeField] private TextMeshProUGUI _promptText;
@@ -24,12 +28,12 @@ namespace Game.UI
 		[SerializeField] private Transform _choiceList;
 		[SerializeField] private List<DialogueChoiceUi> _choices = new();
 
+		private Mesh mesh;
 		private List<ParsedElement> _textEffects;
 		private ADialogueNode _displayedNode = null;
 		private Timer _appreanceTimer = new();
 
 		public event Action<ADialogueNode, string> OnSubmitted;
-
 
 		#region Text effects
 
@@ -43,8 +47,43 @@ namespace Game.UI
 
 		private void AnimateText()
 		{
-			
+			_promptText.ForceMeshUpdate();
+			mesh = _promptText.mesh;
+			var vertices = mesh.vertices;
+
+			for (int i = 0; i < _promptText.textInfo.characterCount; i++)
+			{
+				ParsedElement activeEffect = _textEffects.LastOrDefault(x => x.Contains(i) && x.Name == "effect");
+				TMP_CharacterInfo c = _promptText.textInfo.characterInfo[i];
+				int index = c.vertexIndex;
+
+				if (activeEffect == null || activeEffect.Value == null)
+					continue;
+
+				Vector3 offset = ExecuteEffect(activeEffect.Value, Time.time + i);
+
+				vertices[index] += offset;
+				vertices[index + 1] += offset;
+				vertices[index + 2] += offset;
+				vertices[index + 3] += offset;
+			}
+
+			mesh.vertices = vertices;
+			_promptText.canvasRenderer.SetMesh(mesh);
 		}
+
+		private Vector3 ExecuteEffect(string name, float timeArg)
+		{
+			if (name == "wave")
+				return Wave(timeArg);
+			if (name == "shake")
+				return Shake(timeArg);
+			return Vector3.zero;
+		}
+
+		private Vector3 Shake(float time) => new Vector3(Random.Range(0f, 2f), Random.Range(0f, 2f), Random.Range(0f, 2f));
+
+		private Vector3 Wave(float time) => new Vector3(0, Mathf.Sin(WAVE_SPEED * time) * WAVE_AMP, transform.position.z);
 
 		private void OnApprearTick()
 		{
@@ -71,10 +110,10 @@ namespace Game.UI
 
 			ClearDialogues();
 
+			_promptText.gameObject.SetActive(true);
 			_textEffects = TextElementParser.Parse(richText.RemoveTextMeshProTags());
 			_promptText.text = TextElementParser.RemoveElements(lightText, _textEffects);
 			_displayedNode = node;
-			_promptText.maxVisibleCharacters = 0;
 			_appreanceTimer.Start(0.1f, true, OnApprearTick);
 		}
 
@@ -117,7 +156,9 @@ namespace Game.UI
 			EventSystem.current.SetSelectedGameObject(null);
 			_displayedNode = null;
 			_choiceList.gameObject.SetActive(false);
+			_promptText.gameObject.SetActive(false);
 			_promptText.text = string.Empty;
+			_promptText.maxVisibleCharacters = 0;
 			_choices.ForEach(x => x.gameObject.SetActive(false));
 		}
 
