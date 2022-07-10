@@ -109,6 +109,8 @@ namespace Game.Systems.Run
 
         [Title("Run")]
         [MinValue(0)] public Vector2Int RoomMoneyReward;
+        [MinValue(0)] public Vector2Int LobbyMoneyPerRoom;
+        [MinValue(0)] public Vector2Int LobbyMoneyRunReward;
 
         [Title("Rules", "Run generation rules")]
 

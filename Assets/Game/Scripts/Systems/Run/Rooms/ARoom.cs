@@ -46,7 +46,10 @@ namespace Game.Systems.Run.Rooms
 
 		protected abstract void OnActivate();
 
-		protected virtual void OnClear() => _info.Doors.ForEach(x => x.Activate());
+		protected virtual void OnClear()
+		{
+			_info.Doors.ForEach(x => x.Activate());
+		}
 
 		public void Activate()
 		{

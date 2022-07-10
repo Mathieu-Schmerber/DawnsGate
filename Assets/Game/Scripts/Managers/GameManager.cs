@@ -104,6 +104,14 @@ namespace Game.Managers
 			OnLobbyMoneyUpdated?.Invoke(before, Instance._lobbyMoney);
 		}
 
+		public static void RewardWithLobbyMoney(int amount)
+		{
+			int before = Instance._lobbyMoney;
+
+			Instance._lobbyMoney += amount;
+			OnLobbyMoneyUpdated?.Invoke(before, Instance._lobbyMoney);
+		}
+
 		#endregion
 
 		#region References

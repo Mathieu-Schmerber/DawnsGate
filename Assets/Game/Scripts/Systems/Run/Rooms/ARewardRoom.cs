@@ -33,6 +33,7 @@ namespace Game.Systems.Run.Rooms
 				default:
 					break;
 			}
+			GameManager.RewardWithLobbyMoney(UnityEngine.Random.Range(RunManager.RunSettings.LobbyMoneyPerRoom.x, RunManager.RunSettings.LobbyMoneyPerRoom.y + 1));
 		}
 	}
 }

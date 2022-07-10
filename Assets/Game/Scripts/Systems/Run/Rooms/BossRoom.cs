@@ -53,6 +53,7 @@ namespace Game.Systems.Run.Rooms
 		{
 			base.OnClear();
 			_bossBar.Close();
+			GameManager.RewardWithLobbyMoney(Random.Range(RunManager.RunSettings.LobbyMoneyRunReward.x, RunManager.RunSettings.LobbyMoneyRunReward.y + 1));
 		}
 
 		public override void OnEnemyKilled(GameObject gameObject) => Clear();
