@@ -3,7 +3,7 @@ using Game.Systems.Combat.Attacks;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Game.Entities.Lunaris
+namespace Game.Entities.AI.Lunaris
 {
 	[CreateAssetMenu(menuName = "Data/Entity/Stats/Lunaris")]
 	public class LunarisStatData : BaseStatData

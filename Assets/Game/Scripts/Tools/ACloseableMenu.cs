@@ -10,20 +10,29 @@ namespace Game.Tools
 {
 	public abstract class ACloseableMenu : AMenu
 	{
-		protected virtual void OnEnable()
-		{
-			InputManager.OnCancelPressed += OnCancel;
-		}
-
-		protected virtual void OnDisable()
-		{
-			InputManager.OnCancelPressed -= OnCancel;
-		}
-
-		private void OnCancel()
+		protected virtual void OnCancel()
 		{
 			if (_isOpen)
 				Close();
+		}
+
+		protected virtual void OnSubmit()
+		{
+
+		}
+
+		public override void Open()
+		{
+			base.Open();
+			InputManager.OnCancelPressed += OnCancel;
+			InputManager.OnSubmitPressed += OnSubmit;
+		}
+
+		public override void Close()
+		{
+			base.Close();
+			InputManager.OnCancelPressed -= OnCancel;
+			InputManager.OnSubmitPressed += OnSubmit;
 		}
 	}
 }

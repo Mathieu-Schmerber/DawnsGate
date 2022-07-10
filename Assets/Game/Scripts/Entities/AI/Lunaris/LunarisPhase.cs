@@ -1,4 +1,4 @@
-﻿namespace Game.Entities.Lunaris
+﻿namespace Game.Entities.AI.Lunaris
 {
 	public enum LunarisPhase
 	{

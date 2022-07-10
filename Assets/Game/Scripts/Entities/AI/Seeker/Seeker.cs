@@ -12,7 +12,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace Game.Entities.AI
+namespace Game.Entities.AI.Seeker
 {
 	public class Seeker : EnemyAI, IAnimationEventListener
 	{
@@ -92,9 +92,9 @@ namespace Game.Entities.AI
 			_gfxAnim.Play("LoadCharge");
 		}
 
-		public void OnAnimationEvent(string animationArg) {}
+		public void OnAnimationEvent(string animationArg) { }
 
-		public void OnAnimationEnter(AnimatorStateInfo stateInfo) 
+		public void OnAnimationEnter(AnimatorStateInfo stateInfo)
 		{
 			if (stateInfo.IsName("Charge"))
 			{
@@ -104,7 +104,8 @@ namespace Game.Entities.AI
 				UnlockTarget();
 				Dash(dir, _stats.DashRange, 0.3f, true);
 				_startDamageCheck = true;
-				Awaiter.WaitAndExecute(0.3f, () => {
+				Awaiter.WaitAndExecute(0.3f, () =>
+				{
 					_gfxAnim.Play("EndCharge");
 					_startDamageCheck = false;
 				});

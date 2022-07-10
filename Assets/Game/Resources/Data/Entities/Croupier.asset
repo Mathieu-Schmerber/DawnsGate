@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3f88d37540945445b5c931c35c75827, type: 3}
+  m_Name: Croupier
+  m_EditorClassIdentifier: 
+  DisplayName: Croupier
+  StartHealth: 0
+  MovementSpeed: 0
+  DashRange: 0
+  DashCooldown: 0
+  Modifiers:
+    keyData: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e0000000f000000
+    valueData:
+    - _baseModifier: 100
+      BonusModifier: 0
+      TemporaryModifier: 0
+    - _baseModifier: 100
+      BonusModifier: 0
+      TemporaryModifier: 0
+    - _baseModifier: 0
+      BonusModifier: 0
+      TemporaryModifier: 0
+    - _baseModifier: 100
+      BonusModifier: 0
+      TemporaryModifier: 0
+    - _baseModifier: 0
+      BonusModifier: 0
+      TemporaryModifier: 0
+    - _baseModifier: 0
+      BonusModifier: 0
+      TemporaryModifier: 0
+    - _baseModifier: 150
+      BonusModifier: 0
+      TemporaryModifier: 0
+    - _baseModifier: 100
+      BonusModifier: 0
+      TemporaryModifier: 0
+    - _baseModifier: 100
+      BonusModifier: 0
+      TemporaryModifier: 0
+    - _baseModifier: 100
+      BonusModifier: 0
+      TemporaryModifier: 0
+    - _baseModifier: 0
+      BonusModifier: 0
+      TemporaryModifier: 0
+    - _baseModifier: 100
+      BonusModifier: 0
+      TemporaryModifier: 0
+    - _baseModifier: 100
+      BonusModifier: 0
+      TemporaryModifier: 0
+    - _baseModifier: 0
+      BonusModifier: 0
+      TemporaryModifier: 0
+    - _baseModifier: 100
+      BonusModifier: 0
+      TemporaryModifier: 0
+    - _baseModifier: 0
+      BonusModifier: 0
+      TemporaryModifier: 0
+  DialogueData: {fileID: 11400000, guid: ce8af70772c0de643b9674f581444afa, type: 2}

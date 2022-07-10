@@ -3,7 +3,7 @@ using Nawlian.Lib.Systems.Pooling;
 using Pixelplacement;
 using UnityEngine;
 
-namespace Game.Entities.AI
+namespace Game.Entities.AI.Thrower
 {
 	[System.Serializable]
 	public struct ProjectileParameters
@@ -56,7 +56,7 @@ namespace Game.Entities.AI
 		{
 			float elapsedTime = Time.time - _spawnedTime;
 			float x = elapsedTime / _params.Lifetime;
-			float altitude = _parabola.a * Mathf.Pow(x, 2) + (_parabola.b * x) + _parabola.c;
+			float altitude = _parabola.a * Mathf.Pow(x, 2) + _parabola.b * x + _parabola.c;
 
 			transform.position = transform.position.WithY(_params.Destination.y + altitude);
 		}

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Game.Entities.AI
+namespace Game.Entities.AI.Seeker
 {
 	[CreateAssetMenu(menuName = "Data/Entity/Stats/Seeker")]
 	public class SeekerStatData : EnemyStatData

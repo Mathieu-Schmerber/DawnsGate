@@ -19,15 +19,13 @@ namespace Game.UI
 
 		private Inventory _inventory;
 
-		protected override void OnEnable()
+		private void OnEnable()
 		{
-			base.OnEnable();
 			InputManager.OnInventoryPressed += OpenOrClose;
 		}
 
-		protected override void OnDisable()
+		private void OnDisable()
 		{
-			base.OnDisable();
 			InputManager.OnInventoryPressed -= OpenOrClose;
 		}
 

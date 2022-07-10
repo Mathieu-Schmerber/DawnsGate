@@ -1,5 +1,4 @@
-﻿using Game.Entities.AI;
-using Game.Systems.Combat.Attacks;
+﻿using Game.Systems.Combat.Attacks;
 using Sirenix.OdinInspector;
 using System;
 using System.Collections.Generic;
@@ -8,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace Game.Entities.AI
+namespace Game.Entities.AI.Tank
 {
 	[CreateAssetMenu(menuName = "Data/Entity/Stats/Tank")]
 	public class TankStatData : EnemyStatData

@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace Game.Entities.AI
+namespace Game.Entities.AI.Thrower
 {
 	[CreateAssetMenu(menuName = "Data/Entity/Stats/Thrower")]
 	public class ThrowerStatData : EnemyStatData

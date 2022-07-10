@@ -1,5 +1,6 @@
 ﻿using Game.Entities.Shared;
 using Game.Managers;
+using Game.Tools;
 using Pixelplacement;
 using Sirenix.OdinInspector;
 using TMPro;
@@ -8,7 +9,7 @@ using UnityEngine.UI;
 
 namespace Game.UI
 {
-	public class PlayerUi : MonoBehaviour
+	public class PlayerUi : ACloseableMenu
 	{
 		[Title("References")]
 		[SerializeField] private TextMeshProUGUI _runMoney;
@@ -16,6 +17,8 @@ namespace Game.UI
 		[SerializeField] private TextMeshProUGUI _healthText;
 		[SerializeField] private Image _healthFill;
 		[SerializeField] private Image _armorFill;
+
+		public override bool RequiresGameFocus => false;
 
 		private void Start()
 		{

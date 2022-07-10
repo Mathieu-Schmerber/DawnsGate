@@ -13,7 +13,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using static Game.Systems.Combat.Attacks.AttackBase;
 
-namespace Game.Entities.AI
+namespace Game.Entities.AI.Thrower
 {
 	public class Thrower : EnemyAI, IAnimationEventListener
 	{
@@ -43,7 +43,7 @@ namespace Game.Entities.AI
 
 			if (_previsionPath.corners.Length < 2)
 				return true;
-			
+
 			Vector3 dirToPoint = _previsionPath.corners[1] - transform.position;
 			Vector3 dirToPlayer = GameManager.Player.transform.position - transform.position;
 			float angle = Vector3.Angle(dirToPlayer, dirToPoint);
@@ -58,7 +58,7 @@ namespace Game.Entities.AI
 
 			if (aroundPos?.Length == 0)
 				return _room.Info.Data.SpawnablePositions.Random();
-			
+
 			return aroundPos.Where(x => !PathIsDangerous(x)).Random();
 		}
 

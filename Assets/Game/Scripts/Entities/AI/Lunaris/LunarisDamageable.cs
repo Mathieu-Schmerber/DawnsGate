@@ -1,7 +1,7 @@
 ﻿using Game.Entities.Shared;
 using Game.Entities.Shared.Health;
 
-namespace Game.Entities.Lunaris
+namespace Game.Entities.AI.Lunaris
 {
 	public class LunarisDamageable : Damageable
 	{

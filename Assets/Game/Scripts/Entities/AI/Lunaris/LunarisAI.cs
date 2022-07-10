@@ -13,7 +13,7 @@ using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace Game.Entities.Lunaris
+namespace Game.Entities.AI.Lunaris
 {
 	public class LunarisAI : EnemyAI, IAnimationEventListener
 	{
@@ -164,7 +164,7 @@ namespace Game.Entities.Lunaris
 			Vector3 pos = GameManager.Player.transform.position.WithY(_room.GroundLevel);
 
 			for (int i = 0; i <= (int)_phaseIndex; i++)
-				AttackBase.ShowAttackPrevisu(_stats.PassiveAttack, 
+				AttackBase.ShowAttackPrevisu(_stats.PassiveAttack,
 					pos + Random.insideUnitSphere.WithY(pos.y) * _phase.PassiveSpread,
 					_phase.PrevisualisationDuration,
 					this,
@@ -246,7 +246,7 @@ namespace Game.Entities.Lunaris
 				RefillAttackStack();
 
 			_currentAttackType = _attackStack.Pop();
-			_currentAttack = _currentAttackType == AttackType.HEAVY ? _phase.HeavyAttack : (_currentAttackType == AttackType.LIGHT ? _phase.LightAttack : _phase.LightAttack2);
+			_currentAttack = _currentAttackType == AttackType.HEAVY ? _phase.HeavyAttack : _currentAttackType == AttackType.LIGHT ? _phase.LightAttack : _phase.LightAttack2;
 			_gfxAnim.SetFloat("AttackSpeed", _entity.Scale(_currentAttack.AttackSpeed, Shared.StatModifier.AttackSpeed));
 			_gfxAnim.Play(_currentAttack.Animation.name);
 		}
@@ -361,7 +361,8 @@ namespace Game.Entities.Lunaris
 			_isThrusting = true;
 			_gfxAnim.SetBool("IsThrusting", _isThrusting);
 			Dash(GetAimNormal(), distanceToWall, dashTime, false);
-			Awaiter.WaitAndExecute(dashTime, () => {
+			Awaiter.WaitAndExecute(dashTime, () =>
+			{
 				if (_isThrusting && State != Shared.EntityState.STUN)
 				{
 					_isThrusting = false;

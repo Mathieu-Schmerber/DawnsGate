@@ -20,6 +20,7 @@ namespace Game.Managers
 		public static event Action OnInteractPressed;
 		public static event Action OnInventoryPressed;
 		public static event Action OnCancelPressed;
+		public static event Action OnSubmitPressed;
 
 		#region Unity builtins
 
@@ -45,6 +46,7 @@ namespace Game.Managers
 			_controls.Player.Interact.performed += (ctx) => OnInteractPressed?.Invoke();
 			_controls.UI.Inventory.performed += (ctx) => OnInventoryPressed?.Invoke();
 			_controls.UI.Cancel.performed += (ctx) => OnCancelPressed?.Invoke();
+			_controls.UI.Submit.performed += (ctx) => OnSubmitPressed?.Invoke();
 		}
 
 		#endregion

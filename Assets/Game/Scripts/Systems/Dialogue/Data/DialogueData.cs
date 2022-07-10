@@ -3,6 +3,7 @@ using Sirenix.OdinInspector;
 using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 namespace Game.Systems.Dialogue.Data
 {
@@ -36,5 +37,12 @@ namespace Game.Systems.Dialogue.Data
 					Nodes.Remove(item.Key);
 			}
 		}
+
+		internal ADialogueNode GetFirstNode() => Nodes.First(x => x.Value.IsStartNode).Value;
+
+		internal DialogueCheckpointNode GetCheckpoint(string checkpointName)
+			=> Nodes.Where(x => x.Value.Type == NodeType.CHECKPOINT)
+					.Select(x => x.Value as DialogueCheckpointNode)
+					.FirstOrDefault(x => x.CheckPointName == checkpointName);
 	}
 }
