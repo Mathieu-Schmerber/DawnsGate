@@ -32,7 +32,7 @@ namespace Game.Tools
 		{
 			base.Close();
 			InputManager.OnCancelPressed -= OnCancel;
-			InputManager.OnSubmitPressed += OnSubmit;
+			InputManager.OnSubmitPressed -= OnSubmit;
 		}
 	}
 }

@@ -55,9 +55,16 @@ MonoBehaviour:
       Data: false
     - Name: Text
       Entry: 1
-      Data: 'Yolo les gens c''est
+      Data: 'I could speak at a normal speed
 
-        Watermelon'
+        [speed=40]I could speak faster
+        than that
+
+        [speed=60]I could speed things up,[speed=30] then take
+        a small break[speed=2] <b><color=red>SMALL</color></b>
+
+        [speed]And
+        resume to normal speed again !'
     - Name: NextNodeId
       Entry: 1
       Data: ac7d7679-bd63-4115-9012-0c983caa9671
@@ -97,7 +104,7 @@ MonoBehaviour:
       Data: Game.Systems.Dialogue.Data.DialogueChoiceNode+ChoiceOutput, Assembly-CSharp
     - Name: Text
       Entry: 1
-      Data: T ki ?
+      Data: Great, do it again !
     - Name: NextNodeId
       Entry: 1
       Data: 55f1f315-4cc6-4aea-a4b8-4e3142ba9220
@@ -109,7 +116,7 @@ MonoBehaviour:
       Data: Game.Systems.Dialogue.Data.DialogueChoiceNode+ChoiceOutput, Assembly-CSharp
     - Name: Text
       Entry: 1
-      Data: Ntm
+      Data: Ok bye
     - Name: NextNodeId
       Entry: 1
       Data: 4b674e72-92c9-4d7a-ac23-86b8026a98a4
