@@ -104,21 +104,32 @@ namespace Game.Entities.AI.Lunaris
 			State = Shared.EntityState.STUN;
 
 			// Executing the switched state code after waiting for a while
-			AttackBase.ShowAttackPrevisu(_stats.PhaseSwitchAttack, transform.position.WithY(_room.GroundLevel), _stats.PhaseSwitchTime, this);
+			AttackBase.ShowAttackPrevisu(
+				_stats.PhaseSwitchAttack,
+				transform.position.WithY(_room.GroundLevel),
+				_stats.PhaseSwitchTime - _stats.PhaseSwitchAttack.ActiveTime,
+				this,
+				(param) => DisplayPhaseSwitchFeedback(param));
 			Awaiter.WaitAndExecute(_stats.PhaseSwitchTime, OnReadyToStartNewPhase);
+		}
+
+		private void DisplayPhaseSwitchFeedback(PreviewParameters preview)
+		{
+			// Spawn explosion
+			AttackBase.Spawn(_stats.PhaseSwitchAttack, preview.Position, Quaternion.identity, new()
+			{
+				Caster = _entity,
+				Data = _stats.PhaseSwitchAttack
+			});
+
+			// Graphics update
+			_weaponMesh.mesh = _phase.Weapon;
 		}
 
 		private void OnReadyToStartNewPhase()
 		{
 			if (RunManager.RunState == RunState.LOBBY)
 				return;
-
-			// Spawn explosion
-			AttackBase.Spawn(_stats.PhaseSwitchAttack, transform.position.WithY(_room.GroundLevel), Quaternion.identity, new()
-			{
-				Caster = _entity,
-				Data = _stats.PhaseSwitchAttack
-			});
 
 			// Reactivating the passive
 			_passiveTimer.Start(_phase.SpawnRate, true, OnPassiveTick);
@@ -129,9 +140,6 @@ namespace Game.Entities.AI.Lunaris
 
 			// The boss can return to an active state
 			ResetStates();
-
-			// Graphics update
-			_weaponMesh.mesh = _phase.Weapon;
 		}
 
 		private void ResetStates()
@@ -314,13 +322,13 @@ namespace Game.Entities.AI.Lunaris
 			}
 		}
 
-		private void PutToRest()
+		private void PutToRest(float additionalTime = 0)
 		{
 			LockAim = true;
 			_gfxAnim.SetBool("IsTired", true);
 			_gfxAnim.Play(_stats.RestAnimation.name);
 			State = Shared.EntityState.STUN;
-			Awaiter.WaitAndExecute(_phase.RestingTime, ResetStates);
+			Awaiter.WaitAndExecute(_phase.RestingTime + additionalTime, ResetStates);
 		}
 
 		#endregion
@@ -372,7 +380,7 @@ namespace Game.Entities.AI.Lunaris
 						Caster = _entity,
 						Data = _stats.PhaseSwitchAttack
 					});
-					PutToRest();
+					PutToRest(_stats.PhaseSwitchAttack.ActiveTime);
 				}
 			});
 		}
