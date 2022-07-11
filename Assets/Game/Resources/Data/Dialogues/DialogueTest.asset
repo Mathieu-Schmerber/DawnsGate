@@ -58,13 +58,10 @@ MonoBehaviour:
       Data: false
     - Name: Text
       Entry: 1
-      Data: 'I''m sooooo [effect=wave]<color=red>VERY ANGRY <sprite=1></color>[effect]
+      Data: 'How would I even describe this feeling [speed=0,5]...
 
-        I''m
-        sooooo [effect=shake]<color=green>VERY HAPPY</color>[effect]
-
-        I''m
-        sooooo [effect=wobble]<color=purple>STRANGE</color>[effect]'
+        [speed=1,2]Oh
+        Yeah !!! [speed=1]That is called: [speed=0,2][effect=shake]<color=red>ANGER</color>[effect]'
     - Name: NextNodeId
       Entry: 1
       Data: ac7d7679-bd63-4115-9012-0c983caa9671
@@ -207,3 +204,4 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
+  Sound: {fileID: 8300000, guid: 00d5d8c4c7e72cd48ad10d76e660b77d, type: 3}

@@ -13,6 +13,8 @@ namespace Game.Systems.Dialogue.Data
 		[DictionaryDrawerSettings(IsReadOnly = true)]
 		public Dictionary<string, ADialogueNode> Nodes;
 
+		#region Utility
+
 		[OnInspectorInit]
 		private void Init()
 		{
@@ -44,5 +46,7 @@ namespace Game.Systems.Dialogue.Data
 			=> Nodes.Where(x => x.Value.Type == NodeType.CHECKPOINT)
 					.Select(x => x.Value as DialogueCheckpointNode)
 					.FirstOrDefault(x => x.CheckPointName == checkpointName);
+
+		#endregion
 	}
 }

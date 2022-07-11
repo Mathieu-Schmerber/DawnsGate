@@ -11,5 +11,6 @@ namespace Game.Systems.Dialogue.Data
 
 		[TextArea] public string Text;
 		public string NextNodeId;
+		public AudioClip Audio;
 	}
 }

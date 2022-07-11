@@ -18,7 +18,7 @@ namespace Game.UI
 {
 	public class DialogueUi : ACloseableMenu
 	{
-		private readonly int DEFAULT_SPEED = 30;
+		private readonly int DEFAULT_SPEED = 50;
 		private readonly float WAVE_AMP = 3.5f;
 		private readonly float WAVE_SPEED = 5;
 
@@ -29,12 +29,20 @@ namespace Game.UI
 		[SerializeField] private Transform _choiceList;
 		[SerializeField] private List<DialogueChoiceUi> _choices = new();
 
-		private Mesh mesh;
+		private float _currentSpeachSpeed;
+		private AudioSource _audio;
+		private Mesh _mesh;
 		private List<ParsedElement> _textEffects;
 		private ADialogueNode _displayedNode = null;
 		private Timer _appreanceTimer = new();
 
 		public event Action<ADialogueNode, string> OnSubmitted;
+
+		protected override void Awake()
+		{
+			base.Awake();
+			_audio = GetComponent<AudioSource>();
+		}
 
 		#region Text effects
 
@@ -49,8 +57,8 @@ namespace Game.UI
 		private void AnimateText()
 		{
 			_promptText.ForceMeshUpdate();
-			mesh = _promptText.mesh;
-			var vertices = mesh.vertices;
+			_mesh = _promptText.mesh;
+			var vertices = _mesh.vertices;
 			ParsedElement activeEffect;
 
 			for (int i = 0; i < _promptText.maxVisibleCharacters; i++)
@@ -68,8 +76,8 @@ namespace Game.UI
 				vertices[index + 2] += offset;
 				vertices[index + 3] += offset;
 			}
-			mesh.vertices = vertices;
-			_promptText.canvasRenderer.SetMesh(mesh);
+			_mesh.vertices = vertices;
+			_promptText.canvasRenderer.SetMesh(_mesh);
 		}
 
 		private Vector3 ExecuteEffect(string name, float timeArg)
@@ -94,10 +102,7 @@ namespace Game.UI
 			ParsedElement speed = _textEffects.LastOrDefault(x => x.Contains(_promptText.maxVisibleCharacters) && x.Name == "speed");
 
 			if (speed != null)
-			{
-				int speedValue;
-				_appreanceTimer.Interval = 1.0f / (int.TryParse(speed.Value, out speedValue) ? speedValue * DEFAULT_SPEED : DEFAULT_SPEED);
-			}
+				_appreanceTimer.Interval = 1.0f / (float.TryParse(speed.Value, out _currentSpeachSpeed) ? _currentSpeachSpeed * DEFAULT_SPEED : DEFAULT_SPEED);
 			_promptText.maxVisibleCharacters++;
 			if (_promptText.maxVisibleCharacters == _promptText.textInfo.characterCount)
 				_appreanceTimer.Stop();
@@ -118,7 +123,10 @@ namespace Game.UI
 			_textEffects = TextElementParser.Parse(richText.RemoveTextMeshProTags());
 			_promptText.text = TextElementParser.RemoveElements(lightText, _textEffects);
 			_displayedNode = node;
-			_appreanceTimer.Start(0.1f, true, OnApprearTick);
+			_appreanceTimer.Start(1.0f / (_currentSpeachSpeed * DEFAULT_SPEED), true, OnApprearTick);
+
+			if (node.Audio != null)
+				_audio.PlayOneShot(node.Audio);
 		}
 
 		public void DisplayChoices(DialogueChoiceNode node)
@@ -161,6 +169,8 @@ namespace Game.UI
 
 		private void ClearDialogues()
 		{
+			_audio.Stop();
+			_currentSpeachSpeed = 1;
 			_appreanceTimer.Stop();
 			EventSystem.current.SetSelectedGameObject(null);
 			_displayedNode = null;
