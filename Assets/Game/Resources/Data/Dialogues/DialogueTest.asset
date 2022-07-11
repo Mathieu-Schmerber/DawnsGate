@@ -34,7 +34,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 12
-      Data: 3
+      Data: 9
     - Name: 
       Entry: 7
       Data: 
@@ -58,7 +58,10 @@ MonoBehaviour:
       Data: false
     - Name: Text
       Entry: 1
-      Data: Welcoming message
+      Data: "Oh oh ![speed=0,1] \n[speed=1]Hello dear traveler, let me welcome you
+        to my uh[speed=0,2]... [speed=1]<color=#5a5a5a>(please don't mess this up)</color>[speed=0,1]
+        \n[speed=1]My [speed=0,2][effect=wave]<color=yellow>WONDERFUL</color>[effect][speed=0,5]
+        <b>Casino</b> !"
     - Name: NextNodeId
       Entry: 1
       Data: 146f06bc-25df-4f3c-9ec0-0f594f9fce81
@@ -144,8 +147,8 @@ MonoBehaviour:
       Entry: 1
       Data: Bet {Bet} for {Reward}
     - Name: NextNodeId
-      Entry: 6
-      Data: 
+      Entry: 1
+      Data: cfaad863-d7ab-4095-84ae-fa14bf4a9c4e
     - Name: 
       Entry: 8
       Data: 
@@ -156,8 +159,8 @@ MonoBehaviour:
       Entry: 1
       Data: Refuse to play
     - Name: NextNodeId
-      Entry: 6
-      Data: 
+      Entry: 1
+      Data: 017d8f43-0c98-4631-9308-3433d4c44ae7
     - Name: 
       Entry: 8
       Data: 
@@ -166,6 +169,213 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: cfaad863-d7ab-4095-84ae-fa14bf4a9c4e
+    - Name: $v
+      Entry: 7
+      Data: 6|Game.Systems.Dialogue.Data.DialogueEventNode, Assembly-CSharp
+    - Name: Id
+      Entry: 1
+      Data: cfaad863-d7ab-4095-84ae-fa14bf4a9c4e
+    - Name: Author
+      Entry: 6
+      Data: 
+    - Name: IsStartNode
+      Entry: 5
+      Data: false
+    - Name: IsEndNode
+      Entry: 5
+      Data: false
+    - Name: FunctionName
+      Entry: 1
+      Data: Bet
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: 017d8f43-0c98-4631-9308-3433d4c44ae7
+    - Name: $v
+      Entry: 7
+      Data: 7|Game.Systems.Dialogue.Data.DialoguePromptNode, Assembly-CSharp
+    - Name: Id
+      Entry: 1
+      Data: 017d8f43-0c98-4631-9308-3433d4c44ae7
+    - Name: Author
+      Entry: 6
+      Data: 
+    - Name: IsStartNode
+      Entry: 5
+      Data: false
+    - Name: IsEndNode
+      Entry: 5
+      Data: true
+    - Name: Text
+      Entry: 1
+      Data: Too bad, see ya looser
+    - Name: NextNodeId
+      Entry: 6
+      Data: 
+    - Name: Audio
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: 1a7efaa3-577e-4ecf-9912-be2bb65a24e2
+    - Name: $v
+      Entry: 7
+      Data: 8|Game.Systems.Dialogue.Data.DialogueCheckpointNode, Assembly-CSharp
+    - Name: Id
+      Entry: 1
+      Data: 1a7efaa3-577e-4ecf-9912-be2bb65a24e2
+    - Name: Author
+      Entry: 6
+      Data: 
+    - Name: IsStartNode
+      Entry: 5
+      Data: false
+    - Name: IsEndNode
+      Entry: 5
+      Data: false
+    - Name: CheckPointName
+      Entry: 1
+      Data: Won
+    - Name: NextNodeId
+      Entry: 1
+      Data: 3d4bf66e-721a-4399-bf95-72d50ac6824c
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: a924481b-6638-434a-84f4-60a5d7312f55
+    - Name: $v
+      Entry: 7
+      Data: 9|Game.Systems.Dialogue.Data.DialogueCheckpointNode, Assembly-CSharp
+    - Name: Id
+      Entry: 1
+      Data: a924481b-6638-434a-84f4-60a5d7312f55
+    - Name: Author
+      Entry: 6
+      Data: 
+    - Name: IsStartNode
+      Entry: 5
+      Data: false
+    - Name: IsEndNode
+      Entry: 5
+      Data: false
+    - Name: CheckPointName
+      Entry: 1
+      Data: Lost
+    - Name: NextNodeId
+      Entry: 1
+      Data: 96e529bb-3a51-4fab-b32f-b3d9dcbc9b6f
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: 3d4bf66e-721a-4399-bf95-72d50ac6824c
+    - Name: $v
+      Entry: 7
+      Data: 10|Game.Systems.Dialogue.Data.DialoguePromptNode, Assembly-CSharp
+    - Name: Id
+      Entry: 1
+      Data: 3d4bf66e-721a-4399-bf95-72d50ac6824c
+    - Name: Author
+      Entry: 6
+      Data: 
+    - Name: IsStartNode
+      Entry: 5
+      Data: false
+    - Name: IsEndNode
+      Entry: 5
+      Data: true
+    - Name: Text
+      Entry: 1
+      Data: You won message, good bye
+    - Name: NextNodeId
+      Entry: 6
+      Data: 
+    - Name: Audio
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: 96e529bb-3a51-4fab-b32f-b3d9dcbc9b6f
+    - Name: $v
+      Entry: 7
+      Data: 11|Game.Systems.Dialogue.Data.DialoguePromptNode, Assembly-CSharp
+    - Name: Id
+      Entry: 1
+      Data: 96e529bb-3a51-4fab-b32f-b3d9dcbc9b6f
+    - Name: Author
+      Entry: 6
+      Data: 
+    - Name: IsStartNode
+      Entry: 5
+      Data: false
+    - Name: IsEndNode
+      Entry: 5
+      Data: false
+    - Name: Text
+      Entry: 1
+      Data: 'Oh shoot, maybe luck will strike next time !
+
+        Wanna try again
+        ?'
+    - Name: NextNodeId
+      Entry: 1
+      Data: 06adc04a-5c31-4df5-9cf3-0625e3be3dee
+    - Name: Audio
+      Entry: 6
       Data: 
     - Name: 
       Entry: 8

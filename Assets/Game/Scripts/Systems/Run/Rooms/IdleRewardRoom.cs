@@ -1,6 +1,6 @@
 ﻿namespace Game.Systems.Run.Rooms
 {
-	public class IdleRoom : ARoom
+	public class IdleRewardRoom : ARewardRoom
 	{
 		public override bool RequiresNavBaking => false;
 
