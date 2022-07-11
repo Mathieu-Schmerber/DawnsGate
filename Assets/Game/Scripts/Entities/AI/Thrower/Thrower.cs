@@ -1,6 +1,6 @@
 ﻿using Game.Managers;
 using Game.Systems.Combat.Attacks;
-using Game.VFX.Previsualisations;
+using Game.VFX.Preview;
 using Nawlian.Lib.Extensions;
 using Nawlian.Lib.Systems.Animations;
 using Nawlian.Lib.Systems.Pooling;
@@ -98,7 +98,7 @@ namespace Game.Entities.AI.Thrower
 					MaxAltitude = _stats.MaxAltitude,
 					Destination = _lastHitPos
 				}, null);
-				Previsualisation.Show(_stats.AoeAttack.Previsualisation, _lastHitPos, _stats.AoeAttack.Range / 2, _stats.TravelTime);
+				Preview.Show(_stats.AoeAttack.Previsualisation, _lastHitPos, _stats.AoeAttack.Range / 2, _stats.TravelTime);
 				Invoke(nameof(SpawnAOE), _stats.TravelTime);
 			}
 		}

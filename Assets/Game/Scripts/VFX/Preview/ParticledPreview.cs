@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace Game.VFX.Previsualisations
+namespace Game.VFX.Preview
 {
-	public class ParticledPrevisualisation : PrevisualisationBase
+	public class ParticledPreview : PreviewBase
 	{
 		[SerializeField] private bool _controlDuration = false;
 		[SerializeField] private bool _controlScale = false;

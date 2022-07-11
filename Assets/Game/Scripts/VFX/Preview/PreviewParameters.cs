@@ -1,9 +1,9 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Game.VFX.Previsualisations
+namespace Game.VFX.Preview
 {
-	public struct PrevisuParameters
+	public struct PreviewParameters
 	{
 		public Transform Transform { get; set; }
 		public Vector3 Position { get; set; }
@@ -11,7 +11,7 @@ namespace Game.VFX.Previsualisations
 		public float Size { get; set; }
 		public Vector3 Direction { get; set; }
 		public Quaternion Rotation { get; internal set; }
-		public Action<PrevisuParameters> OnRelease { get; set; }
-		public Action<PrevisuParameters> OnUpdate { get; internal set; }
+		public Action<PreviewParameters> OnRelease { get; set; }
+		public Action<PreviewParameters> OnUpdate { get; internal set; }
 	}
 }

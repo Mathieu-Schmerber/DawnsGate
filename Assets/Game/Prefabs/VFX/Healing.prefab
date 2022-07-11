@@ -9891,6 +9891,8 @@ GameObject:
   - component: {fileID: 8224952050062931011}
   - component: {fileID: 8109593462861119371}
   - component: {fileID: 8138724209687081067}
+  - component: {fileID: 652762459791655009}
+  - component: {fileID: 9045459991148874409}
   m_Layer: 0
   m_Name: Healing
   m_TagString: Untagged
@@ -9931,7 +9933,7 @@ ParticleSystem:
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 0
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -14832,6 +14834,31 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &652762459791655009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8228607959348399897}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 044fc5f3d768ef641ae14ff8411b706f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _destructionMode: 0
+--- !u!114 &9045459991148874409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8228607959348399897}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 305dd3d471eb49d49adf62867313ea9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8228710121009208359
 GameObject:
   m_ObjectHideFlags: 0

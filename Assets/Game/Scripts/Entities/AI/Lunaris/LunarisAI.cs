@@ -3,7 +3,7 @@ using Game.Entities.Shared.Health;
 using Game.Managers;
 using Game.Systems.Combat.Attacks;
 using Game.Systems.Run.Rooms;
-using Game.VFX.Previsualisations;
+using Game.VFX.Preview;
 using Nawlian.Lib.Extensions;
 using Nawlian.Lib.Systems.Animations;
 using Nawlian.Lib.Utils;
@@ -184,7 +184,7 @@ namespace Game.Entities.AI.Lunaris
 
 		}
 
-		private void SpawnPassive(PrevisuParameters obj)
+		private void SpawnPassive(PreviewParameters obj)
 		{
 			if (RunManager.RunState == RunState.IN_RUN)
 			{

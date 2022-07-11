@@ -1,6 +1,6 @@
 ﻿using Game.Entities.Shared;
 using Game.Entities.Shared.Health;
-using Game.VFX.Previsualisations;
+using Game.VFX.Preview;
 using Nawlian.Lib.Extensions;
 using Nawlian.Lib.Systems.Pooling;
 using System;
@@ -75,17 +75,17 @@ namespace Game.Systems.Combat.Attacks
 		public static GameObject Spawn<T>(T attack, Vector3 position, Quaternion rotation, InitData init) where T : AttackBaseData
 			=> ObjectPooler.Get(attack.Prefab.gameObject, position, rotation, init);
 
-		public static void ShowAttackPrevisu<T>(T attack, Vector3 position, float duration, AController caster, Action<PrevisuParameters> OnRelease = null, bool stickToCaster = false) where T : AttackBaseData
+		public static void ShowAttackPrevisu<T>(T attack, Vector3 position, float duration, AController caster, Action<PreviewParameters> OnRelease = null, bool stickToCaster = false) where T : AttackBaseData
 		{
 			if (attack.StickToCaster || stickToCaster)
 			{
-				Previsualisation.Show(attack.Previsualisation,
+				Preview.Show(attack.Previsualisation,
 					position,
 					Quaternion.identity,
 					attack.AttackRange,
 					duration, 
 					OnRelease,
-					OnUpdate: (PrevisuParameters previsu) =>
+					OnUpdate: (PreviewParameters previsu) =>
 					{
 						previsu.Transform.position = caster.transform.position;
 						previsu.Transform.rotation = Quaternion.LookRotation(caster.GetAimNormal());
@@ -93,7 +93,7 @@ namespace Game.Systems.Combat.Attacks
 			}
 			else
 			{
-				Previsualisation.Show(attack.Previsualisation, 
+				Preview.Show(attack.Previsualisation, 
 					position,
 					Quaternion.LookRotation(caster.GetAimNormal()), 
 					attack.AttackRange, 

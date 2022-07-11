@@ -1,4 +1,4 @@
-﻿using Game.VFX.Previsualisations;
+﻿using Game.VFX.Preview;
 using Sirenix.OdinInspector;
 using System;
 using System.Collections.Generic;
@@ -23,7 +23,7 @@ namespace Game.Systems.Combat.Attacks
 		public AttackBase Prefab;
 
 		[AssetsOnly, AssetSelector]
-		public PrevisualisationBase Previsualisation;
+		public PreviewBase Previsualisation;
 
 		[Title("Attack stats")]
 		public int BaseDamage;
