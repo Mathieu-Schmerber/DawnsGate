@@ -52,7 +52,7 @@ MonoBehaviour:
       Data: true
     - Name: IsEndNode
       Entry: 5
-      Data: true
+      Data: false
     - Name: Outputs
       Entry: 7
       Data: 3|System.Collections.Generic.List`1[[Game.Systems.Dialogue.Data.DialogueChoiceNode+ChoiceOutput,
@@ -125,7 +125,7 @@ MonoBehaviour:
       Data: false
     - Name: IsEndNode
       Entry: 5
-      Data: false
+      Data: true
     - Name: FunctionName
       Entry: 1
       Data: Merge
@@ -152,7 +152,7 @@ MonoBehaviour:
       Data: false
     - Name: IsEndNode
       Entry: 5
-      Data: false
+      Data: true
     - Name: FunctionName
       Entry: 1
       Data: Upgrade
@@ -179,7 +179,7 @@ MonoBehaviour:
       Data: false
     - Name: IsEndNode
       Entry: 5
-      Data: false
+      Data: true
     - Name: FunctionName
       Entry: 1
       Data: CloseDialogue

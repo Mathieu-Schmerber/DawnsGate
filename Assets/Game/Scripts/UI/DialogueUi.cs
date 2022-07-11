@@ -18,9 +18,9 @@ namespace Game.UI
 {
 	public class DialogueUi : ACloseableMenu
 	{
-		private readonly int DEFAULT_SPEED = 20;
-		private readonly int WAVE_AMP = 5;
-		private readonly int WAVE_SPEED = 5;
+		private readonly int DEFAULT_SPEED = 30;
+		private readonly float WAVE_AMP = 3.5f;
+		private readonly float WAVE_SPEED = 5;
 
 		[Title("References")]
 		[SerializeField] private TextMeshProUGUI _promptText;
@@ -50,24 +50,23 @@ namespace Game.UI
 			_promptText.ForceMeshUpdate();
 			mesh = _promptText.mesh;
 			var vertices = mesh.vertices;
+			ParsedElement activeEffect;
 
-			for (int i = 0; i < _promptText.textInfo.characterCount; i++)
+			for (int i = 0; i < _promptText.maxVisibleCharacters; i++)
 			{
-				ParsedElement activeEffect = _textEffects.LastOrDefault(x => x.Contains(i) && x.Name == "effect");
-				TMP_CharacterInfo c = _promptText.textInfo.characterInfo[i];
-				int index = c.vertexIndex;
-
-				if (activeEffect == null || activeEffect.Value == null)
+				activeEffect = _textEffects.LastOrDefault(x => x.Contains(i) && x.Name == "effect");
+				if (activeEffect == null || string.IsNullOrEmpty(activeEffect.Value))
 					continue;
 
-				Vector3 offset = ExecuteEffect(activeEffect.Value, Time.time + i);
+				TMP_CharacterInfo c = _promptText.textInfo.characterInfo[i];
+				int index = c.vertexIndex;
+				Vector3 offset = ExecuteEffect(activeEffect?.Value ?? "", Time.time + i);
 
 				vertices[index] += offset;
 				vertices[index + 1] += offset;
 				vertices[index + 2] += offset;
 				vertices[index + 3] += offset;
 			}
-
 			mesh.vertices = vertices;
 			_promptText.canvasRenderer.SetMesh(mesh);
 		}
@@ -76,14 +75,18 @@ namespace Game.UI
 		{
 			if (name == "wave")
 				return Wave(timeArg);
-			if (name == "shake")
+			else if (name == "shake")
 				return Shake(timeArg);
+			else if (name == "wobble")
+				return Wobble(timeArg);
 			return Vector3.zero;
 		}
 
-		private Vector3 Shake(float time) => new Vector3(Random.Range(0f, 2f), Random.Range(0f, 2f), Random.Range(0f, 2f));
+		private Vector3 Shake(float time) => new Vector2(Random.Range(0f, 2f), Random.Range(0f, 2f));
 
-		private Vector3 Wave(float time) => new Vector3(0, Mathf.Sin(WAVE_SPEED * time) * WAVE_AMP, transform.position.z);
+		private Vector3 Wave(float time) => new Vector2(0, Mathf.Sin(WAVE_SPEED * time) * WAVE_AMP);
+
+		private Vector3 Wobble(float time) => new Vector2(Mathf.Sin(time * 3.3f), Mathf.Cos(time * 2.5f));
 
 		private void OnApprearTick()
 		{
@@ -92,7 +95,7 @@ namespace Game.UI
 			if (speed != null)
 			{
 				int speedValue;
-				_appreanceTimer.Interval = 1.0f / (int.TryParse(speed.Value, out speedValue) ? speedValue : DEFAULT_SPEED);
+				_appreanceTimer.Interval = 1.0f / (int.TryParse(speed.Value, out speedValue) ? speedValue * DEFAULT_SPEED : DEFAULT_SPEED);
 			}
 			_promptText.maxVisibleCharacters++;
 			if (_promptText.maxVisibleCharacters == _promptText.textInfo.characterCount)
@@ -105,8 +108,8 @@ namespace Game.UI
 
 		public void DisplayPrompt(DialoguePromptNode node)
 		{
-			string richText = node.Text;
-			string lightText = node.Text;
+			string richText = node.Text.Replace("\n", "\n ").Insert(0, " ");
+			string lightText = richText;
 
 			ClearDialogues();
 
