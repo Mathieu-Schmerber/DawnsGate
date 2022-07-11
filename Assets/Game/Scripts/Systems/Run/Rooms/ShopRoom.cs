@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace Game.Systems.Run.Rooms
 {
-	public class ShopRoom : IdleRoom
+	public class ShopRoom : AutoClearRoom
 	{
 		[SerializeField] private bool _isLifeShop;
 		[SerializeField] private ItemStand[] _stands;

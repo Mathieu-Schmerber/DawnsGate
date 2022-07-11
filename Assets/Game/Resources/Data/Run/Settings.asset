@@ -37,13 +37,14 @@ MonoBehaviour:
     - Folder: Assets/Game/Scenes/Rooms/Boss
       HasError: 0
       RoomDatas:
+      - {fileID: 11400000, guid: 2ab2956c780fe294e8e11b7e51036217, type: 2}
       - {fileID: 11400000, guid: ece19d753a3565549b067245e2b9f233, type: 2}
   RoomMoneyReward: {x: 70, y: 90}
   LobbyMoneyPerRoom: {x: 100, y: 120}
   LobbyMoneyRunReward: {x: 500, y: 600}
   FirstRoom:
-    Type: 2
-    Reward: 1
+    Type: 1
+    Reward: 0
   RoomRules:
   - {fileID: 11400000, guid: e0e0b01f992b9884ca7ee76fd0aa0744, type: 2}
   - {fileID: 11400000, guid: 524bd8840420669418cc7e82f9e97272, type: 2}

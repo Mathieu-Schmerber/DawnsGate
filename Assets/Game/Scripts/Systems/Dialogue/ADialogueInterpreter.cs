@@ -77,7 +77,7 @@ namespace Game.Systems.Dialogue
 			ProcessNode(checkpoint.NextNodeId);
 		}
 
-		protected void CloseDialogue()
+		protected virtual void CloseDialogue()
 		{
 			GuiManager.OpenMenu<PlayerUi>();
 			GuiManager.CloseMenu<DialogueUi>();

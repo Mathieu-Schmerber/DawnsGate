@@ -67,7 +67,7 @@ namespace Game.Systems.Run.Rooms
 					_room = gameObject.AddComponent<ShopRoom>();
 					break;
 				default:
-					_room = gameObject.AddComponent<IdleRoom>();
+					_room = gameObject.AddComponent<AutoClearRoom>();
 					break;
 			}
 		}

@@ -1,6 +1,6 @@
 ﻿namespace Game.Systems.Run.Rooms
 {
-	public class IdleRoom : ARoom
+	public class AutoClearRoom : ARoom
 	{
 		public override bool RequiresNavBaking => false;
 
@@ -10,9 +10,6 @@
 			Activate();
 		}
 
-		protected override void OnActivate()
-		{
-
-		}
+		protected override void OnActivate() => Clear();
 	}
 }

@@ -15,8 +15,7 @@ MonoBehaviour:
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects:
-    - {fileID: 8300000, guid: 737aa44f451c1f945b80f8d61697a327, type: 3}
+    ReferencedUnityObjects: []
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -35,22 +34,22 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 12
-      Data: 4
+      Data: 3
     - Name: 
       Entry: 7
       Data: 
     - Name: $k
       Entry: 1
-      Data: 55f1f315-4cc6-4aea-a4b8-4e3142ba9220
+      Data: ba338ec9-3ef4-4a2a-bc34-8825129f6954
     - Name: $v
       Entry: 7
       Data: 2|Game.Systems.Dialogue.Data.DialoguePromptNode, Assembly-CSharp
     - Name: Id
       Entry: 1
-      Data: 55f1f315-4cc6-4aea-a4b8-4e3142ba9220
+      Data: ba338ec9-3ef4-4a2a-bc34-8825129f6954
     - Name: Author
-      Entry: 6
-      Data: 
+      Entry: 1
+      Data: The Croupier
     - Name: IsStartNode
       Entry: 5
       Data: true
@@ -59,16 +58,13 @@ MonoBehaviour:
       Data: false
     - Name: Text
       Entry: 1
-      Data: 'How would I even describe this feeling [speed=0,5]...
-
-        [speed=1,2]Oh
-        Yeah !!! [speed=1]That is called: [speed=0,2][effect=shake]<color=red>ANGER</color>[effect]'
+      Data: Welcoming message
     - Name: NextNodeId
       Entry: 1
-      Data: ac7d7679-bd63-4115-9012-0c983caa9671
+      Data: 146f06bc-25df-4f3c-9ec0-0f594f9fce81
     - Name: Audio
-      Entry: 10
-      Data: 0
+      Entry: 6
+      Data: 
     - Name: 
       Entry: 8
       Data: 
@@ -80,16 +76,54 @@ MonoBehaviour:
       Data: 
     - Name: $k
       Entry: 1
-      Data: ac7d7679-bd63-4115-9012-0c983caa9671
+      Data: 146f06bc-25df-4f3c-9ec0-0f594f9fce81
     - Name: $v
       Entry: 7
-      Data: 3|Game.Systems.Dialogue.Data.DialogueChoiceNode, Assembly-CSharp
+      Data: 3|Game.Systems.Dialogue.Data.DialoguePromptNode, Assembly-CSharp
     - Name: Id
       Entry: 1
-      Data: ac7d7679-bd63-4115-9012-0c983caa9671
+      Data: 146f06bc-25df-4f3c-9ec0-0f594f9fce81
     - Name: Author
+      Entry: 6
+      Data: 
+    - Name: IsStartNode
+      Entry: 5
+      Data: false
+    - Name: IsEndNode
+      Entry: 5
+      Data: false
+    - Name: Text
       Entry: 1
-      Data: Croupier
+      Data: 'Explaining the game rules...
+
+        Wanna play ?'
+    - Name: NextNodeId
+      Entry: 1
+      Data: 06adc04a-5c31-4df5-9cf3-0625e3be3dee
+    - Name: Audio
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: 06adc04a-5c31-4df5-9cf3-0625e3be3dee
+    - Name: $v
+      Entry: 7
+      Data: 4|Game.Systems.Dialogue.Data.DialogueChoiceNode, Assembly-CSharp
+    - Name: Id
+      Entry: 1
+      Data: 06adc04a-5c31-4df5-9cf3-0625e3be3dee
+    - Name: Author
+      Entry: 6
+      Data: 
     - Name: IsStartNode
       Entry: 5
       Data: false
@@ -98,7 +132,7 @@ MonoBehaviour:
       Data: false
     - Name: Outputs
       Entry: 7
-      Data: 4|System.Collections.Generic.List`1[[Game.Systems.Dialogue.Data.DialogueChoiceNode+ChoiceOutput,
+      Data: 5|System.Collections.Generic.List`1[[Game.Systems.Dialogue.Data.DialogueChoiceNode+ChoiceOutput,
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
@@ -108,10 +142,10 @@ MonoBehaviour:
       Data: Game.Systems.Dialogue.Data.DialogueChoiceNode+ChoiceOutput, Assembly-CSharp
     - Name: Text
       Entry: 1
-      Data: Great, do it again !
+      Data: Bet {Bet} for {Reward}
     - Name: NextNodeId
-      Entry: 1
-      Data: 55f1f315-4cc6-4aea-a4b8-4e3142ba9220
+      Entry: 6
+      Data: 
     - Name: 
       Entry: 8
       Data: 
@@ -120,10 +154,10 @@ MonoBehaviour:
       Data: Game.Systems.Dialogue.Data.DialogueChoiceNode+ChoiceOutput, Assembly-CSharp
     - Name: Text
       Entry: 1
-      Data: Ok bye
+      Data: Refuse to play
     - Name: NextNodeId
-      Entry: 1
-      Data: 4b674e72-92c9-4d7a-ac23-86b8026a98a4
+      Entry: 6
+      Data: 
     - Name: 
       Entry: 8
       Data: 
@@ -132,69 +166,6 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 1
-      Data: 4b674e72-92c9-4d7a-ac23-86b8026a98a4
-    - Name: $v
-      Entry: 7
-      Data: 5|Game.Systems.Dialogue.Data.DialogueEventNode, Assembly-CSharp
-    - Name: Id
-      Entry: 1
-      Data: 4b674e72-92c9-4d7a-ac23-86b8026a98a4
-    - Name: Author
-      Entry: 6
-      Data: 
-    - Name: IsStartNode
-      Entry: 5
-      Data: false
-    - Name: IsEndNode
-      Entry: 5
-      Data: true
-    - Name: FunctionName
-      Entry: 1
-      Data: Log
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 1
-      Data: 983c9394-cc41-4773-a478-daff147f6868
-    - Name: $v
-      Entry: 7
-      Data: 6|Game.Systems.Dialogue.Data.DialogueCheckpointNode, Assembly-CSharp
-    - Name: Id
-      Entry: 1
-      Data: 983c9394-cc41-4773-a478-daff147f6868
-    - Name: Author
-      Entry: 6
-      Data: 
-    - Name: IsStartNode
-      Entry: 5
-      Data: false
-    - Name: IsEndNode
-      Entry: 5
-      Data: false
-    - Name: CheckPointName
-      Entry: 6
-      Data: 
-    - Name: NextNodeId
-      Entry: 6
       Data: 
     - Name: 
       Entry: 8

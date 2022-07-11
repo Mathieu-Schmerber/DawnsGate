@@ -1,6 +1,7 @@
 using Game.Entities.AI;
 using Game.Entities.Shared;
 using Game.Systems.Dialogue;
+using Game.Systems.Run.Rooms;
 using Nawlian.Lib.Systems.Interaction;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,12 +11,15 @@ namespace Game
 {
 	public class CroupierDialogue : ADialogueInterpreter, IInteractable
 	{
+		[SerializeField] private ARoom _room;
 		private NpcStatData _npc;
 
 		private void Awake()
 		{
 			_npc = GetComponent<EntityIdentity>()?.Stats as NpcStatData;
 		}
+
+		#region Interaction
 
 		public string InteractionTitle => "Talk with the croupier";
 
@@ -31,9 +35,38 @@ namespace Game
 
 		private void OnTriggerExit(Collider other) => other.GetComponent<IInteractionActor>()?.UnSuggestInteraction(this);
 
-		private void Log()
+		#endregion
+
+		#region Dialogue events
+
+		protected override void CloseDialogue()
 		{
-			Debug.Log("Dialogue event !");
+			base.CloseDialogue();
+			_room.Clear();
 		}
+
+		private void Bet()
+		{
+			if (Random.Range(0, 2) == 0)
+				OnBetWon();
+			else
+				OnBetLost();
+		}
+
+		#endregion
+
+		#region Betting
+
+		private void OnBetWon()
+		{
+			ProcessCheckpoint("Won");
+		}
+
+		private void OnBetLost()
+		{
+			ProcessCheckpoint("Lost");
+		}
+
+		#endregion
 	}
 }
