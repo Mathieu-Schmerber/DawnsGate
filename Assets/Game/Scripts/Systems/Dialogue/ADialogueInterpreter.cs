@@ -21,6 +21,7 @@ namespace Game.Systems.Dialogue
 			_uiMenu.OnSubmitted += OnSubmission;
 			GuiManager.CloseMenu<PlayerUi>();
 
+			_uiMenu.SetAuthor("???");
 			ProcessNode(_dialogue.GetFirstNode());
 		}
 
@@ -46,6 +47,8 @@ namespace Game.Systems.Dialogue
 
 		private void ProcessNode(ADialogueNode node)
 		{
+			if (!string.IsNullOrEmpty(node.Author))
+				_uiMenu.SetAuthor(node.Author);
 			switch (node.Type)
 			{
 				case NodeType.PROMPT:

@@ -7,6 +7,7 @@ namespace Game.Systems.Dialogue.Data
 	public abstract class ADialogueNode
 	{
 		[ReadOnly] public string Id;
+		public string Author;
 		public bool IsStartNode;
 		public bool IsEndNode;
 

@@ -23,6 +23,7 @@ namespace Game.UI
 		private readonly float WAVE_SPEED = 5;
 
 		[Title("References")]
+		[SerializeField] private TextMeshProUGUI _authorNameText;
 		[SerializeField] private TextMeshProUGUI _promptText;
 		[SerializeField] private DialogueChoiceUi _choicePrefab;
 		[SerializeField] private Transform _choiceList;
@@ -151,6 +152,11 @@ namespace Game.UI
 			}
 			_displayedNode = node;
 			Awaiter.WaitAndExecute(0.05f, () => EventSystem.current.SetSelectedGameObject(_choices[0].gameObject));
+		}
+
+		public void SetAuthor(string author)
+		{
+			_authorNameText.text = author;
 		}
 
 		private void ClearDialogues()
