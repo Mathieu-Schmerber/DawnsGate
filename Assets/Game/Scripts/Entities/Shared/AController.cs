@@ -94,9 +94,12 @@ namespace Game.Entities.Shared
 
 			Vector3 inputs = CanMove ? GetMovementsInputs() : Vector3.zero;
 
-			_gfxAnim?.SetFloat("Speed", inputs.magnitude);
-			if (!LockAim)
-				_gfxAnim?.SetFloat("Angle", Vector3.Angle(inputs, dir));
+			if (_gfxAnim != null)
+			{
+				_gfxAnim.SetFloat("Speed", Mathf.Lerp(_gfxAnim.GetFloat("Speed"), inputs.normalized.magnitude, 0.1f));
+				if (!LockAim)
+					_gfxAnim.SetFloat("Angle", Mathf.Lerp(_gfxAnim.GetFloat("Angle"), Vector3.Angle(inputs, dir), 0.1f));
+			}
 
 			Move();
 		}
