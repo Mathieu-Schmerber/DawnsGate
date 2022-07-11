@@ -75,8 +75,6 @@ namespace Game.Entities.Player
 		public void SetupWeaponConstraints()
 		{
 			_animator.SetLayerWeight(_animator.GetLayerIndex("DefaultLocomotion"), 0f);
-			_animator.SetLayerWeight(_animator.GetLayerIndex("GreatSwordLocomotion"), 0f);
-
 			if (_weapon.Data != null)
 				_animator.SetLayerWeight(_animator.GetLayerIndex(_weapon.Data.LocomotionLayer), 1f);
 			else
