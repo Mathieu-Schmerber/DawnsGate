@@ -229,7 +229,7 @@ MonoBehaviour:
       Data: true
     - Name: Text
       Entry: 1
-      Data: Too bad, see ya looser
+      Data: Too bad, see ya looser.
     - Name: NextNodeId
       Entry: 1
       Data: 
@@ -255,8 +255,8 @@ MonoBehaviour:
       Entry: 1
       Data: 1a7efaa3-577e-4ecf-9912-be2bb65a24e2
     - Name: Author
-      Entry: 6
-      Data: 
+      Entry: 1
+      Data: The Croupier
     - Name: IsStartNode
       Entry: 5
       Data: false
@@ -288,8 +288,8 @@ MonoBehaviour:
       Entry: 1
       Data: a924481b-6638-434a-84f4-60a5d7312f55
     - Name: Author
-      Entry: 6
-      Data: 
+      Entry: 1
+      Data: The Croupier
     - Name: IsStartNode
       Entry: 5
       Data: false
@@ -331,7 +331,12 @@ MonoBehaviour:
       Data: true
     - Name: Text
       Entry: 1
-      Data: You won message, good bye
+      Data: 'I see that luck is on someone''s side !
+
+        [speed=0,2]. . .[speed=1]
+
+        If
+        you didn''t get it, the [effect=wobble]"<i>someone</i>"[effect] is you.'
     - Name: NextNodeId
       Entry: 6
       Data: 
@@ -367,10 +372,10 @@ MonoBehaviour:
       Data: false
     - Name: Text
       Entry: 1
-      Data: 'Oh shoot, maybe luck will strike next time !
+      Data: '[effect=shake]Oh shoot ![effect], maybe luck will strike next time !
 
-        Wanna try again
-        ?'
+        Wanna
+        try again ?'
     - Name: NextNodeId
       Entry: 1
       Data: 06adc04a-5c31-4df5-9cf3-0625e3be3dee
@@ -397,7 +402,7 @@ MonoBehaviour:
       Data: 5cd57ce0-9a86-48fb-9c6f-ca697b3dfb6c
     - Name: Author
       Entry: 1
-      Data: 
+      Data: The Croupier
     - Name: IsStartNode
       Entry: 5
       Data: false
@@ -439,9 +444,10 @@ MonoBehaviour:
       Data: false
     - Name: Text
       Entry: 1
-      Data: 'Whoops !
+      Data: '[effect=shake]Whoops ![effect]
 
-        Looks like you have nothing to bet.'
+        Looks like you have nothing
+        to bet.'
     - Name: NextNodeId
       Entry: 1
       Data: 017d8f43-0c98-4631-9308-3433d4c44ae7
