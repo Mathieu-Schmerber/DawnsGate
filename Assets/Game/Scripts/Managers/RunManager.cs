@@ -105,7 +105,15 @@ namespace Game.Managers
 			OnRunEnded?.Invoke();
 		}
 
-		private static string GetRandomRoomScene(RoomType type) => Path.GetFileNameWithoutExtension(Instance._scenes[type].Random());
+		private static string GetRandomRoomScene(RoomType type)
+		{
+			var rooms = Instance._scenes[type];
+			var notVisited = rooms.Where(x => !Instance.ReachedRooms.Contains(x)).ToArray();
+
+			if (notVisited?.Length == 0)
+				return Path.GetFileNameWithoutExtension(rooms.Random());
+			return Path.GetFileNameWithoutExtension(notVisited.Random());
+		}
 
 		private static void ChangeScene(RoomType type)
 		{
