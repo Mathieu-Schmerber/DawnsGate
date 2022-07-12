@@ -6,6 +6,7 @@ using Game.Systems.Dialogue;
 using Game.Systems.Items;
 using Game.Systems.Run;
 using Game.Systems.Run.Rooms;
+using Game.UI;
 using Nawlian.Lib.Extensions;
 using Nawlian.Lib.Systems.Interaction;
 using Nawlian.Lib.Utils;
@@ -62,13 +63,17 @@ namespace Game
 
 		public void Interact(IInteractionActor actor)
 		{
-			if (_npc.DialogueData == null)
+			if (_npc.DialogueData == null || _numberOfBets > 0)
 				return;
 			actor.UnSuggestInteraction(this);
 			OpenAndProcessDialogue(_npc.DialogueData);
 		}
 
-		private void OnTriggerEnter(Collider other) => other.GetComponent<IInteractionActor>()?.SuggestInteraction(this);
+		private void OnTriggerEnter(Collider other)
+		{
+			if (_numberOfBets == 0)
+				other.GetComponent<IInteractionActor>()?.SuggestInteraction(this);
+		}
 
 		private void OnTriggerExit(Collider other) => other.GetComponent<IInteractionActor>()?.UnSuggestInteraction(this);
 
@@ -93,13 +98,32 @@ namespace Game
 				else
 					OnBetLost();
 				_numberOfBets++;
+				ProcessBetReward();
 			}));
 		}
 
-		private void Refuse()
+		protected override void CloseDialogue()
 		{
-			CloseDialogue();
-			_room.Clear();
+			base.CloseDialogue();
+		}
+
+		private string GetItemBetChoiceText()
+		{
+			if (CanPlayerBet())
+			{
+				return $"Bet {_currentReward.ItemBet.Details.name}" +
+				$"<sprite=\"{_currentReward.ItemBet.Details.Graphics.name}\" index=0>" +
+				$"{string.Concat(Enumerable.Repeat("<sprite=\"star\" index=0>", _currentReward.ItemBet.Quality + 1))}";
+			}
+			return "Bet nothing";
+		}
+
+		private string GetMoneyBetChoiceText()
+		{
+			int amount = CanPlayerBet() ? _currentReward.MoneyBet : ((_numberOfBets == 0) ? _npc.MinimumBet : _currentReward.MoneyBet);
+			string format = string.Format("{0:n0}", amount);
+
+			return $"Bet {format} <sprite=\"money\" index=0>";
 		}
 
 		protected override string GetFormattedChoice(string choiceText)
@@ -107,11 +131,9 @@ namespace Game
 			switch (_betType)
 			{
 				case RoomRewardType.STARS:
-					return choiceText.Replace("{BET}", _currentReward.MoneyBet.ToString())
-									 .Replace("{REWARD}", _currentReward.MoneyReward.ToString());
+					return choiceText.Replace("{BET}", GetMoneyBetChoiceText());
 				case RoomRewardType.ITEM:
-					return choiceText.Replace("{BET}", $"{_currentReward.ItemBet.Details.name}<sprite=\"{_currentReward.ItemBet.Details.Graphics.name}\" index=0>")
-									 .Replace("{REWARD}", _currentReward.ItemBet.Details.name.ToString());
+					return choiceText.Replace("{BET}", GetItemBetChoiceText());
 			}
 			return choiceText;
 		}
@@ -167,10 +189,7 @@ namespace Game
 
 		private IEnumerator PrepareBet(bool isWinningBet, Action onPreparationDone)
 		{
-			// Hide dialogue to show some feedback process
-			CloseDialogue();
-
-			yield return new WaitForSeconds(0.5f);
+			HideDialogue();
 
 			// Visually remove the money to bet
 			if (_betType == RoomRewardType.STARS)
@@ -193,9 +212,16 @@ namespace Game
 					break;
 			}
 			ProcessCheckpoint(ON_BET_WON);
+			_room.Clear();
 		}
 
-		private void OnBetLost() => ProcessCheckpoint(ON_BET_LOST);
+		private void OnBetLost()
+		{
+			if (_betType == RoomRewardType.ITEM)
+				_inventory.RemoveItemFromInventory(_currentReward.ItemBet.Details, true);
+			ProcessCheckpoint(ON_BET_LOST);
+		}
+
 		private void OnCannotBet() => ProcessCheckpoint(ON_NOTHING_TO_BET);
 
 		#endregion

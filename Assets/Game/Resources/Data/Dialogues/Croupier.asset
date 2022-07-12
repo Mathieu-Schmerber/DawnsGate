@@ -34,7 +34,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 12
-      Data: 12
+      Data: 11
     - Name: 
       Entry: 7
       Data: 
@@ -145,7 +145,7 @@ MonoBehaviour:
       Data: Game.Systems.Dialogue.Data.DialogueChoiceNode+ChoiceOutput, Assembly-CSharp
     - Name: Text
       Entry: 1
-      Data: Bet {BET} for {REWARD}
+      Data: '{BET}'
     - Name: NextNodeId
       Entry: 1
       Data: cfaad863-d7ab-4095-84ae-fa14bf4a9c4e
@@ -231,7 +231,7 @@ MonoBehaviour:
       Entry: 1
       Data: Too bad, see ya looser
     - Name: NextNodeId
-      Entry: 6
+      Entry: 1
       Data: 
     - Name: Audio
       Entry: 6
@@ -408,8 +408,8 @@ MonoBehaviour:
       Entry: 1
       Data: CannotBet
     - Name: NextNodeId
-      Entry: 6
-      Data: 
+      Entry: 1
+      Data: 017d8f43-0c98-4631-9308-3433d4c44ae7
     - Name: 
       Entry: 8
       Data: 
@@ -448,36 +448,6 @@ MonoBehaviour:
     - Name: Audio
       Entry: 6
       Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 1
-      Data: 8d482621-0dc9-47e1-af4c-e2ca523d2011
-    - Name: $v
-      Entry: 7
-      Data: 14|Game.Systems.Dialogue.Data.DialogueEventNode, Assembly-CSharp
-    - Name: Id
-      Entry: 1
-      Data: 8d482621-0dc9-47e1-af4c-e2ca523d2011
-    - Name: Author
-      Entry: 6
-      Data: 
-    - Name: IsStartNode
-      Entry: 5
-      Data: false
-    - Name: IsEndNode
-      Entry: 5
-      Data: true
-    - Name: FunctionName
-      Entry: 1
-      Data: Refuse
     - Name: 
       Entry: 8
       Data: 

@@ -80,12 +80,20 @@ namespace Game.Systems.Dialogue
 			_uiMenu = GuiManager.OpenMenu<DialogueUi>();
 			_uiMenu.OnSubmitted += OnSubmission;
 			_uiMenu.SetAuthor("???");
-			GuiManager.CloseMenu<PlayerUi>();
+		}
+
+		protected void ShowDialogue()
+		{
+			_uiMenu.Show();
+		}
+
+		protected void HideDialogue()
+		{
+			_uiMenu.Hide();
 		}
 
 		protected virtual void CloseDialogue()
 		{
-			GuiManager.OpenMenu<PlayerUi>();
 			GuiManager.CloseMenu<DialogueUi>();
 			_uiMenu.OnSubmitted -= OnSubmission;
 		}

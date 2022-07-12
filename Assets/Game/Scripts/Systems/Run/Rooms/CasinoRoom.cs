@@ -1,6 +1,6 @@
 ﻿namespace Game.Systems.Run.Rooms
 {
-	public class IdleRewardRoom : ARewardRoom
+	public class CasinoRoom : ARewardRoom
 	{
 		public override bool RequiresNavBaking => false;
 
@@ -13,6 +13,11 @@
 		protected override void OnActivate()
 		{
 
+		}
+
+		protected override void SpawnReward()
+		{
+			// No reward
 		}
 	}
 }

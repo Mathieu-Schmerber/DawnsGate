@@ -3,6 +3,7 @@ using Game.Systems.Dialogue.Data;
 using Game.Tools;
 using Game.Tools.TextElementParser;
 using Nawlian.Lib.Utils;
+using Pixelplacement;
 using Sirenix.OdinInspector;
 using System;
 using System.Collections.Generic;
@@ -117,8 +118,9 @@ namespace Game.UI
 			string richText = node.Text.Replace("\n", "\n ").Insert(0, " ");
 			string lightText = richText;
 
+			if (IsHidden)
+				Show();
 			ClearDialogues();
-
 			_promptText.gameObject.SetActive(true);
 			_textEffects = TextElementParser.Parse(richText.RemoveTextMeshProTags());
 			_promptText.text = TextElementParser.RemoveElements(lightText, _textEffects);
@@ -133,6 +135,8 @@ namespace Game.UI
 		{
 			int requirements = node.Outputs.Count - _choices.Count;
 
+			if (IsHidden)
+				Show();
 			ClearDialogues();
 			_choiceList.gameObject.SetActive(true);
 			for (int i = 0; i < requirements; i++)

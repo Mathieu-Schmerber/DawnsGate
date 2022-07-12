@@ -8,6 +8,7 @@ namespace Plugins.Nawlian.Lib.Systems.Menuing
 	public abstract class AMenu : MonoBehaviour, IMenu
 	{
 		protected bool _isOpen;
+		protected bool _isHidden;
 		protected CanvasGroup _grp;
 		protected RectTransform _rect;
 
@@ -17,6 +18,7 @@ namespace Plugins.Nawlian.Lib.Systems.Menuing
 		[SerializeField] protected Vector2 _closePosition;
 
 		public bool IsOpen => _isOpen;
+		public bool IsHidden => _isHidden;
 
 		public virtual bool RequiresGameFocus => true;
 
@@ -28,16 +30,29 @@ namespace Plugins.Nawlian.Lib.Systems.Menuing
 
 		public virtual void Close()
 		{
+			Hide();
 			_isOpen = false;
+			_isHidden = false;
+		}
+
+		public virtual void Open()
+		{
+			Show();
+			_isOpen = true;
+		}
+
+		public virtual void Hide()
+		{
+			_isHidden = true;
 			if (_rect != null)
 				Tween.AnchoredPosition(_rect, _openPosition, _closePosition, _duration, 0, Tween.EaseIn);
 			if (_grp != null)
 				Tween.CanvasGroupAlpha(_grp, 1, 0, _duration, 0, Tween.EaseIn, startCallback: () => _grp.interactable = false);
 		}
 
-		public virtual void Open()
+		public virtual void Show()
 		{
-			_isOpen = true;
+			_isHidden = false;
 			if (_rect != null)
 				Tween.AnchoredPosition(_rect, _closePosition, _openPosition, _duration, 0, Tween.EaseOut);
 			if (_grp != null)

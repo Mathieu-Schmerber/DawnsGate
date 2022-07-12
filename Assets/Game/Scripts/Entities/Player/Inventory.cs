@@ -55,7 +55,7 @@ namespace Game.Entities.Player
 			}
 		}
 
-		private void RemoveItemFromInventory(ItemBaseData item)
+		public void RemoveItemFromInventory(ItemBaseData item, bool updateInventory = false)
 		{
 			ItemSummary summary = _items[item].Summary;
 
@@ -64,6 +64,8 @@ namespace Game.Entities.Player
 				_items[item].MergedBehaviour.OnUnequipped();
 			_items[item].OnUnequipped();
 			_items.Remove(_items[item].Details);
+			if (updateInventory)
+				OnUpdated?.Invoke(this);
 		}
 
 		#region Public access
