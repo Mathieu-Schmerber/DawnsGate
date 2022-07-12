@@ -16,6 +16,7 @@ namespace Game.Systems.Run.Rooms
 		protected List<GameObject> _wave = new();
 
 		public override bool RequiresNavBaking => true;
+		public virtual bool ActivateOnStart => true;
 
 		protected override void Awake()
 		{
@@ -28,12 +29,13 @@ namespace Game.Systems.Run.Rooms
 		protected override void Start()
 		{
 			base.Start();
-			Activate();
+			if (ActivateOnStart)
+				Activate();
 		}
 
 		protected override void OnActivate() => StartCoroutine(SpawnWave());
 
-		private void SpawnEnemy()
+		protected void SpawnEnemy()
 		{
 			GameObject enemy = _settings.Enemies.Random();
 			Vector3 spawnPos = Info.Data.SpawnablePositions.Random();

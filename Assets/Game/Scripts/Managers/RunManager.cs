@@ -108,9 +108,9 @@ namespace Game.Managers
 		private static string GetRandomRoomScene(RoomType type)
 		{
 			var rooms = Instance._scenes[type];
-			var notVisited = rooms.Where(x => !Instance.ReachedRooms.Contains(x)).ToArray();
+			var notVisited = rooms.Where(x => !Instance.ReachedRooms.Contains(Path.GetFileNameWithoutExtension(x))).ToArray();
 
-			if (notVisited?.Length == 0)
+			if (notVisited.Length == 0)
 				return Path.GetFileNameWithoutExtension(rooms.Random());
 			return Path.GetFileNameWithoutExtension(notVisited.Random());
 		}

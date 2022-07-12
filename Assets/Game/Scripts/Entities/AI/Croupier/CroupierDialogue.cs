@@ -105,6 +105,7 @@ namespace Game
 		protected override void CloseDialogue()
 		{
 			base.CloseDialogue();
+			_room.Clear();
 		}
 
 		private string GetItemBetChoiceText()
@@ -212,7 +213,6 @@ namespace Game
 					break;
 			}
 			ProcessCheckpoint(ON_BET_WON);
-			_room.Clear();
 		}
 
 		private void OnBetLost()
