@@ -110,7 +110,7 @@ namespace Game
 					return choiceText.Replace("{BET}", _currentReward.MoneyBet.ToString())
 									 .Replace("{REWARD}", _currentReward.MoneyReward.ToString());
 				case RoomRewardType.ITEM:
-					return choiceText.Replace("{BET}", _currentReward.ItemBet.Details.name.ToString())
+					return choiceText.Replace("{BET}", $"{_currentReward.ItemBet.Details.name}<sprite=\"{_currentReward.ItemBet.Details.Graphics.name}\" index=0>")
 									 .Replace("{REWARD}", _currentReward.ItemBet.Details.name.ToString());
 			}
 			return choiceText;
