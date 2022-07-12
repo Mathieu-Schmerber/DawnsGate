@@ -41,15 +41,16 @@ namespace Game.Systems.Items
 			Destroy(this);
 		}
 
-		public virtual void OnUpgrade()
+		public void Upgrade()
 		{
-			if (HasUpgrade && IsAffordable)
+			if (HasUpgrade)
 			{
-				GameManager.PayWithRunMoney(NextUpgradePrice);
 				Quality++;
-				Inventory.OnUpdate();
+				OnUpgrade();
 			}
 		}
+
+		protected virtual void OnUpgrade() => Inventory.OnUpdate();
 
 		protected abstract string GetItemDescription(int quality);
 

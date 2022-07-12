@@ -129,7 +129,7 @@ namespace Game.UI
 				_audio.PlayOneShot(node.Audio);
 		}
 
-		public void DisplayChoices(DialogueChoiceNode node)
+		public void DisplayChoices(DialogueChoiceNode node, Func<string, string> formatChoiceText)
 		{
 			int requirements = node.Outputs.Count - _choices.Count;
 
@@ -148,7 +148,7 @@ namespace Game.UI
 				var output = node.Outputs[i];
 
 				choiceUi.gameObject.SetActive(true);
-				choiceUi.SetText(output.Text);
+				choiceUi.SetText(formatChoiceText.Invoke(output.Text));
 				choiceUi.ChoiceId = output.NextNodeId;
 				if (i > 0)
 				{

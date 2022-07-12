@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3f88d37540945445b5c931c35c75827, type: 3}
+  m_Script: {fileID: 11500000, guid: e20d1a24ea7b4554886f30a31490bb68, type: 3}
   m_Name: Croupier
   m_EditorClassIdentifier: 
   DisplayName: Croupier
@@ -69,3 +69,5 @@ MonoBehaviour:
       BonusModifier: 0
       TemporaryModifier: 0
   DialogueData: {fileID: 11400000, guid: ce8af70772c0de643b9674f581444afa, type: 2}
+  MinimumBet: 100
+  InitialBetRatio: 25

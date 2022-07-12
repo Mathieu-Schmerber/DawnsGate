@@ -23,7 +23,7 @@ namespace Game.Systems.Items.Passive
 			base.OnUnequipped();
 		}
 
-		public override void OnUpgrade()
+		protected override void OnUpgrade()
 		{
 			base.OnUpgrade();
 			_orbPivot.SetOrbCount((int)_data.Stages[Quality].Amount, _data.Stages[Quality].Damage);

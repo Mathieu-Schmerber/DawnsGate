@@ -22,7 +22,7 @@ namespace Game.Systems.Items.Passive
 			base.OnUnequipped();
 		}
 
-		public override void OnUpgrade()
+		protected override void OnUpgrade()
 		{
 			base.OnUpgrade();
 			_timer.Interval = _data.Stages[Quality].Duration;

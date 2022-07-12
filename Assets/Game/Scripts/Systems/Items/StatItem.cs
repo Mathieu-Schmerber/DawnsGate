@@ -56,7 +56,7 @@ namespace Game.Systems.Items
 			base.OnUnequipped();
 		}
 
-		public override void OnUpgrade()
+		protected override void OnUpgrade()
 		{
 			base.OnUpgrade();
 

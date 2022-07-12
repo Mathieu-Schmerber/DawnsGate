@@ -63,7 +63,8 @@ namespace Game.UI
 				return;
 			else if (!slot.Item.IsAffordable || !slot.Item.HasUpgrade)
 				return;
-			slot.Item.OnUpgrade();
+			GameManager.PayWithRunMoney(slot.Item.NextUpgradePrice);
+			slot.Item.Upgrade();
 			OnItemSelected(slot);
 			Feedback();
 		}

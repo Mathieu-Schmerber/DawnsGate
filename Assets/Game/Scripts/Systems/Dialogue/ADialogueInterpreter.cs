@@ -15,13 +15,7 @@ namespace Game.Systems.Dialogue
 
 		public void OpenAndProcessDialogue(DialogueData dialogue)
 		{
-			_dialogue = dialogue;
-
-			_uiMenu = GuiManager.OpenMenu<DialogueUi>();
-			_uiMenu.OnSubmitted += OnSubmission;
-			GuiManager.CloseMenu<PlayerUi>();
-
-			_uiMenu.SetAuthor("???");
+			OpenDialogue(dialogue);
 			ProcessNode(_dialogue.GetFirstNode());
 		}
 
@@ -47,6 +41,9 @@ namespace Game.Systems.Dialogue
 
 		private void ProcessNode(ADialogueNode node)
 		{
+			if ((_uiMenu == null || !_uiMenu.IsOpen) && _dialogue != null)
+				OpenDialogue(_dialogue);
+
 			if (!string.IsNullOrEmpty(node.Author))
 				_uiMenu.SetAuthor(node.Author);
 			switch (node.Type)
@@ -55,7 +52,7 @@ namespace Game.Systems.Dialogue
 					_uiMenu.DisplayPrompt(node as DialoguePromptNode);
 					break;
 				case NodeType.CHOICE:
-					_uiMenu.DisplayChoices(node as DialogueChoiceNode);
+					_uiMenu.DisplayChoices(node as DialogueChoiceNode, GetFormattedChoice);
 					break;
 				case NodeType.EVENT:
 					OnEvent((node as DialogueEventNode).FunctionName);
@@ -77,6 +74,15 @@ namespace Game.Systems.Dialogue
 			ProcessNode(checkpoint.NextNodeId);
 		}
 
+		protected virtual void OpenDialogue(DialogueData dialogue)
+		{
+			_dialogue = dialogue;
+			_uiMenu = GuiManager.OpenMenu<DialogueUi>();
+			_uiMenu.OnSubmitted += OnSubmission;
+			_uiMenu.SetAuthor("???");
+			GuiManager.CloseMenu<PlayerUi>();
+		}
+
 		protected virtual void CloseDialogue()
 		{
 			GuiManager.OpenMenu<PlayerUi>();
@@ -85,5 +91,7 @@ namespace Game.Systems.Dialogue
 		}
 
 		public void OnEvent(string functionName) => SendMessage(functionName);
+
+		protected abstract string GetFormattedChoice(string choiceText);
 	}
 }

@@ -34,5 +34,7 @@ namespace Game.Systems.Run.GPE
 			CloseDialogue();
 			GuiManager.OpenMenu<ItemMergeMenuUi>();
 		}
+
+		protected override string GetFormattedChoice(string choiceText) => choiceText;
 	}
 }
