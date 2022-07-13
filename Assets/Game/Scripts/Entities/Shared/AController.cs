@@ -46,8 +46,8 @@ namespace Game.Entities.Shared
 
 		public event Action<DashParameters> OnDashStarted;
 
-		public bool LockMovement { get => _lockMovement; 
-			set { 
+		[ShowInInspector, ReadOnly] public bool LockMovement { get => _lockMovement; 
+			set {
 				_lockMovement = value; 
 				if (_lockMovement == true)
 					_rb.velocity = Vector3.zero; 

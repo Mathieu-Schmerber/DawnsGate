@@ -142,13 +142,10 @@ namespace Game.Entities.AI.Lunaris
 			ResetStates();
 		}
 
-		private void ResetStates()
+		protected override void ResetStates()
 		{
-			State = Shared.EntityState.IDLE;
-			LockAim = false;
-			LockMovement = false;
+			base.ResetStates();
 			_isThrusting = false;
-			UnlockTarget();
 			_gfxAnim.SetBool("IsTired", false);
 			_gfxAnim.SetBool("IsThrusting", false);
 		}

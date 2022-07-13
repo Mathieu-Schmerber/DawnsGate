@@ -73,23 +73,17 @@ namespace Game.Entities.AI
 
 		protected virtual void Init(object data)
 		{
-			_entity.ResetStats();
-
 			_room = (CombatRoom)data;
+			_entity.ResetStats();
 			_aiSettings = _entity.Stats as EnemyStatData;
-
 			_aiState = EnemyState.PASSIVE;
-			State = EntityState.IDLE;
-			NextPassivePosition = transform.position;
-
 			_path.ClearCorners();
-
 			_lastAttackTime = Time.time;
 
-			UnlockTarget();
-			LockMovement = false;
-			LockAim = false;
+			NextPassivePosition = transform.position;
+
 			OnAttackEnd();
+			ResetStates();
 		}
 
 		protected override void Awake()
@@ -127,6 +121,14 @@ namespace Game.Entities.AI
 		}
 
 		#endregion
+
+		protected virtual void ResetStates()
+		{
+			State = Shared.EntityState.IDLE;
+			LockAim = false;
+			LockMovement = false;
+			UnlockTarget();
+		}
 
 		#region Movement system
 
