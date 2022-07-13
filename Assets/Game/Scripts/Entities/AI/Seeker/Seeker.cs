@@ -102,7 +102,7 @@ namespace Game.Entities.AI.Seeker
 
 				LockAim = true;
 				UnlockTarget();
-				Dash(dir, _stats.DashRange, 0.3f, true);
+				Dash(dir, _stats.DashRange, 0.3f, true, true);
 				_startDamageCheck = true;
 				Awaiter.WaitAndExecute(0.3f, () =>
 				{

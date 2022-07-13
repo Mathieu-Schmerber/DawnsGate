@@ -23,6 +23,7 @@ namespace Game.Entities.Shared
 		public float Distance { get; set; }
 		public float Time { get; set; }
 		public bool CanDashThroughWalls { get; set; }
+		public bool ChangeVulnerabilityState { get; set; }
 	}
 
 	[RequireComponent(typeof(EntityIdentity))]
@@ -177,7 +178,8 @@ namespace Game.Entities.Shared
 			float speed = parameters.Distance / parameters.Time;
 
 			OnDashStarted?.Invoke(parameters);
-			_entity.SetInvulnerable(parameters.Time); // Invulnerable during dash
+			if (parameters.ChangeVulnerabilityState)
+				_entity.SetInvulnerable(parameters.Time); // Invulnerable during dash
 
 			if (!parameters.CanDashThroughWalls)
 			{
@@ -203,12 +205,13 @@ namespace Game.Entities.Shared
 			}
 		}
 
-		public void Dash(Vector3 direction, float distance, float time, bool canDashWalls) => Dash(new DashParameters()
+		public void Dash(Vector3 direction, float distance, float time, bool canDashWalls, bool changeVulnerability) => Dash(new DashParameters()
 		{
 			Direction = direction,
 			Distance = distance,
 			Time = time,
-			CanDashThroughWalls = canDashWalls
+			CanDashThroughWalls = canDashWalls,
+			ChangeVulnerabilityState = changeVulnerability
 		});
 
 		private void OnDrawGizmos()

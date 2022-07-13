@@ -1,5 +1,6 @@
 ﻿using Game.Entities.Player;
 using Game.Systems.Run;
+using Game.Systems.Run.Rooms;
 using Nawlian.Lib.Extensions;
 using Nawlian.Lib.Systems.Pooling;
 using Nawlian.Lib.Utils;
@@ -9,6 +10,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace Game.Managers
@@ -31,8 +33,11 @@ namespace Game.Managers
 		private RunState _runState = RunState.LOBBY;
 		private Dictionary<RoomType, string[]> _scenes = new();
 		private PlayerDamageable _damageable;
+		[SerializeField] private ARoom _currentInstance;
 
 		public static Room CurrentRoom => Instance._room;
+		public static ARoom CurrentRoomInstance { get => Instance._currentInstance; set => Instance._currentInstance = value; }
+
 		public static bool IsLastRoom => Instance._currentRoom == RunSettings.RoomRules.Length - 1;
 		public static string CurrentRoomScene;
 		public static RunState RunState => Instance._runState;
@@ -67,6 +72,7 @@ namespace Game.Managers
 
 		public static void StartNewRun()
 		{
+			CurrentRoomInstance = null;
 			Instance.ReachedRooms.Clear();
 			Instance._currentRoom = 0;
 			Instance._room = new() {

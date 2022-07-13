@@ -26,6 +26,7 @@ namespace Game.Entities.Shared
 
 		public string DisplayName => _stats.DisplayName;
 
+		[ShowInInspector, ReadOnly]
 		public bool IsInvulnerable { get; private set; }
 
 		[ShowInInspector, ReadOnly]

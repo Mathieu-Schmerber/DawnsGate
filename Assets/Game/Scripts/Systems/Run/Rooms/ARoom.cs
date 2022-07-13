@@ -31,6 +31,7 @@ namespace Game.Systems.Run.Rooms
 		{
 			_info = GetComponent<RoomInfo>();
 			_player = GameManager.Player.GetComponent<EntityIdentity>();
+			RunManager.CurrentRoomInstance = this;
 		}
 
 		protected virtual void Start()

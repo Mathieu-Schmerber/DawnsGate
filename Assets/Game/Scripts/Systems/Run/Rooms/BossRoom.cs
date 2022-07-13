@@ -14,7 +14,7 @@ namespace Game.Systems.Run.Rooms
 
 		protected EntityIdentity _bossIdentity;
 		protected BossBarUi _bossBar;
-
+		public GameObject Boss => _bossIdentity.gameObject;
 		public override bool RequiresNavBaking => true;
 		public override bool ActivateOnStart => false;
 		public virtual bool GiveBossReward => false;

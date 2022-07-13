@@ -140,7 +140,7 @@ namespace Game.Systems.Combat.Weapons
 			if (animation == nameof(WeaponAttackEvent.Attack))
 				PerformAttack();
 			else if (animation == nameof(WeaponAttackEvent.Dash) && (_controller.GetMovementNormal().magnitude > 0 || !CurrentWeaponAttack.Dash.OnlyWhenMoving))
-				_controller.Dash(_controller.GetAimNormal(), CurrentWeaponAttack.Dash.Distance, DASH_DURATION, false);
+				_controller.Dash(_controller.GetAimNormal(), CurrentWeaponAttack.Dash.Distance, DASH_DURATION, false, false);
 		}
 
 		public virtual void OnAnimationEnter(AnimatorStateInfo stateInfo) => _controller.State = EntityState.ATTACKING;

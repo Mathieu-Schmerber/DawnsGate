@@ -178,7 +178,7 @@ namespace Game.Entities.AI.Dealer
 			}
 			_dealDone = true;
 			ProcessCheckpoint(ON_DEAL_DONE);
-			_dealer.Room.Clear();
+			RunManager.CurrentRoomInstance.Clear();
 		}
 
 		private void OnCannotDeal() => ProcessCheckpoint(ON_CANNOT_DEAL);

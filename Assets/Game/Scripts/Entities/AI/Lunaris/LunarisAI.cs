@@ -342,7 +342,7 @@ namespace Game.Entities.AI.Lunaris
 			// Dash to be at range
 			if (Vector3.Distance(GameManager.Player.transform.position.WithY(transform.position.y), dashPoint) < AttackRange / 2 && _canDash)
 			{
-				Dash(dir, _stats.DashRange, 0.2f, false);
+				Dash(dir, _stats.DashRange, 0.2f, false, true);
 				_dashTimer.Restart();
 			}
 		}
@@ -365,7 +365,7 @@ namespace Game.Entities.AI.Lunaris
 			LockAim = true;
 			_isThrusting = true;
 			_gfxAnim.SetBool("IsThrusting", _isThrusting);
-			Dash(GetAimNormal(), distanceToWall, dashTime, false);
+			Dash(GetAimNormal(), distanceToWall, dashTime, false, true);
 			Awaiter.WaitAndExecute(dashTime, () =>
 			{
 				if (_isThrusting && State != Shared.EntityState.STUN)

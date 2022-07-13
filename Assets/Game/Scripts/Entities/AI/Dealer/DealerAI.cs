@@ -16,8 +16,6 @@ namespace Game.Entities.AI.Dealer
 		[SerializeField] private LayerMask _wallMask;
 		private DealerStatData _stats;
 
-		public ARoom Room => _room;
-
 		#region Unity builtins
 
 		protected override void OnEnable()
@@ -150,7 +148,7 @@ namespace Game.Entities.AI.Dealer
 			float dashTime = distanceToWall / SPEED;
 
 			_gfxAnim.SetBool("IsDashing", true);
-			Dash(GetAimNormal(), distanceToWall, dashTime, false);
+			Dash(GetAimNormal(), distanceToWall, dashTime, false, false);
 			Awaiter.WaitAndExecute(dashTime, () =>
 			{
 				ResetStates();

@@ -14,14 +14,13 @@ namespace Game.Entities.Shared.Health
 	/// <summary>
 	/// Defines a damageable entity
 	/// </summary>
-	[RequireComponent(typeof(EntityIdentity))]
 	public class Damageable : MonoBehaviour, IDamageProcessor
 	{
 		protected EntityIdentity _identity;
 		protected AController _controller;
 		protected Rigidbody _rb;
 
-		public bool IsDead => _identity.CurrentHealth <= 0;
+		public virtual bool IsDead => _identity.CurrentHealth <= 0;
 
 		public static event Action<Damageable> OnDeath;
 		public event Action OnBeforeDamaged;
@@ -40,7 +39,7 @@ namespace Game.Entities.Shared.Health
 		/// </summary>
 		/// <param name="attacker"></param>
 		/// <param name="damage"></param>
-		public float ApplyDamage(EntityIdentity attacker, float damage)
+		public virtual float ApplyDamage(EntityIdentity attacker, float damage)
 		{
 			if (IsDead || _identity.IsInvulnerable) return 0;
 
@@ -79,7 +78,7 @@ namespace Game.Entities.Shared.Health
 			return totalDamage;
 		}
 
-		public void ApplyPassiveDamage(float damage)
+		public virtual void ApplyPassiveDamage(float damage)
 		{
 			if (IsDead || _identity.IsInvulnerable) return;
 
@@ -103,7 +102,7 @@ namespace Game.Entities.Shared.Health
 		/// </summary>
 		/// <param name="attacker"></param>
 		/// <param name="force"></param>
-		public void ApplyKnockback(EntityIdentity attacker, Vector3 force, float knockbackTime = 0.2f)
+		public virtual void ApplyKnockback(EntityIdentity attacker, Vector3 force, float knockbackTime = 0.2f)
 		{
 			if (IsDead || _identity.IsInvulnerable) return;
 
