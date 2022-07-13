@@ -9,11 +9,11 @@ namespace Game.Systems.Run.Rooms
 {
 	public class BossRoom : CombatRoom
 	{
-		[SerializeField] private GameObject _boss;
-		[SerializeField] private Transform _bossSpawn;
+		[SerializeField] protected GameObject _bossPrefab;
+		[SerializeField] protected Transform _bossSpawn;
 
-		private EntityIdentity _bossIdentity;
-		private BossBarUi _bossBar;
+		protected EntityIdentity _bossIdentity;
+		protected BossBarUi _bossBar;
 
 		public override bool RequiresNavBaking => true;
 		public override bool ActivateOnStart => false;
@@ -29,7 +29,7 @@ namespace Game.Systems.Run.Rooms
 		protected override void Start()
 		{
 			base.Start();
-			_bossIdentity = ObjectPooler.Get(_boss, _bossSpawn.position, _bossSpawn.rotation, this).GetComponent<EntityIdentity>();
+			_bossIdentity = ObjectPooler.Get(_bossPrefab, _bossSpawn.position, _bossSpawn.rotation, this).GetComponent<EntityIdentity>();
 
 			if (ActivateOnBossSpawn)
 				// TODO: wait time according to some animation ?

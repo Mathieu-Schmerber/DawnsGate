@@ -12,7 +12,6 @@ namespace Game.Systems.Run.Rooms
 	{
 		protected override void OnClear()
 		{
-			base.OnClear();
 			SpawnReward();
 		}
 
@@ -35,5 +34,9 @@ namespace Game.Systems.Run.Rooms
 			}
 			GameManager.RewardWithLobbyMoney(UnityEngine.Random.Range(RunManager.RunSettings.LobbyMoneyPerRoom.x, RunManager.RunSettings.LobbyMoneyPerRoom.y + 1));
 		}
+
+		protected void SpawnReward(int runMoney) => GameManager.RewardWithRunMoney(runMoney);
+
+		protected void SpawnReward(ItemSummary item) => LootedItem.Create(_player.transform.position, item);
 	}
 }

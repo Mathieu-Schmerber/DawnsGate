@@ -1,5 +1,6 @@
 ﻿using Game.Managers;
 using Game.Systems.Items;
+using Nawlian.Lib.Extensions;
 using Nawlian.Lib.Utils;
 using Sirenix.OdinInspector;
 using System;
@@ -88,6 +89,9 @@ namespace Game.Entities.Player
 				OnUpdated?.Invoke(this);
 			}
 		}
+
+		public ItemBaseData GetRandomUnEquippedItem(bool includeLifeItem)
+			=> Databases.Database.Data.Item.All<ItemBaseData>().Where(x => x.IsLifeItem == includeLifeItem && !HasEquipped(x)).Random();
 
 		public static void OnUpdate() => OnUpdated?.Invoke(GameManager.Player.GetComponent<Inventory>());
 

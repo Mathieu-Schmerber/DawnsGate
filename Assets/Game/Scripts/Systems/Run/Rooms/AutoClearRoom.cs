@@ -11,5 +11,7 @@
 		}
 
 		protected override void OnActivate() => Clear();
+
+		protected override void OnClear() {}
 	}
 }

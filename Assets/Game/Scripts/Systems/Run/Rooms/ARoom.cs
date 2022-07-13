@@ -46,10 +46,7 @@ namespace Game.Systems.Run.Rooms
 
 		protected abstract void OnActivate();
 
-		protected virtual void OnClear()
-		{
-			_info.Doors.ForEach(x => x.Activate());
-		}
+		protected abstract void OnClear();
 
 		public void Activate()
 		{
@@ -63,6 +60,7 @@ namespace Game.Systems.Run.Rooms
 			_player.RefillArmor();
 			OnRoomCleared?.Invoke();
 			Cleared = true;
+			_info.Doors.ForEach(x => x.Activate());
 			OnClear();
 		}
 	}

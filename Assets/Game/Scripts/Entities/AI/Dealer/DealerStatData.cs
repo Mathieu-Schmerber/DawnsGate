@@ -9,5 +9,6 @@ namespace Game.Entities.AI.Dealer
 	{
 		[Title("Kind mode")]
 		public DialogueData Dialogue;
+		[@Tooltip("Discount that the dealer applies on the item price in %"), MinValue(0), MaxValue(100)]public int PriceDiscount;
 	}
 }
