@@ -1,5 +1,6 @@
 ﻿using Game.Entities.Shared;
 using Game.Managers;
+using Game.Systems.Run.GPE;
 using Nawlian.Lib.Extensions;
 using Nawlian.Lib.Systems.Pooling;
 using System;
@@ -12,6 +13,8 @@ namespace Game.Systems.Run.Rooms
 {
 	public class TimeRoom : CombatRoom
 	{
+		[SerializeField] private Clock _roomClock;
+
 		public override bool RequiresNavBaking => true;
 		public override bool ActivateOnStart => false;
 
@@ -31,6 +34,7 @@ namespace Game.Systems.Run.Rooms
 
 		protected override void OnActivate()
 		{
+			_roomClock.ClockIn(60);
 			StartCoroutine(SpawnEnemies(20, 3, () => Clear()));
 		}
 
