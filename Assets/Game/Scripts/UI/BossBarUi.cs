@@ -1,4 +1,6 @@
 ﻿using Game.Entities.Shared;
+using Game.Managers;
+using Game.Systems.Run.Rooms;
 using Game.Tools;
 using Pixelplacement;
 using System.Collections;
@@ -17,12 +19,23 @@ namespace Game.UI
 
 		public override bool RequiresGameFocus => false;
 
+		public override void Open()
+		{
+			base.Open();
+			RunManager.OnRunEnded += CloseBossUi;
+			ARoom.OnRoomCleared += CloseBossUi;
+		}
+
 		public override void Close()
 		{
 			base.Close();
 			if (_boss)
 				_boss.OnHealthChanged -= UpdateHealth;
+			RunManager.OnRunEnded -= CloseBossUi;
+			ARoom.OnRoomCleared -= CloseBossUi;
 		}
+
+		private void CloseBossUi() => Close();
 
 		public void Bind(EntityIdentity boss)
 		{

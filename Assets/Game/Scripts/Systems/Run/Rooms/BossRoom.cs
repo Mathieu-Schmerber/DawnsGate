@@ -16,6 +16,9 @@ namespace Game.Systems.Run.Rooms
 		private BossBarUi _bossBar;
 
 		public override bool RequiresNavBaking => true;
+		public override bool ActivateOnStart => false;
+		public virtual bool GiveBossReward => false;
+		public virtual bool ActivateOnBossSpawn => true;
 
 		protected override void Awake()
 		{
@@ -23,25 +26,15 @@ namespace Game.Systems.Run.Rooms
 			_waveNumber = 1;
 		}
 
-		private void OnEnable()
-		{
-			RunManager.OnRunEnded += CloseBossUi;
-		}
-
-		private void OnDisable()
-		{
-			RunManager.OnRunEnded -= CloseBossUi;
-		}
-
 		protected override void Start()
 		{
+			base.Start();
 			_bossIdentity = ObjectPooler.Get(_boss, _bossSpawn.position, _bossSpawn.rotation, this).GetComponent<EntityIdentity>();
 
-			// TODO: wait time according to some animation ?
-			Awaiter.WaitAndExecute(1f, Activate);
+			if (ActivateOnBossSpawn)
+				// TODO: wait time according to some animation ?
+				Awaiter.WaitAndExecute(1f, Activate);
 		}
-
-		private void CloseBossUi() => _bossBar.Close();
 
 		protected override void OnActivate()
 		{
@@ -52,8 +45,8 @@ namespace Game.Systems.Run.Rooms
 		protected override void OnClear()
 		{
 			base.OnClear();
-			_bossBar.Close();
-			GameManager.RewardWithLobbyMoney(Random.Range(RunManager.RunSettings.LobbyMoneyRunReward.x, RunManager.RunSettings.LobbyMoneyRunReward.y + 1));
+			if (GiveBossReward)
+				GameManager.RewardWithLobbyMoney(Random.Range(RunManager.RunSettings.LobbyMoneyRunReward.x, RunManager.RunSettings.LobbyMoneyRunReward.y + 1));
 		}
 
 		public override void OnEnemyKilled(GameObject gameObject) => Clear();

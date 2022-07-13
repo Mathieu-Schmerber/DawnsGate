@@ -1,4 +1,3 @@
-using Game.Entities.AI;
 using Game.Entities.Player;
 using Game.Entities.Shared;
 using Game.Managers;
@@ -17,7 +16,7 @@ using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace Game
+namespace Game.Entities.AI.Croupier
 {
 	public class CroupierDialogue : ADialogueInterpreter, IInteractable
 	{
@@ -121,7 +120,7 @@ namespace Game
 
 		private string GetMoneyBetChoiceText()
 		{
-			int amount = CanPlayerBet() ? _currentReward.MoneyBet : ((_numberOfBets == 0) ? _npc.MinimumBet : _currentReward.MoneyBet);
+			int amount = CanPlayerBet() ? _currentReward.MoneyBet : _numberOfBets == 0 ? _npc.MinimumBet : _currentReward.MoneyBet;
 			string format = string.Format("{0:n0}", amount);
 
 			return $"Bet {format} <sprite=\"money\" index=0>";
