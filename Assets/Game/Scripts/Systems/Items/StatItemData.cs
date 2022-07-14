@@ -1,6 +1,5 @@
 ﻿using Game.Entities.Shared;
 using Sirenix.OdinInspector;
-using Sirenix.Utilities.Editor;
 using System;
 using UnityEngine;
 

@@ -72,14 +72,12 @@ namespace Game.Systems.Run
 			}
 		}
 
-		[Space, ValidateInput(nameof(ValidateEditor), "The sum of all probabilities should be 100%")]
+		[Space, ValidateInput("ValidateEditor", "The sum of all probabilities should be 100%")]
 		public RoomDictionary RoomProbabilities;
 
 		public RoomType GetRandomNonMandatory() => RoomProbabilities.GetRandomNonMandatory();
 
 		#region Editor tools
-
-#if UNITY_EDITOR
 
 		private bool ValidateEditor()
 		{
@@ -87,8 +85,6 @@ namespace Game.Systems.Run
 				return RoomProbabilities.Where(x => !x.Value.Mandatory).Select(x => x.Value.Probability).Sum() == 100;
 			return true;
 		}
-
-#endif
 
 		#endregion
 	}

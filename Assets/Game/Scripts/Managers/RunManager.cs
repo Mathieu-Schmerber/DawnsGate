@@ -50,11 +50,11 @@ namespace Game.Managers
 
 		private void Awake()
 		{
-			_scenes.Add(RoomType.COMBAT, Directory.GetFiles(RunSettings.RoomFolders[RoomType.COMBAT].Folder, "*.unity", SearchOption.AllDirectories));
-			_scenes.Add(RoomType.EVENT, Directory.GetFiles(RunSettings.RoomFolders[RoomType.EVENT].Folder, "*.unity", SearchOption.AllDirectories));
-			_scenes.Add(RoomType.SHOP, Directory.GetFiles(RunSettings.RoomFolders[RoomType.SHOP].Folder, "*.unity", SearchOption.AllDirectories));
-			_scenes.Add(RoomType.LIFE_SHOP, Directory.GetFiles(RunSettings.RoomFolders[RoomType.LIFE_SHOP].Folder, "*.unity", SearchOption.AllDirectories));
-			_scenes.Add(RoomType.BOSS, Directory.GetFiles(RunSettings.RoomFolders[RoomType.BOSS].Folder, "*.unity", SearchOption.AllDirectories));
+			_scenes.Add(RoomType.COMBAT, RunSettings.RoomFolders[RoomType.COMBAT].RoomDatas.Select(x => x.SceneName).ToArray());
+			_scenes.Add(RoomType.EVENT, RunSettings.RoomFolders[RoomType.EVENT].RoomDatas.Select(x => x.SceneName).ToArray());
+			_scenes.Add(RoomType.SHOP, RunSettings.RoomFolders[RoomType.SHOP].RoomDatas.Select(x => x.SceneName).ToArray());
+			_scenes.Add(RoomType.LIFE_SHOP, RunSettings.RoomFolders[RoomType.LIFE_SHOP].RoomDatas.Select(x => x.SceneName).ToArray());
+			_scenes.Add(RoomType.BOSS, RunSettings.RoomFolders[RoomType.BOSS].RoomDatas.Select(x => x.SceneName).ToArray());
 			_damageable = GameManager.Player.GetComponent<PlayerDamageable>();
 		}
 
@@ -114,11 +114,11 @@ namespace Game.Managers
 		private static string GetRandomRoomScene(RoomType type)
 		{
 			var rooms = Instance._scenes[type];
-			var notVisited = rooms.Where(x => !Instance.ReachedRooms.Contains(Path.GetFileNameWithoutExtension(x))).ToArray();
+			var notVisited = rooms.Where(x => !Instance.ReachedRooms.Contains(x)).ToArray();
 
 			if (notVisited.Length == 0)
-				return Path.GetFileNameWithoutExtension(rooms.Random());
-			return Path.GetFileNameWithoutExtension(notVisited.Random());
+				return rooms.Random();
+			return notVisited.Random();
 		}
 
 		private static void ChangeScene(RoomType type)

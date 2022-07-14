@@ -1,8 +1,11 @@
 ﻿using Game.Entities.Shared;
 using Nawlian.Lib.Utils;
 using Sirenix.OdinInspector;
-using UnityEditor;
 using UnityEngine;
+
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 namespace Game.Systems.Items
 {
@@ -33,16 +36,25 @@ namespace Game.Systems.Items
 		public ItemCost ItemCosts;
 		public int PriceInflationPerUpgrade;
 
-		[Title("Scripts")]
-		[ValidateInput(nameof(ValidateStatEditor), "Script needs to inherit AEquippedItem.")]
-		public MonoScript DefaultStatScript;
-
 		[Title("Graphics")]
 		public GfxStats StatGraphics;
 
 
 #if UNITY_EDITOR
+		[Title("Scripts")]
+		[ValidateInput("ValidateStatEditor", "Script needs to inherit AEquippedItem.")]
+		public MonoScript DefaultStatScript;
 		private bool ValidateStatEditor() => DefaultStatScript != null && !DefaultStatScript.GetClass().IsAbstract && DefaultStatScript.GetClass().IsSubclassOf(typeof(AEquippedItem));
+
+		[Button]
+		private void UpdateAllItemsScripts()
+		{
+			var items = Databases.Database.Data.Item.All<ItemBaseData>();
+
+			foreach (var item in items)
+				item.OnScriptChanged();
+			Debug.Log("Scripts updated successfully within the data model");
+		}
 #endif
 	}
 }

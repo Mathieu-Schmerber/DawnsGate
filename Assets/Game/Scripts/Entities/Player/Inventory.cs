@@ -42,7 +42,7 @@ namespace Game.Entities.Player
 
 		private void AddItemToInventory(ItemSummary item)
 		{
-			AEquippedItem behaviour = _inventoryParent.AddComponent(item.Data.Script.GetClass()) as AEquippedItem;
+			AEquippedItem behaviour = _inventoryParent.AddComponent(item.Data.Component) as AEquippedItem;
 
 			_occupiedSlots++;
 			_items[item.Data] = behaviour;
@@ -50,7 +50,7 @@ namespace Game.Entities.Player
 
 			if (item.isMerged)
 			{
-				AEquippedItem mergedBehaviour = _inventoryParent.AddComponent(item.Merge.Data.Script.GetClass()) as AEquippedItem;
+				AEquippedItem mergedBehaviour = _inventoryParent.AddComponent(item.Merge.Data.Component) as AEquippedItem;
 				mergedBehaviour.OnEquipped(item.Merge);
 				behaviour.MergedBehaviour = mergedBehaviour;
 			}

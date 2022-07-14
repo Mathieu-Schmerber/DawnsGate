@@ -56,7 +56,7 @@ namespace Game.Systems.Combat.Effects
 
 		private AEffect AddEffectToActive(AEffectBaseData data)
 		{
-			AEffect behaviour = _effectsParent.AddComponent(data.Script.GetClass()) as AEffect;
+			AEffect behaviour = _effectsParent.AddComponent(data.Component) as AEffect;
 
 			_activeEffects[data] = behaviour;
 			return behaviour;

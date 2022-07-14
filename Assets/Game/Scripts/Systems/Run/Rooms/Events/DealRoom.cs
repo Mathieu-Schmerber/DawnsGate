@@ -35,7 +35,6 @@ namespace Game.Systems.Run.Rooms.Events
 
 		private void RoomTotem_OnStateChanged()
 		{
-			Debug.Log($"Boss invulnerable: {_totems.Any(x => x.IsActive)}");
 			_bossIdentity.SetInvulnerable(_totems.Any(x => x.IsActive));
 		}
 

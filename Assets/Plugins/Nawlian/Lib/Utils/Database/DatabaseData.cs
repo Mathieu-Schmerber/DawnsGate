@@ -1,4 +1,3 @@
-using Nawlian.Lib.Extensions;
 using Sirenix.OdinInspector;
 using System;
 using System.Collections.Generic;
@@ -57,6 +56,11 @@ namespace Nawlian.Lib.Utils.Database
 
 		#endregion
 
+		public List<Section> Sections = new List<Section>();
+
+#if UNITY_EDITOR
+		public string DatabaseClassPath => $"{DatabaseFolder}\\{DatabaseClassName}";
+
 		public string DatabaseFolder;
 		public string DatabaseClassName => $"{name}.cs";
 		public string AssetPathFromResources
@@ -71,11 +75,6 @@ namespace Nawlian.Lib.Utils.Database
 			}
 		}
 
-		public List<Section> Sections = new List<Section>();
-
-		public string DatabaseClassPath => $"{DatabaseFolder}\\{DatabaseClassName}";
-
-#if UNITY_EDITOR
 		public Section AddSection(string name)
 		{
 			Section newSection = new Section() { Name = name, GraphPath = $"{Sections.Count}" };

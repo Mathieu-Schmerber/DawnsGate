@@ -42,11 +42,11 @@ namespace Game.Systems.Combat.Attacks
 
 		public abstract void OnStart(Vector3 offset, float travelDistance);
 
-#if UNITY_EDITOR
 		public abstract void OnAttackHit(Collider collider);
-#endif
 
+#if UNITY_EDITOR
 		public abstract (bool isValid, string message) IsAttackEditorValid();
+#endif
 
 		private void OnTriggerEnter(Collider other)
 		{

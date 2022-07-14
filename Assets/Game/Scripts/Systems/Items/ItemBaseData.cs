@@ -1,8 +1,11 @@
 ﻿using Sirenix.OdinInspector;
-using Sirenix.Utilities.Editor;
-using System;
-using UnityEditor;
 using UnityEngine;
+using System;
+
+#if UNITY_EDITOR
+using Sirenix.Utilities.Editor;
+using UnityEditor;
+#endif
 
 namespace Game.Systems.Items
 {
@@ -13,14 +16,13 @@ namespace Game.Systems.Items
 		ACTIVE
 	}
 
-	public abstract class ItemBaseData : ScriptableObject
+	public abstract class ItemBaseData : SerializedScriptableObject
 	{
 		public ItemType Type;
 
-		[ValidateInput(nameof(ValidateEditor), "Script needs to inherit AEquippedItem.")]
-		public MonoScript Script;
+		public Type Component;
 
-		[OnInspectorGUI(nameof(DrawPreview), append: true)]
+		[OnInspectorGUI("DrawPreview", append: true)]
 		public Sprite Graphics;
 
 		public ItemTag Tags;
@@ -31,6 +33,9 @@ namespace Game.Systems.Items
 		public abstract string GetRichDescription(int quality);
 
 #if UNITY_EDITOR
+
+		[OnValueChanged(nameof(OnScriptChanged)), ValidateInput(nameof(ValidateScript), "Script needs to inherit AEquippedItem.")]
+		public MonoScript Script;
 
 		private void DrawPreview()
 		{
@@ -79,7 +84,16 @@ namespace Game.Systems.Items
 			_ => null
 		};
 
-		private bool ValidateEditor() => Script != null && !Script.GetClass().IsAbstract && Script.GetClass().IsSubclassOf(typeof(AEquippedItem));
+		private bool ValidateScript() => Script != null && !Script.GetClass().IsAbstract && Script.GetClass().IsSubclassOf(typeof(AEquippedItem));
+
+		internal void OnScriptChanged()
+		{
+			if (ValidateScript())
+			{
+				Component = Script.GetClass();
+				Debug.Log($"{name}.Component set to {Component}");
+			}
+		}
 
 #endif
 	}

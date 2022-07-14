@@ -1,9 +1,6 @@
-﻿using Sirenix.Utilities.Editor;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿#if UNITY_EDITOR
+
+using Sirenix.Utilities.Editor;
 using UnityEditor;
 using UnityEngine;
 
@@ -35,3 +32,4 @@ namespace Game.Scripts.Tools
 		}
 	}
 }
+#endif

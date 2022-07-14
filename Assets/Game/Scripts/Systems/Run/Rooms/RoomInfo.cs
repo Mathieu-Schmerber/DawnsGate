@@ -2,19 +2,17 @@
 using Game.Systems.Run.GPE;
 using Nawlian.Lib.Extensions;
 using Sirenix.OdinInspector;
-using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEditor.SceneManagement;
-using UnityEngine.SceneManagement;
+
+#if UNITY_EDITOR
 using Sirenix.Utilities.Editor;
+using UnityEditor.SceneManagement;
 using Game.Scripts.Tools;
+#endif
 
 namespace Game.Systems.Run.Rooms
 {
@@ -25,7 +23,7 @@ namespace Game.Systems.Run.Rooms
 	{
 		[Space]
 		[Title("General")]
-		[SerializeField, OnValueChanged(nameof(OnTypeChanged))] private RoomType _roomType;
+		[SerializeField, OnValueChanged("OnTypeChanged")] private RoomType _roomType;
 		[SerializeField] private Transform _playerSpawn;
 		[SerializeField] private RoomDoor[] _doors;
 
@@ -41,15 +39,14 @@ namespace Game.Systems.Run.Rooms
 		public RoomType Type { get => _roomType; set 
 			{ 
 				_roomType = value;
-				OnTypeChanged();
 			} 
 		}
 
 		#region Editor Tools
 
-#if UNITY_EDITOR
-
 		private ARoom GetRoom() => _room ?? GetComponent<ARoom>();
+
+#if UNITY_EDITOR
 
 		private void OnTypeChanged()
 		{

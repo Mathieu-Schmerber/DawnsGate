@@ -12,6 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c20aea0fd1aa67419e2f70ffca4d7bc, type: 3}
   m_Name: Burn
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 0
+    SerializedBytes: 01010900000043006f006d0070006f006e0065006e0074002f00000000011c000000530079007300740065006d002e00520075006e00740069006d00650054007900700065002c0020006d00730063006f0072006c006900620000000000280138000000470061006d0065002e00530079007300740065006d0073002e0043006f006d006200610074002e0045006600660065006300740073002e00420061007300690063004500660066006500630074002c00200041007300730065006d0062006c0079002d0043005300680061007200700005
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
   DisplayName: Burn
   Description: Applies <color=red>5</color> damage every <color=yellow>0.5</color>
     second.

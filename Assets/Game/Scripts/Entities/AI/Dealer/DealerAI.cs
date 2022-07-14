@@ -112,7 +112,6 @@ namespace Game.Entities.AI.Dealer
 			}
 			else
 			{
-				Debug.Log("Attack Cast !");
 				_gfxAnim.SetBool("IsCasting", true);
 				LockMovement = true;
 				LockAim = true;

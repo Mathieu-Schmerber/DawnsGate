@@ -1,17 +1,17 @@
-using Game.Entities.Shared;
-using Game.Scripts.Tools;
 using Game.Systems.Run.Rooms;
 using Nawlian.Lib.Extensions;
 using Nawlian.Lib.Utils;
 using Sirenix.OdinInspector;
-using Sirenix.Utilities.Editor;
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using UnityEditor;
 using UnityEngine;
+
+#if UNITY_EDITOR
+using UnityEditor;
+using UnityEditor.SceneManagement;
+using Sirenix.Utilities.Editor;
+#endif
 
 namespace Game.Systems.Run
 {
@@ -30,10 +30,10 @@ namespace Game.Systems.Run
         [System.Serializable] [InlineProperty]
         public class RoomFolder
 		{
-            [ValidateInput(nameof(IsFolderEmpty), "This folder contains no scene.")]
+            [ValidateInput("IsFolderEmpty", "This folder contains no scene.")]
             [FolderPath(RequireExistingPath = true), LabelText("@GetFolderDisplayName()")] public string Folder;
             [HideInInspector] public bool HasError;
-            [ReadOnly, ListDrawerSettings(HideAddButton = true, HideRemoveButton = true, ShowIndexLabels = false, ElementColor = nameof(GetElementColor))]
+            [ReadOnly, ListDrawerSettings(HideAddButton = true, HideRemoveButton = true, ShowIndexLabels = false, ElementColor = "GetElementColor")]
             public List<RoomInfoData> RoomDatas;
 
 			#region Editor
@@ -93,7 +93,9 @@ namespace Game.Systems.Run
 
 		[System.Serializable] public class RoomFolderDictionary : SerializedDictionary<RoomType, RoomFolder>
         {
+#if UNITY_EDITOR
             public void Refresh() => Values.ForEach(x => x.Refresh());
+#endif
         }
 
         #endregion
@@ -103,7 +105,7 @@ namespace Game.Systems.Run
         [@Tooltip("Maximum number of doors that can be activated in a room")]
         [MinValue(0)] public int MaxExitNumber;
         [Sirenix.OdinInspector.FilePath(RequireExistingPath = true)] public string BootScenePath;
-        [OnInspectorGUI(nameof(ValidateFolders))]
+        [OnInspectorGUI("ValidateFolders")]
         public string LobbySceneName;
         public RoomFolderDictionary RoomFolders;
 
@@ -122,6 +124,18 @@ namespace Game.Systems.Run
         #region Editor check
 
 #if UNITY_EDITOR
+
+        [Button]
+        private void UpdateAllRoomDatas()
+		{
+			foreach (var room in RoomFolders)
+			{
+                if (room.Value.RoomDatas == null)
+                    continue;
+                room.Value.RoomDatas.RemoveAll(x => x == null);
+                room.Value.RoomDatas.ForEach(x => x.UpdateSceneName());
+            }
+		}
 
         public void ValidateFolders()
 		{

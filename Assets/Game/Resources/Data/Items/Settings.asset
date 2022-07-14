@@ -21,7 +21,6 @@ MonoBehaviour:
     - {x: 200, y: 220}
     - {x: 180, y: 200}
   PriceInflationPerUpgrade: 50
-  DefaultStatScript: {fileID: 11500000, guid: 08926e121668c91429746aa3d5ff809b, type: 3}
   StatGraphics:
     keyData: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d000000
     valueData:
@@ -39,3 +38,4 @@ MonoBehaviour:
     - Name: Dash range
     - Name: Dash cooldown
     - Name: Stun resistance
+  DefaultStatScript: {fileID: 11500000, guid: 08926e121668c91429746aa3d5ff809b, type: 3}
