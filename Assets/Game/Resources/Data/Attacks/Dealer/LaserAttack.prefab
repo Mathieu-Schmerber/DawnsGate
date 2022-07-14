@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4440920095948804284}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -76,8 +76,8 @@ LineRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Positions:
-  - {x: 0, y: 1, z: 0}
-  - {x: 0, y: 1, z: 50}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 50}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -131,7 +131,7 @@ LineRenderer:
     textureMode: 0
     shadowBias: 0.5
     generateLightingData: 0
-  m_UseWorldSpace: 0
+  m_UseWorldSpace: 1
   m_Loop: 0
 --- !u!136 &7424633537180733009
 CapsuleCollider:
@@ -146,7 +146,7 @@ CapsuleCollider:
   m_Radius: 1
   m_Height: 50
   m_Direction: 2
-  m_Center: {x: 0, y: 1, z: 25}
+  m_Center: {x: 0, y: 0, z: 25}
 --- !u!114 &6742795211460156706
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -159,6 +159,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c30eef7a8905024faa78c602d09e11d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _wallMask:
+    serializedVersion: 2
+    m_Bits: 1
 --- !u!1 &4977678002939469769
 GameObject:
   m_ObjectHideFlags: 0
@@ -186,7 +189,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4977678002939469769}
   m_LocalRotation: {x: 0, y: 0.7071068, z: -0, w: -0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -235,8 +238,8 @@ LineRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Positions:
-  - {x: 0, y: 1, z: 0}
-  - {x: 0, y: 1, z: 50}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 50}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -290,7 +293,7 @@ LineRenderer:
     textureMode: 0
     shadowBias: 0.5
     generateLightingData: 0
-  m_UseWorldSpace: 0
+  m_UseWorldSpace: 1
   m_Loop: 0
 --- !u!136 &8012487409635975974
 CapsuleCollider:
@@ -305,7 +308,7 @@ CapsuleCollider:
   m_Radius: 1
   m_Height: 50
   m_Direction: 2
-  m_Center: {x: 0, y: 1, z: 25}
+  m_Center: {x: 0, y: 0, z: 25}
 --- !u!114 &590317636844328554
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -318,6 +321,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c30eef7a8905024faa78c602d09e11d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _wallMask:
+    serializedVersion: 2
+    m_Bits: 1
 --- !u!1 &5703335138721370553
 GameObject:
   m_ObjectHideFlags: 0
@@ -345,7 +351,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5703335138721370553}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -394,8 +400,8 @@ LineRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Positions:
-  - {x: 0, y: 1, z: 0}
-  - {x: 0, y: 1, z: 50}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 50}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -449,7 +455,7 @@ LineRenderer:
     textureMode: 0
     shadowBias: 0.5
     generateLightingData: 0
-  m_UseWorldSpace: 0
+  m_UseWorldSpace: 1
   m_Loop: 0
 --- !u!136 &1584747077497672025
 CapsuleCollider:
@@ -464,7 +470,7 @@ CapsuleCollider:
   m_Radius: 1
   m_Height: 50
   m_Direction: 2
-  m_Center: {x: 0, y: 1, z: 25}
+  m_Center: {x: 0, y: 0, z: 25}
 --- !u!114 &4297505415835212016
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -477,6 +483,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c30eef7a8905024faa78c602d09e11d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _wallMask:
+    serializedVersion: 2
+    m_Bits: 1
 --- !u!1 &6109970368916795978
 GameObject:
   m_ObjectHideFlags: 0
@@ -5392,7 +5401,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6154027615347174345}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5441,8 +5450,8 @@ LineRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Positions:
-  - {x: 0, y: 1, z: 0}
-  - {x: 0, y: 1, z: 50}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 50}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -5496,7 +5505,7 @@ LineRenderer:
     textureMode: 0
     shadowBias: 0.5
     generateLightingData: 0
-  m_UseWorldSpace: 0
+  m_UseWorldSpace: 1
   m_Loop: 0
 --- !u!136 &360064092611022064
 CapsuleCollider:
@@ -5511,7 +5520,7 @@ CapsuleCollider:
   m_Radius: 1
   m_Height: 50
   m_Direction: 2
-  m_Center: {x: 0, y: 1, z: 25}
+  m_Center: {x: 0, y: 0, z: 25}
 --- !u!114 &4160411594005837010
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5524,3 +5533,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c30eef7a8905024faa78c602d09e11d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _wallMask:
+    serializedVersion: 2
+    m_Bits: 1

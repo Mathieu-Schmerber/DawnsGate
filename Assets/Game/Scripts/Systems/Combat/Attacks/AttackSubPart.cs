@@ -6,7 +6,7 @@ namespace Game.Systems.Combat.Attacks
 	{
 		private AttackBase _base;
 
-		private void Awake()
+		protected virtual void Awake()
 		{
 			_base = GetComponentInParent<AttackBase>();
 		}
