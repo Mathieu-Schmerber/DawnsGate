@@ -21,9 +21,10 @@ namespace Nawlian.Lib.Extensions
 
 			if (includeThis)
 			{
-				T comp = obj.GetComponent<T>();
-				if (comp != null)
-					res.Add(comp);
+				T comp = obj.gameObject.GetComponent<T>();
+				if (comp == null)
+					return res;
+				res.Add(comp);
 			}
 			return res;
 		}

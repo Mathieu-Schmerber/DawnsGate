@@ -64,6 +64,8 @@ namespace Game.Systems.Combat.Attacks
 
 			if (_attackData.ScaleOverLifetime)
 				Tween.LocalScale(transform, _attackData.EndScale, _attackData.ActiveTime, 0, Tween.EaseLinear);
+			if (_attackData.RotateOverTime)
+				Tween.Rotate(transform, _attackData.EndRotation, Space.Self, _attackData.ActiveTime, 0, Tween.EaseLinear);
 		}
 
 		private void Update()
@@ -81,13 +83,12 @@ namespace Game.Systems.Combat.Attacks
 			}
 		}
 
-		protected override void OnAttackHit(Collider collider)
+		public override void OnAttackHit(Collider collider)
 		{
-			if (_hitColliders.Contains(collider) || _isOff) return;
+			if ((!_attackData.ContinuouslyHit && _hitColliders.Contains(collider)) || _isOff) return;
 
 			Damageable damageProcessor = collider.GetComponent<Damageable>();
 
-			_hitColliders.Add(collider);
 			if (damageProcessor != null)
 			{
 				Vector3 direction = _attackData.KnockbackDir == KnockbackDirection.FORWARD ? transform.forward : (collider.transform.position - transform.position).normalized.WithY(0);
@@ -98,7 +99,11 @@ namespace Game.Systems.Combat.Attacks
 				damageProcessor.ApplyKnockback(Caster, direction * knockbackForce);
 				ObjectPooler.Get(_attackData.HitFx, collider.transform.position.WithY(transform.position.y), Quaternion.Euler(0, transform.rotation.eulerAngles.y + _attackData.HitYRotation, 0), null);
 				OnAttackHitEvent?.Invoke(_data, damageProcessor, applied);
+				if (applied > 0)
+					_hitColliders.Add(collider);
+				return;
 			}
+			_hitColliders.Add(collider);
 		}
 
 		private void SmoothRelease()
@@ -126,14 +131,15 @@ namespace Game.Systems.Combat.Attacks
 
 		public override (bool isValid, string message) IsAttackEditorValid()
 		{
+			var childCheck = GetComponentsInChildren<Collider>();
 			var colliderCheck = GetComponents<Collider>();
 
-			if (colliderCheck.Length == 0)
+			if (colliderCheck.Length == 0 && childCheck.Length == 0)
 				return (false, "No collider found, this attack won't hit");
-			else if (colliderCheck.Any(x => x.isTrigger == false))
+			else if (colliderCheck.Any(x => x.isTrigger == false) || childCheck.Any(x => x.isTrigger == false))
 				return (false, "Some colliders are not triggers, those won't hit");
 
-			var psCheck = GetComponents<ParticleSystem>();
+			var psCheck = transform.GetComponentsInChildren<ParticleSystem>();
 
 			if (psCheck.Length == 0)
 				return (false, "No particle system found");

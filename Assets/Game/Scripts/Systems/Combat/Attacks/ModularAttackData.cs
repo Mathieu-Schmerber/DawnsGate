@@ -14,6 +14,9 @@ namespace Game.Systems.Combat.Attacks
 	{
 		public bool ScaleOverLifetime;
 		[ShowIf(nameof(ScaleOverLifetime))] public Vector3 EndScale;
+		public bool RotateOverTime;
+		[ShowIf(nameof(RotateOverTime))] public Vector3 EndRotation;
+		public bool ContinuouslyHit;
 		
 		[Title("Game feel")]
 		[ValidateInput(nameof(EditorValidate), "HitFx needs an IPoolableObject component.")] public GameObject HitFx;

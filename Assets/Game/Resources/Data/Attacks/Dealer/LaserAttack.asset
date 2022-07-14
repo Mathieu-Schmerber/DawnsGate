@@ -19,6 +19,9 @@ MonoBehaviour:
   KnockbackDir: 1
   ScaleOverLifetime: 0
   EndScale: {x: 0, y: 0, z: 0}
+  RotateOverTime: 1
+  EndRotation: {x: 0, y: 360, z: 0}
+  ContinuouslyHit: 1
   HitFx: {fileID: 6826739793168019112, guid: 161ce196c6bae7843a3573a1fe4c5d5f, type: 3}
   HitYRotation: 0
   ActiveTime: 5

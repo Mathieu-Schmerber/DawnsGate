@@ -28,7 +28,7 @@ namespace Game.Systems.Combat.Attacks
 		/// </summary>
 		public abstract float Range { get; }
 
-		protected EntityIdentity Caster { get; private set; }
+		public EntityIdentity Caster { get; private set; }
 
 		public Action<AttackBaseData, Damageable, float> OnAttackHitEvent { get; set; }
 
@@ -43,7 +43,7 @@ namespace Game.Systems.Combat.Attacks
 		public abstract void OnStart(Vector3 offset, float travelDistance);
 
 #if UNITY_EDITOR
-		protected abstract void OnAttackHit(Collider collider);
+		public abstract void OnAttackHit(Collider collider);
 #endif
 
 		public abstract (bool isValid, string message) IsAttackEditorValid();
