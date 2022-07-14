@@ -1,7 +1,7 @@
 ﻿using Game.Entities.Shared;
 using Game.Managers;
 using Game.Systems.Combat.Attacks;
-using Game.Systems.Run.Rooms;
+using Game.Systems.Run.Rooms.Events;
 using Nawlian.Lib.Extensions;
 using Nawlian.Lib.Systems.Animations;
 using Nawlian.Lib.Utils;
@@ -15,6 +15,8 @@ namespace Game.Entities.AI.Dealer
 	{
 		[SerializeField] private LayerMask _wallMask;
 		private DealerStatData _stats;
+		private DealRoom _dealRoom;
+		private bool _atTheMapCenter = false;
 
 		#region Unity builtins
 
@@ -32,6 +34,7 @@ namespace Game.Entities.AI.Dealer
 		{
 			base.Init(data);
 			_stats = _entity.Stats as DealerStatData;
+			_dealRoom = _room as DealRoom;
 
 			_attackNumber = 0;
 			State = EntityState.STUN;
@@ -46,6 +49,15 @@ namespace Game.Entities.AI.Dealer
 		protected override float TriggerRange => Mathf.Infinity;
 		protected override float UnTriggerRange => Mathf.Infinity;
 
+		protected override void Update()
+		{
+			base.Update();
+
+			_atTheMapCenter = Vector3.Distance(transform.position, _dealRoom.BossSpawnPoint.WithY(transform.position.y)) <= 0.5f;
+			if (!_isDashAttack)
+				NextAggressivePosition = _dealRoom.BossSpawnPoint;
+		}
+
 		#endregion
 
 		#region States
@@ -54,6 +66,7 @@ namespace Game.Entities.AI.Dealer
 		{
 			base.ResetStates();
 			_gfxAnim.SetBool("IsDashing", false);
+			_gfxAnim.SetBool("IsCasting", false);
 		}
 
 		public void TakeAction()
@@ -75,8 +88,14 @@ namespace Game.Entities.AI.Dealer
 
 		private int _attackNumber = 0;
 		private int _dashToPerform;
-
 		private bool _isDashAttack => _attackNumber % 2 == 0;
+
+		protected override void TryAttacking()
+		{
+			if (!_isDashAttack && !_atTheMapCenter)
+				return;
+			base.TryAttacking();
+		}
 
 		protected override void Attack()
 		{
@@ -86,20 +105,25 @@ namespace Game.Entities.AI.Dealer
 					_dashToPerform = Random.Range(_stats.ConsecutiveDashes.x, _stats.ConsecutiveDashes.y + 1);
 				_dashToPerform--;
 				_gfxAnim.Play(_stats.StartDashAnimation.name);
+				if (_dashToPerform == 0)
+				{
+					_attackNumber++;
+				}
 			}
 			else
 			{
-				// Go to the center of the map
-				// perform laser atack
-				OnAttackEnd(); // tmp
+				Debug.Log("Attack Cast !");
+				_gfxAnim.SetBool("IsCasting", true);
+				LockMovement = true;
+				LockAim = true;
 			}
-			if (_dashToPerform == 0)
-				_attackNumber++;
 		}
 
 		public void OnAnimationEvent(string animationArg)
 		{
-			if (_isDashAttack && animationArg == "Attack")
+			if (animationArg != "Attack")
+				return;
+			if (_isDashAttack)
 			{
 				ModularAttack instance = AttackBase.Spawn(_stats.DashAttack, transform.position, Quaternion.LookRotation(GetAimNormal()), new()
 				{
@@ -108,6 +132,21 @@ namespace Game.Entities.AI.Dealer
 				}).GetComponent<ModularAttack>();
 				instance.OnStart(Vector3.zero, 0);
 				DashToWall();
+			}
+			else if (_atTheMapCenter)
+			{
+				ModularAttack instance = AttackBase.Spawn(_stats.LaserAttack, transform.position, Quaternion.LookRotation(GetAimNormal()), new()
+				{
+					Caster = _entity,
+					Data = _stats.LaserAttack
+				}).GetComponent<ModularAttack>();
+				instance.OnStart(Vector3.zero, 0);
+				Awaiter.WaitAndExecute(_stats.LaserAttack.ActiveTime, () =>
+				{
+					ResetStates();
+					OnAttackEnd();
+					_attackNumber++;
+				});
 			}
 		}
 

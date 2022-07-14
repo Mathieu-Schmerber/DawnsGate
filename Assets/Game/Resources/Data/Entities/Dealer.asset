@@ -68,13 +68,11 @@ MonoBehaviour:
     - _baseModifier: 0
       BonusModifier: 0
       TemporaryModifier: 0
-  TriggerRange: 0
-  UntriggerRange: 0
-  AttackRange: 0
-  AttackCooldown: 0
   Dialogue: {fileID: 11400000, guid: b34964c42fff6094bbdb844ae1c30261, type: 2}
   PriceDiscount: 20
   DashAttack: {fileID: 11400000, guid: 7b5aae8b01596c94e8fb739a5975340e, type: 2}
   StartDashAnimation: {fileID: -203655887218126122, guid: 8bbd01a6593e02540bf0ad46d5c33c3d,
     type: 3}
   ConsecutiveDashes: {x: 3, y: 4}
+  LaserAttack: {fileID: 11400000, guid: 5947d81b259f55c4498b441ca4341132, type: 2}
+  LaserCastAnimation: {fileID: 7400000, guid: 9a675a018b7435f45a1b1270f9df3953, type: 2}

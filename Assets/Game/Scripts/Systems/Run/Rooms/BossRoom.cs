@@ -15,6 +15,7 @@ namespace Game.Systems.Run.Rooms
 		protected EntityIdentity _bossIdentity;
 		protected BossBarUi _bossBar;
 		public GameObject Boss => _bossIdentity.gameObject;
+		public Vector3 BossSpawnPoint => _bossSpawn.position;
 		public override bool RequiresNavBaking => true;
 		public override bool ActivateOnStart => false;
 		public virtual bool GiveBossReward => false;
@@ -29,7 +30,7 @@ namespace Game.Systems.Run.Rooms
 		protected override void Start()
 		{
 			base.Start();
-			_bossIdentity = ObjectPooler.Get(_bossPrefab, _bossSpawn.position, _bossSpawn.rotation, this).GetComponent<EntityIdentity>();
+			_bossIdentity = ObjectPooler.Get(_bossPrefab, BossSpawnPoint, _bossSpawn.rotation, this).GetComponent<EntityIdentity>();
 
 			if (ActivateOnBossSpawn)
 				// TODO: wait time according to some animation ?

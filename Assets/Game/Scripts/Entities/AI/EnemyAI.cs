@@ -197,7 +197,7 @@ namespace Game.Entities.AI
 			return aroundPos.Where(pos => Vector3.Distance(pos, NextPassivePosition) == maxDistance).Random();
 		}
 
-		protected Vector3 UpdateAgressivePoint()
+		protected virtual Vector3 UpdateAgressivePoint()
 		{
 			if (Vector3.Distance(transform.position, NextAggressivePosition) < 0.5f)
 				NextAggressivePosition = CalculateNextAggressivePoint();

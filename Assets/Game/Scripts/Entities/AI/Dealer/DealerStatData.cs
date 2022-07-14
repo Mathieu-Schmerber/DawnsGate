@@ -17,5 +17,8 @@ namespace Game.Entities.AI.Dealer
 		[InlineEditor] public ModularAttackData DashAttack;
 		public AnimationClip StartDashAnimation;
 		public Vector2Int ConsecutiveDashes;
+		[Space]
+		[InlineEditor] public ModularAttackData LaserAttack;
+		public AnimationClip LaserCastAnimation;
 	}
 }
