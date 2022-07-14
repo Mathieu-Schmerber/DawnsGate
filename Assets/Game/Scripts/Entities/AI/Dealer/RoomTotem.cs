@@ -18,6 +18,7 @@ namespace Game.Entities.AI.Dealer
 		private bool _active;
 		private DealRoom _room;
 		private RoomTotemLink _link;
+		private DealerAI _ai;
 
 		public static event Action OnStateChanged;
 
@@ -56,7 +57,7 @@ namespace Game.Entities.AI.Dealer
 		{
 			if (IsDead)
 				return 0;
-			else if (attacker.Stats is DealerStatData)
+			else if (attacker.gameObject == _room.Boss && _room.Boss.GetComponent<DealerAI>().IsDashAttack)
 			{
 				IsActive = false;
 				Awaiter.WaitAndExecute(_chargeTime, () => ReActivate());

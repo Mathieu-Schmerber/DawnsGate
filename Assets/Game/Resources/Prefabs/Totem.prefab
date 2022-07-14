@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3331041633589802441}
   - component: {fileID: 3331041633589802447}
   - component: {fileID: 3331041633589802446}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Link
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3331041633589802440}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 4, z: 0}
+  m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -156,7 +156,7 @@ GameObject:
   - component: {fileID: 3331041633870427582}
   - component: {fileID: 3331041633870427581}
   - component: {fileID: 3331041633870427580}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: GFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -171,8 +171,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3331041633870427577}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2, z: 0}
-  m_LocalScale: {x: 1, y: 4, z: 1}
+  m_LocalPosition: {x: 0, y: 1.5, z: 0}
+  m_LocalScale: {x: 0.5, y: 3, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3331041634302934169}
@@ -240,7 +240,7 @@ GameObject:
   - component: {fileID: 3331041634302934174}
   - component: {fileID: 2368835461194247969}
   - component: {fileID: 6302533347837726164}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Totem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -276,7 +276,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54bb0f623db77dc49908295dd8635f85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _chargeTime: 20
+  _chargeTime: 30
 --- !u!65 &2368835461194247969
 BoxCollider:
   m_ObjectHideFlags: 0

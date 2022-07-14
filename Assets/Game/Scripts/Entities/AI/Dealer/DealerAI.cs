@@ -54,7 +54,7 @@ namespace Game.Entities.AI.Dealer
 			base.Update();
 
 			_atTheMapCenter = Vector3.Distance(transform.position, _dealRoom.BossSpawnPoint.WithY(transform.position.y)) <= 0.5f;
-			if (!_isDashAttack)
+			if (!IsDashAttack)
 				NextAggressivePosition = _dealRoom.BossSpawnPoint;
 		}
 
@@ -84,25 +84,25 @@ namespace Game.Entities.AI.Dealer
 		#region Attacks
 
 		protected override float AttackRange => _stats.DashAttack.AttackRange;
-		protected override float AttackCooldown => 0.1f;
+		protected override float AttackCooldown => 0.5f;
 
 		private int _attackNumber = 0;
 		private int _dashToPerform;
-		private bool _isDashAttack => _attackNumber % 2 == 0;
+		public bool IsDashAttack => _attackNumber % 2 == 0;
 
 		protected override void TryAttacking()
 		{
-			if (!_isDashAttack && !_atTheMapCenter)
+			if (!IsDashAttack && !_atTheMapCenter)
 				return;
 			base.TryAttacking();
 		}
 
 		protected override void Attack()
 		{
-			if (_isDashAttack)
+			if (IsDashAttack)
 			{
 				if (_dashToPerform == 0)
-					_dashToPerform = Random.Range(_stats.ConsecutiveDashes.x, _stats.ConsecutiveDashes.y + 1);
+					_dashToPerform = Random.Range(_stats.ConsecutiveDashes.x + 1, _stats.ConsecutiveDashes.y + 2);
 				_dashToPerform--;
 				_gfxAnim.Play(_stats.StartDashAnimation.name);
 				if (_dashToPerform == 0)
@@ -123,7 +123,7 @@ namespace Game.Entities.AI.Dealer
 		{
 			if (animationArg != "Attack")
 				return;
-			if (_isDashAttack)
+			if (IsDashAttack)
 			{
 				ModularAttack instance = AttackBase.Spawn(_stats.DashAttack, transform.position, Quaternion.LookRotation(GetAimNormal()), new()
 				{
