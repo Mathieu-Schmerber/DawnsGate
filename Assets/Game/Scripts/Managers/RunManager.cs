@@ -58,6 +58,8 @@ namespace Game.Managers
 			_damageable = GameManager.Player.GetComponent<PlayerDamageable>();
 		}
 
+		private void Start() => OnLobbyEntered();
+
 		private void OnEnable()
 		{
 			_damageable.OnPlayerDeath += EndRun;
@@ -70,8 +72,11 @@ namespace Game.Managers
 
 		#region Tools
 
+		private static void OnLobbyEntered() => AudioManager.PlayTheme(RunSettings.LobbyTheme);
+
 		public static void StartNewRun()
 		{
+			AudioManager.PlayTheme(RunSettings.RunTheme);
 			CurrentRoomInstance = null;
 			Instance.ReachedRooms.Clear();
 			Instance._currentRoom = 0;
@@ -108,6 +113,7 @@ namespace Game.Managers
 		{
 			ChangeScene(RunSettings.LobbySceneName);
 			Instance._runState = RunState.LOBBY;
+			OnLobbyEntered();
 			OnRunEnded?.Invoke();
 		}
 

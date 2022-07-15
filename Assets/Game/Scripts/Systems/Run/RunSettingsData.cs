@@ -114,6 +114,10 @@ namespace Game.Systems.Run
         [MinValue(0)] public Vector2Int LobbyMoneyPerRoom;
         [MinValue(0)] public Vector2Int LobbyMoneyRunReward;
 
+        [Title("Music")]
+        public AudioClip LobbyTheme;
+        public AudioClip RunTheme;
+
         [Title("Rules", "Run generation rules")]
 
         [ValidateInput("@ValidateMaxExit().Item1", "@ValidateMaxExit().Item2")]

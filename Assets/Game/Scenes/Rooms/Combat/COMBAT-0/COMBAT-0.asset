@@ -12,8 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e08ca7b20a10db4e8b3f5b93cd13413, type: 3}
   m_Name: COMBAT-0
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  SceneName: COMBAT-0
   HasErrors: 0
-  NavMesh: {fileID: 23800000, guid: f7561426117af604d986be7571fb0813, type: 2}
+  NavMesh: {fileID: 23800000, guid: 50d1b1dd74c0519438811e97354177a6, type: 2}
+  GroundLevel: 0.05873382
   SpawnablePositions:
   - {x: -10.471047, y: 0.05873382, z: -9.612671}
   - {x: -10.33564, y: 0.05873382, z: -7.6255665}

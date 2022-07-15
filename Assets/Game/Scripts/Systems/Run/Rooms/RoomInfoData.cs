@@ -22,7 +22,7 @@ namespace Game.Systems.Run.Rooms
 
 #if UNITY_EDITOR
 
-		[OnInspectorInit]
+		//[OnInspectorInit]
 		public void UpdateSceneName()
 		{
 			string[] guids = AssetDatabase.FindAssets($"{name} t:{typeof(RoomInfoData)}");
@@ -35,10 +35,13 @@ namespace Game.Systems.Run.Rooms
 				{
 					string folder = Path.GetDirectoryName(path);
 					string scenePath = Directory.GetFiles(folder, "*.unity", SearchOption.TopDirectoryOnly)[0];
-
-					SceneName = Path.GetFileNameWithoutExtension(scenePath);
+					string scene = Path.GetFileNameWithoutExtension(scenePath);
+					if (SceneName != scene)
+						SceneName = scene;
 				}
 			}
+			EditorUtility.SetDirty(this);
+			AssetDatabase.SaveAssets();
 		}
 
 #endif

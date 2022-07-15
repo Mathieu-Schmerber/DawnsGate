@@ -12,12 +12,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3453c080cf97d5b4493ae3569a2eac4d, type: 3}
   m_Name: Solaris book
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: Component
+      Entry: 7
+      Data: 0|System.RuntimeType, mscorlib
+    - Name: 
+      Entry: 1
+      Data: Game.Systems.Items.Active.SolarisBook, Assembly-CSharp
+    - Name: 
+      Entry: 8
+      Data: 
   Type: 2
-  Script: {fileID: 11500000, guid: 811d8d5442e7a0943af931a378d196fb, type: 3}
   Graphics: {fileID: 21300000, guid: 79ce5cddc228010408d0bed9194779bd, type: 3}
   Tags: 8
   IsLifeItem: 0
   LifeCost: 0
+  Script: {fileID: 11500000, guid: 811d8d5442e7a0943af931a378d196fb, type: 3}
   Stages:
   - Damage: 0
     Duration: 3

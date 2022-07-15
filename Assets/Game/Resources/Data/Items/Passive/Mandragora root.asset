@@ -12,12 +12,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3453c080cf97d5b4493ae3569a2eac4d, type: 3}
   m_Name: Mandragora root
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: Component
+      Entry: 7
+      Data: 0|System.RuntimeType, mscorlib
+    - Name: 
+      Entry: 1
+      Data: Game.Systems.Items.Passive.MandragoraRoot, Assembly-CSharp
+    - Name: 
+      Entry: 8
+      Data: 
   Type: 1
-  Script: {fileID: 11500000, guid: 4ab6f8d9e8551704f878d9491ab2ed9f, type: 3}
   Graphics: {fileID: 21300000, guid: c86ebc3e77e40534282d7a9ca146c1e3, type: 3}
   Tags: 1
   IsLifeItem: 0
   LifeCost: 0
+  Script: {fileID: 11500000, guid: 4ab6f8d9e8551704f878d9491ab2ed9f, type: 3}
   Stages:
   - Damage: 0
     Duration: 0

@@ -40,6 +40,7 @@ namespace Game.Entities.AI.Lunaris
 		#endregion
 
 		[Title("Phases")]
+		public AudioClip FightTheme;
 		public float PhaseSwitchTime;
 		public AnimationClip RestAnimation;
 		public AnimationClip DeathAnimation;

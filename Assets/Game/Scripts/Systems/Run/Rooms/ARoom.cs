@@ -58,6 +58,7 @@ namespace Game.Systems.Run.Rooms
 
 		public void Clear()
 		{
+			AudioManager.PlayTheme(RunManager.RunSettings.RunTheme, false);
 			_player.RefillArmor();
 			OnRoomCleared?.Invoke();
 			Cleared = true;

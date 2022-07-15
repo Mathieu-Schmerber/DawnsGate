@@ -14,6 +14,7 @@ namespace Game.Systems.Run.Rooms.Events
 	public class TimeRoom : CombatRoom
 	{
 		[SerializeField] private Clock _roomClock;
+		[SerializeField] private AudioClip _activationTheme;
 
 		public override bool RequiresNavBaking => true;
 		public override bool ActivateOnStart => false;
@@ -34,6 +35,7 @@ namespace Game.Systems.Run.Rooms.Events
 
 		protected override void OnActivate()
 		{
+			AudioManager.PlayTheme(_activationTheme);
 			_roomClock.ClockIn(60);
 			StartCoroutine(SpawnEnemies(20, 3, () => Clear()));
 		}

@@ -92,6 +92,8 @@ namespace Game.Systems.Items
 			{
 				Component = Script.GetClass();
 				Debug.Log($"{name}.Component set to {Component}");
+				EditorUtility.SetDirty(this);
+				AssetDatabase.SaveAssets();
 			}
 		}
 

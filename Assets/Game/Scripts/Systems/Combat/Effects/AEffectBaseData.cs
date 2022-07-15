@@ -27,6 +27,8 @@ namespace Game.Systems.Combat.Effects
 			{
 				Component = Script.GetClass();
 				Debug.Log($"{DisplayName} Component set to {Component}");
+				EditorUtility.SetDirty(this);
+				AssetDatabase.SaveAssets();
 			}
 		}
 #endif

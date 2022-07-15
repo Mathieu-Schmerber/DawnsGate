@@ -80,6 +80,7 @@ namespace Game.Entities.AI.Lunaris
 		public void EngageFight()
 		{
 			_dashTimer.Start(_stats.DashCooldown, false);
+			AudioManager.PlayTheme(_stats.FightTheme);
 			OnPhaseSet();
 		}
 

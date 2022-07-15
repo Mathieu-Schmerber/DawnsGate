@@ -12,6 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33a9b64f172f3044d9470a871e6a07c3, type: 3}
   m_Name: Steel hammer
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: Component
+      Entry: 7
+      Data: 0|System.RuntimeType, mscorlib
+    - Name: 
+      Entry: 1
+      Data: Game.Systems.Items.StatItem, Assembly-CSharp
+    - Name: 
+      Entry: 8
+      Data: 
   Type: 0
   Graphics: {fileID: 21300000, guid: 7b27de25809bbbc43b0c0ac89dd73922, type: 3}
   Tags: 10

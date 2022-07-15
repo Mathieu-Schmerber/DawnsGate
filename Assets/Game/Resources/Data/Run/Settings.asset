@@ -26,6 +26,7 @@ MonoBehaviour:
       HasError: 0
       RoomDatas:
       - {fileID: 11400000, guid: 96347e5a664d7ca4fbd29b177abb0a5e, type: 2}
+      - {fileID: 11400000, guid: 91526c4d0d136ac40824a044e4a40f15, type: 2}
       - {fileID: 11400000, guid: e8c3c652bd3d66848b2193cfd17bee06, type: 2}
     - Folder: Assets/Game/Scenes/Rooms/Shop
       HasError: 0
@@ -43,10 +44,16 @@ MonoBehaviour:
   RoomMoneyReward: {x: 70, y: 90}
   LobbyMoneyPerRoom: {x: 100, y: 120}
   LobbyMoneyRunReward: {x: 500, y: 600}
+  LobbyTheme: {fileID: 8300000, guid: f60df34f448dc624293b7303c6043beb, type: 3}
+  RunTheme: {fileID: 8300000, guid: 9c443d020dfed0e4ba21352cbb4144bc, type: 3}
   FirstRoom:
     Type: 0
     Reward: 1
   RoomRules:
+  - {fileID: 11400000, guid: 79ec421b3049b9c419c735921f2143a6, type: 2}
+  - {fileID: 11400000, guid: 79ec421b3049b9c419c735921f2143a6, type: 2}
+  - {fileID: 11400000, guid: 79ec421b3049b9c419c735921f2143a6, type: 2}
+  - {fileID: 11400000, guid: e0e0b01f992b9884ca7ee76fd0aa0744, type: 2}
   - {fileID: 11400000, guid: 524bd8840420669418cc7e82f9e97272, type: 2}
   - {fileID: 11400000, guid: 524bd8840420669418cc7e82f9e97272, type: 2}
   - {fileID: 11400000, guid: 524bd8840420669418cc7e82f9e97272, type: 2}
@@ -61,4 +68,3 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 79ec421b3049b9c419c735921f2143a6, type: 2}
   - {fileID: 11400000, guid: 524bd8840420669418cc7e82f9e97272, type: 2}
   - {fileID: 11400000, guid: 703b35c19301b8c4d92c1445fe7c0360, type: 2}
-  - {fileID: 11400000, guid: e0e0b01f992b9884ca7ee76fd0aa0744, type: 2}

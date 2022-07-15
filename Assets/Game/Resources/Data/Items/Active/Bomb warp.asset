@@ -12,12 +12,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3453c080cf97d5b4493ae3569a2eac4d, type: 3}
   m_Name: Bomb warp
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: Component
+      Entry: 7
+      Data: 0|System.RuntimeType, mscorlib
+    - Name: 
+      Entry: 1
+      Data: Game.Systems.Items.Active.BombWarp, Assembly-CSharp
+    - Name: 
+      Entry: 8
+      Data: 
   Type: 2
-  Script: {fileID: 11500000, guid: b6fff92d88847f64f8cace7b0a88246c, type: 3}
   Graphics: {fileID: 21300000, guid: 4fe00a6f878b88244bef1ee952e3b777, type: 3}
   Tags: 12
   IsLifeItem: 0
   LifeCost: 0
+  Script: {fileID: 11500000, guid: b6fff92d88847f64f8cace7b0a88246c, type: 3}
   Stages:
   - Damage: 10
     Duration: 1

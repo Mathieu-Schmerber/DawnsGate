@@ -46,6 +46,7 @@ namespace Game.Entities.AI.Dealer
 		{
 			ProcessNewDeal();
 			_dealDone = false;
+			AudioManager.PlayTheme(_stats.DealTheme);
 		}
 
 		#region Interaction
@@ -84,6 +85,7 @@ namespace Game.Entities.AI.Dealer
 		{
 			_dealDone = true;
 			_dealer.TakeAction();
+			AudioManager.PlayTheme(_stats.FightTheme);
 		}
 
 		private string GetBetText()
