@@ -1,4 +1,5 @@
 ﻿using Game.Entities.Player;
+using Game.Managers;
 using Nawlian.Lib.Systems.Interaction;
 using Pixelplacement;
 using Plugins.Nawlian.Lib.Systems.Menuing;
@@ -29,9 +30,11 @@ namespace Game.UI
 
 		private void OnInteractionProposal(IInteractable obj)
 		{
-			if (!_isOpen && obj != null)
+			if (GuiManager.IsMenuing)
+				return;
+			else if (!_isOpen && obj != null)
 				Open();
-			else if (_isOpen && obj == null)
+			else if (_isOpen || obj == null)
 			{
 				Close();
 				return;

@@ -1,6 +1,7 @@
 ﻿using Game.Entities.Player;
 using Game.Systems.Run;
 using Game.Systems.Run.Rooms;
+using Game.UI;
 using Nawlian.Lib.Extensions;
 using Nawlian.Lib.Systems.Pooling;
 using Nawlian.Lib.Utils;
@@ -136,12 +137,21 @@ namespace Game.Managers
 
 		private static void ChangeScene(string sceneName)
 		{
-			Instance.ReachedRooms.Add(sceneName);
+			SceneTransition.StartTransition(() =>
+			{
+				Instance.ReachedRooms.Add(sceneName);
+				ObjectPooler.ReleaseAll();
+				SceneManager.UnloadSceneAsync(Instance._currentRoomScene);
+				var load = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
 
-			ObjectPooler.ReleaseAll();
-			SceneManager.UnloadSceneAsync(Instance._currentRoomScene);
-			SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
-			Instance._currentRoomScene = sceneName;
+				load.completed += OnSceneLoaded;
+				Instance._currentRoomScene = sceneName;
+			});
+		}
+
+		private static void OnSceneLoaded(AsyncOperation obj)
+		{
+			Awaiter.WaitAndExecute(1f, SceneTransition.EndTransition);
 		}
 
 		#endregion
