@@ -26,9 +26,9 @@ namespace Game.Systems.Run.Rooms
 			_currentWave = 0;
 		}
 
-		protected override void Start()
+		protected override void OnRoomReady()
 		{
-			base.Start();
+			base.OnRoomReady();
 			if (ActivateOnStart)
 				Activate();
 		}

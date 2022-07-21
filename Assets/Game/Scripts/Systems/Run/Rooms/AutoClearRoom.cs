@@ -4,9 +4,8 @@
 	{
 		public override bool RequiresNavBaking => false;
 
-		protected override void Start()
+		protected override void OnRoomReady()
 		{
-			base.Start();
 			Activate();
 		}
 

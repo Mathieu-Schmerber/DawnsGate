@@ -20,8 +20,6 @@ namespace Game.Systems.Combat.Attacks
 
 		private List<Collider> _hitColliders = new List<Collider>();
 		private float _startTime;
-		private Vector3 _baseOffset;
-		private Vector3 _baseScale = Vector3.zero;
 
 		private ParticleSystem _particleSystem;
 
@@ -53,20 +51,6 @@ namespace Game.Systems.Combat.Attacks
 
 		public override void OnStart(Vector3 offset, float travelDistance)
 		{
-			_baseOffset = offset;
-			_baseScale = transform.localScale;
-
-			Vector3 localOffsetDir = transform.InverseTransformDirection(_baseOffset);
-			localOffsetDir.x *= -1;
-			transform.position = Caster.transform.position + localOffsetDir;
-
-			if (travelDistance != 0)
-			{
-				Vector3 travelDest = transform.position + transform.forward * travelDistance;
-
-				Tween.LocalPosition(transform, travelDest, _attackData.ActiveTime, 0, Tween.EaseLinear);
-			}
-
 			if (_attackData.ScaleOverLifetime)
 				Tween.LocalScale(transform, _attackData.EndScale, _attackData.ActiveTime, 0, Tween.EaseLinear);
 			if (_attackData.RotateOverTime)
@@ -77,13 +61,6 @@ namespace Game.Systems.Combat.Attacks
 		{
 			if (Time.time - _startTime >= _attackData.ActiveTime)
 				Release();
-			else if (FollowCaster)
-			{
-				Vector3 localOffsetDir = transform.InverseTransformDirection(_baseOffset);
-
-				localOffsetDir.x *= -1;
-				transform.position = Caster.transform.position + localOffsetDir;
-			}
 		}
 
 		public override void OnAttackHit(Collider collider)

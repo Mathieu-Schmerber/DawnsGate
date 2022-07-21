@@ -27,9 +27,9 @@ namespace Game.Systems.Run.Rooms
 			_waveNumber = 1;
 		}
 
-		protected override void Start()
+		protected override void OnRoomReady()
 		{
-			base.Start();
+			base.OnRoomReady();
 			_bossIdentity = ObjectPooler.Get(_bossPrefab, BossSpawnPoint, _bossSpawn.rotation, this).GetComponent<EntityIdentity>();
 
 			if (ActivateOnBossSpawn)

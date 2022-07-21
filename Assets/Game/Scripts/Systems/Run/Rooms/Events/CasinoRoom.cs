@@ -9,9 +9,9 @@ namespace Game.Systems.Run.Rooms.Events
 
 		public override bool RequiresNavBaking => false;
 
-		protected override void Start()
+		protected override void OnRoomReady()
 		{
-			base.Start();
+			base.OnRoomReady();
 			Activate();
 			AudioManager.PlayTheme(_roomTheme);
 		}

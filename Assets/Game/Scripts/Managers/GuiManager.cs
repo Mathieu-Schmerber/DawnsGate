@@ -41,13 +41,14 @@ namespace Game.Managers
 			return (T)menu;
 		}
 
-		public static void CloseMenu<T>() where T : IMenu
+		public static T CloseMenu<T>() where T : IMenu
 		{
 			IMenu menu = Instance._menus[typeof(T)];
 
 			if (menu == null)
-				return;
+				return default(T);
 			menu.Close();
+			return (T)menu;
 		}
 
 		public static void CloseAll()

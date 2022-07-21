@@ -26,10 +26,10 @@ namespace Game.Systems.Run.Rooms
 			_items = Databases.Database.Data.Item.All<ItemBaseData>().Where(x => x.IsLifeItem == _isLifeShop && !inventory.HasEquipped(x)).ToList();
 		}
 
-		protected override void Start()
+		protected override void OnRoomReady()
 		{
+			base.OnRoomReady();
 			_stands.ForEach(x => DefineItem(x));
-			base.Start();
 		}
 
 		private void DefineItem(ItemStand x)

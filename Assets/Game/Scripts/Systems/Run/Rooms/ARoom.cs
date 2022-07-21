@@ -26,6 +26,15 @@ namespace Game.Systems.Run.Rooms
 
 		public Room RoomData => RunManager.CurrentRoom;
 
+		protected virtual void OnEnable()
+		{
+			RunManager.OnSceneSwitched += OnRoomReady;
+		}
+
+		protected virtual void OnDisable()
+		{
+			RunManager.OnSceneSwitched -= OnRoomReady;
+		}
 
 		protected virtual void Awake()
 		{
@@ -44,6 +53,8 @@ namespace Game.Systems.Run.Rooms
 					_info.Doors[i].LeadToRoom = RoomData.NextRooms[i];
 			}
 		}
+
+		protected virtual void OnRoomReady() {}
 
 		protected abstract void OnActivate();
 

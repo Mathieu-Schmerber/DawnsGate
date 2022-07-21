@@ -46,6 +46,7 @@ namespace Game.Managers
 		public List<string> ReachedRooms = new();
 
 		public static event Action OnRunEnded;
+		public static event Action OnSceneSwitched;
 
 		#endregion
 
@@ -151,7 +152,10 @@ namespace Game.Managers
 
 		private static void OnSceneLoaded(AsyncOperation obj)
 		{
-			Awaiter.WaitAndExecute(1f, SceneTransition.EndTransition);
+			Awaiter.WaitAndExecute(1f, () => SceneTransition.EndTransition(() =>
+			{
+				OnSceneSwitched?.Invoke();
+			}));
 		}
 
 		#endregion

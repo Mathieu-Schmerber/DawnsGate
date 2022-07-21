@@ -66,6 +66,10 @@ namespace Game.UI
 			Awaiter.WaitAndExecute(menu._duration, onReady);
 		}
 
-		public static void EndTransition() => GuiManager.CloseMenu<SceneTransition>();
+		public static void EndTransition(Action onReady)
+		{
+			var menu = GuiManager.CloseMenu<SceneTransition>();
+			Awaiter.WaitAndExecute(menu._duration, onReady);
+		}
 	}
 }
