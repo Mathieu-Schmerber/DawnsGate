@@ -91,7 +91,7 @@ namespace Game.Systems.Run.Rooms
 
 					if (Data.SpawnablePositions.Contains(position))
 						continue;
-					else if (NavMesh.SamplePosition(position, out hit, 1000, 1) && Vector3.Distance(hit.position.WithY(position.y), position) < 0.2f)
+					else if (NavMesh.SamplePosition(position, out hit, 1000, 1) && Vector3.Distance(hit.position.WithY(position.y), position) == 0)
 					{
 						if (lowerGround > hit.position.y)
 							lowerGround = hit.position.y;
