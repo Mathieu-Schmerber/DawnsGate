@@ -8,6 +8,7 @@ using Nawlian.Lib.Extensions;
 using Game.Managers;
 using Game.Entities.Shared;
 using Plugins.Nawlian.Lib.Systems.Menuing;
+using System;
 
 namespace Game.Entities.Player
 {
@@ -31,11 +32,13 @@ namespace Game.Entities.Player
 		private void OnEnable()
 		{
 			InputManager.OnDashPressed += OnDashInput;
+			OnDashStarted += PlayDashAudio;
 		}
 
 		private void OnDisable()
 		{
 			InputManager.OnDashPressed -= OnDashInput;
+			OnDashStarted -= PlayDashAudio;
 		}
 
 		protected override void Awake()
@@ -58,6 +61,11 @@ namespace Game.Entities.Player
 
 		#endregion
 
+		private void PlayDashAudio(DashParameters obj)
+		{
+			_dashAudio.Play();
+		}
+
 		private void OnDashInput()
 		{
 			if (CanDash)
@@ -66,7 +74,6 @@ namespace Game.Entities.Player
 
 				_dashFx.Play(true);
 				Dash(direction, _entity.CurrentDashRange, _dashTime, false, true);
-				_dashAudio.Play();
 				_dashTimer.Interval = _entity.CurrentDashCooldown;
 				_dashTimer.Restart();
 			}
