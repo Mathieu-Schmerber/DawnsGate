@@ -1,4 +1,5 @@
 using Game.Managers;
+using Game.Tools;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,8 @@ namespace Game.Entities.Player
 	{
 		private ParticleSystem _ps;
 		private Animator _animator;
+		private RandomAudioClip _rdn;
+
 		[SerializeField] private float _minSpeedToPlay;
 		[SerializeField] private float _maxSpeedToPlay;
 
@@ -16,14 +19,19 @@ namespace Game.Entities.Player
 		{
 			_ps = GetComponent<ParticleSystem>();
 			_animator = GameManager.Player.GetComponentInChildren<Animator>();
+			_rdn = GetComponent<RandomAudioClip>();
 		}
 
 		private void OnTriggerEnter(Collider other)
 		{
+			if (other.isTrigger || !other.gameObject.isStatic)
+				return;
+
 			float speed = _animator.GetFloat("Speed");
 
 			if (speed >= _minSpeedToPlay && speed <= _maxSpeedToPlay)
 				_ps.Play(true);
+			_rdn.PlayRandom();
 		}
 	}
 }

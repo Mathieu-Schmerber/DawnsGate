@@ -26,7 +26,7 @@ namespace Game.UI
 		[Title("Feedback")]
 		[SerializeField] private Color _flashColor;
 		[SerializeField] private float _bumpIntensity;
-
+		[SerializeField] private AudioClip _errorAudio;
 
 		private Color _currentDefaultColor;
 		private Color _nextDefaultColor;
@@ -62,7 +62,10 @@ namespace Game.UI
 			if (slot.IsEmpty)
 				return;
 			else if (!slot.Item.IsAffordable || !slot.Item.HasUpgrade)
+			{
+				_source.PlayOneShot(_errorAudio);
 				return;
+			}
 			GameManager.PayWithRunMoney(slot.Item.NextUpgradePrice);
 			slot.Item.Upgrade();
 			OnItemSelected(slot);

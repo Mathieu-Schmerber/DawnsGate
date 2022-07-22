@@ -1,6 +1,7 @@
 ﻿using Game.Entities.Player;
 using Game.Managers;
 using Game.Systems.Items;
+using Game.Tools;
 using Nawlian.Lib.Extensions;
 using Plugins.Nawlian.Lib.Systems.Selection;
 using System;
@@ -22,6 +23,7 @@ namespace Game.UI
 		[SerializeField] private Color _unselectionColor;
 		[SerializeField] private Color _disabledColor;
 
+		private RandomAudioClip _audioRdm;
 		private Image[] _stars;
 		private Outline _outline;
 		private AEquippedItem _item;
@@ -46,6 +48,7 @@ namespace Game.UI
 		protected override void Awake()
 		{
 			base.Awake();
+			_audioRdm = GetComponent<RandomAudioClip>();
 			_outline = GetComponent<Outline>();
 			_itemImage.enabled = false;
 			_stars = _starList.GetComponentsInChildren<Image>(true);
@@ -80,6 +83,7 @@ namespace Game.UI
 			base.OnSelect(eventData);
 			_outline.effectColor = _selectionColor;
 			OnSelected?.Invoke(this);
+			_audioRdm.PlayRandom();
 		}
 
 		public override void OnDeselect(BaseEventData eventData)

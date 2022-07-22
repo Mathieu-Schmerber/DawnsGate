@@ -15,6 +15,7 @@ namespace Game.Entities.Player
 	{
 		#region Properties
 
+		[SerializeField] private AudioSource _dashAudio;
 		[SerializeField] private float _dashTime = 0.1f;
 		[SerializeField] private ParticleSystem _dashFx;
 
@@ -65,6 +66,7 @@ namespace Game.Entities.Player
 
 				_dashFx.Play(true);
 				Dash(direction, _entity.CurrentDashRange, _dashTime, false, true);
+				_dashAudio.Play();
 				_dashTimer.Interval = _entity.CurrentDashCooldown;
 				_dashTimer.Restart();
 			}

@@ -26,6 +26,7 @@ namespace Game.UI
 		[Title("Feedback")]
 		[SerializeField] private Color _flashColor;
 		[SerializeField] private float _bumpIntensity;
+		[SerializeField] private AudioClip _errorAudio;
 
 		private Color _resultDefaultColor;
 		private Image _resultRenderer;
@@ -59,7 +60,15 @@ namespace Game.UI
 			_inventory = GameManager.Player.GetComponent<Inventory>();
 		}
 
-		private bool TryMerging() => _inventory.TryMergeItems(_additionSlots[0].Item, _additionSlots[1].Item);
+		private bool TryMerging()
+		{
+			bool result = _inventory.TryMergeItems(_additionSlots[0].Item, _additionSlots[1].Item);
+
+			if (!result)
+				_source.PlayOneShot(_errorAudio);
+			return result;
+		}
+		
 
 		#region Slot handling
 

@@ -50,7 +50,7 @@ namespace Game.Systems.Items
 			}
 		}
 
-		protected virtual void OnUpgrade() => Inventory.OnUpdate();
+		protected virtual void OnUpgrade() => Inventory.OnItemUpgraded();
 
 		protected abstract string GetItemDescription(int quality);
 

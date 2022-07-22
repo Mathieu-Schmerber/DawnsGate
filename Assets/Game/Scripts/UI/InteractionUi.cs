@@ -31,7 +31,10 @@ namespace Game.UI
 		private void OnInteractionProposal(IInteractable obj)
 		{
 			if (GuiManager.IsMenuing)
+			{
+				Close();
 				return;
+			}
 			else if (!_isOpen && obj != null)
 				Open();
 			else if (_isOpen || obj == null)

@@ -7,9 +7,11 @@ using UnityEngine;
 
 namespace Game.Systems.Run.Lobby
 {
+	[RequireComponent(typeof(AudioSource))]
 	public class WeaponStand : MonoBehaviour, IInteractable
 	{
 		[SerializeField] private WeaponData _weapon;
+		private AudioSource _source;
 
 		public event Action OnInteracted;
 
@@ -17,6 +19,11 @@ namespace Game.Systems.Run.Lobby
 		public bool Empty => Data == null;
 
 		public string InteractionTitle => (Data == null) ? "Place weapon" : $"Pickup {(Data == null ? "" : Data.name)}";
+
+		private void Awake()
+		{
+			_source = GetComponent<AudioSource>();
+		}
 
 		private void Start()
 		{
@@ -35,6 +42,7 @@ namespace Game.Systems.Run.Lobby
 			playerWeapon.EquipWeapon(Data);
 			Data = currentWeapon;
 			OnInteracted?.Invoke();
+			_source.Play();
 		}
 
 		private void OnTriggerEnter(Collider other) => other.GetComponent<IInteractionActor>()?.SuggestInteraction(this);

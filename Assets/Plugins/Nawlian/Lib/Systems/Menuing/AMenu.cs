@@ -17,6 +17,12 @@ namespace Plugins.Nawlian.Lib.Systems.Menuing
 		[SerializeField] protected Vector2 _openPosition;
 		[SerializeField] protected Vector2 _closePosition;
 
+		[Title("Audio")]
+		[SerializeField] protected AudioClip _openAudio;
+		[SerializeField] protected bool _reverseClipForClose;
+		[SerializeField, ShowIf("@_reverseClipForClose == false")] protected AudioClip _closeAudio;
+		protected AudioSource _source;
+
 		public bool IsOpen => _isOpen;
 		public bool IsHidden => _isHidden;
 
@@ -26,6 +32,7 @@ namespace Plugins.Nawlian.Lib.Systems.Menuing
 		{
 			_grp = GetComponent<CanvasGroup>();
 			_rect = GetComponent<RectTransform>();
+			_source = GetComponent<AudioSource>();
 		}
 
 		public virtual void Close()
@@ -33,11 +40,28 @@ namespace Plugins.Nawlian.Lib.Systems.Menuing
 			Hide();
 			_isOpen = false;
 			_isHidden = false;
+			if (_source != null)
+			{
+				if (_reverseClipForClose == false)
+					_source.PlayOneShot(_closeAudio);
+				else
+				{
+					_source.clip = _openAudio;
+					_source.pitch = -1;
+					_source.time = _openAudio.length - 0.01f;
+					_source.Play();
+				}
+			}
 		}
 
 		public virtual void Open()
 		{
 			Show();
+			if (_source)
+			{
+				_source.pitch = 1;
+				_source.PlayOneShot(_openAudio);
+			}
 			_isOpen = true;
 		}
 
@@ -60,6 +84,12 @@ namespace Plugins.Nawlian.Lib.Systems.Menuing
 		}
 
 #if UNITY_EDITOR
+
+		private void OnValidate()
+		{
+			if ((_openAudio || _closeAudio) && GetComponent<AudioSource>() == null)
+				gameObject.AddComponent<AudioSource>();
+		}
 
 		[Button("Open")]
 		public virtual void OpenEditorButton()

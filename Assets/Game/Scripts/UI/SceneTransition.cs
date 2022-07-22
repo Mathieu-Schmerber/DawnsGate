@@ -1,14 +1,14 @@
 using Game.Managers;
-using Game.Tools;
 using Nawlian.Lib.Utils;
 using Pixelplacement;
+using Plugins.Nawlian.Lib.Systems.Menuing;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Game.UI
 {
-	public class SceneTransition : ACloseableMenu
+	public class SceneTransition : AMenu
     {
 		private Material _material;
 

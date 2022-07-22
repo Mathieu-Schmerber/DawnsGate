@@ -33,11 +33,11 @@ namespace Game.UI
 			Inventory.OnUpdated -= UpdateDisplay;
 		}
 
-		private void UpdateDisplay(Inventory inventory)
+		private void UpdateDisplay(Inventory.InventoryUpdateEventArgs args)
 		{
 			_slots.ForEach(x => x.SetItem(null));
-			for (int i = 0; i < inventory.Items.Length; i++)
-				_slots[i].SetItem(inventory.Items[i]);
+			for (int i = 0; i < args.inventory.Items.Length; i++)
+				_slots[i].SetItem(args.inventory.Items[i]);
 			if (_inUse && _inUsePredicate != null)
 				Select(_inUsePredicate);
 		}

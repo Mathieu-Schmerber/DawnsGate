@@ -15,6 +15,8 @@ namespace Game.UI
 	public class TraitUpgradeUi : ACloseableMenu
 	{
 		private TraitDescriptorUi[] _descriptors;
+		[SerializeField] private AudioClip _purchaseAudio;
+		[SerializeField] private AudioClip _errorAudio;
 
 		protected override void Awake()
 		{
@@ -38,9 +40,12 @@ namespace Game.UI
 			{
 				_descriptors.ForEach(x => Refresh(x));
 				descriptorUi.Interact();
+				_source.PlayOneShot(_purchaseAudio);
 				if (!descriptorUi.Interactable)
 					EventSystem.current.SetSelectedGameObject(_descriptors.FirstOrDefault(x => x.Interactable)?.gameObject);
 			}
+			else
+				_source.PlayOneShot(_errorAudio);
 		}
 
 		public override void Open()

@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using Pixelplacement;
+using Game.Tools;
 
 namespace Game.UI
 {
@@ -26,6 +27,7 @@ namespace Game.UI
 		[SerializeField] private Color _flashColor;
 		[SerializeField] private float _bumpIntensity;
 
+		private RandomAudioClip _audioRdn;
 		private Color _resultDefaultColor;
 		private Image _resultRenderer;
 		private Outline _outline;
@@ -50,6 +52,7 @@ namespace Game.UI
 			_resultRenderer = GetComponent<Image>();
 			_resultDefaultColor = _resultRenderer.color;
 			_outline = GetComponent<Outline>();
+			_audioRdn = GetComponent<RandomAudioClip>();
 		}
 
 		protected override void Start()
@@ -78,6 +81,7 @@ namespace Game.UI
 		{
 			base.OnSelect(eventData);
 			_outline.effectColor = Interactable ? _selectedColor : _disabledColor;
+			_audioRdn.PlayRandom();
 		}
 
 		public override void OnDeselect(BaseEventData eventData)

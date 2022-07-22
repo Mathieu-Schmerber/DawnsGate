@@ -12,6 +12,28 @@ namespace Game.Entities.Player
 	public class Inventory : MonoBehaviour
 	{
 		#region Types
+
+		public class InventoryUpdateEventArgs : EventArgs
+		{
+			public enum UpdateType
+			{
+				UPGRADE,
+				DROP,
+				MERGE,
+				EQUIP,
+				GLOBAL_UPDATE
+			}
+
+			public Inventory inventory;
+			public UpdateType Event;
+
+			public InventoryUpdateEventArgs(Inventory inventory, UpdateType @event)
+			{
+				this.inventory = inventory;
+				Event = @event;
+			}
+		}
+
 		[Serializable] public class ItemDictionary : SerializedDictionary<ItemBaseData, AEquippedItem> { }
 		#endregion
 
@@ -23,7 +45,7 @@ namespace Game.Entities.Player
 		public AEquippedItem[] Items => _items.Where(x => x.Value != null).Select(x => x.Value).ToArray();
 		public bool HasAvailableSlot => _occupiedSlots < _slotNumber;
 
-		public static event Action<Inventory> OnUpdated;
+		public static event Action<InventoryUpdateEventArgs> OnUpdated;
 
 		#region Unity Builtins
 
@@ -37,7 +59,7 @@ namespace Game.Entities.Player
 		public void RemoveAllItems()
 		{
 			_items.ToList().ForEach(x => RemoveItemFromInventory(x.Key));
-			OnUpdated?.Invoke(this);
+			OnUpdated?.Invoke(new(this, InventoryUpdateEventArgs.UpdateType.GLOBAL_UPDATE));
 		}
 
 		private void AddItemToInventory(ItemSummary item)
@@ -66,7 +88,7 @@ namespace Game.Entities.Player
 			_items[item].OnUnequipped();
 			_items.Remove(_items[item].Details);
 			if (updateInventory)
-				OnUpdated?.Invoke(this);
+				OnUpdated?.Invoke(new(this, InventoryUpdateEventArgs.UpdateType.DROP));
 		}
 
 		#region Public access
@@ -86,20 +108,20 @@ namespace Game.Entities.Player
 			if (exists == null)
 			{
 				AddItemToInventory(summary);
-				OnUpdated?.Invoke(this);
+				OnUpdated?.Invoke(new(this, InventoryUpdateEventArgs.UpdateType.EQUIP));
 			}
 		}
 
 		public ItemBaseData GetRandomUnEquippedItem(bool includeLifeItem)
 			=> Databases.Database.Data.Item.All<ItemBaseData>().Where(x => x.IsLifeItem == includeLifeItem && !HasEquipped(x)).Random();
 
-		public static void OnUpdate() => OnUpdated?.Invoke(GameManager.Player.GetComponent<Inventory>());
+		public static void OnItemUpgraded() => OnUpdated?.Invoke(new(GameManager.Player.GetComponent<Inventory>(), InventoryUpdateEventArgs.UpdateType.UPGRADE));
 
 		public void DropItem(ItemBaseData item)
 		{
 			LootedItem.Create(transform.position, _items[item].Summary);
 			RemoveItemFromInventory(item);
-			OnUpdated?.Invoke(this);
+			OnUpdated?.Invoke(new(this, InventoryUpdateEventArgs.UpdateType.DROP));
 		}
 
 		public bool TryMergeItems(AEquippedItem a, AEquippedItem b)
@@ -116,7 +138,7 @@ namespace Game.Entities.Player
 			// Remove b's data from inventory, without removing its behaviour
 			_occupiedSlots--;
 			_items.Remove(b.Details);
-			OnUpdated?.Invoke(this);
+			OnUpdated?.Invoke(new(this, InventoryUpdateEventArgs.UpdateType.MERGE));
 
 			GameManager.PayWithRunMoney(cost);
 			return true;
