@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Transition
-  m_Shader: {fileID: -6465566751694194690, guid: 4390ca6502c71f647b9655120373101c,
+  m_Shader: {fileID: -6465566751694194690, guid: 68d08dc5307cb164599e60ab469ec47d,
     type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -52,9 +52,14 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _CutoffHeight: 0
+    - _EdgeWidth: 0.02
+    - _NoiseScale: 39.6
+    - _NoiseStrength: 1
     - _Progress: 1
     - _QueueControl: 0
     - _QueueOffset: 0
     m_Colors:
     - _Color: {r: 0.22434905, g: 0.041384835, b: 0.2830189, a: 1}
+    - _EdgeColor: {r: 0.9103469, g: 0, b: 3.9999995, a: 1}
   m_BuildTextureStacks: []
