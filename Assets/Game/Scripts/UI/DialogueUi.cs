@@ -30,20 +30,16 @@ namespace Game.UI
 		[SerializeField] private Transform _choiceList;
 		[SerializeField] private List<DialogueChoiceUi> _choices = new();
 
+		[Title("Audio")]
+		[SerializeField] private AudioClip _nextDialogueAudio;
+		[SerializeField] private AudioSource _promptNarration;
 		private float _currentSpeachSpeed;
-		private AudioSource _audio;
 		private Mesh _mesh;
 		private List<ParsedElement> _textEffects;
 		private ADialogueNode _displayedNode = null;
 		private Timer _appreanceTimer = new();
 
 		public event Action<ADialogueNode, string> OnSubmitted;
-
-		protected override void Awake()
-		{
-			base.Awake();
-			_audio = GetComponent<AudioSource>();
-		}
 
 		#region Text effects
 
@@ -128,7 +124,8 @@ namespace Game.UI
 			_appreanceTimer.Start(1.0f / (_currentSpeachSpeed * DEFAULT_SPEED), true, OnApprearTick);
 
 			if (node.Audio != null)
-				_audio.PlayOneShot(node.Audio);
+				_promptNarration.PlayOneShot(node.Audio);
+			_source.PlayOneShot(_nextDialogueAudio);
 		}
 
 		public void DisplayChoices(DialogueChoiceNode node, Func<string, string> formatChoiceText)
@@ -164,6 +161,7 @@ namespace Game.UI
 			}
 			_displayedNode = node;
 			Awaiter.WaitAndExecute(0.05f, () => EventSystem.current.SetSelectedGameObject(_choices[0].gameObject));
+			_source.PlayOneShot(_nextDialogueAudio);
 		}
 
 		public void SetAuthor(string author)
@@ -173,7 +171,7 @@ namespace Game.UI
 
 		private void ClearDialogues()
 		{
-			_audio.Stop();
+			_promptNarration.Stop();
 			_currentSpeachSpeed = 1;
 			_appreanceTimer.Stop();
 			EventSystem.current.SetSelectedGameObject(null);
@@ -204,5 +202,12 @@ namespace Game.UI
 		}
 
 		#endregion
+
+		public override void Close()
+		{
+			base.Close();
+			if (EventSystem.current.currentSelectedGameObject?.GetComponent<DialogueChoiceUi>() != null)
+				EventSystem.current.SetSelectedGameObject(null);
+		}
 	}
 }

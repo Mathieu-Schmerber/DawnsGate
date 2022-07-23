@@ -36,18 +36,11 @@ namespace Game.Entities.AI.Lunaris
 
 		#region Unity builtins
 
-		protected override void Awake()
-		{
-			base.Awake();
-		}
-
 		protected override void Init(object data)
 		{
 			base.Init(data);
 			_stats = _entity.Stats as LunarisStatData;
-			ResetStates();
 			_phaseIndex = 0;
-			State = Shared.EntityState.STUN;
 		}
 
 		protected override void OnEnable()
@@ -76,6 +69,11 @@ namespace Game.Entities.AI.Lunaris
 		private readonly LunarisPhase LAST_PHASE = LunarisPhase.STAFF;
 		private LunarisPhase _phaseIndex = 0;
 		internal bool IsLastPhase => _phaseIndex == LAST_PHASE;
+
+		protected override void OnInitState()
+		{
+			// We don't want to reset state here, as Lunaris should be activated by the room on EngageFight()
+		}
 
 		public void EngageFight()
 		{

@@ -1,15 +1,18 @@
-﻿using System;
+﻿using Game.Tools;
+using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace Game.UI
 {
-	public class DialogueChoiceUi : MonoBehaviour
+	public class DialogueChoiceUi : MonoBehaviour, ISelectHandler
 	{
 		[SerializeField] private TextMeshProUGUI _text;
 		private Button _button;
 		private Action<string> _onClick;
+		private RandomAudioClip _rdmClip;
 
 		public string ChoiceId { get; set; }
 
@@ -17,6 +20,7 @@ namespace Game.UI
 		{
 			_button = GetComponent<Button>();
 			_button.onClick.AddListener(OnClick);
+			_rdmClip = GetComponent<RandomAudioClip>();
 		}
 
 		private void OnClick() => _onClick?.Invoke(ChoiceId);
@@ -37,6 +41,11 @@ namespace Game.UI
 			var nav = _button.navigation;
 			nav.selectOnDown = down._button;
 			_button.navigation = nav;
+		}
+
+		public void OnSelect(BaseEventData eventData)
+		{
+			_rdmClip.PlayRandom();
 		}
 	}
 }

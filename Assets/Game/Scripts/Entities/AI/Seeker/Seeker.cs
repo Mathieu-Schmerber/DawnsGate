@@ -1,6 +1,7 @@
 ﻿using Game.Entities.Shared.Health;
 using Game.Managers;
 using Game.Systems.Combat.Attacks;
+using Game.VFX;
 using Nawlian.Lib.Extensions;
 using Nawlian.Lib.Systems.Animations;
 using Nawlian.Lib.Utils;
@@ -22,12 +23,20 @@ namespace Game.Entities.AI.Seeker
 		private SeekerStatData _stats;
 		private Vector3? _sinPos;
 		private bool _startDamageCheck = false;
+		private AEnemySpawnFX _spawnFx;
 
 		protected override void Init(object data)
 		{
 			base.Init(data);
 			_stats = _entity.Stats as SeekerStatData;
 		}
+
+		protected override void Awake()
+		{
+			base.Awake();
+			_spawnFx = GetComponentInChildren<AEnemySpawnFX>();
+		}
+		protected override void OnInitState() => _spawnFx.PlaySpawnFX(() => base.OnInitState());
 
 		#region Movement
 

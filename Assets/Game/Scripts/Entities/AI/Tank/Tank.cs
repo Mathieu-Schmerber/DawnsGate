@@ -1,6 +1,7 @@
 ﻿using Game.Entities.Shared;
 using Game.Managers;
 using Game.Systems.Combat.Attacks;
+using Game.VFX;
 using Nawlian.Lib.Systems.Animations;
 using Sirenix.OdinInspector;
 using System;
@@ -20,6 +21,13 @@ namespace Game.Entities.AI.Tank
 		private TankStatData _stats;
 		private AnimatorStateInfo _currentState;
 		private float _restTime = 1f;
+		private AEnemySpawnFX _spawnFx;
+
+		protected override void Awake()
+		{
+			base.Awake();
+			_spawnFx = GetComponentInChildren<AEnemySpawnFX>();
+		}
 
 		protected override void OnEnable()
 		{
@@ -41,6 +49,8 @@ namespace Game.Entities.AI.Tank
 			_stats = _entity.Stats as TankStatData;
 			_isDefending = false;
 		}
+
+		protected override void OnInitState() => _spawnFx.PlaySpawnFX(() => base.OnInitState());
 
 		#region Movement
 

@@ -5168,6 +5168,7 @@ GameObject:
   - component: {fileID: 130950331416712062}
   - component: {fileID: 8716378792263976861}
   - component: {fileID: 4655342726327593292}
+  - component: {fileID: 4250277326693318510}
   m_Layer: 7
   m_Name: GFX
   m_TagString: Untagged
@@ -5306,6 +5307,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _patrolMaterial: {fileID: 2100000, guid: 201f8f12ae97b96469a3d308084c27ba, type: 2}
   _chaseMaterial: {fileID: 2100000, guid: 17dc241a15bcc6d49a777755b56819b8, type: 2}
+--- !u!114 &4250277326693318510
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7310629612046420550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c487eabffbbc3745b2d2fb9ec79e051, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _exposedShaderSliderValue: _Progress
+  _duration: 1
+  _startToEndValues: {x: 1, y: 0}
 --- !u!1 &7538132102015118881
 GameObject:
   m_ObjectHideFlags: 0

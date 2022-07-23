@@ -82,8 +82,14 @@ namespace Game.Entities.AI
 
 			NextPassivePosition = transform.position;
 
+			// Clear old state logic, since we pulled this from the pool
 			OnAttackEnd();
 			ResetStates();
+
+			// Init polished state
+			_entity.SetInvulnerable(true);
+			State = EntityState.STUN;
+			OnInitState();
 		}
 
 		protected override void Awake()
@@ -121,14 +127,6 @@ namespace Game.Entities.AI
 		}
 
 		#endregion
-
-		protected virtual void ResetStates()
-		{
-			State = Shared.EntityState.IDLE;
-			LockAim = false;
-			LockMovement = false;
-			UnlockTarget();
-		}
 
 		#region Movement system
 
@@ -214,6 +212,25 @@ namespace Game.Entities.AI
 		#endregion
 
 		#region State
+
+		/// <summary>
+		/// Called when the entity spawns from the pool, you can hook up some polish logic.<br/>
+		/// At this point the entity is STUNNED and invulnerable, so the AI wont be active.<br/>
+		/// Don't forget to call ResetStates() at the end of the implementation.
+		/// </summary>
+		protected virtual void OnInitState()
+		{
+			ResetStates();
+			_entity.SetInvulnerable(false);
+		}
+	
+		protected virtual void ResetStates()
+		{
+			State = Shared.EntityState.IDLE;
+			LockAim = false;
+			LockMovement = false;
+			UnlockTarget();
+		}
 
 		protected virtual void UpdateAiState()
 		{

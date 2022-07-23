@@ -18,6 +18,7 @@ namespace Game.UI
 		[SerializeField] private TextMeshProUGUI _healthText;
 		[SerializeField] private Image _healthFill;
 		[SerializeField] private Image _armorFill;
+		[SerializeField] private AudioClip _coinLoseAudio;
 
 		public override bool RequiresGameFocus => false;
 
@@ -64,7 +65,13 @@ namespace Game.UI
 			Tween.Value(_armorFill.fillAmount, ratio, (v) => _armorFill.fillAmount = v, 0.2f, 0, Tween.EaseOut);
 		}
 
-		private void UpdateRunMoneyDisplay(int before, int now) => Tween.Value(before, now, (v) => _runMoney.text = v.ToString(), 0.2f, 0);
+		private void UpdateRunMoneyDisplay(int before, int now)
+		{
+			Tween.Value(before, now, (v) => { 
+				_runMoney.text = v.ToString();
+				_source.PlayOneShot(_coinLoseAudio);
+			}, 0.2f, 0);
+		}
 
 		private void UpdateLobbyMoneyDisplay(int before, int now) => Tween.Value(before, now, (v) => _lobbyMoney.text = v.ToString(), 0.2f, 0);
 	}

@@ -20,25 +20,12 @@ namespace Game.Entities.AI.Dealer
 
 		#region Unity builtins
 
-		protected override void OnEnable()
-		{
-			base.OnEnable();
-		}
-
-		protected override void OnDisable()
-		{
-			base.OnDisable();
-		}
-
 		protected override void Init(object data)
 		{
 			base.Init(data);
 			_stats = _entity.Stats as DealerStatData;
 			_dealRoom = _room as DealRoom;
-
 			_attackNumber = 0;
-			State = EntityState.STUN;
-			_entity.SetInvulnerable(true);
 		}
 
 		#endregion
@@ -61,6 +48,11 @@ namespace Game.Entities.AI.Dealer
 		#endregion
 
 		#region States
+
+		protected override void OnInitState()
+		{
+			// We don't want to activate the AI here, the room should take care of it with TakeAction()
+		}
 
 		protected override void ResetStates()
 		{

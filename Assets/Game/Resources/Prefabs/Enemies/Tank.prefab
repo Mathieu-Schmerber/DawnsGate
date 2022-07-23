@@ -5339,6 +5339,7 @@ GameObject:
   - component: {fileID: 8600449352074765010}
   - component: {fileID: 8503350386170332762}
   - component: {fileID: 3286540221664589726}
+  - component: {fileID: 3739196516293037467}
   m_Layer: 7
   m_Name: GFX
   m_TagString: Untagged
@@ -5398,6 +5399,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d805d54c9dd9b1143beb01088a5da72e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3739196516293037467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8597645612513957462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c487eabffbbc3745b2d2fb9ec79e051, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _exposedShaderSliderValue: _Progress
+  _duration: 1
+  _startToEndValues: {x: 1, y: 0}
 --- !u!1 &8597714224757623922
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,5 +1,6 @@
 ﻿using Game.Managers;
 using Game.Systems.Combat.Attacks;
+using Game.VFX;
 using Game.VFX.Preview;
 using Nawlian.Lib.Extensions;
 using Nawlian.Lib.Systems.Animations;
@@ -20,6 +21,7 @@ namespace Game.Entities.AI.Thrower
 		private ThrowerStatData _stats;
 		private NavMeshPath _previsionPath;
 		private Vector3 _lastHitPos;
+		private AEnemySpawnFX _spawnFx;
 
 		protected override void Init(object data)
 		{
@@ -31,7 +33,10 @@ namespace Game.Entities.AI.Thrower
 		{
 			base.Awake();
 			_previsionPath = new();
+			_spawnFx = GetComponentInChildren<AEnemySpawnFX>();
 		}
+
+		protected override void OnInitState() => _spawnFx.PlaySpawnFX(() => base.OnInitState());
 
 		#region Movement
 

@@ -11,9 +11,13 @@ using UnityEngine;
 
 namespace Game.Systems.Run.GPE
 {
+	[RequireComponent(typeof(AudioSource))]
 	public class ItemStand : LootedItem
 	{
 		[SerializeField] private SpriteRenderer _itemRenderer;
+		[SerializeField] private AudioClip _purchaseAudio;
+
+		private AudioSource _source;
 
 		public bool WasBought { get; set; }
 		public int Cost { get; set; }
@@ -27,6 +31,7 @@ namespace Game.Systems.Run.GPE
 		protected override void Awake()
 		{
 			_spr = _itemRenderer;
+			_source = GetComponent<AudioSource>();
 		}
 
 		public override void Interact(IInteractionActor actor)
@@ -54,6 +59,7 @@ namespace Game.Systems.Run.GPE
 				entity.Stats.Modifiers[StatModifier.MaxHealth].BonusModifier -= Item.LifeCost;
 				entity.CurrentHealth = Mathf.Max(1, entity.MaxHealth * healthRatio);
 			}
+			_source.PlayOneShot(_purchaseAudio);
 			OnItemPaid?.Invoke();
 			WasBought = true;
 		}

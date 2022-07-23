@@ -8,13 +8,25 @@ namespace Game.Systems.Run.GPE
 	{
 		[SerializeField] private ARoom _room;
 
+		private bool _used = false;
+		private AudioSource _source;
+
 		public override string InteractionTitle => "Activate the clock";
+
+		private void Awake()
+		{
+			_source = GetComponent<AudioSource>();
+		}
 
 		public override void Interact(IInteractionActor actor)
 		{
+			if (_used)
+				return;
+			_source.Play();
 			_room.Activate();
 			actor.UnSuggestInteraction(this);
-			Destroy(gameObject);
+			Destroy(gameObject, _source.time);
+			_used = true;
 		}
 	}
 }

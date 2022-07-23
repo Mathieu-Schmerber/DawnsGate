@@ -9,11 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3263981822062372004}
-  - component: {fileID: 3263981822062372006}
-  - component: {fileID: 3263981822062372007}
-  - component: {fileID: 2475186662641378075}
   - component: {fileID: 6968142730514905328}
   - component: {fileID: 2448255945280307906}
+  - component: {fileID: 2475186662641378075}
+  - component: {fileID: 3263981822062372006}
+  - component: {fileID: 3263981822062372007}
+  - component: {fileID: 3372749716510038411}
   m_Layer: 7
   m_Name: GFX
   m_TagString: Untagged
@@ -39,6 +40,52 @@ Transform:
   m_Father: {fileID: 8217679923564704957}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6968142730514905328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 294555466605076936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d805d54c9dd9b1143beb01088a5da72e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2448255945280307906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 294555466605076936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed72be90e54cf374696c1c33ad73e02c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _patrolMaterial: {fileID: 2100000, guid: 201f8f12ae97b96469a3d308084c27ba, type: 2}
+  _chaseMaterial: {fileID: 2100000, guid: 17dc241a15bcc6d49a777755b56819b8, type: 2}
+--- !u!95 &2475186662641378075
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 294555466605076936}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b5e193f48f61dc1479093d7ea96e9804, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!23 &3263981822062372006
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -89,27 +136,7 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 294555466605076936}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!95 &2475186662641378075
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 294555466605076936}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: b5e193f48f61dc1479093d7ea96e9804, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 1
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &6968142730514905328
+--- !u!114 &3372749716510038411
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -118,23 +145,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 294555466605076936}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d805d54c9dd9b1143beb01088a5da72e, type: 3}
+  m_Script: {fileID: 11500000, guid: 1c487eabffbbc3745b2d2fb9ec79e051, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2448255945280307906
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 294555466605076936}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed72be90e54cf374696c1c33ad73e02c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _patrolMaterial: {fileID: 2100000, guid: 201f8f12ae97b96469a3d308084c27ba, type: 2}
-  _chaseMaterial: {fileID: 2100000, guid: 17dc241a15bcc6d49a777755b56819b8, type: 2}
+  _exposedShaderSliderValue: _Progress
+  _duration: 1
+  _startToEndValues: {x: 1, y: 0}
 --- !u!1 &2362495802214851311
 GameObject:
   m_ObjectHideFlags: 0
