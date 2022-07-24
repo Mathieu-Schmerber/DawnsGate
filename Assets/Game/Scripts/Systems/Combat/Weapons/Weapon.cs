@@ -5,6 +5,7 @@ using UnityEngine;
 using Game.Entities.Camera;
 using Game.Managers;
 using Game.Systems.Combat.Attacks;
+using Game.Tools;
 
 namespace Game.Systems.Combat.Weapons
 {
@@ -18,7 +19,7 @@ namespace Game.Systems.Combat.Weapons
 		protected AController _controller;
 		protected PlayerWeapon _weaponManager;
 		private MeshFilter _meshFilter;
-
+		private RandomAudioClip _audio;
 		protected int _lastAttackIndex = -1;
 		private const float DASH_DURATION = 0.1f;
 
@@ -45,6 +46,7 @@ namespace Game.Systems.Combat.Weapons
 			_meshFilter = GetComponent<MeshFilter>();
 			_controller = GetComponentInParent<AController>();
 			_weaponManager = GetComponentInParent<PlayerWeapon>();
+			_audio = GetComponent<RandomAudioClip>();
 		}
 
 		#endregion
@@ -110,7 +112,11 @@ namespace Game.Systems.Combat.Weapons
 			AttackBase attack = _weaponManager.SpawnFromPool(CurrentWeaponAttack.Attack.AttackData, _controller.transform.position, Quaternion.identity);
 
 			// Notify weapon holder that the attack did hit
-			attack.OnAttackHitEvent = (data, victim, damage) => _weaponManager.OnHit(data, victim, Data.IsHeavy(CurrentWeaponAttack), damage);
+			attack.OnAttackHitEvent = (data, victim, damage) =>
+			{
+				_audio.PlayRandom(data.OnHitAudios);
+				_weaponManager.OnHit(data, victim, Data.IsHeavy(CurrentWeaponAttack), damage);
+			};
 
 			// Aim assist
 			if (CurrentWeaponAttack.Attack.AimAssist)

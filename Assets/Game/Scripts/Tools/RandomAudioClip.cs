@@ -1,4 +1,5 @@
 using Nawlian.Lib.Extensions;
+using System;
 using UnityEngine;
 
 namespace Game.Tools
@@ -25,6 +26,14 @@ namespace Game.Tools
 		public void PlayRandom()
 		{
 			_audioSource.PlayOneShot(_clips.Random());
+		}
+
+		public void PlayRandom(AudioClip[] audios)
+		{
+			if (audios == null)
+				return;
+			_clips = audios;
+			PlayRandom();
 		}
 	}
 }

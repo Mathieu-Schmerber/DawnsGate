@@ -13,9 +13,18 @@ MonoBehaviour:
   m_Name: 360Slash
   m_EditorClassIdentifier: 
   Prefab: {fileID: 353677936852187588, guid: ee1f525e73053774698d6551ea091acd, type: 3}
+  Previsualisation: {fileID: 0}
+  OnHitAudios:
+  - {fileID: 8300000, guid: 64cdad58265b6434b951affc34db71bc, type: 3}
+  - {fileID: 8300000, guid: 2b77de5e701cdfe43a74067ac5e02aa2, type: 3}
   BaseDamage: 30
   BaseKnockbackForce: 2
   KnockbackDir: 0
+  ScaleOverLifetime: 0
+  EndScale: {x: 0, y: 0, z: 0}
+  RotateOverTime: 0
+  EndRotation: {x: 0, y: 0, z: 0}
+  ContinuouslyHit: 0
   HitFx: {fileID: 6826739793168019112, guid: 161ce196c6bae7843a3573a1fe4c5d5f, type: 3}
   HitYRotation: 0
   ActiveTime: 0.4

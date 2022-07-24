@@ -13,9 +13,18 @@ MonoBehaviour:
   m_Name: LSlash
   m_EditorClassIdentifier: 
   Prefab: {fileID: -7109925867012405211, guid: e3e9d9b7eac0d604a93b19aedf96fe1b, type: 3}
+  Previsualisation: {fileID: 0}
+  OnHitAudios:
+  - {fileID: 8300000, guid: 64cdad58265b6434b951affc34db71bc, type: 3}
+  - {fileID: 8300000, guid: 2b77de5e701cdfe43a74067ac5e02aa2, type: 3}
   BaseDamage: 10
   BaseKnockbackForce: 1
   KnockbackDir: 1
+  ScaleOverLifetime: 0
+  EndScale: {x: 0, y: 0, z: 0}
+  RotateOverTime: 0
+  EndRotation: {x: 0, y: 0, z: 0}
+  ContinuouslyHit: 0
   HitFx: {fileID: 6826739793168019112, guid: 161ce196c6bae7843a3573a1fe4c5d5f, type: 3}
   HitYRotation: 0
   ActiveTime: 0.4

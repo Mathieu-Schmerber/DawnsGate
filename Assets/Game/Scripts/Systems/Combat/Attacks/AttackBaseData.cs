@@ -25,6 +25,9 @@ namespace Game.Systems.Combat.Attacks
 		[AssetsOnly, AssetSelector]
 		public PreviewBase Previsualisation;
 
+		[Title("Audio")]
+		public AudioClip[] OnHitAudios;
+
 		[Title("Attack stats")]
 		public int BaseDamage;
 		public int BaseKnockbackForce;
