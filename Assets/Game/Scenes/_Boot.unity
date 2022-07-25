@@ -16303,6 +16303,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 302256866171547278, guid: 814944eadb999fb47af7403b53a00139,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: -2141307219491396045, guid: 24851033fbbc64946bb3058c1819198b,
+        type: 3}
+    - target: {fileID: 1156737594515320101, guid: 814944eadb999fb47af7403b53a00139,
+        type: 3}
+      propertyPath: m_Avatar
+      value: 
+      objectReference: {fileID: 9000000, guid: 9a419e0c3054cad47852865b01dd8ef5, type: 3}
+    - target: {fileID: 1156737594515320101, guid: 814944eadb999fb47af7403b53a00139,
+        type: 3}
+      propertyPath: m_WarningMessage
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 1246958100871007507, guid: 814944eadb999fb47af7403b53a00139,
         type: 3}
       propertyPath: m_LocalRotation.w
