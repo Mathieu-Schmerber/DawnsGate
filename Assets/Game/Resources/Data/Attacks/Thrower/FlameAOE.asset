@@ -15,13 +15,20 @@ MonoBehaviour:
   Prefab: {fileID: 3623881684595140825, guid: 435e5eeffa82cda4c944ec403924075e, type: 3}
   Previsualisation: {fileID: 8134988624244144373, guid: c303688915f74d3409412fd03a820401,
     type: 3}
+  OnHitAudios: []
   BaseDamage: 20
   BaseKnockbackForce: 2
   KnockbackDir: 0
+  ScaleOverLifetime: 0
+  EndScale: {x: 0, y: 0, z: 0}
+  RotateOverTime: 0
+  EndRotation: {x: 0, y: 0, z: 0}
+  ContinuouslyHit: 0
   HitFx: {fileID: 6826739793168019112, guid: 161ce196c6bae7843a3573a1fe4c5d5f, type: 3}
   HitYRotation: 0
   ActiveTime: 2
   FollowCaster: 0
   Range: 4
+  IdleAudio: {fileID: 8300000, guid: f55ef9f1c3ee72a4eb1e09851d1000c7, type: 3}
   Effect: {fileID: 11400000, guid: d6b6ffb4ec06c65458cc632b0339ecc8, type: 2}
   EffectDuration: 2
