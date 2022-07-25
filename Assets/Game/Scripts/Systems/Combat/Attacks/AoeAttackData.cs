@@ -13,6 +13,7 @@ namespace Game.Systems.Combat.Attacks
 	[CreateAssetMenu(menuName = "Data/Attacks/AOE")]
 	public class AoeAttackData : ModularAttackData
 	{
+		public AudioClip IdleAudio;
 		public AEffectBaseData Effect;
 		public float EffectDuration;
 	}

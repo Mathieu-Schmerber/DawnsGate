@@ -12,6 +12,7 @@ using UnityEngine;
 
 namespace Game.Systems.Combat.Attacks
 {
+	[RequireComponent(typeof(AudioSource))]
 	public class AoeAttack : AttackBase
 	{
 		private AoeAttackData _attackData;
@@ -22,6 +23,7 @@ namespace Game.Systems.Combat.Attacks
 		private float _startTime;
 
 		private ParticleSystem _particleSystem;
+		private AudioSource _source;
 
 		public override void Init(object data)
 		{
@@ -36,6 +38,7 @@ namespace Game.Systems.Combat.Attacks
 			main.startLifetime = _attackData.ActiveTime;
 
 			_particleSystem.Play(true);
+			_source.PlayOneShot(_attackData.IdleAudio);
 		}
 
 		protected override void OnReleasing()
@@ -46,6 +49,7 @@ namespace Game.Systems.Combat.Attacks
 
 		private void Awake()
 		{
+			_source = GetComponent<AudioSource>();
 			_particleSystem = GetComponentInChildren<ParticleSystem>();
 		}
 
