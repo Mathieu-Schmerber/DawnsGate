@@ -9,7 +9,8 @@ namespace Game.VFX
 {
 	public class FloatingEffect : MonoBehaviour
 	{
-		[SerializeField] private float _amplitude;
+		[SerializeField] private float _amplitude = 0.2f;
+		[SerializeField] private float _speed = 1;
 		private float customTime;
 
 		private void Start()
@@ -19,7 +20,7 @@ namespace Game.VFX
 
 		private void Update()
 		{
-			transform.position += Vector3.up * Mathf.Sin(Time.time + customTime) * (_amplitude / 100);
+			transform.position += Vector3.up * Mathf.Sin(_speed * Time.time + customTime) * (_amplitude / 100);
 		}
 	}
 }
