@@ -61,7 +61,7 @@ namespace Game.Entities.AI.Dealer
 			return 0;
 		}
 
-		public override void ApplyKnockback(EntityIdentity attacker, Vector3 force, float knockbackTime = 0.2F) {}
+		public override void ApplyKnockback(EntityIdentity attacker, Vector3 force) {}
 		public override void ApplyPassiveDamage(float amount) {}
 		public override void Kill(EntityIdentity attacker){}
 

@@ -97,12 +97,12 @@ namespace Game.Entities.Shared.Health
 		}
 
 		/// <summary>
-		/// Knocks back to this entity. <br/>
+		/// Knocks back this entity. <br/>
 		/// The amount of force applied will get decreased or increased based on this entity's stats.
 		/// </summary>
 		/// <param name="attacker"></param>
 		/// <param name="force"></param>
-		public virtual void ApplyKnockback(EntityIdentity attacker, Vector3 force, float knockbackTime = 0.2f)
+		public virtual void ApplyKnockback(EntityIdentity attacker, Vector3 force)
 		{
 			if (IsDead || _identity.IsInvulnerable) return;
 
@@ -112,11 +112,12 @@ namespace Game.Entities.Shared.Health
 			if (totalForce == Vector3.zero)
 				return;
 
-			float speed = totalForce.magnitude / knockbackTime;
+			float speed = IDamageProcessor.KNOCKBACK_SPEED;
 			Vector3 velocity = speed * totalForce.normalized;
+			float time = velocity.magnitude / speed;
 
 			_rb.velocity = velocity;
-			Awaiter.WaitAndExecute(knockbackTime, () => _rb.velocity = Vector3.zero);
+			Awaiter.WaitAndExecute(time, () => _rb.velocity = Vector3.zero);
 		}
 
 		public virtual void Kill(EntityIdentity attacker)
