@@ -23,6 +23,8 @@ MonoBehaviour:
     SerializationNodes: []
   Material: {fileID: 2100000, guid: 06c0dafe01cc66043b53ff7cea8cff01, type: 2}
   Mesh: {fileID: -130930191001427872, guid: 35b1d2104a5e93248a0d3f40b7a776dd, type: 3}
+  InHandPosition: {x: -0.33, y: 0.31, z: 0.26}
+  InHandRotation: {x: -235.307, y: 278.324, z: -101.902}
   LocomotionLayer: DefaultLocomotion
   AttackSpeed: 1.5
   ComboIntervalTime: 0.2
@@ -35,6 +37,9 @@ MonoBehaviour:
       AimAssist: 0
       LockAim: 0
       LockMovement: 1
+      UseCustomHandPosition: 1
+      InHandPosition: {x: -0.2393805, y: -0.685074, z: 0.4689342}
+      InHandRotation: {x: -101.752, y: -182.912, z: -116.771}
     Dash:
       OnlyWhenMoving: 1
       Distance: 2
@@ -51,6 +56,9 @@ MonoBehaviour:
       AimAssist: 0
       LockAim: 0
       LockMovement: 1
+      UseCustomHandPosition: 1
+      InHandPosition: {x: -0.39, y: -0.3, z: 0.31}
+      InHandRotation: {x: -133.245, y: -75.94598, z: -71.27802}
     Dash:
       OnlyWhenMoving: 1
       Distance: 2
@@ -67,6 +75,9 @@ MonoBehaviour:
       AimAssist: 0
       LockAim: 1
       LockMovement: 1
+      UseCustomHandPosition: 1
+      InHandPosition: {x: 0.09137173, y: -0.3486941, z: 0.0270145}
+      InHandRotation: {x: -120.804, y: -203.994, z: -36.04401}
     Dash:
       OnlyWhenMoving: 0
       Distance: 4
