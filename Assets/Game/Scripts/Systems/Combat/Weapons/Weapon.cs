@@ -19,6 +19,7 @@ namespace Game.Systems.Combat.Weapons
 		protected AController _controller;
 		protected PlayerWeapon _weaponManager;
 		private MeshFilter _meshFilter;
+		private MeshRenderer _meshRenderer;
 		private RandomAudioClip _audio;
 		protected int _lastAttackIndex = -1;
 		private const float DASH_DURATION = 0.1f;
@@ -44,6 +45,7 @@ namespace Game.Systems.Combat.Weapons
 		{
 			_camera = GameManager.Camera;
 			_meshFilter = GetComponent<MeshFilter>();
+			_meshRenderer = GetComponent<MeshRenderer>();
 			_controller = GetComponentInParent<AController>();
 			_weaponManager = GetComponentInParent<PlayerWeapon>();
 			_audio = GetComponent<RandomAudioClip>();
@@ -55,6 +57,7 @@ namespace Game.Systems.Combat.Weapons
 		{
 			Data = data;
 			_meshFilter.mesh = data?.Mesh;
+			_meshRenderer.material = data?.Material;
 			_lastAttackIndex = -1;
 		}
 
