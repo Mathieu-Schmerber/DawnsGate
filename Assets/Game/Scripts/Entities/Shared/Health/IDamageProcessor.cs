@@ -5,6 +5,8 @@ using UnityEngine;
 
 public interface IDamageProcessor
 {
+	const float KNOCKBACK_SPEED = 3f;
+
 	bool IsDead { get; }
 
 	/// <summary>
@@ -20,5 +22,5 @@ public interface IDamageProcessor
 	/// <param name="amount"></param>
 	void ApplyPassiveDamage(float amount);
 
-	void ApplyKnockback(EntityIdentity attacker, Vector3 force, float knockbackTime = 0.2f);
+	void ApplyKnockback(EntityIdentity attacker, Vector3 force);
 }

@@ -21,6 +21,7 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
+  Material: {fileID: 2100000, guid: fbe6f23612e486349bf6ac9857ce6f17, type: 2}
   Mesh: {fileID: 4300000, guid: 69c3ba73285f94e489e8cd5a6b07da3c, type: 3}
   LocomotionLayer: DefaultLocomotion
   AttackSpeed: 1.5
@@ -30,7 +31,7 @@ MonoBehaviour:
     Attack:
       AttackData: {fileID: 11400000, guid: cba9f7096f88bbd4c9f8867a45aaebc2, type: 2}
       StartOffset: {x: 0, y: 1, z: 1.5}
-      TravelDistance: {x: 0, y: 0, z: 0}
+      TravelDistance: 0
       AimAssist: 1
       LockAim: 0
       LockMovement: 1
@@ -46,7 +47,7 @@ MonoBehaviour:
     Attack:
       AttackData: {fileID: 11400000, guid: 6ecc0c5fd0ec7354da77330c0089de43, type: 2}
       StartOffset: {x: 0, y: 1, z: 1.5}
-      TravelDistance: {x: 0, y: 0, z: 0}
+      TravelDistance: 0
       AimAssist: 1
       LockAim: 0
       LockMovement: 1
@@ -62,7 +63,7 @@ MonoBehaviour:
     Attack:
       AttackData: {fileID: 11400000, guid: 677fe4c347a22ec4e862ff99c0ca0579, type: 2}
       StartOffset: {x: 0, y: 0.1, z: 1.7}
-      TravelDistance: {x: 0, y: 0, z: 0}
+      TravelDistance: 0
       AimAssist: 0
       LockAim: 1
       LockMovement: 1

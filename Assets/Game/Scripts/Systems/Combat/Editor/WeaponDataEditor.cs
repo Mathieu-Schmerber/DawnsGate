@@ -36,6 +36,7 @@ namespace Game.Systems.Combat.Editor
             serializedObject.Update();
 
             SirenixEditorGUI.Title("Graphics", "", TextAlignment.Left, true);
+            EditorGUILayout.PropertyField(serializedObject.FindProperty(nameof(Data.Material)));
             EditorGUILayout.PropertyField(serializedObject.FindProperty(nameof(Data.Mesh)));
             EditorGUILayout.PropertyField(serializedObject.FindProperty(nameof(Data.LocomotionLayer)));
 

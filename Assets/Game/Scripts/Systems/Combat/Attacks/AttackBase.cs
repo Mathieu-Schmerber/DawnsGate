@@ -67,7 +67,7 @@ namespace Game.Systems.Combat.Attacks
 				target.ApplyDamage(caster, totalDamage);
 			else
 				target.ApplyPassiveDamage(totalDamage);
-			target.ApplyKnockback(caster, direction * knockbackForce, .2f);
+			target.ApplyKnockback(caster, direction * knockbackForce);
 			if (hitFx)
 				ObjectPooler.Get(hitFx, target.transform.position.WithY(caster.transform.position.y), Quaternion.Euler(0, caster.transform.rotation.eulerAngles.y, 0), null);
 		}

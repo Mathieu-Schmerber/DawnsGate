@@ -82,6 +82,7 @@ namespace Game.Systems.Combat.Weapons
 
 		#region Properties
 
+		public Material Material;
 		public Mesh Mesh;
 		[@Tooltip("Animator layer to use when moving around holding this weapon.")] 
 		public string LocomotionLayer = "DefaultLocomotion";
