@@ -79,6 +79,7 @@ namespace Game.Entities.Player
 				Dash(direction, _entity.CurrentDashRange, _dashTime, false, true);
 				_dashTimer.Interval = _entity.CurrentDashCooldown;
 				_dashTimer.Restart();
+				Debug.Log(_entity.CurrentDashRange);
 			}
 		}
 

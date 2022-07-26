@@ -30,8 +30,8 @@ namespace Game.Entities.Shared
 		public bool IsInvulnerable { get; private set; }
 
 		[ShowInInspector, ReadOnly]
-		public float CurrentHealth { get => _currentHealth; 
-			set 
+		public float CurrentHealth { get => _currentHealth;
+			set
 			{
 				float before = _currentHealth;
 
@@ -41,7 +41,7 @@ namespace Game.Entities.Shared
 		}
 
 		[ShowInInspector, ReadOnly]
-		public float CurrentArmor { get => _currentArmor; 
+		public float CurrentArmor { get => _currentArmor;
 			set
 			{
 				float before = _currentArmor;
@@ -58,7 +58,15 @@ namespace Game.Entities.Shared
 		public float MaxArmor => Scale(MaxHealth, StatModifier.ArmorRatio);
 		public float CurrentSpeed => Scale(Stats.MovementSpeed, StatModifier.MovementSpeed);
 		public float CurrentDashRange => Scale(Stats.DashRange, StatModifier.DashRange);
-		public float CurrentDashCooldown => Scale(Stats.DashCooldown, StatModifier.DashCooldown);
+		public float CurrentDashCooldown
+		{
+			get
+			{
+				float value = Stats.DashCooldown - Mathf.Abs(Stats.DashCooldown - Scale(Stats.DashCooldown, StatModifier.DashCooldown));
+				
+				return value;
+			}
+		}
 
 		public virtual void ResetStats()
 		{

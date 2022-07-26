@@ -37,18 +37,27 @@ MonoBehaviour:
   LifeCost: 0
   Script: {fileID: 11500000, guid: 08926e121668c91429746aa3d5ff809b, type: 3}
   Stages:
-  - keyData: 0b000000
-    valueData:
-    - _baseModifier: 25
-      BonusModifier: 0
-      TemporaryModifier: 0
-  - keyData: 0b000000
-    valueData:
-    - _baseModifier: 38
-      BonusModifier: 0
-      TemporaryModifier: 0
-  - keyData: 0b000000
+  - keyData: 0b0000000c000000
     valueData:
     - _baseModifier: 50
+      BonusModifier: 0
+      TemporaryModifier: 0
+    - _baseModifier: 30
+      BonusModifier: 0
+      TemporaryModifier: 0
+  - keyData: 0b0000000c000000
+    valueData:
+    - _baseModifier: 75
+      BonusModifier: 0
+      TemporaryModifier: 0
+    - _baseModifier: 45
+      BonusModifier: 0
+      TemporaryModifier: 0
+  - keyData: 0b0000000c000000
+    valueData:
+    - _baseModifier: 100
+      BonusModifier: 0
+      TemporaryModifier: 0
+    - _baseModifier: 60
       BonusModifier: 0
       TemporaryModifier: 0

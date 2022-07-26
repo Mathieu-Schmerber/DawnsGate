@@ -28,8 +28,8 @@ namespace Game.Systems.Run.Rooms
 
 		protected override void OnRoomReady()
 		{
-			base.OnRoomReady();
 			_stands.ForEach(x => DefineItem(x));
+			base.OnRoomReady();
 		}
 
 		private void DefineItem(ItemStand x)

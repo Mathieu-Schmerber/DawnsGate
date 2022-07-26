@@ -30,7 +30,8 @@ namespace Game.UI
 
 		private void OnDisable()
 		{
-			GameManager.Player.GetComponent<Damageable>().OnDamaged -= ShowHurtEffect;
+			if (GameManager.Player)
+				GameManager.Player.GetComponent<Damageable>().OnDamaged -= ShowHurtEffect;
 		}
 
 		private void ShowHurtEffect(float obj)
