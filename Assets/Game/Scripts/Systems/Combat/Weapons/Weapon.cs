@@ -169,9 +169,9 @@ namespace Game.Systems.Combat.Weapons
 
 		public virtual void OnAnimationExit(AnimatorStateInfo stateInfo)
 		{
-			_controller.LockMovement = false;
 			if (_controller.State == EntityState.ATTACKING)
 				_controller.State = EntityState.IDLE;
+			_controller.LockMovement = false;
 			_controller.LockAim = false;
 			transform.localPosition = Data.InHandPosition;
 			transform.localEulerAngles = Data.InHandRotation;

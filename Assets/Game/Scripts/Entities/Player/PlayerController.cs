@@ -55,8 +55,11 @@ namespace Game.Entities.Player
 		protected override void Update()
 		{
 			base.Update();
-			LockMovement = GuiManager.IsMenuing;
-			LockAim = GuiManager.IsMenuing;
+			if (State == EntityState.IDLE)
+			{
+				LockMovement = GuiManager.IsMenuing;
+				LockAim = GuiManager.IsMenuing;
+			}
 		}
 
 		#endregion
