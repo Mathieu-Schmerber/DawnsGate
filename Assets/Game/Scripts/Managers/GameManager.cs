@@ -116,9 +116,9 @@ namespace Game.Managers
 
 		#region References
 
-		public static PlayerController Player => Instance._player;
+		public static PlayerController Player => Instance?._player;
 		public static PlayerIdentity PlayerIdentity => Instance?._playerEntity;
-		public static CameraController Camera => Instance._camera;
+		public static CameraController Camera => Instance?._camera;
 
 		#endregion
 	}

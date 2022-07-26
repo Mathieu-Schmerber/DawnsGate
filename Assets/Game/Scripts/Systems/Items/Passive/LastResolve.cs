@@ -6,7 +6,7 @@ namespace Game.Systems.Items.Passive
 	{
 		private bool _boosted = false;
 
-		private void CheckHealthLevel()
+		private void CheckHealthLevel(float before, float now)
 		{
 			float ratio = _entity.CurrentHealth / _entity.MaxHealth;
 
@@ -34,7 +34,7 @@ namespace Game.Systems.Items.Passive
 		{
 			base.OnEquipped(summary);
 			_boosted = false;
-			CheckHealthLevel();
+			CheckHealthLevel(0, 0);
 		}
 
 		public override void OnUnequipped()

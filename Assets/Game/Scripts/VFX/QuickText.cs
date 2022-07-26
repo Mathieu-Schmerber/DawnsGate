@@ -41,7 +41,14 @@ namespace Game.VFX
 		public static void ShowHealText(Vector3 position, float amount)
 			=> ObjectPooler.Get(PoolIdEnum.QUICK_TEXT, position, Quaternion.identity, new TextData() { Text = $"+{amount}", Color = Color.green });
 
+		public static void ShowArmorText(Vector3 position, float amount)
+		{
+			if (amount == 0)
+				return;
+			ObjectPooler.Get(PoolIdEnum.QUICK_TEXT, position, Quaternion.identity, new TextData() { Text = $"{amount}", Color = Color.yellow });
+		}
+
 		public static void ShowGoldText(Vector3 position, float amount)
-			=> ObjectPooler.Get(PoolIdEnum.QUICK_TEXT, position, Quaternion.identity, new TextData() { Text = $"+{amount}<sprite=\"money\" index=0>", Color = Color.yellow });
+			=> ObjectPooler.Get(PoolIdEnum.QUICK_TEXT, position, Quaternion.identity, new TextData() { Text = $"{amount}<sprite=\"money\" index=0>", Color = Color.yellow });
 	}
 }

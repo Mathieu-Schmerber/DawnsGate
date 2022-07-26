@@ -50,7 +50,7 @@ namespace Game.UI
 			GameManager.OnRunMoneyUpdated -= UpdateRunMoneyDisplay; ;
 		}
 
-		private void UpdateHealthDisplay()
+		private void UpdateHealthDisplay(float before, float now)
 		{
 			float ratio = GameManager.PlayerIdentity.CurrentHealth / GameManager.PlayerIdentity.MaxHealth;
 
@@ -58,7 +58,7 @@ namespace Game.UI
 			Tween.Value(_healthFill.fillAmount, ratio, (v) => _healthFill.fillAmount = v, 0.2f, 0, Tween.EaseOut);
 		}
 
-		private void UpdateArmorDisplay()
+		private void UpdateArmorDisplay(float before, float now)
 		{
 			float ratio = GameManager.PlayerIdentity.MaxArmor == 0 ? 0 : GameManager.PlayerIdentity.CurrentArmor / GameManager.PlayerIdentity.MaxArmor;
 

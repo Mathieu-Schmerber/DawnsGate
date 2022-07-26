@@ -46,7 +46,7 @@ namespace Game.UI
 				_boss.OnHealthChanged += UpdateHealth;
 		}
 
-		private void UpdateHealth()
+		private void UpdateHealth(float before, float now)
 		{
 			float ratio = _boss.CurrentHealth / _boss.MaxHealth;
 

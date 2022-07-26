@@ -1,6 +1,8 @@
 using Game.Entities.Shared;
 using Game.Managers;
 using Game.Systems.Combat.Effects;
+using Game.VFX;
+using System;
 
 namespace Game.Entities.Player
 {
@@ -20,14 +22,36 @@ namespace Game.Entities.Player
 
 		private void OnEnable()
 		{
+			OnHealthChanged += DisplayHealthText;
+			OnArmorChanged += DisplayArmorText;
 			_damageable.OnPlayerDeath += OnRunEnded;
+			GameManager.OnRunMoneyUpdated += DisplayMoneyText;
 			RunManager.OnRunEnded += OnRunEnded;
 		}
 
 		private void OnDisable()
 		{
+			OnArmorChanged -= DisplayArmorText;
+			OnHealthChanged -= DisplayHealthText;
 			_damageable.OnPlayerDeath -= OnRunEnded;
+			GameManager.OnRunMoneyUpdated -= DisplayMoneyText;
 			RunManager.OnRunEnded -= OnRunEnded;
+		}
+
+		private void DisplayMoneyText(int before, int now)
+		{
+			QuickText.ShowGoldText(transform.position, now - before);
+		}
+
+		private void DisplayHealthText(float before, float now)
+		{
+			if (before < now)
+				QuickText.ShowHealText(transform.position, now - before);
+		}
+
+		private void DisplayArmorText(float before, float now)
+		{
+			QuickText.ShowArmorText(transform.position, now - before);
 		}
 
 		#region Run Ending management 

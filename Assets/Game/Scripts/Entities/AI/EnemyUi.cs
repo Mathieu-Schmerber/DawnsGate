@@ -38,12 +38,12 @@ namespace Game.Entities.AI
 			_identity.OnArmorChanged -= _identity_OnArmorChanged;
 		}
 
-		private void _identity_OnArmorChanged()
+		private void _identity_OnArmorChanged(float before, float now)
 		{
 			_armorBar.fillAmount = _identity.CurrentArmor / _identity.MaxArmor;
 		}
 
-		private void _identity_OnHealthChanged()
+		private void _identity_OnHealthChanged(float before, float now)
 		{
 			_healthBar.fillAmount = _identity.CurrentHealth / _identity.MaxHealth;
 		}

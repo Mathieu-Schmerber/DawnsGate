@@ -19,10 +19,10 @@ namespace Game.Entities.Shared
 		private float _currentArmor;
 
 		public event Action OnArmorBroken;
-		public event Action OnArmorGained;
+		public event Action<float> OnArmorGained;
 
-		public event Action OnHealthChanged;
-		public event Action OnArmorChanged;
+		public event Action<float, float> OnHealthChanged;
+		public event Action<float, float> OnArmorChanged;
 
 		public string DisplayName => _stats.DisplayName;
 
@@ -33,8 +33,10 @@ namespace Game.Entities.Shared
 		public float CurrentHealth { get => _currentHealth; 
 			set 
 			{
+				float before = _currentHealth;
+
 				_currentHealth = Mathf.Clamp(value, 0, MaxHealth);
-				OnHealthChanged?.Invoke();
+				OnHealthChanged?.Invoke(before, _currentHealth);
 			}
 		}
 
@@ -48,8 +50,8 @@ namespace Game.Entities.Shared
 				if (_currentArmor == 0 && before > _currentArmor)
 					OnArmorBroken?.Invoke();
 				else if (_currentArmor > 0 && before == 0)
-					OnArmorGained?.Invoke();
-				OnArmorChanged?.Invoke();
+					OnArmorGained?.Invoke(_currentArmor);
+				OnArmorChanged?.Invoke(before, _currentArmor);
 			}
 		}
 		public float MaxHealth => Mathf.Max(1, Scale(Stats.StartHealth, StatModifier.MaxHealth));
