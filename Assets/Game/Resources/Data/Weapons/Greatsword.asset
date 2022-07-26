@@ -23,6 +23,8 @@ MonoBehaviour:
     SerializationNodes: []
   Material: {fileID: 2100000, guid: d00a0f17e87323648bc64c8b85350615, type: 2}
   Mesh: {fileID: 4300000, guid: f2892d73e025a2e4fa946c585e58c9ad, type: 3}
+  InHandPosition: {x: 0, y: 0, z: 0}
+  InHandRotation: {x: 90, y: 0, z: 0}
   LocomotionLayer: DefaultLocomotion
   AttackSpeed: 1.5
   ComboIntervalTime: 0.2

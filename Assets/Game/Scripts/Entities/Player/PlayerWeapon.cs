@@ -3,6 +3,7 @@ using Game.Entities.Shared.Health;
 using Game.Managers;
 using Game.Systems.Combat.Attacks;
 using Game.Systems.Combat.Weapons;
+using Game.VFX;
 using Nawlian.Lib.Systems.Animations;
 using Nawlian.Lib.Systems.Pooling;
 using Nawlian.Lib.Utils;
@@ -131,8 +132,11 @@ namespace Game.Entities.Player
 			OnAttackLaunched?.Invoke();
 		}
 
-		public void OnHit(AttackBaseData data, Damageable collider, bool isHeavy, float damage) 
-			=> OnAttackHit?.Invoke(new() {Data = data, Victim = collider, IsHeavyAttack = isHeavy, DamageApplied = damage});
+		public void OnHit(AttackBaseData data, Damageable collider, bool isHeavy, float damage)
+		{
+			QuickText.ShowDamageText(collider.transform.position, damage);
+			OnAttackHit?.Invoke(new() { Data = data, Victim = collider, IsHeavyAttack = isHeavy, DamageApplied = damage });
+		}
 
 		public void OnAnimationEvent(string animationArg) => _weapon.OnAnimationEvent(animationArg);
 
