@@ -142,7 +142,12 @@ namespace Game.Entities.Player
 
 		public void OnAnimationEnter(AnimatorStateInfo stateInfo) => _weapon.OnAnimationEnter(stateInfo);
 
-		public void OnAnimationExit(AnimatorStateInfo stateInfo) => _weapon.OnAnimationExit(stateInfo);
+		public void OnAnimationExit(AnimatorStateInfo stateInfo)
+		{
+			_weapon.transform.localPosition = _weapon.Data.InHandPosition;
+			_weapon.transform.localEulerAngles = _weapon.Data.InHandRotation;
+			_weapon.OnAnimationExit(stateInfo);
+		}
 
 		#endregion
 	}

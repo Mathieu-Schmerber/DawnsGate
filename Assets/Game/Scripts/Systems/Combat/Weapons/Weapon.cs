@@ -157,7 +157,15 @@ namespace Game.Systems.Combat.Weapons
 				_controller.Dash(_controller.GetAimNormal(), CurrentWeaponAttack.Dash.Distance, DASH_DURATION, false, false);
 		}
 
-		public virtual void OnAnimationEnter(AnimatorStateInfo stateInfo) => _controller.State = EntityState.ATTACKING;
+		public virtual void OnAnimationEnter(AnimatorStateInfo stateInfo)
+		{
+			_controller.State = EntityState.ATTACKING;
+			if (CurrentWeaponAttack.Attack.UseCustomHandPosition)
+			{
+				transform.localPosition = CurrentWeaponAttack.Attack.InHandPosition;
+				transform.localEulerAngles = CurrentWeaponAttack.Attack.InHandRotation;
+			}
+		}
 
 		public virtual void OnAnimationExit(AnimatorStateInfo stateInfo)
 		{
@@ -165,6 +173,8 @@ namespace Game.Systems.Combat.Weapons
 			if (_controller.State == EntityState.ATTACKING)
 				_controller.State = EntityState.IDLE;
 			_controller.LockAim = false;
+			transform.localPosition = Data.InHandPosition;
+			transform.localEulerAngles = Data.InHandRotation;
 		}
 
 		#endregion

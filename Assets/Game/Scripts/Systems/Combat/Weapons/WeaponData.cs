@@ -26,6 +26,10 @@ namespace Game.Systems.Combat.Weapons
 			[@Tooltip("Should this move be aim assisted ?")] public bool AimAssist;
 			[@Tooltip("Can the player rotate during the attack ?")] public bool LockAim;
 			[@Tooltip("Can the player move during the attack ?")] public bool LockMovement;
+
+			public bool UseCustomHandPosition;
+			public Vector3 InHandPosition;
+			public Vector3 InHandRotation;
 		}
 
 		[System.Serializable]

@@ -153,6 +153,13 @@ namespace Game.Systems.Combat.Editor
                             EditorGUILayout.PropertyField(attackProp.FindPropertyRelative(nameof(item.Attack.AimAssist)));
                             EditorGUILayout.PropertyField(attackProp.FindPropertyRelative(nameof(item.Attack.LockAim)));
                             EditorGUILayout.PropertyField(attackProp.FindPropertyRelative(nameof(item.Attack.LockMovement)));
+
+                            EditorGUILayout.PropertyField(attackProp.FindPropertyRelative(nameof(item.Attack.UseCustomHandPosition)));
+                            if (item.Attack.UseCustomHandPosition)
+							{
+                                EditorGUILayout.PropertyField(attackProp.FindPropertyRelative(nameof(item.Attack.InHandPosition)));
+                                EditorGUILayout.PropertyField(attackProp.FindPropertyRelative(nameof(item.Attack.InHandRotation)));
+                            }
                         }
                         else
                             ShowError($"The '{nameof(item.AttackAnimation)}' doesn't contain any {WeaponAttackEvent.Attack} event.");
