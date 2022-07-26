@@ -59,7 +59,7 @@ namespace Game.Systems.Combat.Weapons
 			if (data != null)
 			{
 				transform.localPosition = data.InHandPosition;
-				transform.localRotation = Quaternion.Euler(data.InHandRotation);
+				transform.localEulerAngles = data.InHandRotation;
 			}
 			_meshFilter.mesh = data?.Mesh;
 			_meshRenderer.material = data?.Material;
