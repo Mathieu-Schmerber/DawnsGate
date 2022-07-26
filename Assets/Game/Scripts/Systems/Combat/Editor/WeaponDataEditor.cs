@@ -38,6 +38,8 @@ namespace Game.Systems.Combat.Editor
             SirenixEditorGUI.Title("Graphics", "", TextAlignment.Left, true);
             EditorGUILayout.PropertyField(serializedObject.FindProperty(nameof(Data.Material)));
             EditorGUILayout.PropertyField(serializedObject.FindProperty(nameof(Data.Mesh)));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty(nameof(Data.InHandPosition)));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty(nameof(Data.InHandRotation)));
             EditorGUILayout.PropertyField(serializedObject.FindProperty(nameof(Data.LocomotionLayer)));
 
             GUILayout.Space(10);

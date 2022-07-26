@@ -56,6 +56,11 @@ namespace Game.Systems.Combat.Weapons
 		public void SetData(WeaponData data)
 		{
 			Data = data;
+			if (data != null)
+			{
+				transform.localPosition = data.InHandPosition;
+				transform.localRotation = Quaternion.Euler(data.InHandRotation);
+			}
 			_meshFilter.mesh = data?.Mesh;
 			_meshRenderer.material = data?.Material;
 			_lastAttackIndex = -1;

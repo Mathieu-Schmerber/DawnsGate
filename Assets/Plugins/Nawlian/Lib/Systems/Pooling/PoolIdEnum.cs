@@ -16,4 +16,6 @@ public enum PoolIdEnum
     SLASH_HIT_FX,
     
     AFTER_IMAGE,
+    
+    QUICK_TEXT,
 }

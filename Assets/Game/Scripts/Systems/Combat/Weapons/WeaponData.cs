@@ -84,6 +84,8 @@ namespace Game.Systems.Combat.Weapons
 
 		public Material Material;
 		public Mesh Mesh;
+		public Vector3 InHandPosition;
+		public Vector3 InHandRotation;
 		[@Tooltip("Animator layer to use when moving around holding this weapon.")] 
 		public string LocomotionLayer = "DefaultLocomotion";
 		[@Tooltip("Base attack speed of the weapon, affects animation speed.")]
