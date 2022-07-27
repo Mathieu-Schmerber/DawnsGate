@@ -73,7 +73,7 @@ namespace Game.Systems.Combat.Attacks
 			if (_isOff)
 				return;
 			else if (Time.time - _startTime >= _attackData.ActiveTime)
-				Release();
+				SmoothRelease();
 			else if (FollowCaster)
 			{
 				Vector3 localOffsetDir = transform.InverseTransformDirection(_baseOffset);
