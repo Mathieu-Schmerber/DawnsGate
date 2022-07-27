@@ -7,12 +7,11 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: TwoSides11
-  m_Shader: {fileID: -6465566751694194690, guid: fd42847feb7e352439f0ceed3532b186, type: 3}
+  m_Name: FlashGroundCG
+  m_Shader: {fileID: -6465566751694194690, guid: 809ae895b07ba5f4587b4fd1dabdfbfe, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords:
-  - _USEBACKFRESNEL_ON
-  - _USECUSTOMDATA_ON
+  - _USEDEPTH_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -42,12 +41,16 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _MainTex:
+    - _Flow:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: 60d224affeaecf84ead5a8b24c6c9995, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _Mask:
-        m_Texture: {fileID: 2800000, guid: 802ddd854a81b044d8ded8591dc2ae8d, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -55,18 +58,14 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Noise:
-        m_Texture: {fileID: 2800000, guid: 3f1d4fadb37c37e4488860109d7dce4b, type: 3}
-        m_Scale: {x: 1, y: 2}
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ParallaxMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _tex4coord:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -88,48 +87,51 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _BackFresnel: -2
-    - _BackFresnelEmission: 1
+    - _Blend2: 1
+    - _BlendMode: 1
     - _BumpScale: 1
+    - _CullMode: 0
     - _Cutoff: 0.5
+    - _Depthpower: 0.7
     - _DetailNormalMapScale: 1
-    - _DstBlend: 0
-    - _Emission: 3
-    - _Fresnel: 2
-    - _FresnelEmission: 1
+    - _DstBlend: 1
+    - _DstMode: 10
+    - _Emission: 2
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
+    - _MainTexUspeed: 0
+    - _MainTexVspeed: 0
     - _Metallic: 0
     - _Mode: 0
+    - _NoiseUspeed: 0
+    - _NoiseVspeed: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _SeparateEmission: 2
-    - _SeparateFresnel: 0
-    - _Sideopacity: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
+    - _SrcMode: 5
     - _UVSec: 0
-    - _UseBackFresnel: 1
-    - _UseCustomData: 1
-    - _UseFresnel: 0
-    - _Usesmoothcorners: 0
-    - __dirty: 1
+    - _Usecenterglow: 0
+    - _Usecustomrandom: 0
+    - _Usedepth: 1
     m_Colors:
-    - _BackFacesColor: {r: 1, g: 1, b: 1, a: 1}
-    - _BackFresnelColor: {r: 0.35686278, g: 0.08627448, b: 0.08627448, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _DistortionSpeedXYPowerZ: {r: 0, g: 0, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _FresnelColor: {r: 1, g: 1, b: 1, a: 1}
-    - _FrontFacesColor: {r: 1, g: 1, b: 1, a: 1}
+    - _FlowTiling: {r: 1, g: 1, b: 0, a: 0}
     - _MainTexTiling: {r: 1, g: 1, b: 0, a: 0}
+    - _MaskTiling: {r: 1, g: 1, b: 0, a: 0}
     - _NoiseTiling: {r: 1, g: 1, b: 0, a: 0}
-    - _SpeedMainTexUVNoiseZW: {r: 0, g: 0, b: -3, a: 0}
+    - _SpeedMainTexUVNoiseUV: {r: 0, g: 0, b: 0, a: 0}
+    - _SpeedMainTexUVNoiseZW: {r: 0, g: 0, b: 0, a: 0}
+    - _TilingMainTexUVNoiseZW: {r: 1, g: 1, b: 1, a: 1}
+    - _TintColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
---- !u!114 &2736507439303517835
+--- !u!114 &1725441242212535531
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
