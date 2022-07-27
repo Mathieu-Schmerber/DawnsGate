@@ -1,5 +1,6 @@
 using Game.Managers;
 using Game.Tools;
+using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,7 @@ namespace Game.Entities.Player
 		private ParticleSystem _ps;
 		private Animator _animator;
 		private RandomAudioClip _rdn;
+		private PlayerController _controller;
 
 		[SerializeField] private float _minSpeedToPlay;
 		[SerializeField] private float _maxSpeedToPlay;
@@ -20,18 +22,23 @@ namespace Game.Entities.Player
 			_ps = GetComponent<ParticleSystem>();
 			_animator = GameManager.Player.GetComponentInChildren<Animator>();
 			_rdn = GetComponent<RandomAudioClip>();
+			_controller = GameManager.Player;
 		}
 
-		private void OnTriggerEnter(Collider other)
+		public void Play()
 		{
-			if (other.isTrigger || !other.gameObject.isStatic)
-				return;
-
 			float speed = _animator.GetFloat("Speed");
 
 			if (speed >= _minSpeedToPlay && speed <= _maxSpeedToPlay)
 				_ps.Play(true);
 			_rdn.PlayRandom();
+		}
+
+		private void OnTriggerEnter(Collider other)
+		{
+			if (other.isTrigger || !other.gameObject.isStatic || _controller.State != Shared.EntityState.IDLE)
+				return;
+			Play();
 		}
 	}
 }
