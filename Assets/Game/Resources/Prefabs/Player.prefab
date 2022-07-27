@@ -7658,7 +7658,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[2]
       value: 
-      objectReference: {fileID: 2100000, guid: 77585a35b55599d41b7c6f6004ea1e42, type: 2}
+      objectReference: {fileID: 2100000, guid: e85d37b3e3bc1614f8e7796f77bcfbc0, type: 2}
     - target: {fileID: 919132149155446097, guid: a9b2a1c1be4f2ed4ca66317eab95d5c3,
         type: 3}
       propertyPath: m_Name
@@ -7854,6 +7854,16 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 3585884874617014283, guid: 063bccd7a322e35489aba0ba14a8dd93,
+        type: 3}
+      propertyPath: m_CapsuleColliders.Array.data[0]
+      value: 
+      objectReference: {fileID: 1869739885559018090}
+    - target: {fileID: 3585884874617014283, guid: 063bccd7a322e35489aba0ba14a8dd93,
+        type: 3}
+      propertyPath: m_CapsuleColliders.Array.data[1]
+      value: 
+      objectReference: {fileID: 7825273246872556922}
     - target: {fileID: 3679159904062926900, guid: 063bccd7a322e35489aba0ba14a8dd93,
         type: 3}
       propertyPath: m_RootOrder
