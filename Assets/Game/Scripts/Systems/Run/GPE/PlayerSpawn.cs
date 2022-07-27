@@ -12,7 +12,10 @@ namespace Game.Systems.Run.GPE
 	{
 		private void Start()
 		{
-			GameManager.Player.transform.position = transform.position;
+			if (Physics.Raycast(transform.position, -transform.up, out RaycastHit hit, 10))
+				GameManager.Player.transform.position = hit.point;
+			else
+				GameManager.Player.transform.position = transform.position;
 		}
 	}
 }
