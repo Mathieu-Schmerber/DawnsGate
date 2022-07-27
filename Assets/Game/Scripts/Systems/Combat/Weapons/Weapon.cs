@@ -159,8 +159,8 @@ namespace Game.Systems.Combat.Weapons
 			}
 			else
 			{
-				Tween.LocalPosition(transform, localPos, 0.2f, 0);
-				Tween.LocalRotation(transform, localRot, 0.2f, 0);
+				Tween.Value(transform.localPosition, localPos, (v) => transform.localPosition = v, 0.5f, 0);
+				Tween.Value(transform.localEulerAngles, localRot, (v) => transform.localEulerAngles = v, 0.5f, 0);
 			}
 		}
 
@@ -185,7 +185,7 @@ namespace Game.Systems.Combat.Weapons
 				_controller.State = EntityState.IDLE;
 			_controller.LockMovement = false;
 			_controller.LockAim = false;
-			MoveInHand(Data.InHandPosition, Data.InHandRotation);
+			MoveInHand(Data.InHandPosition, Data.InHandRotation, Data.SmoothHandPlacement);
 		}
 
 		#endregion

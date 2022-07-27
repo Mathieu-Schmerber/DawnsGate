@@ -25,11 +25,12 @@ MonoBehaviour:
   Mesh: {fileID: -130930191001427872, guid: 35b1d2104a5e93248a0d3f40b7a776dd, type: 3}
   InHandPosition: {x: -0.33, y: 0.31, z: 0.26}
   InHandRotation: {x: -235.307, y: 278.324, z: -101.902}
+  SmoothHandPlacement: 1
   LocomotionLayer: DefaultLocomotion
   AttackSpeed: 1.5
   ComboIntervalTime: 0.2
   AttackCombos:
-  - AttackAnimation: {fileID: 7400000, guid: c1a35dc06e78ad143929fcd2e91a0648, type: 2}
+  - AttackAnimation: {fileID: 7400000, guid: b57afa588f621c6409076b02fa0052d6, type: 2}
     Attack:
       AttackData: {fileID: 11400000, guid: 3fe5b49525bec9e4184c79482cf32ece, type: 2}
       StartOffset: {x: 0, y: 1, z: 0.5}
@@ -40,7 +41,7 @@ MonoBehaviour:
       UseCustomHandPosition: 1
       InHandPosition: {x: -0.2393805, y: -0.685074, z: 0.4689342}
       InHandRotation: {x: -101.752, y: -182.912, z: -116.771}
-      SmoothHandPlacement: 0
+      SmoothHandPlacement: 1
     Dash:
       OnlyWhenMoving: 1
       Distance: 2
@@ -49,7 +50,7 @@ MonoBehaviour:
       CameraShakeDuration: 0
       VibrationForce: 0
       VibrationDuration: 0
-  - AttackAnimation: {fileID: 7400000, guid: eaa8bfba00fa6004d91026e7976f46b2, type: 2}
+  - AttackAnimation: {fileID: 7400000, guid: 61da10d661f26ca4a990e53263738f0e, type: 2}
     Attack:
       AttackData: {fileID: 11400000, guid: 3fe5b49525bec9e4184c79482cf32ece, type: 2}
       StartOffset: {x: 0, y: 1, z: 0.5}
@@ -60,7 +61,7 @@ MonoBehaviour:
       UseCustomHandPosition: 1
       InHandPosition: {x: -0.39, y: -0.3, z: 0.31}
       InHandRotation: {x: -133.245, y: -75.94598, z: -71.27802}
-      SmoothHandPlacement: 0
+      SmoothHandPlacement: 1
     Dash:
       OnlyWhenMoving: 1
       Distance: 2
@@ -69,7 +70,7 @@ MonoBehaviour:
       CameraShakeDuration: 0
       VibrationForce: 0
       VibrationDuration: 0
-  - AttackAnimation: {fileID: 7400000, guid: f8a56976657b6264eb6cb9cd76465737, type: 2}
+  - AttackAnimation: {fileID: 7400000, guid: 4c0cca327adbb4e47bcee541f868a9b8, type: 2}
     Attack:
       AttackData: {fileID: 11400000, guid: 0f4e606c9f863e44ba76cec642b9dc8d, type: 2}
       StartOffset: {x: 0, y: 1, z: 0}
@@ -80,7 +81,7 @@ MonoBehaviour:
       UseCustomHandPosition: 1
       InHandPosition: {x: 0.09137173, y: -0.3486941, z: 0.0270145}
       InHandRotation: {x: -120.804, y: -203.994, z: -36.04401}
-      SmoothHandPlacement: 0
+      SmoothHandPlacement: 1
     Dash:
       OnlyWhenMoving: 0
       Distance: 4

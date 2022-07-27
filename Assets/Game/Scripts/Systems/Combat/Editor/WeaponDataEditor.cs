@@ -40,6 +40,7 @@ namespace Game.Systems.Combat.Editor
             EditorGUILayout.PropertyField(serializedObject.FindProperty(nameof(Data.Mesh)));
             EditorGUILayout.PropertyField(serializedObject.FindProperty(nameof(Data.InHandPosition)));
             EditorGUILayout.PropertyField(serializedObject.FindProperty(nameof(Data.InHandRotation)));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty(nameof(Data.SmoothHandPlacement)));
             EditorGUILayout.PropertyField(serializedObject.FindProperty(nameof(Data.LocomotionLayer)));
 
             GUILayout.Space(10);
