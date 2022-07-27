@@ -1848,12 +1848,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 212459020}
   m_PrefabAsset: {fileID: 0}
---- !u!136 &228134388 stripped
-CapsuleCollider:
-  m_CorrespondingSourceObject: {fileID: 7825273246872556922, guid: 814944eadb999fb47af7403b53a00139,
-    type: 3}
-  m_PrefabInstance: {fileID: 2018765462}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &238479244
 GameObject:
   m_ObjectHideFlags: 0
@@ -12205,12 +12199,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1397850355}
   m_CullTransparentMesh: 1
---- !u!136 &1415412654 stripped
-CapsuleCollider:
-  m_CorrespondingSourceObject: {fileID: 1869739885559018090, guid: 814944eadb999fb47af7403b53a00139,
-    type: 3}
-  m_PrefabInstance: {fileID: 2018765462}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1458683035
 GameObject:
   m_ObjectHideFlags: 0
@@ -16325,11 +16313,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 295636897511331801, guid: 814944eadb999fb47af7403b53a00139,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1251468110984439636, guid: 814944eadb999fb47af7403b53a00139,
         type: 3}
       propertyPath: m_RootOrder
@@ -16396,21 +16379,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1251468110984439643, guid: 814944eadb999fb47af7403b53a00139,
         type: 3}
-    - target: {fileID: 2241293160079095308, guid: 814944eadb999fb47af7403b53a00139,
-        type: 3}
-      propertyPath: m_Materials.Array.data[2]
-      value: 
-      objectReference: {fileID: 2100000, guid: e85d37b3e3bc1614f8e7796f77bcfbc0, type: 2}
-    - target: {fileID: 8434778961896527626, guid: 814944eadb999fb47af7403b53a00139,
-        type: 3}
-      propertyPath: m_CapsuleColliders.Array.data[0]
-      value: 
-      objectReference: {fileID: 1415412654}
-    - target: {fileID: 8434778961896527626, guid: 814944eadb999fb47af7403b53a00139,
-        type: 3}
-      propertyPath: m_CapsuleColliders.Array.data[1]
-      value: 
-      objectReference: {fileID: 228134388}
     - target: {fileID: 8629284230178930871, guid: 814944eadb999fb47af7403b53a00139,
         type: 3}
       propertyPath: serializationData.Prefab

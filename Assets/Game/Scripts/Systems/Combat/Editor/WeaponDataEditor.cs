@@ -159,6 +159,7 @@ namespace Game.Systems.Combat.Editor
 							{
                                 EditorGUILayout.PropertyField(attackProp.FindPropertyRelative(nameof(item.Attack.InHandPosition)));
                                 EditorGUILayout.PropertyField(attackProp.FindPropertyRelative(nameof(item.Attack.InHandRotation)));
+                                EditorGUILayout.PropertyField(attackProp.FindPropertyRelative(nameof(item.Attack.SmoothHandPlacement)));
                             }
                         }
                         else
