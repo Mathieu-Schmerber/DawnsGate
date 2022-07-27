@@ -17,6 +17,8 @@ namespace Game.VFX
 		}
 
 		[SerializeField] private float _lifetime;
+		[SerializeField] private Vector2 _horizontalMinMax;
+		[SerializeField] private Vector2 _verticalMinMax;
 		private TextMeshPro _text;
 
 		private void Awake()
@@ -30,8 +32,11 @@ namespace Game.VFX
 
 			_text.text = textData.Text;
 			_text.color = textData.Color;
-			Tween.Position(transform, transform.position + Vector3.up, _lifetime, 0, Tween.EaseBounce);
-			Tween.Value(1, 0, (value) => _text.color.Alpha(value), _lifetime / 2f, _lifetime / 2f);
+
+			var offset = (Vector3.up * Random.Range(_verticalMinMax.x, _verticalMinMax.y)) + (Vector3.forward * Random.Range(_horizontalMinMax.x, _horizontalMinMax.y));
+
+			Tween.Position(transform, transform.position + offset, _lifetime, 0, Tween.EaseSpring);
+			Tween.Value(1f, 0f, (value) => _text.color = _text.color.Alpha(value), _lifetime / 2f, _lifetime / 2f, Tween.EaseOut);
 			Invoke(nameof(Release), _lifetime);
 		}
 
