@@ -144,8 +144,6 @@ namespace Game.Entities.Player
 
 		public void OnAnimationExit(AnimatorStateInfo stateInfo)
 		{
-			_weapon.transform.localPosition = _weapon.Data.InHandPosition;
-			_weapon.transform.localEulerAngles = _weapon.Data.InHandRotation;
 			_weapon.OnAnimationExit(stateInfo);
 		}
 

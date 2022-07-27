@@ -58,10 +58,7 @@ namespace Game.Systems.Combat.Weapons
 		{
 			Data = data;
 			if (data != null)
-			{
-				transform.localPosition = data.InHandPosition;
-				transform.localEulerAngles = data.InHandRotation;
-			}
+				MoveInHand(data.InHandPosition, data.InHandRotation);
 			_meshFilter.mesh = data?.Mesh;
 			_meshRenderer.material = data?.Material;
 			_lastAttackIndex = -1;
@@ -159,8 +156,8 @@ namespace Game.Systems.Combat.Weapons
 			}
 			else
 			{
-				Tween.Value(transform.localPosition, localPos, (v) => transform.localPosition = v, 0.5f, 0);
-				Tween.Value(transform.localEulerAngles, localRot, (v) => transform.localEulerAngles = v, 0.5f, 0);
+				Tween.Value(transform.localPosition, localPos, (v) => transform.localPosition = v, 0.3f, 0);
+				Tween.Value(transform.localEulerAngles, localRot, (v) => transform.localEulerAngles = v, 0.3f, 0);
 			}
 		}
 
@@ -174,6 +171,14 @@ namespace Game.Systems.Combat.Weapons
 
 		public virtual void OnAnimationEnter(AnimatorStateInfo stateInfo)
 		{
+			if (stateInfo.IsName("Null"))
+			{
+				if (Data != null)
+				{
+					MoveInHand(Data.InHandPosition, Data.InHandRotation, Data.SmoothHandPlacement);
+				}
+				return;
+			}
 			_controller.State = EntityState.ATTACKING;
 			if (CurrentWeaponAttack.Attack.UseCustomHandPosition)
 				MoveInHand(CurrentWeaponAttack.Attack.InHandPosition, CurrentWeaponAttack.Attack.InHandRotation, CurrentWeaponAttack.Attack.SmoothHandPlacement);
@@ -181,11 +186,12 @@ namespace Game.Systems.Combat.Weapons
 
 		public virtual void OnAnimationExit(AnimatorStateInfo stateInfo)
 		{
+			if (stateInfo.IsName("Null"))
+				return;
 			if (_controller.State == EntityState.ATTACKING)
 				_controller.State = EntityState.IDLE;
 			_controller.LockMovement = false;
 			_controller.LockAim = false;
-			MoveInHand(Data.InHandPosition, Data.InHandRotation, Data.SmoothHandPlacement);
 		}
 
 		#endregion
