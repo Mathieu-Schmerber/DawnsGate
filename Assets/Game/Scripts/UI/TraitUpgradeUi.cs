@@ -17,6 +17,7 @@ namespace Game.UI
 		private TraitDescriptorUi[] _descriptors;
 		[SerializeField] private AudioClip _purchaseAudio;
 		[SerializeField] private AudioClip _errorAudio;
+		[SerializeField] private Button _purchaseButton;
 
 		protected override void Awake()
 		{
