@@ -23,6 +23,8 @@ namespace Game.UI
 		[SerializeField] private SimpleDescriptorUi _nextItemStage;
 		[SerializeField] private TextMeshProUGUI _priceTxt;
 		[SerializeField] private Transform _interactionBox;
+		[SerializeField] private Button _purchaseBtn;
+
 		[Title("Feedback")]
 		[SerializeField] private Color _flashColor;
 		[SerializeField] private float _bumpIntensity;
@@ -33,6 +35,8 @@ namespace Game.UI
 		private Image _currentRenderer;
 		private Image _nextRenderer;
 
+		private InventorySlotUi _lastSelectedSlot;
+
 		protected override void Awake()
 		{
 			base.Awake();
@@ -40,6 +44,11 @@ namespace Game.UI
 			_nextRenderer = _nextItemStage.GetComponent<Image>();
 			_currentDefaultColor = _currentRenderer.color;
 			_nextDefaultColor = _nextRenderer.color;
+		}
+
+		private void Start()
+		{
+			_purchaseBtn.onClick.AddListener(Submit);
 		}
 
 		#region Upgrade
@@ -57,9 +66,11 @@ namespace Game.UI
 			Tween.LocalScale(_interactionBox, Vector3.one, _duration / 2, _duration / 2, Tween.EaseBounce);
 		}
 
-		private void OnSlotSubmitted(InventorySlotUi slot)
+		private void Submit()
 		{
-			if (slot.IsEmpty)
+			InventorySlotUi slot = _lastSelectedSlot;
+
+			if (slot != null && slot.IsEmpty)
 				return;
 			else if (!slot.Item.IsAffordable || !slot.Item.HasUpgrade)
 			{
@@ -68,7 +79,7 @@ namespace Game.UI
 			}
 			GameManager.PayWithRunMoney(slot.Item.NextUpgradePrice);
 			slot.Item.Upgrade();
-			OnItemSelected(slot);
+			slot.Select();
 			Feedback();
 		}
 
@@ -92,11 +103,7 @@ namespace Game.UI
 		}
 
 		private void DisplayInteractionBox(InventorySlotUi slot)
-		{
-			if (slot.IsEmpty)
-				return;
-			_interactionBox.gameObject.SetActive(slot.Item.IsAffordable && slot.Item.HasUpgrade);
-		}
+			=> _purchaseBtn.interactable = slot.Item != null && slot.Item.HasUpgrade && slot.Item.IsAffordable && !slot.IsEmpty;
 
 		private void DisplayPrice(InventorySlotUi slot)
 		{
@@ -109,6 +116,7 @@ namespace Game.UI
 
 		private void OnItemSelected(InventorySlotUi slot)
 		{
+			_lastSelectedSlot = slot;
 			_globalPanel.gameObject.SetActive(InventorySlotSelector.HasUsableSlot);
 			_emptyPanel.gameObject.SetActive(!InventorySlotSelector.HasUsableSlot);
 			if (slot == null)
@@ -128,8 +136,8 @@ namespace Game.UI
 			_globalPanel.gameObject.SetActive(InventorySlotSelector.HasUsableSlot);
 			_emptyPanel.gameObject.SetActive(!InventorySlotSelector.HasUsableSlot);
 			InventorySlotSelector.StartUsing(x => !x.IsEmpty && x.Item.HasUpgrade);
+			InventorySlotSelector.SetRightNavigation(_purchaseBtn);
 			InventorySlotUi.OnSelected += OnItemSelected;
-			InventorySlotUi.OnSubmitted += OnSlotSubmitted;
 			OnItemSelected(InventorySlotSelector.SelectedSlot);
 		}
 
@@ -137,8 +145,9 @@ namespace Game.UI
 		{
 			base.Close();
 			InventorySlotSelector.EndUsing();
+			InventorySlotSelector.SetRightNavigation(null);
 			InventorySlotUi.OnSelected -= OnItemSelected;
-			InventorySlotUi.OnSubmitted -= OnSlotSubmitted;
+			//InventorySlotUi.OnSubmitted -= OnSlotSubmitted;
 		}
 	}
 }

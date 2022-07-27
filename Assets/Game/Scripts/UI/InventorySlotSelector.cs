@@ -101,9 +101,21 @@ namespace Game.UI
 			}
 		}
 
+		private void LayoutRightNavigation(Selectable navObject)
+		{
+			foreach (var slot in _slots)
+			{
+				Navigation nav = slot.navigation;
+
+				nav.selectOnRight = navObject;
+				slot.navigation = nav;
+			}
+		}
+
 		public static bool IsInUse => GuiManager.InventoryUI._inUse;
 		public static bool HasUsableSlot => GuiManager.InventoryUI._slots.Any(x => x.Usable);
 		public static void StartUsing(Func<InventorySlotUi, bool> predicate = null) => GuiManager.InventoryUI.Select(predicate);
+		public static void SetRightNavigation(Selectable navObject) => GuiManager.InventoryUI.LayoutRightNavigation(navObject);
 		public static void EndUsing() => GuiManager.InventoryUI.Deselect();
 	}
 }

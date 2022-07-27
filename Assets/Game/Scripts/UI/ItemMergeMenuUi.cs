@@ -22,6 +22,7 @@ namespace Game.UI
 		[SerializeField] private TextMeshProUGUI _priceTxt;
 		[SerializeField] private Transform _interactionBox;
 		[SerializeField] private InventorySlotUi[] _additionSlots;
+		[SerializeField] private Button _purchaseBtn;
 
 		[Title("Feedback")]
 		[SerializeField] private Color _flashColor;
@@ -32,6 +33,7 @@ namespace Game.UI
 		private Image _resultRenderer;
 		private int _slotIndex;
 		private Inventory _inventory;
+		private InventorySlotUi _lastSelectedSlot;
 
 		#region Properties
 
@@ -58,6 +60,11 @@ namespace Game.UI
 			_resultRenderer = _resultItem.GetComponent<Image>();
 			_resultDefaultColor = _resultRenderer.color;
 			_inventory = GameManager.Player.GetComponent<Inventory>();
+		}
+
+		private void Start()
+		{
+			_purchaseBtn.onClick.AddListener(OnPurchaseSubmit);
 		}
 
 		private bool TryMerging()
@@ -90,24 +97,32 @@ namespace Game.UI
 			_slotIndex++;
 		}
 
+		private void OnPurchaseSubmit()
+		{
+			InventorySlotUi slot = _lastSelectedSlot;
+
+			if (TryMerging())
+			{
+				Feedback();
+				ResetAddition();
+			}
+		}
+
 		private void OnSlotSubmitted(InventorySlotUi slot)
 		{
 			if (slot.IsEmpty) // Cannot do a thing with an empty slot
 				return;
 			else if (!_isAdditionReady && _additionSlots.Any(x => x.Item == slot.Item)) // Cannot use a duplicate
 				return;
-			if (_isAdditionReady) 
-			{
-				if (_additionSlots.Last().Item == slot.Item && TryMerging()) // Merge if the last item is submitted twice
-				{
-					Feedback();
-					ResetAddition();
-					return;
-				}
+			if (_isAdditionReady)
 				ResetAddition();
-			}
 			SetCurrentSlot(slot);
 			RefreshUi();
+		}
+
+		private void OnSlotSelected(InventorySlotUi slot)
+		{
+			_lastSelectedSlot = slot;
 		}
 
 		#endregion
@@ -138,7 +153,7 @@ namespace Game.UI
 			}
 		}
 
-		private void DisplayInteraction() => _interactionBox.gameObject.SetActive(_isAdditionReady && _isAdditionCorrect);
+		private void DisplayInteraction() => _purchaseBtn.interactable = _isAdditionReady && _isAdditionCorrect;
 
 		private void DisplayPrice()
 		{
@@ -188,18 +203,24 @@ namespace Game.UI
 			if (InventorySlotSelector.IsInUse)
 				return;
 			base.Open();
-			_globalPanel.gameObject.SetActive(InventorySlotSelector.HasUsableSlot);
-			_emptyPanel.gameObject.SetActive(!InventorySlotSelector.HasUsableSlot);
+			
 			ResetAddition();
 			RefreshUi();
 			InventorySlotSelector.StartUsing(x => !x.IsEmpty && Inventory.CanBeMerged(x.Item));
+			InventorySlotSelector.SetRightNavigation(_purchaseBtn);
+			InventorySlotUi.OnSelected += OnSlotSelected;
 			InventorySlotUi.OnSubmitted += OnSlotSubmitted;
+
+			_globalPanel.gameObject.SetActive(InventorySlotSelector.HasUsableSlot);
+			_emptyPanel.gameObject.SetActive(!InventorySlotSelector.HasUsableSlot);
 		}
 
 		public override void Close()
 		{
 			base.Close();
 			InventorySlotSelector.EndUsing();
+			InventorySlotSelector.SetRightNavigation(null);
+			InventorySlotUi.OnSelected -= OnSlotSelected;
 			InventorySlotUi.OnSubmitted -= OnSlotSubmitted;
 		}
 

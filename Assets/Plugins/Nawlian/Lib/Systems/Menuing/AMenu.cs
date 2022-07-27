@@ -71,7 +71,11 @@ namespace Plugins.Nawlian.Lib.Systems.Menuing
 			if (_rect != null)
 				Tween.AnchoredPosition(_rect, _openPosition, _closePosition, _duration, 0, Tween.EaseIn);
 			if (_grp != null)
-				Tween.CanvasGroupAlpha(_grp, 1, 0, _duration, 0, Tween.EaseIn, startCallback: () => _grp.interactable = false);
+			{
+				Tween.CanvasGroupAlpha(_grp, 1, 0, _duration, 0, Tween.EaseIn);
+				_grp.interactable = false;
+				_grp.blocksRaycasts = false;
+			}
 		}
 
 		public virtual void Show()
@@ -80,7 +84,11 @@ namespace Plugins.Nawlian.Lib.Systems.Menuing
 			if (_rect != null)
 				Tween.AnchoredPosition(_rect, _closePosition, _openPosition, _duration, 0, Tween.EaseOut);
 			if (_grp != null)
-				Tween.CanvasGroupAlpha(_grp, 0, 1, _duration, 0, Tween.EaseOut, completeCallback: () => _grp.interactable = true);
+			{
+				Tween.CanvasGroupAlpha(_grp, 0, 1, _duration, 0, Tween.EaseOut);
+				_grp.interactable = true;
+				_grp.blocksRaycasts = true;
+			}
 		}
 
 #if UNITY_EDITOR

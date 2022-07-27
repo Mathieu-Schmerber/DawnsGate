@@ -23,7 +23,10 @@ namespace Game.UI
 			_rdmClip = GetComponent<RandomAudioClip>();
 		}
 
-		private void OnClick() => _onClick?.Invoke(ChoiceId);
+		private void OnClick()
+		{
+			_onClick?.Invoke(ChoiceId);
+		}
 
 		public void SetText(string text) => _text.text = text;
 

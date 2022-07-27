@@ -993,8 +993,8 @@ CanvasGroup:
   m_GameObject: {fileID: 103687142}
   m_Enabled: 1
   m_Alpha: 0
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!114 &103687148
 MonoBehaviour:
@@ -1279,6 +1279,7 @@ GameObject:
   - component: {fileID: 149006803}
   - component: {fileID: 149006802}
   - component: {fileID: 149006801}
+  - component: {fileID: 149006805}
   m_Layer: 5
   m_Name: InteractionBox
   m_TagString: Untagged
@@ -1387,6 +1388,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 149006799}
   m_CullTransparentMesh: 1
+--- !u!114 &149006805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 149006799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 0.6287291, g: 0.6018156, b: 0.7924528, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_DisabledColor: {r: 0.028301895, g: 0.027901396, b: 0.027901396, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 0
+  m_TargetGraphic: {fileID: 1582539930}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &179241259
 GameObject:
   m_ObjectHideFlags: 0
@@ -1525,8 +1570,8 @@ CanvasGroup:
   m_GameObject: {fileID: 179612067}
   m_Enabled: 1
   m_Alpha: 0
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!114 &179612072
 MonoBehaviour:
@@ -3295,8 +3340,8 @@ CanvasGroup:
   m_GameObject: {fileID: 424785870}
   m_Enabled: 1
   m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!82 &424785876
 AudioSource:
@@ -3634,7 +3679,7 @@ GameObject:
   - component: {fileID: 443616231}
   - component: {fileID: 443616233}
   - component: {fileID: 443616232}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5706,7 +5751,7 @@ GameObject:
   - component: {fileID: 646452613}
   - component: {fileID: 646452615}
   - component: {fileID: 646452614}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: BloodScreen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5780,8 +5825,8 @@ CanvasGroup:
   m_GameObject: {fileID: 646452608}
   m_Enabled: 1
   m_Alpha: 0
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!114 &646452613
 MonoBehaviour:
@@ -6412,8 +6457,8 @@ CanvasGroup:
   m_GameObject: {fileID: 803262659}
   m_Enabled: 1
   m_Alpha: 0
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!1 &808438374
 GameObject:
@@ -6725,8 +6770,8 @@ CanvasGroup:
   m_GameObject: {fileID: 820222371}
   m_Enabled: 1
   m_Alpha: 0
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!222 &820222375
 CanvasRenderer:
@@ -6760,6 +6805,7 @@ MonoBehaviour:
   _nextItemStage: {fileID: 1776800530}
   _priceTxt: {fileID: 995941145}
   _interactionBox: {fileID: 1582539928}
+  _purchaseBtn: {fileID: 1582539933}
   _flashColor: {r: 1, g: 1, b: 1, a: 0.6117647}
   _bumpIntensity: 1.2
   _errorAudio: {fileID: 8300000, guid: dccdb6a6438b76d4cbe84602bf7f01d9, type: 3}
@@ -8606,8 +8652,8 @@ CanvasGroup:
   m_GameObject: {fileID: 951645970}
   m_Enabled: 1
   m_Alpha: 0
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!114 &951645975
 MonoBehaviour:
@@ -11660,8 +11706,8 @@ CanvasGroup:
   m_GameObject: {fileID: 1300042402}
   m_Enabled: 1
   m_Alpha: 0
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!114 &1300042408
 MonoBehaviour:
@@ -11935,10 +11981,11 @@ MonoBehaviour:
   _emptyPanel: {fileID: 1067721067}
   _resultItem: {fileID: 1739170549}
   _priceTxt: {fileID: 1329842120}
-  _interactionBox: {fileID: 0}
+  _interactionBox: {fileID: 149006800}
   _additionSlots:
   - {fileID: 7023228739032129792}
   - {fileID: 3333286700658011826}
+  _purchaseBtn: {fileID: 149006805}
   _flashColor: {r: 1, g: 1, b: 1, a: 1}
   _bumpIntensity: 1.2
   _errorAudio: {fileID: 8300000, guid: dccdb6a6438b76d4cbe84602bf7f01d9, type: 3}
@@ -11951,8 +11998,8 @@ CanvasGroup:
   m_GameObject: {fileID: 1302925854}
   m_Enabled: 1
   m_Alpha: 0
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!114 &1302925858
 MonoBehaviour:
@@ -12452,7 +12499,7 @@ GameObject:
   - component: {fileID: 1353613442}
   - component: {fileID: 1353613446}
   - component: {fileID: 1353613447}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: SceneTransition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13966,6 +14013,7 @@ GameObject:
   - component: {fileID: 1582539930}
   - component: {fileID: 1582539929}
   - component: {fileID: 1582539932}
+  - component: {fileID: 1582539933}
   m_Layer: 5
   m_Name: InteractionBox
   m_TagString: Untagged
@@ -14074,6 +14122,50 @@ MonoBehaviour:
   m_EffectColor: {r: 0.8584906, g: 0.53433514, b: 0.16602883, a: 0.5}
   m_EffectDistance: {x: 3, y: -3}
   m_UseGraphicAlpha: 1
+--- !u!114 &1582539933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1582539927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 0, g: 0, b: 0, a: 0.25490198}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0, g: 0, b: 0, a: 1}
+    m_DisabledColor: {r: 0.028301895, g: 0.027901396, b: 0.027901396, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 1582539930}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1603175564
 GameObject:
   m_ObjectHideFlags: 0
@@ -16509,8 +16601,8 @@ CanvasGroup:
   m_GameObject: {fileID: 1918339267}
   m_Enabled: 1
   m_Alpha: 0
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!1 &1946098794
 GameObject:
@@ -18481,9 +18573,6 @@ MonoBehaviour:
     m_DisabledTrigger: Disabled
   m_Interactable: 1
   m_TargetGraphic: {fileID: 1003561948}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls: []
   _itemImage: {fileID: 4508401085994500757}
   _starList: {fileID: 2436677812296841205}
   _selectionColor: {r: 1, g: 0.6745098, b: 0, a: 0.09803922}
@@ -19489,9 +19578,6 @@ MonoBehaviour:
     m_DisabledTrigger: Disabled
   m_Interactable: 1
   m_TargetGraphic: {fileID: 1003561948}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls: []
   _itemImage: {fileID: 5090540581714683889}
   _starList: {fileID: 6477553788858602129}
   _selectionColor: {r: 1, g: 0.6745098, b: 0, a: 0.09803922}

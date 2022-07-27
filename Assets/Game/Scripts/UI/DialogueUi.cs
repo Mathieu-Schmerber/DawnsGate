@@ -17,7 +17,7 @@ using Random = UnityEngine.Random;
 
 namespace Game.UI
 {
-	public class DialogueUi : ACloseableMenu
+	public class DialogueUi : ACloseableMenu, IPointerClickHandler
 	{
 		private readonly int DEFAULT_SPEED = 50;
 		private readonly float WAVE_AMP = 3.5f;
@@ -184,6 +184,8 @@ namespace Game.UI
 		}
 
 		private void SubmitChoice(string id) => OnSubmitted?.Invoke(_displayedNode, id);
+
+		public void OnPointerClick(PointerEventData eventData) => OnSubmit();
 
 		protected override void OnSubmit()
 		{
