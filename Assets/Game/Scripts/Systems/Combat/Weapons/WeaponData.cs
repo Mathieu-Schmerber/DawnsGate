@@ -30,6 +30,7 @@ namespace Game.Systems.Combat.Weapons
 			public bool UseCustomHandPosition;
 			public Vector3 InHandPosition;
 			public Vector3 InHandRotation;
+			public bool SmoothHandPlacement;
 		}
 
 		[System.Serializable]

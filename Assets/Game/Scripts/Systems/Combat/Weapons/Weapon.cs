@@ -6,6 +6,7 @@ using Game.Entities.Camera;
 using Game.Managers;
 using Game.Systems.Combat.Attacks;
 using Game.Tools;
+using Pixelplacement;
 
 namespace Game.Systems.Combat.Weapons
 {
@@ -149,6 +150,20 @@ namespace Game.Systems.Combat.Weapons
 				DeactivateAimAssist();
 		}
 
+		private void MoveInHand(Vector3 localPos, Vector3 localRot, bool smooth = false)
+		{
+			if (!smooth)
+			{
+				transform.localPosition = localPos;
+				transform.localEulerAngles = localRot;
+			}
+			else
+			{
+				Tween.LocalPosition(transform, localPos, 0.2f, 0);
+				Tween.LocalRotation(transform, localRot, 0.2f, 0);
+			}
+		}
+
 		public virtual void OnAnimationEvent(string animation)
 		{
 			if (animation == nameof(WeaponAttackEvent.Attack))
@@ -161,10 +176,7 @@ namespace Game.Systems.Combat.Weapons
 		{
 			_controller.State = EntityState.ATTACKING;
 			if (CurrentWeaponAttack.Attack.UseCustomHandPosition)
-			{
-				transform.localPosition = CurrentWeaponAttack.Attack.InHandPosition;
-				transform.localEulerAngles = CurrentWeaponAttack.Attack.InHandRotation;
-			}
+				MoveInHand(CurrentWeaponAttack.Attack.InHandPosition, CurrentWeaponAttack.Attack.InHandRotation, CurrentWeaponAttack.Attack.SmoothHandPlacement);
 		}
 
 		public virtual void OnAnimationExit(AnimatorStateInfo stateInfo)
@@ -173,8 +185,7 @@ namespace Game.Systems.Combat.Weapons
 				_controller.State = EntityState.IDLE;
 			_controller.LockMovement = false;
 			_controller.LockAim = false;
-			transform.localPosition = Data.InHandPosition;
-			transform.localEulerAngles = Data.InHandRotation;
+			MoveInHand(Data.InHandPosition, Data.InHandRotation);
 		}
 
 		#endregion
