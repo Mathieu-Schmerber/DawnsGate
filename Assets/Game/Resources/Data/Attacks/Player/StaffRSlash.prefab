@@ -14,10 +14,10 @@ GameObject:
   - component: {fileID: -7109925867012405211}
   - component: {fileID: 8336055474934556729}
   - component: {fileID: 8782931238669148665}
-  - component: {fileID: -2259693132312396307}
-  - component: {fileID: -1007019076095263113}
+  - component: {fileID: 3096857855690667812}
+  - component: {fileID: 8948257172765377227}
   m_Layer: 6
-  m_Name: HammerLSlash
+  m_Name: StaffRSlash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4871,7 +4871,7 @@ ParticleSystemRenderer:
   m_ShadowBias: 0
   m_RenderAlignment: 2
   m_Pivot: {x: 0, y: 0, z: 0}
-  m_Flip: {x: 0, y: 0, z: 0}
+  m_Flip: {x: 1, y: 0, z: 0}
   m_UseCustomVertexStreams: 0
   m_EnableGPUInstancing: 1
   m_ApplyActiveColorSpace: 1
@@ -4900,7 +4900,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17e5775844e65f84f9514b819ac7d21a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _attackData: {fileID: 11400000, guid: cba9f7096f88bbd4c9f8867a45aaebc2, type: 2}
+  _attackData: {fileID: 11400000, guid: 6ecc0c5fd0ec7354da77330c0089de43, type: 2}
 --- !u!65 &8336055474934556729
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4927,7 +4927,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.2784529, y: 0, z: 0.94541955}
   m_Center: {x: 0, y: 0, z: 0.92902315}
---- !u!82 &-2259693132312396307
+--- !u!82 &3096857855690667812
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5024,7 +5024,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &-1007019076095263113
+--- !u!114 &8948257172765377227
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
