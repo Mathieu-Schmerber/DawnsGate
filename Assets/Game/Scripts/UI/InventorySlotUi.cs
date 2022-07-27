@@ -79,6 +79,8 @@ namespace Game.UI
 
 		public override void OnSelect(BaseEventData eventData)
 		{
+			if (!interactable)
+				return;
 			Selected = true;
 			base.OnSelect(eventData);
 			_outline.effectColor = _selectionColor;
@@ -95,9 +97,16 @@ namespace Game.UI
 
 		public void OnSubmit(BaseEventData eventData)
 		{
-			if (_item == null || !interactable)
+			if (_item == null || !interactable || !Selected)
 				return;
 			OnSubmitted?.Invoke(this);
+		}
+
+		public override void OnPointerDown(PointerEventData eventData)
+		{
+			if (Selected)
+				OnSubmit(eventData);
+			base.OnPointerDown(eventData);
 		}
 	}
 }
