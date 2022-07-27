@@ -19,6 +19,7 @@ namespace Game.UI
 		[SerializeField] private TextMeshProUGUI _description;
 		[SerializeField] private TextMeshProUGUI _stats;
 		[SerializeField] private TextMeshProUGUI _price;
+		[SerializeField] private Image _resultRenderer;
 
 		[Title("Feedback")]
 		[SerializeField] private float _duration;
@@ -29,7 +30,7 @@ namespace Game.UI
 
 		private RandomAudioClip _audioRdn;
 		private Color _resultDefaultColor;
-		private Image _resultRenderer;
+		private Color _outlineDefaultColor;
 		private Outline _outline;
 
 		public static event Action<TraitDescriptorUi> OnTraitClicked;
@@ -49,9 +50,9 @@ namespace Game.UI
 		protected override void Awake()
 		{
 			base.Awake();
-			_resultRenderer = GetComponent<Image>();
 			_resultDefaultColor = _resultRenderer.color;
-			_outline = GetComponent<Outline>();
+			_outline = GetComponentInChildren<Outline>();
+			_outlineDefaultColor = _outline.effectColor;
 			_audioRdn = GetComponent<RandomAudioClip>();
 		}
 
@@ -87,14 +88,14 @@ namespace Game.UI
 		public override void OnDeselect(BaseEventData eventData)
 		{
 			base.OnDeselect(eventData);
-			_outline.effectColor = Interactable ? _resultDefaultColor : _disabledColor;
+			_outline.effectColor = Interactable ? _outlineDefaultColor : _disabledColor;
 		}
 
 		public void Interact()
 		{
 			// Flash
-			Tween.Value(_resultDefaultColor, _flashColor, (c) => _resultRenderer.color = c, _duration / 2, 0);
-			Tween.Value(_flashColor, _resultDefaultColor, (c) => _resultRenderer.color = c, _duration / 2, _duration / 2);
+			Tween.Value(_outlineDefaultColor, _flashColor, (c) => _outline.effectColor = c, _duration / 2, 0);
+			Tween.Value(_flashColor, _outlineDefaultColor, (c) => _outline.effectColor = c, _duration / 2, _duration / 2);
 
 			// Bump
 			Tween.LocalScale(transform, Vector3.one * _bumpIntensity, _duration / 2, 0, Tween.EaseBounce);
