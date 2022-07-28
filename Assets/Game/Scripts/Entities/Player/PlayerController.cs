@@ -26,7 +26,7 @@ namespace Game.Entities.Player
 
 		private Plane _mousePlane;
 
-		public bool CanDash => CanMove && _dashTimer.IsOver();
+		public bool CanDash => /*CanMove && */State != EntityState.STUN && _dashTimer.IsOver();
 
 		#endregion
 
@@ -106,7 +106,7 @@ namespace Game.Entities.Player
 
 		private Vector3 GetTargetForMouse()
 		{
-			if (State != EntityState.ATTACKING)
+			if (State != EntityState.ATTACKING && State != EntityState.DASH)
 				return GetMovementsInputs();
 
 			Ray ray = GameManager.Camera.Camera.ScreenPointToRay(_inputs.MousePosition);
