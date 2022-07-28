@@ -22,8 +22,11 @@ namespace Game.Entities.Player
 
 		private Timer _dashTimer = new();
 		private InputManager _inputs;
+		private Vector3 _lastAimDir;
 
-		public bool CanDash => CanMove && _dashTimer.IsOver();
+		private Plane _mousePlane;
+
+		public bool CanDash => !LockMovement && State != EntityState.STUN && _dashTimer.IsOver();
 
 		#endregion
 
@@ -49,6 +52,7 @@ namespace Game.Entities.Player
 
 		private void Start()
 		{
+			_mousePlane = new Plane(Vector3.up, transform.position);
 			_dashTimer.Start(_entity.CurrentDashCooldown, false);
 		}
 
@@ -88,14 +92,28 @@ namespace Game.Entities.Player
 
 		protected override Vector3 GetTargetPosition()
 		{
-			Vector3 aimInput = GetMovementsInputs();
+			Vector3 aimInput = _inputs.InUseControl == ControlType.KEYBOARD ? GetTargetForMouse() : GetMovementsInputs();
 			bool isAiming = aimInput.magnitude > 0;
 
+			if (isAiming)
+				_lastAimDir = aimInput;
 			if (LockAim)
 				return _rb.position + _graphics.transform.forward;
 			else if (isAiming)
 				return _rb.position + aimInput;
-			return _rb.position + _graphics.transform.forward;
+			return _rb.position + _lastAimDir;
+		}
+
+		private Vector3 GetTargetForMouse()
+		{
+			if (State != EntityState.ATTACKING && State != EntityState.DASH)
+				return GetMovementsInputs();
+
+			Ray ray = GameManager.Camera.Camera.ScreenPointToRay(_inputs.MousePosition);
+
+			if (_mousePlane.Raycast(ray, out float distance))
+				return (ray.GetPoint(distance) - transform.position).normalized;
+			return _lastAimDir;
 		}
 
 		#endregion
