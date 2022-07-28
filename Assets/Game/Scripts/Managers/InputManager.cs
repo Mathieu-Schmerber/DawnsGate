@@ -22,7 +22,9 @@ namespace Game.Managers
 		private PlayerInput _input;
 		private Controls _controls;
 		public Vector2 MovementAxis => _controls.Player.Movement.ReadValue<Vector2>();
+		public Vector2 MousePosition => Mouse.current.position.ReadValue();
 		public bool IsAttackDown { get; private set; }
+		public ControlType InUseControl { get; private set; }
 
 		public static event Action OnDashPressed;
 		public static event Action OnInteractPressed;
@@ -69,11 +71,12 @@ namespace Game.Managers
 		private void OnControlsChanged(PlayerInput input)
 		{
 			if (input.devices[0].device.displayName.Contains("Keyboard"))
-				OnControlChanged?.Invoke(ControlType.KEYBOARD);
+				InUseControl = ControlType.KEYBOARD;
 			else if (Gamepad.current is UnityEngine.InputSystem.XInput.XInputController) // XBOX
-				OnControlChanged?.Invoke(ControlType.XBOX);
+				InUseControl = ControlType.XBOX;
 			else if (Gamepad.current is UnityEngine.InputSystem.DualShock.DualShockGamepad) // PS4
-				OnControlChanged?.Invoke(ControlType.PS4);
+				InUseControl = ControlType.PS4;
+			OnControlChanged?.Invoke(InUseControl);
 		}
 
 		private static async void WaitAndExecute(float time, Action execute)
