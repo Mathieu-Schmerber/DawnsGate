@@ -9,6 +9,7 @@ using Game.UI;
 using Nawlian.Lib.Extensions;
 using Nawlian.Lib.Systems.Interaction;
 using Nawlian.Lib.Utils;
+using Sirenix.OdinInspector;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -32,6 +33,8 @@ namespace Game.Entities.AI.Croupier
 		#endregion
 
 		[SerializeField] private ARoom _room;
+		[Title("Roulette animation")]
+		[SerializeField] private RouletteFX _roulette;
 
 		private const string ON_BET_WON = "Won";
 		private const string ON_BET_LOST = "Lost";
@@ -196,7 +199,8 @@ namespace Game.Entities.AI.Croupier
 				GameManager.PayWithRunMoney(_currentReward.MoneyBet);
 
 			yield return new WaitForSeconds(0.5f);
-
+			_roulette.Play(); 
+			yield return new WaitForSeconds(_roulette._totalAnimationTime);
 			onPreparationDone?.Invoke();
 		}
 
