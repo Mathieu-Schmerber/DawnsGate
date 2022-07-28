@@ -22,6 +22,7 @@ namespace Game.Entities.Player
 
 		private Timer _dashTimer = new();
 		private InputManager _inputs;
+		private Vector3 _lastAimDir;
 
 		public bool CanDash => CanMove && _dashTimer.IsOver();
 
@@ -91,11 +92,13 @@ namespace Game.Entities.Player
 			Vector3 aimInput = GetMovementsInputs();
 			bool isAiming = aimInput.magnitude > 0;
 
+			if (isAiming)
+				_lastAimDir = aimInput;
 			if (LockAim)
 				return _rb.position + _graphics.transform.forward;
 			else if (isAiming)
 				return _rb.position + aimInput;
-			return _rb.position + _graphics.transform.forward;
+			return _rb.position + _lastAimDir;
 		}
 
 		#endregion
