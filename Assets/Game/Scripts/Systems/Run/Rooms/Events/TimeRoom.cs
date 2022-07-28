@@ -49,5 +49,10 @@ namespace Game.Systems.Run.Rooms.Events
 			}
 			onDone?.Invoke();
 		}
+
+		public override void OnEnemyKilled(GameObject gameObject)
+		{
+
+		}
 	}
 }
