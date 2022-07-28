@@ -40,24 +40,35 @@ namespace Game.UI
 			x.UpdatePrice(cost);
 			x.SetStatsText($"{trait.StatName}: {GameManager.PlayerIdentity.Stats.Modifiers[trait.StatModified].Value}%<color=green>(+{trait.IncrementPerUpgrade}%)</color>");
 			x.Interactable = GameManager.IsUpgradable(trait);
+			_purchaseButton.interactable = GameManager.CanLobbyMoneyAfford(cost) && GameManager.IsUpgradable(trait);
 		}
 
 		private void OnSubmitted() => PerformPurchase(_lastSelectedTrait);
+
+		private void SelectTrait(TraitDescriptorUi descriptorUi)
+		{
+			if (descriptorUi == null)
+				return;
+			EventSystem.current.SetSelectedGameObject(descriptorUi.gameObject);
+			descriptorUi.Select();
+			descriptorUi.OnSelect(null);
+		}
 
 		private void PerformPurchase(TraitDescriptorUi descriptorUi)
 		{
 			if (GameManager.UpgradeTrait(descriptorUi.Trait))
 			{
 				_descriptors.ForEach(x => Refresh(x));
+				Refresh(descriptorUi);
 				descriptorUi.Interact();
 				_source.PlayOneShot(_purchaseAudio);
 			}
 			else
 				_source.PlayOneShot(_errorAudio);
 			if (!descriptorUi.Interactable)
-				EventSystem.current.SetSelectedGameObject(_descriptors.FirstOrDefault(x => x.Interactable)?.gameObject);
+				SelectTrait(_descriptors.FirstOrDefault(x => x.Interactable));
 			else
-				EventSystem.current.SetSelectedGameObject(descriptorUi.gameObject);
+				SelectTrait(descriptorUi);
 		}
 
 		private void OnSelected(TraitDescriptorUi descriptorUi)
@@ -77,8 +88,8 @@ namespace Game.UI
 
 			if (selected != null)
 			{
-				EventSystem.current.SetSelectedGameObject(selected.gameObject);
-				selected.Select();
+				SelectTrait(selected);
+				Refresh(selected);
 			}
 
 			TraitDescriptorUi.OnTraitSelected += OnSelected;
