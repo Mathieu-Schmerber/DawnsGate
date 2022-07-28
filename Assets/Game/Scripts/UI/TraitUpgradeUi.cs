@@ -19,10 +19,17 @@ namespace Game.UI
 		[SerializeField] private AudioClip _errorAudio;
 		[SerializeField] private Button _purchaseButton;
 
+		private TraitDescriptorUi _lastSelectedTrait;
+
 		protected override void Awake()
 		{
 			base.Awake();
 			_descriptors = GetComponentsInChildren<TraitDescriptorUi>();
+		}
+
+		private void Start()
+		{
+			_purchaseButton.onClick.AddListener(OnSubmitted);
 		}
 
 		private void Refresh(TraitDescriptorUi x)
@@ -32,36 +39,58 @@ namespace Game.UI
 
 			x.UpdatePrice(cost);
 			x.SetStatsText($"{trait.StatName}: {GameManager.PlayerIdentity.Stats.Modifiers[trait.StatModified].Value}%<color=green>(+{trait.IncrementPerUpgrade}%)</color>");
-			x.Interactable = GameManager.CanLobbyMoneyAfford(cost) && GameManager.IsUpgradable(trait);
+			x.Interactable = GameManager.IsUpgradable(trait);
 		}
 
-		private void OnSubmitted(TraitDescriptorUi descriptorUi)
+		private void OnSubmitted() => PerformPurchase(_lastSelectedTrait);
+
+		private void PerformPurchase(TraitDescriptorUi descriptorUi)
 		{
 			if (GameManager.UpgradeTrait(descriptorUi.Trait))
 			{
 				_descriptors.ForEach(x => Refresh(x));
 				descriptorUi.Interact();
 				_source.PlayOneShot(_purchaseAudio);
-				if (!descriptorUi.Interactable)
-					EventSystem.current.SetSelectedGameObject(_descriptors.FirstOrDefault(x => x.Interactable)?.gameObject);
 			}
 			else
 				_source.PlayOneShot(_errorAudio);
+			if (!descriptorUi.Interactable)
+				EventSystem.current.SetSelectedGameObject(_descriptors.FirstOrDefault(x => x.Interactable)?.gameObject);
+			else
+				EventSystem.current.SetSelectedGameObject(descriptorUi.gameObject);
+		}
+
+		private void OnSelected(TraitDescriptorUi descriptorUi)
+		{
+			int cost = GameManager.GetTraitUpgradeCost(descriptorUi.Trait);
+
+			_lastSelectedTrait = descriptorUi;
+			_purchaseButton.interactable = GameManager.CanLobbyMoneyAfford(cost) && GameManager.IsUpgradable(descriptorUi.Trait);
 		}
 
 		public override void Open()
 		{
 			base.Open();
 			_descriptors.ForEach(x => Refresh(x));
-			EventSystem.current.SetSelectedGameObject(_descriptors.FirstOrDefault(x => x.Interactable)?.gameObject);
-			TraitDescriptorUi.OnTraitClicked += OnSubmitted;
+
+			TraitDescriptorUi selected = _descriptors.FirstOrDefault(x => x.Interactable);
+
+			if (selected != null)
+			{
+				EventSystem.current.SetSelectedGameObject(selected.gameObject);
+				selected.Select();
+			}
+
+			TraitDescriptorUi.OnTraitSelected += OnSelected;
+			TraitDescriptorUi.OnTraitSubmitted += PerformPurchase;
 		}
 
 		public override void Close()
 		{
 			base.Close();
 			EventSystem.current.SetSelectedGameObject(null);
-			TraitDescriptorUi.OnTraitClicked -= OnSubmitted;
+			TraitDescriptorUi.OnTraitSelected -= OnSelected;
+			TraitDescriptorUi.OnTraitSubmitted -= PerformPurchase;
 		}
 	}
 }

@@ -33,7 +33,8 @@ namespace Game.UI
 		private Color _outlineDefaultColor;
 		private Outline _outline;
 
-		public static event Action<TraitDescriptorUi> OnTraitClicked;
+		public static event Action<TraitDescriptorUi> OnTraitSelected;
+		public static event Action<TraitDescriptorUi> OnTraitSubmitted;
 		public TraitUpgradeData Trait => _traitData;
 
 		public bool Interactable
@@ -45,7 +46,6 @@ namespace Game.UI
 					_outline.effectColor = _disabledColor;
 			}
 		}
-
 
 		protected override void Awake()
 		{
@@ -75,7 +75,7 @@ namespace Game.UI
 		public void OnSubmit(BaseEventData eventData)
 		{
 			if (interactable)
-				OnTraitClicked?.Invoke(this);
+				OnTraitSubmitted?.Invoke(this);
 		}
 
 		public override void OnSelect(BaseEventData eventData)
@@ -83,6 +83,7 @@ namespace Game.UI
 			base.OnSelect(eventData);
 			_outline.effectColor = Interactable ? _selectedColor : _disabledColor;
 			_audioRdn.PlayRandom();
+			OnTraitSelected?.Invoke(this);
 		}
 
 		public override void OnDeselect(BaseEventData eventData)
