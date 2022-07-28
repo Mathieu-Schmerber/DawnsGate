@@ -208,12 +208,12 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 0
+  m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.22745098, g: 1, b: 0, a: 1}
-    m_SelectedColor: {r: 0.69803923, g: 0.28627452, b: 0.043137256, a: 0.7529412}
+    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 0.8509804}
+    m_PressedColor: {r: 1, g: 0.4541185, b: 0, a: 0.6745098}
+    m_SelectedColor: {r: 1, g: 1, b: 1, a: 0.87058824}
     m_DisabledColor: {r: 0.32156864, g: 0, b: 0, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -229,7 +229,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 7370455245008328621}
   _traitData: {fileID: 0}
   _title: {fileID: 8189605917390080524}
   _description: {fileID: 7650698004270348007}
