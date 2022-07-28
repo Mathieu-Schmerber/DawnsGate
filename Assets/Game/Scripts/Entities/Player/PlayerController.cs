@@ -26,7 +26,7 @@ namespace Game.Entities.Player
 
 		private Plane _mousePlane;
 
-		public bool CanDash => /*CanMove && */State != EntityState.STUN && _dashTimer.IsOver();
+		public bool CanDash => !LockMovement && State != EntityState.STUN && _dashTimer.IsOver();
 
 		#endregion
 
