@@ -15,7 +15,12 @@ MonoBehaviour:
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects: []
+    ReferencedUnityObjects:
+    - {fileID: 8300000, guid: dc027e83e2553d349b20bcb48ae1c515, type: 3}
+    - {fileID: 8300000, guid: d65e58a267dfef24ca0923484879175e, type: 3}
+    - {fileID: 8300000, guid: bc629d489eec20d4dbbb9191f322a352, type: 3}
+    - {fileID: 8300000, guid: 59c17e9489c03a94a9efdf9d108c82ba, type: 3}
+    - {fileID: 8300000, guid: 2ae18f659956e5c43b2da02982a785f9, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -66,8 +71,8 @@ MonoBehaviour:
       Entry: 1
       Data: 146f06bc-25df-4f3c-9ec0-0f594f9fce81
     - Name: Audio
-      Entry: 6
-      Data: 
+      Entry: 10
+      Data: 0
     - Name: 
       Entry: 8
       Data: 
@@ -97,13 +102,26 @@ MonoBehaviour:
       Data: false
     - Name: Text
       Entry: 1
-      Data: 'TODO: Explaine the rules'
+      Data: '[speed=2]Lemme introduce you to my <color=yellow>[effect=wave]Lovely
+        Gambling Game[effect]</color> !
+
+        The rules are quite simple: Bet
+        whatever you want and hope to win.
+
+        If you lose the bet, I get to
+        keep whatever you placed in the gamble.
+
+        If you win, you get the
+        double of what you risked.
+
+
+        Wanna give it a go with me ?'
     - Name: NextNodeId
       Entry: 1
       Data: 06adc04a-5c31-4df5-9cf3-0625e3be3dee
     - Name: Audio
-      Entry: 6
-      Data: 
+      Entry: 10
+      Data: 1
     - Name: 
       Entry: 8
       Data: 
@@ -232,8 +250,8 @@ MonoBehaviour:
       Entry: 1
       Data: 
     - Name: Audio
-      Entry: 6
-      Data: 
+      Entry: 10
+      Data: 2
     - Name: 
       Entry: 8
       Data: 
@@ -339,8 +357,8 @@ MonoBehaviour:
       Entry: 6
       Data: 
     - Name: Audio
-      Entry: 6
-      Data: 
+      Entry: 10
+      Data: 3
     - Name: 
       Entry: 8
       Data: 
@@ -378,8 +396,8 @@ MonoBehaviour:
       Entry: 1
       Data: 06adc04a-5c31-4df5-9cf3-0625e3be3dee
     - Name: Audio
-      Entry: 6
-      Data: 
+      Entry: 10
+      Data: 4
     - Name: 
       Entry: 8
       Data: 
@@ -447,8 +465,8 @@ MonoBehaviour:
       Entry: 1
       Data: 017d8f43-0c98-4631-9308-3433d4c44ae7
     - Name: Audio
-      Entry: 6
-      Data: 
+      Entry: 10
+      Data: 4
     - Name: 
       Entry: 8
       Data: 
