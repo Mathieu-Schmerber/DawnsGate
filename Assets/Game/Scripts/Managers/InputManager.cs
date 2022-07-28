@@ -6,12 +6,20 @@ using UnityEngine.InputSystem;
 
 namespace Game.Managers
 {
+	public enum ControlType
+	{
+		XBOX,
+		PS4,
+		KEYBOARD
+	}
+
 	/// <summary>
 	/// Input handler. <br></br>
 	/// Stores the inputs states
 	/// </summary>
 	public class InputManager : ManagerSingleton<InputManager>
 	{
+		private PlayerInput _input;
 		private Controls _controls;
 		public Vector2 MovementAxis => _controls.Player.Movement.ReadValue<Vector2>();
 		public bool IsAttackDown { get; private set; }
@@ -21,6 +29,7 @@ namespace Game.Managers
 		public static event Action OnInventoryPressed;
 		public static event Action OnCancelPressed;
 		public static event Action OnSubmitPressed;
+		public static event Action<ControlType> OnControlChanged;
 
 		#region Unity builtins
 
@@ -28,16 +37,20 @@ namespace Game.Managers
 		{
 			_controls.Player.Enable();
 			_controls.UI.Enable();
+			_input.onControlsChanged += OnControlsChanged;
 		}
 
 		private void OnDisable()
 		{
 			_controls.Player.Disable();
 			_controls.UI.Disable();
+			_input.onControlsChanged -= OnControlsChanged;
 		}
 
 		private void Awake()
 		{
+			_input = GetComponent<PlayerInput>();
+
 			_controls = new Controls();
 
 			_controls.Player.Attack.performed += (ctx) => IsAttackDown = true;
@@ -49,7 +62,19 @@ namespace Game.Managers
 			_controls.UI.Submit.performed += (ctx) => OnSubmitPressed?.Invoke();
 		}
 
+		private void Start() => OnControlsChanged(_input);
+
 		#endregion
+
+		private void OnControlsChanged(PlayerInput input)
+		{
+			if (input.devices[0].device.displayName.Contains("Keyboard"))
+				OnControlChanged?.Invoke(ControlType.KEYBOARD);
+			else if (Gamepad.current is UnityEngine.InputSystem.XInput.XInputController) // XBOX
+				OnControlChanged?.Invoke(ControlType.XBOX);
+			else if (Gamepad.current is UnityEngine.InputSystem.DualShock.DualShockGamepad) // PS4
+				OnControlChanged?.Invoke(ControlType.PS4);
+		}
 
 		private static async void WaitAndExecute(float time, Action execute)
 		{
