@@ -157,7 +157,16 @@ namespace Game.Entities.AI.Croupier
 			_animator.SetBool(ANIM_ACTIVE, true);
 		}
 
-		protected override void OnPromptShowing() => _animator.SetBool(ANIM_PROMPT, true);
+		protected override void OnPromptShowing()
+		{
+			if (_animator.GetBool(ANIM_PROMPT))
+			{
+				_animator.SetBool(ANIM_PROMPT, false);
+				Awaiter.WaitAndExecute(0.1f, () => _animator.SetBool(ANIM_PROMPT, true));
+			}
+			else
+				_animator.SetBool(ANIM_PROMPT, true);
+		}
 
 		protected override void OnChoiceShowing() => _animator.SetBool(ANIM_PROMPT, false);
 
