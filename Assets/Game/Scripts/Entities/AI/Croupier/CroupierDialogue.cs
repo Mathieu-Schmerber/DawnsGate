@@ -58,12 +58,16 @@ namespace Game.Entities.AI.Croupier
 
 		private void Awake()
 		{
-			_npc = GetComponent<EntityIdentity>()?.Stats as CroupierStatData;
+			_npc = GetComponent<EntityIdentity>().Stats as CroupierStatData;
 			_inventory = GameManager.Player.GetComponent<Inventory>();
 			_animator = GetComponentInChildren<Animator>();
 		}
 
-		private void Start() => ProcessBetReward();
+		private void Start()
+		{
+			_npc = GetComponent<EntityIdentity>().Stats as CroupierStatData;
+			ProcessBetReward();
+		}
 
 		#endregion
 

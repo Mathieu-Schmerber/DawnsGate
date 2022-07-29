@@ -42,10 +42,12 @@ namespace Plugins.Nawlian.Lib.Systems.Menuing
 			_isHidden = false;
 			if (_source != null)
 			{
-				if (_reverseClipForClose == false)
+				if (_reverseClipForClose == false && _closeAudio != null)
 					_source.PlayOneShot(_closeAudio);
 				else
 				{
+					if (_openAudio == null)
+						return;
 					_source.clip = _openAudio;
 					_source.pitch = -1;
 					_source.time = _openAudio.length - 0.01f;
