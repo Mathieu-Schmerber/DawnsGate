@@ -114,6 +114,21 @@ namespace Game.Managers
 
 		#endregion
 
+		private void OnEnable()
+		{
+			RunManager.OnRunEnded += RunManager_OnRunEnded;
+		}
+
+		private void OnDisable()
+		{
+			RunManager.OnRunEnded -= RunManager_OnRunEnded;
+		}
+
+		private void RunManager_OnRunEnded()
+		{
+			PayWithRunMoney(_runMoney);
+		}
+
 		#region References
 
 		public static PlayerController Player => Instance?._player;

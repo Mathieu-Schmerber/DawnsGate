@@ -23,7 +23,12 @@ namespace Game.Tools
 				PlayRandom();
 		}
 
-		public void Play(AudioClip audio) => _audioSource.PlayOneShot(audio);
+		public void Play(AudioClip audio)
+		{
+			if (audio == null)
+				return;
+			_audioSource.PlayOneShot(audio);
+		}
 
 		public void PlayRandom()
 		{
