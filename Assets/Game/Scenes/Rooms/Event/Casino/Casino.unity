@@ -2975,6 +2975,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8671964433614713425, guid: ce4ac01e95542224b84c311ae157778b,
+        type: 3}
+      propertyPath: _room
+      value: 
+      objectReference: {fileID: 5621188100699248005}
+    - target: {fileID: 8671964433614713425, guid: ce4ac01e95542224b84c311ae157778b,
+        type: 3}
+      propertyPath: _roulette
+      value: 
+      objectReference: {fileID: 919132148263744072}
+    - target: {fileID: 8671964433614713426, guid: ce4ac01e95542224b84c311ae157778b,
+        type: 3}
+      propertyPath: _stats
+      value: 
+      objectReference: {fileID: 11400000, guid: a2c086df7fa59d84b8e512123abc704d,
+        type: 2}
     - target: {fileID: 8671964433614713428, guid: ce4ac01e95542224b84c311ae157778b,
         type: 3}
       propertyPath: m_RootOrder
@@ -2988,7 +3004,7 @@ PrefabInstance:
     - target: {fileID: 8671964433614713428, guid: ce4ac01e95542224b84c311ae157778b,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.8
+      value: 1.987599
       objectReference: {fileID: 0}
     - target: {fileID: 8671964433614713428, guid: ce4ac01e95542224b84c311ae157778b,
         type: 3}
@@ -6713,6 +6729,18 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &919132148263744072 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8875568335405379520, guid: 4c218a01a5d8b1f46b30f7241da4dfa3,
+    type: 3}
+  m_PrefabInstance: {fileID: 8641620099547798920}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b91daf1edc4cf464eb4b0721afe62f10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &4555957896664274604
 Transform:
   m_ObjectHideFlags: 0

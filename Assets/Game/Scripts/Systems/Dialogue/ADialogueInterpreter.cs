@@ -39,6 +39,9 @@ namespace Game.Systems.Dialogue
 
 		private void ProcessNode(string id) => ProcessNode(_dialogue.Nodes[id]);
 
+		protected virtual void OnPromptShowing() { }
+		protected virtual void OnChoiceShowing() { }
+
 		private void ProcessNode(ADialogueNode node)
 		{
 			if ((_uiMenu == null || !_uiMenu.IsOpen) && _dialogue != null)
@@ -49,9 +52,11 @@ namespace Game.Systems.Dialogue
 			switch (node.Type)
 			{
 				case NodeType.PROMPT:
+					OnPromptShowing();
 					_uiMenu.DisplayPrompt(node as DialoguePromptNode);
 					break;
 				case NodeType.CHOICE:
+					OnChoiceShowing();
 					_uiMenu.DisplayChoices(node as DialogueChoiceNode, GetFormattedChoice);
 					break;
 				case NodeType.EVENT:

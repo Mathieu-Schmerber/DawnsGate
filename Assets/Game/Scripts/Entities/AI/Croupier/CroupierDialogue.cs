@@ -2,6 +2,7 @@ using Game.Entities.Player;
 using Game.Entities.Shared;
 using Game.Managers;
 using Game.Systems.Dialogue;
+using Game.Systems.Dialogue.Data;
 using Game.Systems.Items;
 using Game.Systems.Run;
 using Game.Systems.Run.Rooms;
@@ -40,10 +41,16 @@ namespace Game.Entities.AI.Croupier
 		private const string ON_BET_LOST = "Lost";
 		private const string ON_NOTHING_TO_BET = "CannotBet";
 
+		private const string ANIM_ACTIVE = "IsActive";
+		private const string ANIM_PROMPT = "IsTalking";
+		private const string ANIM_BET_OCCURING = "IsRouletteRolling";
+		private const string ANIM_BET_LOST = "Lost";
+
 		private int _numberOfBets = 0;
 		private CroupierStatData _npc;
 		private Inventory _inventory;
 		private BetInfo _currentReward = new();
+		private Animator _animator;
 
 		private RoomRewardType _betType => _room.RoomData.Reward;
 
@@ -53,6 +60,7 @@ namespace Game.Entities.AI.Croupier
 		{
 			_npc = GetComponent<EntityIdentity>()?.Stats as CroupierStatData;
 			_inventory = GameManager.Player.GetComponent<Inventory>();
+			_animator = GetComponentInChildren<Animator>();
 		}
 
 		private void Start() => ProcessBetReward();
@@ -107,6 +115,8 @@ namespace Game.Entities.AI.Croupier
 		protected override void CloseDialogue()
 		{
 			base.CloseDialogue();
+			_animator.SetBool(ANIM_PROMPT, false);
+			_animator.SetBool(ANIM_ACTIVE, false);
 			_room.Clear();
 		}
 
@@ -140,6 +150,16 @@ namespace Game.Entities.AI.Croupier
 			}
 			return choiceText;
 		}
+
+		protected override void OpenDialogue(DialogueData dialogue)
+		{
+			base.OpenDialogue(dialogue);
+			_animator.SetBool(ANIM_ACTIVE, true);
+		}
+
+		protected override void OnPromptShowing() => _animator.SetBool(ANIM_PROMPT, true);
+
+		protected override void OnChoiceShowing() => _animator.SetBool(ANIM_PROMPT, false);
 
 		#endregion
 
@@ -199,7 +219,17 @@ namespace Game.Entities.AI.Croupier
 				GameManager.PayWithRunMoney(_currentReward.MoneyBet);
 
 			yield return new WaitForSeconds(0.5f);
-			_roulette.Play(); 
+
+			// Roulette roll
+			_animator.SetBool(ANIM_PROMPT, false);
+			_animator.SetBool(ANIM_BET_OCCURING, true);
+			_animator.SetBool(ANIM_BET_LOST, !isWinningBet);
+			_roulette.Play();
+
+			// Quick state reset
+			yield return new WaitForSeconds(0.1f);
+			_animator.SetBool(ANIM_BET_OCCURING, false);
+
 			yield return new WaitForSeconds(_roulette._totalAnimationTime);
 			onPreparationDone?.Invoke();
 		}
