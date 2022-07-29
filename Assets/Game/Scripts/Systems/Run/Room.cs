@@ -16,7 +16,7 @@ namespace Game.Systems.Run
         BOSS
     }
 
-    public enum RoomRewardType { STARS, ITEM, NONE }
+    public enum RoomRewardType { GOLD, ITEM, NONE }
 
     public class Room
     {
@@ -40,7 +40,7 @@ namespace Game.Systems.Run
                 NextRooms.Add(new Room()
                 {
                     Type = room,
-                    Reward = IsRewardRoom(room) ? (Random.Range(0, 2) == 0 ? RoomRewardType.STARS : RoomRewardType.ITEM) : RoomRewardType.NONE
+                    Reward = IsRewardRoom(room) ? (Random.Range(0, 2) == 0 ? RoomRewardType.GOLD : RoomRewardType.ITEM) : RoomRewardType.NONE
                 });
 
                 if (IsUniqueRoom(room))

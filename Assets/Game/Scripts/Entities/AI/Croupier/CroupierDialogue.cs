@@ -143,7 +143,7 @@ namespace Game.Entities.AI.Croupier
 		{
 			switch (_betType)
 			{
-				case RoomRewardType.STARS:
+				case RoomRewardType.GOLD:
 					return choiceText.Replace("{BET}", GetMoneyBetChoiceText());
 				case RoomRewardType.ITEM:
 					return choiceText.Replace("{BET}", GetItemBetChoiceText());
@@ -198,7 +198,7 @@ namespace Game.Entities.AI.Croupier
 		{
 			switch (_betType)
 			{
-				case RoomRewardType.STARS:
+				case RoomRewardType.GOLD:
 					return _currentReward.MoneyBet >= _npc.MinimumBet && GameManager.CanRunMoneyAfford(_currentReward.MoneyBet);
 				case RoomRewardType.ITEM:
 					return _currentReward.ItemBet != null;
@@ -210,7 +210,7 @@ namespace Game.Entities.AI.Croupier
 		{
 			switch (_betType)
 			{
-				case RoomRewardType.STARS:
+				case RoomRewardType.GOLD:
 					_currentReward.MoneyBet = GetMoneyBet();
 					break;
 				case RoomRewardType.ITEM:
@@ -224,7 +224,7 @@ namespace Game.Entities.AI.Croupier
 			HideDialogue();
 
 			// Visually remove the money to bet
-			if (_betType == RoomRewardType.STARS)
+			if (_betType == RoomRewardType.GOLD)
 				GameManager.PayWithRunMoney(_currentReward.MoneyBet);
 
 			yield return new WaitForSeconds(0.5f);
@@ -247,7 +247,7 @@ namespace Game.Entities.AI.Croupier
 		{
 			switch (_betType)
 			{
-				case RoomRewardType.STARS:
+				case RoomRewardType.GOLD:
 					GameManager.RewardWithRunMoney(_currentReward.MoneyReward);
 					break;
 				case RoomRewardType.ITEM:

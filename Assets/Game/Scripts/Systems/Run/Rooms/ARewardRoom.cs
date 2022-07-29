@@ -19,7 +19,7 @@ namespace Game.Systems.Run.Rooms
 		{
 			switch (RoomData.Reward)
 			{
-				case RoomRewardType.STARS:
+				case RoomRewardType.GOLD:
 					int money = UnityEngine.Random.Range(RunManager.RunSettings.RoomMoneyReward.x, RunManager.RunSettings.RoomMoneyReward.y + 1);
 					money = Mathf.RoundToInt(_player.Scale(money, Entities.Shared.StatModifier.GoldGain));
 					GameManager.RewardWithRunMoney(money);

@@ -94,7 +94,7 @@ namespace Game.Entities.AI.Dealer
 
 			switch (_dealType)
 			{
-				case RoomRewardType.STARS:
+				case RoomRewardType.GOLD:
 					if (!CanDeal())
 						return "Try to hide that you have no item to sell.";
 					return $"Deal <sprite=\"{_deal.Item.Data.Graphics.name}\" index=0>" +
@@ -132,7 +132,7 @@ namespace Game.Entities.AI.Dealer
 
 			switch (_dealType)
 			{
-				case RoomRewardType.STARS:
+				case RoomRewardType.GOLD:
 					if (_inventory.Items.Length == 0)
 						item = null;
 					else
@@ -157,7 +157,7 @@ namespace Game.Entities.AI.Dealer
 		{
 			switch (_dealType)
 			{
-				case RoomRewardType.STARS:
+				case RoomRewardType.GOLD:
 					return _deal.Item != null;
 				case RoomRewardType.ITEM:
 					return GameManager.CanRunMoneyAfford(_deal.MoneyAmount);
@@ -169,7 +169,7 @@ namespace Game.Entities.AI.Dealer
 		{
 			switch (_dealType)
 			{
-				case RoomRewardType.STARS:
+				case RoomRewardType.GOLD:
 					_inventory.RemoveItemFromInventory(_deal.Item.Data, true);
 					GameManager.RewardWithRunMoney(_deal.MoneyAmount);
 					break;

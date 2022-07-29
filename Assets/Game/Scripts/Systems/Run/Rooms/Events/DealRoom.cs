@@ -45,7 +45,7 @@ namespace Game.Systems.Run.Rooms.Events
 
 			switch (RoomData.Reward)
 			{
-				case RoomRewardType.STARS:
+				case RoomRewardType.GOLD:
 					SpawnReward(_dialogue.CurrentDeal.MoneyAmount);
 					break;
 				case RoomRewardType.ITEM:
