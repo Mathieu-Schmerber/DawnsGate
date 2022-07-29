@@ -106,7 +106,7 @@ namespace Game.Entities.Player
 
 		protected virtual void TryAttack()
 		{
-			if (_attackTimer.IsOver() && _weapon.Data != null)
+			if (!GuiManager.IsMenuing && _attackTimer.IsOver() && _weapon.Data != null)
 			{
 				OnMeleeAttack();
 				_attackTimer.Restart();
@@ -142,10 +142,7 @@ namespace Game.Entities.Player
 
 		public void OnAnimationEnter(AnimatorStateInfo stateInfo) => _weapon.OnAnimationEnter(stateInfo);
 
-		public void OnAnimationExit(AnimatorStateInfo stateInfo)
-		{
-			_weapon.OnAnimationExit(stateInfo);
-		}
+		public void OnAnimationExit(AnimatorStateInfo stateInfo) => _weapon.OnAnimationExit(stateInfo);
 
 		#endregion
 	}
