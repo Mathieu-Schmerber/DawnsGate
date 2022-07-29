@@ -60,7 +60,8 @@ namespace Plugins.Nawlian.Lib.Systems.Menuing
 			if (_source)
 			{
 				_source.pitch = 1;
-				_source.PlayOneShot(_openAudio);
+				if (_openAudio)
+					_source.PlayOneShot(_openAudio);
 			}
 			_isOpen = true;
 		}
