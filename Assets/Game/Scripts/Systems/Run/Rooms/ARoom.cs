@@ -62,7 +62,7 @@ namespace Game.Systems.Run.Rooms
 
 		public void Activate()
 		{
-			_player.RefillArmor();
+			_player?.RefillArmor();
 			OnRoomActivated?.Invoke();
 			OnActivate();
 		}

@@ -48,6 +48,8 @@ namespace UnityToolbarExtender.Examples
 
 			if (selected != currentScene)
 			{
+				if (Application.isPlaying)
+					return;
 				EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo();
 				EditorSceneManager.OpenScene(scenes[selected].Path, OpenSceneMode.Single);
 			}

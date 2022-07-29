@@ -30,7 +30,10 @@ namespace Game.Systems.Run.Rooms.Events
 		{
 			base.OnClear();
 			foreach (var item in _wave.ToList())
+			{
+				item.GetComponent<EntityIdentity>().SetInvulnerable(false);
 				item.GetComponent<IDamageProcessor>().ApplyPassiveDamage(Mathf.Infinity);
+			}
 		}
 
 		protected override void OnActivate()
@@ -44,7 +47,8 @@ namespace Game.Systems.Run.Rooms.Events
 		{
 			for (int i = 0; i < number; i++)
 			{
-				SpawnEnemy();
+				if (!Cleared)
+					SpawnEnemy();
 				yield return new WaitForSeconds(delay);
 			}
 			onDone?.Invoke();
