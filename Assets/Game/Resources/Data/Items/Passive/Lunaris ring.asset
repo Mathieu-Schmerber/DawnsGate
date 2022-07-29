@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3453c080cf97d5b4493ae3569a2eac4d, type: 3}
-  m_Name: Demon's eye
+  m_Name: Lunaris ring
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -26,30 +26,33 @@ MonoBehaviour:
       Data: 0|System.RuntimeType, mscorlib
     - Name: 
       Entry: 1
-      Data: Game.Systems.Items.Active.DemonsEye, Assembly-CSharp
+      Data: Game.Systems.Items.Active.LunarisRing, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
-  Type: 2
-  Graphics: {fileID: 21300000, guid: bfd70a47b1e216442848bcd385de0b82, type: 3}
-  Tags: 8
+  Type: 1
+  Graphics: {fileID: 21300000, guid: 5a2feb3bfea934247bf8aaf6a6f37003, type: 3}
+  Tags: 40
   IsLifeItem: 0
   LifeCost: 0
-  Script: {fileID: 11500000, guid: 429bccb132ba2ca4caef33b15592576a, type: 3}
+  Script: {fileID: 11500000, guid: de2d709d1305925439f866cf8a80e9dd, type: 3}
   Stages:
-  - Damage: 0
-    Duration: 3
+  - Damage: 10
+    Duration: 5
     Amount: 10
     Range: 0
-  - Damage: 0
+  - Damage: 10
     Duration: 5
     Amount: 15
     Range: 0
-  - Damage: 0
-    Duration: 6
+  - Damage: 10
+    Duration: 5
     Amount: 20
     Range: 0
-  SpawnPrefab: {fileID: 0}
-  ApplyEffect: {fileID: 11400000, guid: 519d7686ad2fe734f96807e7b26411a8, type: 2}
-  Description: Heavy attacks have a {Amount}% chance of applying a {Effect} for {Duration}
-    seconds.
+  SpawnPrefab: {fileID: 868409571415310201, guid: 5b4cd21be37b9eb44bf6a2db9f172078,
+    type: 3}
+  ApplyEffect: {fileID: 0}
+  Description: 'Killing an enemy creates a {Amount}% chance of spawning a soul which
+    tracks and blows up nearby enemies.
+
+    The soul deals {Damage:u} damages.'

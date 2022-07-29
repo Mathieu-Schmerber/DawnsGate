@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33a9b64f172f3044d9470a871e6a07c3, type: 3}
-  m_Name: Lunaris ring
+  m_Script: {fileID: 11500000, guid: 3453c080cf97d5b4493ae3569a2eac4d, type: 3}
+  m_Name: Bat bat
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -26,29 +26,29 @@ MonoBehaviour:
       Data: 0|System.RuntimeType, mscorlib
     - Name: 
       Entry: 1
-      Data: Game.Systems.Items.StatItem, Assembly-CSharp
+      Data: Game.Systems.Items.Passive.BatBat, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
-  Type: 0
-  Graphics: {fileID: 21300000, guid: 5a2feb3bfea934247bf8aaf6a6f37003, type: 3}
-  Tags: 2
+  Type: 1
+  Graphics: {fileID: 21300000, guid: 8cd38dacf1c0f674ba17040d00015083, type: 3}
+  Tags: 8
   IsLifeItem: 0
   LifeCost: 0
-  Script: {fileID: 11500000, guid: 08926e121668c91429746aa3d5ff809b, type: 3}
+  Script: {fileID: 11500000, guid: fc478d027de614549988cd5d851a2fbd, type: 3}
   Stages:
-  - keyData: 0a000000
-    valueData:
-    - _baseModifier: 20
-      BonusModifier: 0
-      TemporaryModifier: 0
-  - keyData: 0a000000
-    valueData:
-    - _baseModifier: 30
-      BonusModifier: 0
-      TemporaryModifier: 0
-  - keyData: 0a000000
-    valueData:
-    - _baseModifier: 40
-      BonusModifier: 0
-      TemporaryModifier: 0
+  - Damage: 50
+    Duration: 0
+    Amount: 0
+    Range: 0
+  - Damage: 75
+    Duration: 0
+    Amount: 0
+    Range: 0
+  - Damage: 100
+    Duration: 0
+    Amount: 0
+    Range: 0
+  SpawnPrefab: {fileID: 0}
+  ApplyEffect: {fileID: 0}
+  Description: Increases damage up to {Damage:%} in proportion to your health loss.

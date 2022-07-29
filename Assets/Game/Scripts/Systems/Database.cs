@@ -105,7 +105,7 @@ namespace Databases
                 
                 public static Game.Systems.Items.StatItemData AssasinsBane = (Game.Systems.Items.StatItemData)Instance.DatabaseAsset.Sections[1].Sections[1].Assets[15].Prefab;
                 
-                public static Game.Systems.Items.StatItemData BatBat = (Game.Systems.Items.StatItemData)Instance.DatabaseAsset.Sections[1].Sections[1].Assets[16].Prefab;
+                public static Game.Systems.Items.SpecialItemData BatBat = (Game.Systems.Items.SpecialItemData)Instance.DatabaseAsset.Sections[1].Sections[1].Assets[16].Prefab;
                 
                 public static Game.Systems.Items.StatItemData BrokenWatch = (Game.Systems.Items.StatItemData)Instance.DatabaseAsset.Sections[1].Sections[1].Assets[17].Prefab;
                 
@@ -119,11 +119,11 @@ namespace Databases
                 
                 public static Game.Systems.Items.StatItemData LuckyStar = (Game.Systems.Items.StatItemData)Instance.DatabaseAsset.Sections[1].Sections[1].Assets[22].Prefab;
                 
-                public static Game.Systems.Items.StatItemData LunarisRing = (Game.Systems.Items.StatItemData)Instance.DatabaseAsset.Sections[1].Sections[1].Assets[23].Prefab;
+                public static Game.Systems.Items.SpecialItemData LunarisRing = (Game.Systems.Items.SpecialItemData)Instance.DatabaseAsset.Sections[1].Sections[1].Assets[23].Prefab;
                 
                 public static Game.Systems.Items.StatItemData MaliceShard = (Game.Systems.Items.StatItemData)Instance.DatabaseAsset.Sections[1].Sections[1].Assets[24].Prefab;
                 
-                public static Game.Systems.Items.StatItemData MeltingPot = (Game.Systems.Items.StatItemData)Instance.DatabaseAsset.Sections[1].Sections[1].Assets[25].Prefab;
+                public static Game.Systems.Items.SpecialItemData MeltingPot = (Game.Systems.Items.SpecialItemData)Instance.DatabaseAsset.Sections[1].Sections[1].Assets[25].Prefab;
                 
                 public static Game.Systems.Items.StatItemData OminousStick = (Game.Systems.Items.StatItemData)Instance.DatabaseAsset.Sections[1].Sections[1].Assets[26].Prefab;
                 

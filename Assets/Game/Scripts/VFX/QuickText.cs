@@ -40,20 +40,20 @@ namespace Game.VFX
 			Invoke(nameof(Release), _lifetime);
 		}
 
-		public static void ShowDamageText(Vector3 position, float amount)
-			=> ObjectPooler.Get(PoolIdEnum.QUICK_TEXT, position, Quaternion.identity, new TextData() { Text = $"-{amount}", Color = Color.red });
+		public static void ShowDamageText(Vector3 position, float amount, Color? color = null)
+			=> ObjectPooler.Get(PoolIdEnum.QUICK_TEXT, position, Quaternion.identity, new TextData() { Text = $"-{Mathf.Ceil(amount)}", Color = color.HasValue ? color.Value : Color.red });
 
 		public static void ShowHealText(Vector3 position, float amount)
-			=> ObjectPooler.Get(PoolIdEnum.QUICK_TEXT, position, Quaternion.identity, new TextData() { Text = $"+{amount}", Color = Color.green });
+			=> ObjectPooler.Get(PoolIdEnum.QUICK_TEXT, position, Quaternion.identity, new TextData() { Text = $"+{Mathf.Ceil(amount)}", Color = Color.green });
 
 		public static void ShowArmorText(Vector3 position, float amount)
 		{
 			if (amount == 0)
 				return;
-			ObjectPooler.Get(PoolIdEnum.QUICK_TEXT, position, Quaternion.identity, new TextData() { Text = $"{amount}", Color = Color.yellow });
+			ObjectPooler.Get(PoolIdEnum.QUICK_TEXT, position, Quaternion.identity, new TextData() { Text = $"{Mathf.Ceil(amount)}", Color = Color.yellow });
 		}
 
 		public static void ShowGoldText(Vector3 position, float amount)
-			=> ObjectPooler.Get(PoolIdEnum.QUICK_TEXT, position, Quaternion.identity, new TextData() { Text = $"{amount}<sprite=\"money\" index=0>", Color = Color.yellow });
+			=> ObjectPooler.Get(PoolIdEnum.QUICK_TEXT, position, Quaternion.identity, new TextData() { Text = $"{Mathf.Ceil(amount)}<sprite=\"money\" index=0>", Color = Color.yellow });
 	}
 }

@@ -1,10 +1,6 @@
+using Game.VFX;
 using Nawlian.Lib.Utils;
-using Pixelplacement;
-using Pixelplacement.TweenSystem;
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using StatModifier = Game.Entities.Shared.StatModifier;
@@ -49,7 +45,10 @@ namespace Game.Entities.Shared.Health
 
 			// Critical hit check
 			if (Random.Range(0, 100) <= attacker.Stats.Modifiers[StatModifier.CriticalRate]?.Value)
+			{
 				totalDamage = attacker.Scale(totalDamage, StatModifier.CriticalDamage);
+				QuickText.ShowDamageText(transform.position, totalDamage - damage, new Color(1, 0.25f, 0, 1));
+			}
 
 			// Apply damage
 			if (_identity.CurrentArmor > 0)
@@ -87,6 +86,8 @@ namespace Game.Entities.Shared.Health
 				_identity.CurrentArmor -= damage;
 			else
 				_identity.CurrentHealth -= damage;
+
+			QuickText.ShowDamageText(transform.position, damage, Color.magenta);
 
 			// Triggering event
 			OnDamaged?.Invoke(damage);
