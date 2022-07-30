@@ -184,13 +184,10 @@ namespace Game.Managers
 			}
 			_lobbyMoney = 0;
 			RewardWithLobbyMoney(save.LobbyMoney);
-			Debug.Log("Game data Loaded");
 		}
 
 		public object Save()
 		{
-			Debug.Log("Game data Saved");
-
 			return new SaveData()
 			{
 				LobbyMoney = _lobbyMoney,
