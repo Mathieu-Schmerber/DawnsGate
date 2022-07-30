@@ -54,7 +54,7 @@ namespace Game.UI
 		{
 			float ratio = GameManager.PlayerIdentity.CurrentHealth / GameManager.PlayerIdentity.MaxHealth;
 
-			_healthText.text = $"{GameManager.PlayerIdentity.CurrentHealth}/{GameManager.PlayerIdentity.MaxHealth}";
+			_healthText.text = $"{Mathf.CeilToInt(GameManager.PlayerIdentity.CurrentHealth)}/{GameManager.PlayerIdentity.MaxHealth}";
 			Tween.Value(_healthFill.fillAmount, ratio, (v) => _healthFill.fillAmount = v, 0.2f, 0, Tween.EaseOut);
 		}
 
