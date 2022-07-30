@@ -21,7 +21,7 @@ namespace Nawlian.Lib.Utils
             get
             {
                 if (_instance == null)
-                    _instance = GameObject.FindObjectOfType<T>(includeInactive: true);
+                    _instance = GameObject.FindObjectOfType<T>(includeInactive: false);
                 return _instance;
             }
         }

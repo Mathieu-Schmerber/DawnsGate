@@ -12,6 +12,11 @@ namespace Game
 
 			if (!boot.IsValid())
 				SceneManager.LoadScene("_Boot", LoadSceneMode.Additive);
+
+			var ui = SceneManager.GetSceneByName("_UI");
+
+			if (!ui.IsValid())
+				SceneManager.LoadScene("_UI", LoadSceneMode.Additive);
 		}
 	}
 }

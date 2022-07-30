@@ -11,6 +11,7 @@ namespace Game.UI
 	public class SceneTransition : AMenu
     {
 		private Material _material;
+		private Canvas _canvas;
 
 		public override bool RequiresGameFocus => true;
 
@@ -18,6 +19,12 @@ namespace Game.UI
 		{
 			base.Awake();
 			_material = GetComponentInChildren<Image>().material;
+			_canvas = GetComponent<Canvas>();
+		}
+
+		private void Start()
+		{
+			_canvas.worldCamera = GameManager.Camera.Camera;
 		}
 
 		private void Fade(float duration, bool toOpen)
