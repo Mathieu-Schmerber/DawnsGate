@@ -62,6 +62,9 @@ namespace Game.Entities.Miscellaneous
 
 		private void FixedUpdate()
 		{
+			if (_target == null)
+				return;
+
 			var heading = _target.transform.position - transform.position;
 			var rot = Quaternion.LookRotation(heading);
 
@@ -75,7 +78,7 @@ namespace Game.Entities.Miscellaneous
 			if (_target == null || !_target.gameObject.activeSelf)
 				_target = GetClosestEnemyCollider(Physics.OverlapSphere(transform.position, 1000f))?.transform;
 
-			if (!_exploded && Vector3.Distance(transform.position, _target.position) < 0.5f)
+			if (_target != null && !_exploded && Vector3.Distance(transform.position, _target.position) < 0.5f)
 			{
 				_exploded = true;
 				CancelInvoke(nameof(Release));

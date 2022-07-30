@@ -66,7 +66,7 @@ namespace Game.Entities.Player
 			GameManager.Traits.ForEach(x =>
 			{
 				for (int i = 0; i < GameManager.GetTraitUpgradeCount(x); i++)
-					GameManager.ApplyTrait(x);
+					GameManager.ApplySingleTraitUpgrade(x);
 			});
 		}
 

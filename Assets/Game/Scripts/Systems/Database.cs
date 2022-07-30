@@ -154,6 +154,27 @@ namespace Databases
                     return all.Where(x => x is T).Select(x => (T)x);
                 }
             }
+            
+            public class Lobby
+            {
+                
+                public static Game.Systems.Run.Lobby.TraitUpgradeData Armor = (Game.Systems.Run.Lobby.TraitUpgradeData)Instance.DatabaseAsset.Sections[1].Sections[2].Assets[0].Prefab;
+                
+                public static Game.Systems.Run.Lobby.TraitUpgradeData Damage = (Game.Systems.Run.Lobby.TraitUpgradeData)Instance.DatabaseAsset.Sections[1].Sections[2].Assets[1].Prefab;
+                
+                public static Game.Systems.Run.Lobby.TraitUpgradeData Health = (Game.Systems.Run.Lobby.TraitUpgradeData)Instance.DatabaseAsset.Sections[1].Sections[2].Assets[2].Prefab;
+                
+                public static Game.Systems.Run.Lobby.TraitUpgradeData Money = (Game.Systems.Run.Lobby.TraitUpgradeData)Instance.DatabaseAsset.Sections[1].Sections[2].Assets[3].Prefab;
+                
+                public static Game.Systems.Run.Lobby.TraitUpgradeData Revive = (Game.Systems.Run.Lobby.TraitUpgradeData)Instance.DatabaseAsset.Sections[1].Sections[2].Assets[4].Prefab;
+                
+                public static IEnumerable<T> All<T>()
+                    where T : UnityEngine.Object
+                {
+                    UnityEngine.Object[] all = new UnityEngine.Object[5] {Armor, Damage, Health, Money, Revive};
+                    return all.Where(x => x is T).Select(x => (T)x);
+                }
+            }
         }
     }
 }

@@ -1,13 +1,28 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using UnityEditor;
+
+#if UNITY_EDITOR
 using UnityEngine;
+#endif
 
 namespace Nawlian.Lib.Systems.Saving
 {
 	public static class SaveSystem
 	{
 		private static string _savePath => $"{Application.persistentDataPath}/save.data";
+
+#if UNITY_EDITOR
+
+		[MenuItem("Tools/Game/Wipe save files")]
+		public static void WipeSaveFile()
+		{
+			Wipe();
+			Debug.Log("The save files of the game were wiped.");
+		}
+
+#endif
 
 		/// <summary>
 		/// Saves the scene current state. <br/>

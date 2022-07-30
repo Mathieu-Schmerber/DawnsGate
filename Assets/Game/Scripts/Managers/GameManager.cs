@@ -2,23 +2,29 @@
 using Game.Entities.Player;
 using Game.Entities.Shared;
 using Game.Systems.Run.Lobby;
+using Nawlian.Lib.Systems.Saving;
 using Nawlian.Lib.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Game.Managers
 {
-	public class GameManager : ManagerSingleton<GameManager>
+	public class GameManager : ManagerSingleton<GameManager>, ISaveable
 	{
 		[SerializeField] private PlayerController _player;
 		[SerializeField] private PlayerIdentity _playerEntity;
 		[SerializeField] private CameraController _camera;
 		[SerializeField] private int _runMoney;
 		[SerializeField] private int _lobbyMoney;
+
+		[Serializable]
+		internal struct SaveData
+		{
+			public int LobbyMoney;
+			public Dictionary<string, int> TraitUpgrades;
+		}
 
 		#region Traits
 
@@ -42,7 +48,7 @@ namespace Game.Managers
 			return 0;
 		}
 
-		public static void ApplyTrait(TraitUpgradeData trait)
+		public static void ApplySingleTraitUpgrade(TraitUpgradeData trait)
 		{
 			float healthRatio = Instance._playerEntity.CurrentHealth / Instance._playerEntity.MaxHealth;
 			float armorRatio = Instance._playerEntity.MaxArmor == 0 ? 1 : Instance._playerEntity.CurrentArmor / Instance._playerEntity.MaxArmor;
@@ -50,6 +56,25 @@ namespace Game.Managers
 			Instance._playerEntity.Stats.Modifiers[trait.StatModified].BonusModifier += trait.IncrementPerUpgrade;
 			Instance._playerEntity.CurrentHealth = Mathf.Max(1, Instance._playerEntity.MaxHealth * healthRatio);
 			Instance._playerEntity.CurrentArmor = Instance._playerEntity.MaxArmor * armorRatio;
+		}
+
+		public static void ResetTraits()
+		{
+			float healthRatio = Instance._playerEntity.CurrentHealth / Instance._playerEntity.MaxHealth;
+			float armorRatio = Instance._playerEntity.MaxArmor == 0 ? 1 : Instance._playerEntity.CurrentArmor / Instance._playerEntity.MaxArmor;
+
+			foreach (TraitUpgradeData trait in Instance._traitUpgrades.Keys)
+				Instance._playerEntity.Stats.Modifiers[trait.StatModified].BonusModifier -= trait.IncrementPerUpgrade * Instance._traitUpgrades[trait];
+			Instance._playerEntity.CurrentHealth = Mathf.Max(1, Instance._playerEntity.MaxHealth * healthRatio);
+			Instance._playerEntity.CurrentArmor = Instance._playerEntity.MaxArmor * armorRatio;
+
+			Instance._traitUpgrades.Clear();
+		}
+
+		public static void ApplyMultipleTraitUpgrades(TraitUpgradeData trait)
+		{
+			for (int i = 0; i < Instance._traitUpgrades[trait]; i++)
+				ApplySingleTraitUpgrade(trait);
 		}
 
 		public static bool UpgradeTrait(TraitUpgradeData trait)
@@ -63,7 +88,7 @@ namespace Game.Managers
 			else
 				Instance._traitUpgrades.Add(trait, 1);
 			PayWithLobbyMoney(cost);
-			ApplyTrait(trait);
+			ApplySingleTraitUpgrade(trait);
 			return true;
 		}
 
@@ -114,6 +139,16 @@ namespace Game.Managers
 
 		#endregion
 
+		#region References
+
+		public static PlayerController Player => Instance?._player;
+		public static PlayerIdentity PlayerIdentity => Instance?._playerEntity;
+		public static CameraController Camera => Instance?._camera;
+
+		#endregion
+
+		#region Data lifecycle
+
 		private void OnEnable()
 		{
 			RunManager.OnRunEnded += RunManager_OnRunEnded;
@@ -129,11 +164,39 @@ namespace Game.Managers
 			PayWithRunMoney(_runMoney);
 		}
 
-		#region References
+		public void Load(object data)
+		{
+			SaveData save = (SaveData)data;
 
-		public static PlayerController Player => Instance?._player;
-		public static PlayerIdentity PlayerIdentity => Instance?._playerEntity;
-		public static CameraController Camera => Instance?._camera;
+			ResetTraits();
+			if (save.TraitUpgrades != null)
+			{
+				foreach (string id in save.TraitUpgrades.Keys)
+				{
+					TraitUpgradeData trait = Databases.Database.Data.Lobby.All<TraitUpgradeData>().FirstOrDefault(x => x.Id == id);
+
+					if (trait != null)
+					{
+						_traitUpgrades[trait] = save.TraitUpgrades[id];
+						ApplyMultipleTraitUpgrades(trait);
+					}
+				}
+			}
+			_lobbyMoney = 0;
+			RewardWithLobbyMoney(save.LobbyMoney);
+			Debug.Log("Game data Loaded");
+		}
+
+		public object Save()
+		{
+			Debug.Log("Game data Saved");
+
+			return new SaveData()
+			{
+				LobbyMoney = _lobbyMoney,
+				TraitUpgrades = _traitUpgrades.ToDictionary(x => x.Key.Id, x => x.Value)
+			};
+		}
 
 		#endregion
 	}

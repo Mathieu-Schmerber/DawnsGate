@@ -4,6 +4,7 @@ using Game.Systems.Run.Rooms;
 using Game.UI;
 using Nawlian.Lib.Extensions;
 using Nawlian.Lib.Systems.Pooling;
+using Nawlian.Lib.Systems.Saving;
 using Nawlian.Lib.Utils;
 using System;
 using System.Collections.Generic;
@@ -74,7 +75,11 @@ namespace Game.Managers
 
 		#region Tools
 
-		private static void OnLobbyEntered() => AudioManager.PlayTheme(RunSettings.LobbyTheme);
+		private static void OnLobbyEntered()
+		{
+			AudioManager.PlayTheme(RunSettings.LobbyTheme);
+			SaveSystem.Load();
+		}
 
 		public static void StartNewRun()
 		{
@@ -115,6 +120,7 @@ namespace Game.Managers
 		{
 			ChangeScene(RunSettings.LobbySceneName);
 			Instance._runState = RunState.LOBBY;
+			SaveSystem.Save();
 			OnLobbyEntered();
 			OnRunEnded?.Invoke();
 		}
