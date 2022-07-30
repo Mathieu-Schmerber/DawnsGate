@@ -31,6 +31,7 @@ namespace Game.Managers
 		public static event Action OnInventoryPressed;
 		public static event Action OnCancelPressed;
 		public static event Action OnSubmitPressed;
+		public static event Action OnEscapePressed;
 		public static event Action<ControlType> OnControlChanged;
 
 		#region Unity builtins
@@ -62,6 +63,7 @@ namespace Game.Managers
 			_controls.UI.Inventory.performed += (ctx) => OnInventoryPressed?.Invoke();
 			_controls.UI.Cancel.performed += (ctx) => OnCancelPressed?.Invoke();
 			_controls.UI.Submit.performed += (ctx) => OnSubmitPressed?.Invoke();
+			_controls.UI.Escape.performed += (ctx) => OnEscapePressed?.Invoke();
 		}
 
 		private void Start() => OnControlsChanged(_input);

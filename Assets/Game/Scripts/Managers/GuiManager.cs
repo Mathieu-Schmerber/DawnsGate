@@ -31,13 +31,23 @@ namespace Game.Managers
 			_group = _mainCanvas.GetComponent<CanvasGroup>();
 		}
 
+		public static T Get<T>() where T : IMenu
+		{
+			IMenu menu = Instance._menus[typeof(T)];
+
+			if (menu == null)
+				return default(T);
+			return (T)menu;
+		}
+
 		public static T OpenMenu<T>() where T : IMenu
 		{
 			IMenu menu = Instance._menus[typeof(T)];
 
 			if (menu == null)
 				return default(T);
-			menu.Open();
+			if (!menu.IsOpen)
+				menu.Open();
 			return (T)menu;
 		}
 
@@ -47,7 +57,8 @@ namespace Game.Managers
 
 			if (menu == null)
 				return default(T);
-			menu.Close();
+			if (menu.IsOpen)
+				menu.Close();
 			return (T)menu;
 		}
 

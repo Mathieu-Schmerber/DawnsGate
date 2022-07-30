@@ -128,6 +128,8 @@ namespace Plugins.Nawlian.Lib.Systems.Menuing
 			_isOpen = true;
 			_rect = GetComponent<RectTransform>();
 			_grp = GetComponent<CanvasGroup>();
+			_grp.blocksRaycasts = true;
+			_grp.interactable = true;
 			if (_rect != null)
 				_rect.anchoredPosition = _openPosition;
 			if (_grp != null)
@@ -140,6 +142,8 @@ namespace Plugins.Nawlian.Lib.Systems.Menuing
 			_isOpen = false;
 			_rect = GetComponent<RectTransform>();
 			_grp = GetComponent<CanvasGroup>();
+			_grp.blocksRaycasts = false;
+			_grp.interactable = false;
 			if (_rect != null)
 				_rect.anchoredPosition = _closePosition;
 			if (_grp != null)

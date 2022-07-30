@@ -1,16 +1,18 @@
 using Nawlian.Lib.Extensions;
 using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace Game.Tools
 {
 	[RequireComponent(typeof(AudioSource))]
-    public class RandomAudioClip : MonoBehaviour
+    public class RandomAudioClip : MonoBehaviour, ISelectHandler
     {
         [SerializeField] private AudioClip[] _clips;
-        [SerializeField] private bool _playOnEnable;
+		[SerializeField] private bool _playOnEnable;
+		[SerializeField] private bool _playOnSelect;
 
-        private AudioSource _audioSource;
+		private AudioSource _audioSource;
 
 		private void Awake()
 		{
@@ -41,6 +43,12 @@ namespace Game.Tools
 				return;
 			_clips = audios;
 			PlayRandom();
+		}
+
+		public void OnSelect(BaseEventData eventData)
+		{
+			if (_playOnSelect)
+				PlayRandom();
 		}
 	}
 }

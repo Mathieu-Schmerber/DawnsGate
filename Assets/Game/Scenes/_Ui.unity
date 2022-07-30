@@ -1658,7 +1658,10 @@ MonoBehaviour:
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects: []
+    ReferencedUnityObjects:
+    - {fileID: -604388753, guid: 7bf9c7ad64876144f97c12530aa15d9b, type: 3}
+    - {fileID: 1450390099, guid: 7bf9c7ad64876144f97c12530aa15d9b, type: 3}
+    - {fileID: 300067431, guid: 7bf9c7ad64876144f97c12530aa15d9b, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -1691,8 +1694,8 @@ MonoBehaviour:
       Entry: 3
       Data: 2
     - Name: $v
-      Entry: 6
-      Data: 
+      Entry: 10
+      Data: 0
     - Name: 
       Entry: 8
       Data: 
@@ -1703,8 +1706,8 @@ MonoBehaviour:
       Entry: 3
       Data: 0
     - Name: $v
-      Entry: 6
-      Data: 
+      Entry: 10
+      Data: 1
     - Name: 
       Entry: 8
       Data: 
@@ -1715,8 +1718,8 @@ MonoBehaviour:
       Entry: 3
       Data: 1
     - Name: $v
-      Entry: 6
-      Data: 
+      Entry: 10
+      Data: 2
     - Name: 
       Entry: 8
       Data: 
@@ -1932,7 +1935,10 @@ MonoBehaviour:
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects: []
+    ReferencedUnityObjects:
+    - {fileID: 1047783271, guid: 7bf9c7ad64876144f97c12530aa15d9b, type: 3}
+    - {fileID: 756951739, guid: 7bf9c7ad64876144f97c12530aa15d9b, type: 3}
+    - {fileID: 758269116, guid: 7bf9c7ad64876144f97c12530aa15d9b, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -1965,8 +1971,8 @@ MonoBehaviour:
       Entry: 3
       Data: 0
     - Name: $v
-      Entry: 6
-      Data: 
+      Entry: 10
+      Data: 0
     - Name: 
       Entry: 8
       Data: 
@@ -1977,8 +1983,8 @@ MonoBehaviour:
       Entry: 3
       Data: 1
     - Name: $v
-      Entry: 6
-      Data: 
+      Entry: 10
+      Data: 1
     - Name: 
       Entry: 8
       Data: 
@@ -1989,8 +1995,8 @@ MonoBehaviour:
       Entry: 3
       Data: 2
     - Name: $v
-      Entry: 6
-      Data: 
+      Entry: 10
+      Data: 2
     - Name: 
       Entry: 8
       Data: 
@@ -4173,7 +4179,10 @@ MonoBehaviour:
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects: []
+    ReferencedUnityObjects:
+    - {fileID: 1047783271, guid: 7bf9c7ad64876144f97c12530aa15d9b, type: 3}
+    - {fileID: 756951739, guid: 7bf9c7ad64876144f97c12530aa15d9b, type: 3}
+    - {fileID: 758269116, guid: 7bf9c7ad64876144f97c12530aa15d9b, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -4206,8 +4215,8 @@ MonoBehaviour:
       Entry: 3
       Data: 0
     - Name: $v
-      Entry: 6
-      Data: 
+      Entry: 10
+      Data: 0
     - Name: 
       Entry: 8
       Data: 
@@ -4218,8 +4227,8 @@ MonoBehaviour:
       Entry: 3
       Data: 1
     - Name: $v
-      Entry: 6
-      Data: 
+      Entry: 10
+      Data: 1
     - Name: 
       Entry: 8
       Data: 
@@ -4230,8 +4239,8 @@ MonoBehaviour:
       Entry: 3
       Data: 2
     - Name: $v
-      Entry: 6
-      Data: 
+      Entry: 10
+      Data: 2
     - Name: 
       Entry: 8
       Data: 
@@ -8035,6 +8044,8 @@ MonoBehaviour:
     SerializedFormat: 2
     SerializedBytes: 
     ReferencedUnityObjects:
+    - {fileID: -1674639013, guid: 7bf9c7ad64876144f97c12530aa15d9b, type: 3}
+    - {fileID: -623990810, guid: 7bf9c7ad64876144f97c12530aa15d9b, type: 3}
     - {fileID: 21300000, guid: 20f7844622a1fdf4b8e57c009905af47, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
@@ -8068,8 +8079,8 @@ MonoBehaviour:
       Entry: 3
       Data: 0
     - Name: $v
-      Entry: 6
-      Data: 
+      Entry: 10
+      Data: 0
     - Name: 
       Entry: 8
       Data: 
@@ -8080,8 +8091,8 @@ MonoBehaviour:
       Entry: 3
       Data: 1
     - Name: $v
-      Entry: 6
-      Data: 
+      Entry: 10
+      Data: 1
     - Name: 
       Entry: 8
       Data: 
@@ -8093,7 +8104,7 @@ MonoBehaviour:
       Data: 2
     - Name: $v
       Entry: 10
-      Data: 0
+      Data: 2
     - Name: 
       Entry: 8
       Data: 
@@ -9305,7 +9316,7 @@ GameObject:
   - component: {fileID: 761542415}
   - component: {fileID: 761542414}
   m_Layer: 5
-  m_Name: SceneTransition (1)
+  m_Name: SceneTransition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9546,6 +9557,8 @@ MonoBehaviour:
     SerializedFormat: 2
     SerializedBytes: 
     ReferencedUnityObjects:
+    - {fileID: -1674639013, guid: 7bf9c7ad64876144f97c12530aa15d9b, type: 3}
+    - {fileID: -623990810, guid: 7bf9c7ad64876144f97c12530aa15d9b, type: 3}
     - {fileID: 21300000, guid: 20f7844622a1fdf4b8e57c009905af47, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
@@ -9579,8 +9592,8 @@ MonoBehaviour:
       Entry: 3
       Data: 0
     - Name: $v
-      Entry: 6
-      Data: 
+      Entry: 10
+      Data: 0
     - Name: 
       Entry: 8
       Data: 
@@ -9591,8 +9604,8 @@ MonoBehaviour:
       Entry: 3
       Data: 1
     - Name: $v
-      Entry: 6
-      Data: 
+      Entry: 10
+      Data: 1
     - Name: 
       Entry: 8
       Data: 
@@ -9604,7 +9617,7 @@ MonoBehaviour:
       Data: 2
     - Name: $v
       Entry: 10
-      Data: 0
+      Data: 2
     - Name: 
       Entry: 8
       Data: 
@@ -10888,7 +10901,10 @@ MonoBehaviour:
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects: []
+    ReferencedUnityObjects:
+    - {fileID: 1047783271, guid: 7bf9c7ad64876144f97c12530aa15d9b, type: 3}
+    - {fileID: 756951739, guid: 7bf9c7ad64876144f97c12530aa15d9b, type: 3}
+    - {fileID: 758269116, guid: 7bf9c7ad64876144f97c12530aa15d9b, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -10921,8 +10937,8 @@ MonoBehaviour:
       Entry: 3
       Data: 0
     - Name: $v
-      Entry: 6
-      Data: 
+      Entry: 10
+      Data: 0
     - Name: 
       Entry: 8
       Data: 
@@ -10933,8 +10949,8 @@ MonoBehaviour:
       Entry: 3
       Data: 1
     - Name: $v
-      Entry: 6
-      Data: 
+      Entry: 10
+      Data: 1
     - Name: 
       Entry: 8
       Data: 
@@ -10945,8 +10961,8 @@ MonoBehaviour:
       Entry: 3
       Data: 2
     - Name: $v
-      Entry: 6
-      Data: 
+      Entry: 10
+      Data: 2
     - Name: 
       Entry: 8
       Data: 
@@ -11310,7 +11326,9 @@ MonoBehaviour:
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects: []
+    ReferencedUnityObjects:
+    - {fileID: -75144692, guid: 7bf9c7ad64876144f97c12530aa15d9b, type: 3}
+    - {fileID: -672571547, guid: 7bf9c7ad64876144f97c12530aa15d9b, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -11343,8 +11361,8 @@ MonoBehaviour:
       Entry: 3
       Data: 2
     - Name: $v
-      Entry: 6
-      Data: 
+      Entry: 10
+      Data: 0
     - Name: 
       Entry: 8
       Data: 
@@ -11355,8 +11373,8 @@ MonoBehaviour:
       Entry: 3
       Data: 0
     - Name: $v
-      Entry: 6
-      Data: 
+      Entry: 10
+      Data: 1
     - Name: 
       Entry: 8
       Data: 
@@ -11367,8 +11385,8 @@ MonoBehaviour:
       Entry: 3
       Data: 1
     - Name: $v
-      Entry: 6
-      Data: 
+      Entry: 10
+      Data: 1
     - Name: 
       Entry: 8
       Data: 
@@ -13396,7 +13414,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -800}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1083466380
@@ -13437,6 +13455,10 @@ MonoBehaviour:
   _openAudio: {fileID: 8300000, guid: 40055b92dc3f4724582614fc91dd0d94, type: 3}
   _reverseClipForClose: 1
   _closeAudio: {fileID: 0}
+  _moveableMenuPart: {fileID: 725755703}
+  _resumeBtn: {fileID: 1015459821}
+  _audioBtn: {fileID: 1481369923}
+  _menuBtn: {fileID: 1742625373}
 --- !u!82 &1083466383
 AudioSource:
   m_ObjectHideFlags: 0
@@ -13927,7 +13949,7 @@ GameObject:
   - component: {fileID: 1135410218}
   - component: {fileID: 1135410217}
   m_Layer: 0
-  m_Name: EventSystem (1)
+  m_Name: EventSystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15876,7 +15898,7 @@ GameObject:
   - component: {fileID: 1280299345}
   - component: {fileID: 1280299344}
   m_Layer: 5
-  m_Name: Canvas (1)
+  m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16445,7 +16467,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 300, y: 0}
+  m_AnchoredPosition: {x: 100, y: 0}
   m_SizeDelta: {x: 420, y: 450}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1327210712
@@ -16464,9 +16486,9 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1327210710}
   m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_Alpha: 0
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!114 &1327210714
 MonoBehaviour:
@@ -16482,7 +16504,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _duration: 0.2
   _openPosition: {x: 300, y: 0}
-  _closePosition: {x: 0, y: 0}
+  _closePosition: {x: 100, y: 0}
   _openAudio: {fileID: 8300000, guid: 40055b92dc3f4724582614fc91dd0d94, type: 3}
   _reverseClipForClose: 1
   _closeAudio: {fileID: 0}
@@ -17923,7 +17945,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Navigation.m_SelectOnRight
       value: 
-      objectReference: {fileID: 1702267566}
+      objectReference: {fileID: 0}
     - target: {fileID: 1310518864964992823, guid: 69618c5c8fe43ec4faba7c25d5a671ba,
         type: 3}
       propertyPath: m_Name
@@ -20270,6 +20292,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 2c1ccef9adbe1304ea484e8a06ef4af0, type: 3}
   - {fileID: 8300000, guid: afd594c577c0d2a4c8f1373fd95751e2, type: 3}
   _playOnEnable: 0
+  _playOnSelect: 0
 --- !u!82 &1755720021
 AudioSource:
   m_ObjectHideFlags: 0
@@ -21476,7 +21499,10 @@ MonoBehaviour:
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects: []
+    ReferencedUnityObjects:
+    - {fileID: 1047783271, guid: 7bf9c7ad64876144f97c12530aa15d9b, type: 3}
+    - {fileID: 756951739, guid: 7bf9c7ad64876144f97c12530aa15d9b, type: 3}
+    - {fileID: 758269116, guid: 7bf9c7ad64876144f97c12530aa15d9b, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -21509,8 +21535,8 @@ MonoBehaviour:
       Entry: 3
       Data: 0
     - Name: $v
-      Entry: 6
-      Data: 
+      Entry: 10
+      Data: 0
     - Name: 
       Entry: 8
       Data: 
@@ -21521,8 +21547,8 @@ MonoBehaviour:
       Entry: 3
       Data: 1
     - Name: $v
-      Entry: 6
-      Data: 
+      Entry: 10
+      Data: 1
     - Name: 
       Entry: 8
       Data: 
@@ -21533,8 +21559,8 @@ MonoBehaviour:
       Entry: 3
       Data: 2
     - Name: $v
-      Entry: 6
-      Data: 
+      Entry: 10
+      Data: 2
     - Name: 
       Entry: 8
       Data: 
@@ -22511,7 +22537,9 @@ MonoBehaviour:
     SerializedFormat: 2
     SerializedBytes: 
     ReferencedUnityObjects:
-    - {fileID: 21300000, guid: 94e90814ad034944bb2e27bd4bb51ec1, type: 3}
+    - {fileID: 1047783271, guid: 7bf9c7ad64876144f97c12530aa15d9b, type: 3}
+    - {fileID: 756951739, guid: 7bf9c7ad64876144f97c12530aa15d9b, type: 3}
+    - {fileID: 758269116, guid: 7bf9c7ad64876144f97c12530aa15d9b, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -22544,8 +22572,8 @@ MonoBehaviour:
       Entry: 3
       Data: 0
     - Name: $v
-      Entry: 6
-      Data: 
+      Entry: 10
+      Data: 0
     - Name: 
       Entry: 8
       Data: 
@@ -22556,8 +22584,8 @@ MonoBehaviour:
       Entry: 3
       Data: 1
     - Name: $v
-      Entry: 6
-      Data: 
+      Entry: 10
+      Data: 1
     - Name: 
       Entry: 8
       Data: 
@@ -22569,7 +22597,7 @@ MonoBehaviour:
       Data: 2
     - Name: $v
       Entry: 10
-      Data: 0
+      Data: 2
     - Name: 
       Entry: 8
       Data: 
