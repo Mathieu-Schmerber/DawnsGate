@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.0813257, g: 0.101462364, b: 0.29566896, a: 1}
+  m_IndirectSpecularColor: {r: 0.12597576, g: 0.11312384, b: 0.2986721, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 23800000, guid: f494bd245eeaf174da18e03414393b28, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: b3dee50f6f3bc564a96b1b7d08082563, type: 2}
 --- !u!1 &71943988
 GameObject:
   m_ObjectHideFlags: 0
@@ -1452,6 +1452,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Cloak_Low 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 646a7cb1a0c13eb458d22409d8151e6b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1801482543798626622, guid: 646a7cb1a0c13eb458d22409d8151e6b,
         type: 3}
@@ -2790,7 +2795,7 @@ MonoBehaviour:
   - {fileID: 6410346653642826883}
   - {fileID: 2858593939639831172}
   - {fileID: 3994609276102500336}
-  _drawGizmos: 0
+  _drawGizmos: 1
   Data: {fileID: 11400000, guid: e8c3c652bd3d66848b2193cfd17bee06, type: 2}
 --- !u!114 &5621188100699248005
 MonoBehaviour:
