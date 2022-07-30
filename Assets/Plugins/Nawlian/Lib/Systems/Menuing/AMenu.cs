@@ -35,11 +35,18 @@ namespace Plugins.Nawlian.Lib.Systems.Menuing
 			_source = GetComponent<AudioSource>();
 		}
 
-		public virtual void Close()
+		protected virtual void PlayOpenSound()
 		{
-			Hide();
-			_isOpen = false;
-			_isHidden = false;
+			if (_source)
+			{
+				_source.pitch = 1;
+				if (_openAudio)
+					_source.PlayOneShot(_openAudio);
+			}
+		}
+
+		protected virtual void PlayCloseSound()
+		{
 			if (_source != null)
 			{
 				if (_reverseClipForClose == false && _closeAudio != null)
@@ -56,21 +63,8 @@ namespace Plugins.Nawlian.Lib.Systems.Menuing
 			}
 		}
 
-		public virtual void Open()
+		protected virtual void ExecuteHideMovement()
 		{
-			Show();
-			if (_source)
-			{
-				_source.pitch = 1;
-				if (_openAudio)
-					_source.PlayOneShot(_openAudio);
-			}
-			_isOpen = true;
-		}
-
-		public virtual void Hide()
-		{
-			_isHidden = true;
 			if (_rect != null)
 				Tween.AnchoredPosition(_rect, _openPosition, _closePosition, _duration, 0, Tween.EaseIn);
 			if (_grp != null)
@@ -81,9 +75,8 @@ namespace Plugins.Nawlian.Lib.Systems.Menuing
 			}
 		}
 
-		public virtual void Show()
+		protected virtual void ExecuteShowMovement()
 		{
-			_isHidden = false;
 			if (_rect != null)
 				Tween.AnchoredPosition(_rect, _closePosition, _openPosition, _duration, 0, Tween.EaseOut);
 			if (_grp != null)
@@ -92,6 +85,33 @@ namespace Plugins.Nawlian.Lib.Systems.Menuing
 				_grp.interactable = true;
 				_grp.blocksRaycasts = true;
 			}
+		}
+
+		public virtual void Close()
+		{
+			Hide();
+			_isOpen = false;
+			_isHidden = false;
+			PlayCloseSound();
+		}
+
+		public virtual void Open()
+		{
+			Show();
+			PlayOpenSound();
+			_isOpen = true;
+		}
+
+		public virtual void Hide()
+		{
+			_isHidden = true;
+			ExecuteHideMovement();
+		}
+
+		public virtual void Show()
+		{
+			_isHidden = false;
+			ExecuteShowMovement();
 		}
 
 #if UNITY_EDITOR
