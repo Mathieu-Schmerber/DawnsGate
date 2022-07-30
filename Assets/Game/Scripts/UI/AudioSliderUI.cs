@@ -22,16 +22,19 @@ namespace Game.UI
 			_slider = GetComponent<Slider>();
 			_slider.minValue = -45;
 			_slider.maxValue = 0;
-
-			float value;
-			_audioGroup.audioMixer.GetFloat(_audioGroup.name, out value);
-			_slider.value = value;
-			_fill.fillAmount = 1 - (value / _slider.minValue) + _minimumFillAmount;
 		}
 
 		private void Start()
 		{
 			_slider.onValueChanged.AddListener(OnValueChanged);
+		}
+
+		public void Refresh()
+		{
+			float value;
+			_audioGroup.audioMixer.GetFloat(_audioGroup.name, out value);
+			_slider.value = value;
+			_fill.fillAmount = 1 - (value / _slider.minValue) + _minimumFillAmount;
 		}
 
 		private void OnValueChanged(float value)

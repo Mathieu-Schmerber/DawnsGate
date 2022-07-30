@@ -1,17 +1,26 @@
+using Nawlian.Lib.Systems.Saving;
 using Nawlian.Lib.Utils;
 using Pixelplacement;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Audio;
 
 namespace Game.Managers
 {
-	public class AudioManager : ManagerSingleton<AudioManager>
+	public class AudioManager : ManagerSingleton<AudioManager>, ISaveable
 	{
 		private Dictionary<AudioClip, AudioSource> _sources = new();
 		private AudioSource _currentTrack = null;
+		[SerializeField] private AudioMixerGroup[] _mixers;
 		[SerializeField] private AudioMixerGroup _musicMixerGroup;
+
+		[System.Serializable]
+		internal struct SaveData
+		{
+			public Dictionary<string, float> AudioLevels;
+		}
 
 		public static void PlayTheme(AudioClip clip, bool restart = true)
 		{
@@ -48,5 +57,23 @@ namespace Game.Managers
 			source.outputAudioMixerGroup = _musicMixerGroup;
 			_sources.Add(clip, source);
 		}
+
+		public void Load(object data)
+		{
+			SaveData save = (SaveData)data;
+
+			foreach (var group in _mixers)
+				group.audioMixer.SetFloat(group.name, save.AudioLevels[group.name]);
+		}
+
+		public object Save() => new SaveData()
+		{
+			AudioLevels = _mixers.ToDictionary(x => x.name, (x) =>
+			{
+				float value;
+				x.audioMixer.GetFloat(x.name, out value);
+				return value;
+			})
+		};
 	}
 }

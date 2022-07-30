@@ -83,6 +83,7 @@ namespace Game.Managers
 
 		public static void StartNewRun()
 		{
+			SaveSystem.Save();
 			AudioManager.PlayTheme(RunSettings.RunTheme);
 			CurrentRoomInstance = null;
 			Instance.ReachedRooms.Clear();
