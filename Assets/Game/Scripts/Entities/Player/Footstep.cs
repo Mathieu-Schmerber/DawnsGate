@@ -11,7 +11,7 @@ namespace Game.Entities.Player
 	{
 		private ParticleSystem _ps;
 		private Animator _animator;
-		private RandomAudioClip _rdn;
+		private LayeredRandomAudioClip _rdn;
 		private PlayerController _controller;
 
 		[SerializeField] private float _minSpeedToPlay;
@@ -21,24 +21,24 @@ namespace Game.Entities.Player
 		{
 			_ps = GetComponent<ParticleSystem>();
 			_animator = GameManager.Player.GetComponentInChildren<Animator>();
-			_rdn = GetComponent<RandomAudioClip>();
+			_rdn = GetComponent<LayeredRandomAudioClip>();
 			_controller = GameManager.Player;
 		}
 
-		public void Play()
+		public void Play(string tag)
 		{
 			float speed = _animator.GetFloat("Speed");
 
 			if (speed >= _minSpeedToPlay && speed <= _maxSpeedToPlay)
 				_ps.Play(true);
-			_rdn.PlayRandom();
+			_rdn.PlayRandom(tag);
 		}
 
 		private void OnTriggerEnter(Collider other)
 		{
 			if (other.isTrigger || !other.gameObject.isStatic || _controller.State != Shared.EntityState.IDLE)
 				return;
-			Play();
+			Play(other.tag);
 		}
 	}
 }

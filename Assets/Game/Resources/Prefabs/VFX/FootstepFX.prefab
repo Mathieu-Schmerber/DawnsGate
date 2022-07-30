@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1997195114372272021}
   - component: {fileID: 1997195114372272024}
   - component: {fileID: 6310616800903393470}
-  - component: {fileID: 7441715745994764851}
+  - component: {fileID: 1630336767934069219}
   m_Layer: 0
   m_Name: FootstepFX
   m_TagString: Untagged
@@ -5005,7 +5005,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &7441715745994764851
+--- !u!114 &1630336767934069219
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5014,13 +5014,117 @@ MonoBehaviour:
   m_GameObject: {fileID: 1997195114372272030}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3118503874c1d7f4284a811aafe2ce69, type: 3}
+  m_Script: {fileID: 11500000, guid: 37d335859dbe8244fb69efc9a254a9a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _clips:
-  - {fileID: 8300000, guid: e88f3a656ec2a9a45acae6e323e9367d, type: 3}
-  - {fileID: 8300000, guid: a1242873aa9ec804394ff28f05ec67f4, type: 3}
-  - {fileID: 8300000, guid: b89dd447dc6a5b1438cb30f424e860b7, type: 3}
-  - {fileID: 8300000, guid: 428999e3423be1f43a0e67c661384778, type: 3}
-  - {fileID: 8300000, guid: 47e4225a1922a8e459c7d25f90a721dd, type: 3}
-  _playOnEnable: 0
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 8300000, guid: e88f3a656ec2a9a45acae6e323e9367d, type: 3}
+    - {fileID: 8300000, guid: a1242873aa9ec804394ff28f05ec67f4, type: 3}
+    - {fileID: 8300000, guid: b89dd447dc6a5b1438cb30f424e860b7, type: 3}
+    - {fileID: 8300000, guid: 428999e3423be1f43a0e67c661384778, type: 3}
+    - {fileID: 8300000, guid: 47e4225a1922a8e459c7d25f90a721dd, type: 3}
+    - {fileID: 8300000, guid: 81167b67875579548975af075dbc8e6e, type: 3}
+    - {fileID: 8300000, guid: efc191eeccf5f584daba594a337beebc, type: 3}
+    - {fileID: 8300000, guid: 069c7947e2324b84eaad5e0b2b9c4aa7, type: 3}
+    - {fileID: 8300000, guid: 87c601059820e2c4e8c648ad4b61684c, type: 3}
+    - {fileID: 8300000, guid: a3d2149ac17b43640ad1aeb080a1e3aa, type: 3}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: _layeredClips
+      Entry: 7
+      Data: 0|System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[UnityEngine.AudioClip[],
+        UnityEngine.AudioModule]], mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 1|System.Collections.Generic.GenericEqualityComparer`1[[System.String,
+        mscorlib]], mscorlib
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: Untagged
+    - Name: $v
+      Entry: 7
+      Data: 2|UnityEngine.AudioClip[], UnityEngine.AudioModule
+    - Name: 
+      Entry: 12
+      Data: 5
+    - Name: 
+      Entry: 10
+      Data: 0
+    - Name: 
+      Entry: 10
+      Data: 1
+    - Name: 
+      Entry: 10
+      Data: 2
+    - Name: 
+      Entry: 10
+      Data: 3
+    - Name: 
+      Entry: 10
+      Data: 4
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: Glass
+    - Name: $v
+      Entry: 7
+      Data: 3|UnityEngine.AudioClip[], UnityEngine.AudioModule
+    - Name: 
+      Entry: 12
+      Data: 5
+    - Name: 
+      Entry: 10
+      Data: 5
+    - Name: 
+      Entry: 10
+      Data: 6
+    - Name: 
+      Entry: 10
+      Data: 7
+    - Name: 
+      Entry: 10
+      Data: 8
+    - Name: 
+      Entry: 10
+      Data: 9
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
