@@ -8,6 +8,9 @@ namespace Game
 		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
 		public static void Execute()
 		{
+			if (SceneManager.GetActiveScene().name == "Main Menu")
+				return;
+
 			var boot = SceneManager.GetSceneByName("_Boot");
 
 			if (!boot.IsValid())

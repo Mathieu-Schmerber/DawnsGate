@@ -66,6 +66,7 @@ namespace Nawlian.Lib.EditorTools.SceneSwitcher
 				switch (choice)
 				{
 					case 0:
+						EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo();
 						method = OpenSceneMode.Single;
 						break;
 					case 2:
@@ -74,7 +75,6 @@ namespace Nawlian.Lib.EditorTools.SceneSwitcher
 					default:
 						return;
 				}
-				EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo();
 				EditorSceneManager.OpenScene(scenes[selected].Path, method);
 			}
 		}
