@@ -59,7 +59,7 @@ namespace Nawlian.Lib.EditorTools.SceneSwitcher
 			Rect win = EditorGUIUtility.GetMainWindowPosition();
 
 			// Calculating window ratios to center the window next to the play button
-			Vector2 pos = new Vector2(win.x + (win.width * .43f) - (size.x * .5f), win.y + EditorGUIUtility.singleLineHeight * 1.5f);
+			Vector2 pos = new Vector2(win.x + (win.width * .415f) - (size.x * .5f), win.y + EditorGUIUtility.singleLineHeight * 1.5f);
 
 			window.Init();
 			window.position = new Rect(pos.x, pos.y, size.x, window.GetMinimumHeight());
