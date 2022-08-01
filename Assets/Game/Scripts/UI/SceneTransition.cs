@@ -11,7 +11,6 @@ namespace Game.UI
 	public class SceneTransition : AMenu
     {
 		private Material _material;
-		private Canvas _canvas;
 
 		public override bool RequiresGameFocus => true;
 
@@ -19,25 +18,18 @@ namespace Game.UI
 		{
 			base.Awake();
 			_material = GetComponentInChildren<Image>().material;
-			_canvas = GetComponent<Canvas>();
-		}
-
-		private void Start()
-		{
-			_canvas.worldCamera = GameManager.ActiveCamera;
 		}
 
 		private void Fade(float duration, bool toOpen)
 		{
-			float init = toOpen ? 1 : 0;
-			float end = toOpen ? 0 : 1;
+			float init = toOpen ? 0 : 1;
+			float end = toOpen ? 1 : 0;
 
 			Tween.Value(init, end, (value) => _material.SetFloat("_Progress", value), duration, 0);
 		}
 
 		public override void Open()
 		{
-			_canvas.worldCamera = GameManager.ActiveCamera;
 			GuiManager.CloseAll();
 			GuiManager.Hide(_duration);
 			Fade(_duration, true);
@@ -57,13 +49,13 @@ namespace Game.UI
 		public override void CloseEditorButton()
 		{
 			base.CloseEditorButton();
-			GetComponentInChildren<Image>().material.SetFloat("_Progress", 1);
+			GetComponentInChildren<Image>().material.SetFloat("_Progress", 0);
 		}
 
 		public override void OpenEditorButton()
 		{
 			base.OpenEditorButton();
-			GetComponentInChildren<Image>().material.SetFloat("_Progress", 0);
+			GetComponentInChildren<Image>().material.SetFloat("_Progress", 1);
 		}
 
 #endif

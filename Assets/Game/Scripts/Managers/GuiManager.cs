@@ -14,7 +14,6 @@ namespace Game.Managers
 	public class GuiManager : ManagerSingleton<GuiManager>
 	{
 		[SerializeField] private Canvas _mainCanvas;
-		[SerializeField] private Canvas _sceneTransitionCanvas;
 
 		private CanvasGroup _group;
 		private Dictionary<Type, IMenu> _menus = new();
@@ -27,7 +26,6 @@ namespace Game.Managers
 		private void Awake()
 		{
 			_mainCanvas.GetComponentsInChildren<IMenu>(includeInactive: true).ForEach(x => _menus.Add(x.GetType(), x));
-			_sceneTransitionCanvas.GetComponentsInChildren<IMenu>().ForEach(x => _menus.Add(x.GetType(), x));
 			_inventoryUi = _mainCanvas.GetComponentInChildren<InventorySlotSelector>();
 			_group = _mainCanvas.GetComponent<CanvasGroup>();
 			_resourceSwitcher = GetComponent<ResourceSwitcher>();
