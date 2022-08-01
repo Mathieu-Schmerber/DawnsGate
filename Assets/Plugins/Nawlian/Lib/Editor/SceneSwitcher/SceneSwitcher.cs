@@ -46,6 +46,8 @@ namespace Nawlian.Lib.EditorTools.SceneSwitcher
 
 		private static void OnToolbarGUI()
 		{
+			if (Application.isPlaying)
+				return;
 			SceneItem[] scenes = SceneHelper.GetAllSceneInProject().Select(x => new SceneItem(x.Path, x.BuildIndex)).OrderBy(x => x.DisplayName).ToArray();
 
 			GUILayout.FlexibleSpace();
@@ -57,9 +59,6 @@ namespace Nawlian.Lib.EditorTools.SceneSwitcher
 
 			if (selected != currentScene)
 			{
-				if (Application.isPlaying)
-					return;
-
 				OpenSceneMode method;
 				int choice = EditorUtility.DisplayDialogComplex("Scene switcher", $"How do you want to load {scenes[selected].Name} ?", "Change scene", "Cancel", "Add scene");
 
