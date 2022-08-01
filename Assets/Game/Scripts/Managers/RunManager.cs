@@ -171,10 +171,7 @@ namespace Game.Managers
 		public static void ArtificiallyLaunchScene()
 		{
 			OnBeforeSceneSwitched?.Invoke();
-			Awaiter.WaitAndExecute(1f, () => SceneTransition.EndTransition(() =>
-			{
-				OnSceneSwitched?.Invoke();
-			}));
+			OnSceneSwitched?.Invoke();
 		}
 #endif
 
