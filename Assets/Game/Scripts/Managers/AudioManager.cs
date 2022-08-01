@@ -13,6 +13,7 @@ namespace Game.Managers
 	{
 		private Dictionary<AudioClip, AudioSource> _sources = new();
 		private AudioSource _currentTrack = null;
+		[SerializeField] private AudioClip _mainMenuMusic;
 		[SerializeField] private AudioMixerGroup[] _mixers;
 		[SerializeField] private AudioMixerGroup _musicMixerGroup;
 
@@ -21,6 +22,8 @@ namespace Game.Managers
 		{
 			public Dictionary<string, float> AudioLevels;
 		}
+
+		private void Start() => PlayTheme(_mainMenuMusic);
 
 		public static void PlayTheme(AudioClip clip, bool restart = true)
 		{

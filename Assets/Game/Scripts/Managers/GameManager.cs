@@ -2,22 +2,21 @@
 using Game.Entities.Player;
 using Game.Entities.Shared;
 using Game.Systems.Run.Lobby;
+using Game.UI;
 using Nawlian.Lib.Systems.Saving;
 using Nawlian.Lib.Utils;
+using Sirenix.OdinInspector;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Game.Managers
 {
 	public class GameManager : ManagerSingleton<GameManager>, ISaveable
 	{
-		[SerializeField] private PlayerController _player;
-		[SerializeField] private PlayerIdentity _playerEntity;
-		[SerializeField] private CameraController _camera;
-		[SerializeField] private int _runMoney;
-		[SerializeField] private int _lobbyMoney;
+		#region Types
 
 		[Serializable]
 		internal struct SaveData
@@ -25,6 +24,74 @@ namespace Game.Managers
 			public int LobbyMoney;
 			public Dictionary<string, int> TraitUpgrades;
 		}
+
+		#endregion
+
+		[Title("Gameplay references")]
+		[SerializeField] private PlayerController _player;
+		[SerializeField] private PlayerIdentity _playerEntity;
+		[SerializeField] private CameraController _cameraController;
+		[SerializeField] private Transform _cameraParent;
+
+		[Title("Currencies")]
+		[SerializeField] private int _runMoney;
+		[SerializeField] private int _lobbyMoney;
+
+		private ResourceSwitcher _switcher;
+
+		public static Camera ActiveCamera => Instance._cameraParent.GetComponentsInChildren<Camera>().FirstOrDefault(x => x.gameObject.activeSelf);
+
+		#region Game state
+
+		private void Awake()
+		{
+			_switcher = GetComponent<ResourceSwitcher>();
+			BootInit();
+		}
+
+#if UNITY_EDITOR
+		private void Start()
+		{
+			if (!SceneManager.GetSceneByName("Main Menu").IsValid())
+				StartGameFromEditor();
+		}
+
+		public static void StartGameFromEditor()
+		{
+			GuiManager.DisplayGameplayUI();
+			Instance._switcher.SwitchGameplayResources(true);
+			RunManager.ArtificiallyLaunchScene();
+		}
+
+#endif
+
+		private void BootInit() => _switcher.SwitchGameplayResources(false);
+
+		public static void StartGame()
+		{
+			GuiManager.DisplayGameplayUI();
+			SceneTransition.StartTransition(() =>
+			{
+				SceneManager.UnloadSceneAsync("Main Menu");
+				var operation = SceneManager.LoadSceneAsync(RunManager.RunSettings.LobbySceneName, LoadSceneMode.Additive);
+
+				operation.completed += (op) =>
+				{
+					Instance._switcher.SwitchGameplayResources(true);
+					SceneManager.SetActiveScene(SceneManager.GetSceneByName(RunManager.RunSettings.LobbySceneName));
+					SceneTransition.EndTransition(() => RunManager.OnLobbyEntered());
+				};
+			});
+		}
+
+		public static void StopGame()
+		{
+			SceneManager.LoadScene("Main Menu", LoadSceneMode.Single);
+			SceneManager.LoadScene("_Boot", LoadSceneMode.Additive);
+			SceneManager.LoadScene("_UI", LoadSceneMode.Additive);
+		}
+
+		#endregion
 
 		#region Traits
 
@@ -143,7 +210,7 @@ namespace Game.Managers
 
 		public static PlayerController Player => Instance?._player;
 		public static PlayerIdentity PlayerIdentity => Instance?._playerEntity;
-		public static CameraController Camera => Instance?._camera;
+		public static CameraController Camera => Instance?._cameraController;
 
 		#endregion
 

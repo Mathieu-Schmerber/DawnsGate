@@ -1,8 +1,10 @@
-﻿using Nawlian.Lib.Systems.Saving;
+﻿using Game.Managers;
+using Nawlian.Lib.Systems.Saving;
 using Plugins.Nawlian.Lib.Systems.Menuing;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace Game.UI
@@ -38,7 +40,10 @@ namespace Game.UI
 
 		private void StartClicked()
 		{
-
+			GameManager.StartGame();
+			//SceneManager.LoadScene(RunManager.RunSettings.LobbySceneName); 
+			//SceneManager.LoadScene("_Boot", LoadSceneMode.Additive);
+			//SceneManager.LoadScene("_UI", LoadSceneMode.Additive);
 		}
 
 		private void AudioClicked()

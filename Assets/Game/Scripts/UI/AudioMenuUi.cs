@@ -1,4 +1,5 @@
-﻿using Nawlian.Lib.Extensions;
+﻿using Game.Tools;
+using Nawlian.Lib.Extensions;
 using Plugins.Nawlian.Lib.Systems.Menuing;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -7,7 +8,7 @@ using UnityEngine.UI;
 
 namespace Game.UI
 {
-	public class AudioMenuUi : AMenu
+	public class AudioMenuUi : ACloseableMenu
 	{
 		[Title("References")]
 		[SerializeField] private Button _closeBtn;

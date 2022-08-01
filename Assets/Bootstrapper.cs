@@ -8,16 +8,14 @@ namespace Game
 		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
 		public static void Execute()
 		{
-			if (SceneManager.GetActiveScene().name == "Main Menu")
-				return;
+			//if (SceneManager.GetActiveScene().name == "Main Menu")
+			//	return;
 
 			var boot = SceneManager.GetSceneByName("_Boot");
-
 			if (!boot.IsValid())
 				SceneManager.LoadScene("_Boot", LoadSceneMode.Additive);
 
 			var ui = SceneManager.GetSceneByName("_UI");
-
 			if (!ui.IsValid())
 				SceneManager.LoadScene("_UI", LoadSceneMode.Additive);
 		}

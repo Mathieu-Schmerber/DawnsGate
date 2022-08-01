@@ -19,16 +19,32 @@ namespace Game.Managers
 		private CanvasGroup _group;
 		private Dictionary<Type, IMenu> _menus = new();
 		private InventorySlotSelector _inventoryUi;
+		private ResourceSwitcher _resourceSwitcher;
 
 		[ShowInInspector, ReadOnly] public static bool IsMenuing => Instance?._menus?.Any(x => x.Value.IsOpen && x.Value.RequiresGameFocus) ?? false;
 		public static InventorySlotSelector InventoryUI => Instance._inventoryUi;
 
 		private void Awake()
 		{
-			_mainCanvas.GetComponentsInChildren<IMenu>().ForEach(x => _menus.Add(x.GetType(), x));
+			_mainCanvas.GetComponentsInChildren<IMenu>(includeInactive: true).ForEach(x => _menus.Add(x.GetType(), x));
 			_sceneTransitionCanvas.GetComponentsInChildren<IMenu>().ForEach(x => _menus.Add(x.GetType(), x));
 			_inventoryUi = _mainCanvas.GetComponentInChildren<InventorySlotSelector>();
 			_group = _mainCanvas.GetComponent<CanvasGroup>();
+			_resourceSwitcher = GetComponent<ResourceSwitcher>();
+			DisplayMenuUI();
+		}
+
+		public static void DisplayGameplayUI()
+		{
+			CloseMenu<MainMenuUi>();
+			CloseMenu<CreditMenuUi>();
+			CloseMenu<AudioMenuUi>();
+			Instance._resourceSwitcher.SwitchGameplayResources(true);
+		}
+
+		public static void DisplayMenuUI()
+		{
+			Instance._resourceSwitcher.SwitchGameplayResources(false);
 		}
 
 		public static T Get<T>() where T : IMenu

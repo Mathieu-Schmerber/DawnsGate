@@ -19,6 +19,7 @@ namespace Game.Managers
 {
 	public enum RunState
 	{
+		NONE,
 		LOBBY,
 		IN_RUN
 	}
@@ -32,7 +33,7 @@ namespace Game.Managers
 		private string _currentRoomScene;
 		private int _currentRoom;
 		private Room _room;
-		private RunState _runState = RunState.LOBBY;
+		private RunState _runState = RunState.NONE;
 		private Dictionary<RoomType, string[]> _scenes = new();
 		private PlayerDamageable _damageable;
 		[SerializeField] private ARoom _currentInstance;
@@ -47,6 +48,7 @@ namespace Game.Managers
 		public List<string> ReachedRooms = new();
 
 		public static event Action OnRunEnded;
+		public static event Action OnBeforeSceneSwitched;
 		public static event Action OnSceneSwitched;
 
 		#endregion
@@ -61,8 +63,6 @@ namespace Game.Managers
 			_damageable = GameManager.Player.GetComponent<PlayerDamageable>();
 		}
 
-		private void Start() => OnLobbyEntered();
-
 		private void OnEnable()
 		{
 			_damageable.OnPlayerDeath += EndRun;
@@ -75,8 +75,9 @@ namespace Game.Managers
 
 		#region Tools
 
-		private static void OnLobbyEntered()
+		public static void OnLobbyEntered()
 		{
+			Instance._runState = RunState.LOBBY;
 			AudioManager.PlayTheme(RunSettings.LobbyTheme);
 			SaveSystem.Load();
 		}
@@ -120,9 +121,8 @@ namespace Game.Managers
 		public static void EndRun()
 		{
 			ChangeScene(RunSettings.LobbySceneName);
-			Instance._runState = RunState.LOBBY;
 			SaveSystem.Save();
-			OnLobbyEntered();
+			OnLobbyEntered(); // <= Maybe call this when the scene has been loaded ?
 			OnRunEnded?.Invoke();
 		}
 
@@ -159,11 +159,24 @@ namespace Game.Managers
 
 		private static void OnSceneLoaded(AsyncOperation obj)
 		{
+			SceneManager.SetActiveScene(SceneManager.GetSceneByName(Instance._currentRoomScene));
+			OnBeforeSceneSwitched?.Invoke();
 			Awaiter.WaitAndExecute(1f, () => SceneTransition.EndTransition(() =>
 			{
 				OnSceneSwitched?.Invoke();
 			}));
 		}
+
+#if UNITY_EDITOR
+		public static void ArtificiallyLaunchScene()
+		{
+			OnBeforeSceneSwitched?.Invoke();
+			Awaiter.WaitAndExecute(1f, () => SceneTransition.EndTransition(() =>
+			{
+				OnSceneSwitched?.Invoke();
+			}));
+		}
+#endif
 
 		#endregion
 	}

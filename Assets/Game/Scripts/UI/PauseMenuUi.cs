@@ -4,6 +4,7 @@ using Pixelplacement;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace Game.UI
@@ -47,7 +48,7 @@ namespace Game.UI
 
 		private void ResumeBtn() => Close();
 		private void AudioBtn() => GuiManager.OpenMenu<PauseMenuAudioUi>();
-		private void MenuBtn() { }
+		private void MenuBtn() => GameManager.StopGame();
 
 		#endregion
 

@@ -24,7 +24,7 @@ namespace Game.UI
 
 		private void Start()
 		{
-			_canvas.worldCamera = GameManager.Camera.Camera;
+			_canvas.worldCamera = GameManager.ActiveCamera;
 		}
 
 		private void Fade(float duration, bool toOpen)
@@ -37,6 +37,7 @@ namespace Game.UI
 
 		public override void Open()
 		{
+			_canvas.worldCamera = GameManager.ActiveCamera;
 			GuiManager.CloseAll();
 			GuiManager.Hide(_duration);
 			Fade(_duration, true);
