@@ -170,6 +170,7 @@ namespace Game.Managers
 #if UNITY_EDITOR
 		public static void ArtificiallyLaunchScene()
 		{
+			AudioManager.PlayTheme(RunSettings.LobbyTheme);
 			OnBeforeSceneSwitched?.Invoke();
 			OnSceneSwitched?.Invoke();
 		}

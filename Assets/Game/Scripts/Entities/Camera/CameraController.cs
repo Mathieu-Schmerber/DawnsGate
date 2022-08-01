@@ -1,6 +1,7 @@
 using Pixelplacement;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Game.Entities.Camera
@@ -10,13 +11,9 @@ namespace Game.Entities.Camera
 		[SerializeField] private Vector3 _offset;
 		[SerializeField] private Transform _target;
 		[SerializeField] private float _lerpAmount = 0.123f;
+		[SerializeField] private UnityEngine.Camera _cam;
 
-		public UnityEngine.Camera Camera { get; private set; }
-
-		private void Awake()
-		{
-			Camera = UnityEngine.Camera.main;
-		}
+		public UnityEngine.Camera Camera => _cam;
 
 		private void LateUpdate()
 		{
