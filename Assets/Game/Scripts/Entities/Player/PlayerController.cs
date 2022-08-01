@@ -58,13 +58,6 @@ namespace Game.Entities.Player
 
 		protected override void Update()
 		{
-			Ray ray = GameManager.Camera.Camera.ScreenPointToRay(_inputs.MousePosition);
-
-			if (_mousePlane.Raycast(ray, out float distance))
-			{
-				Debug.DrawLine(transform.position, ray.GetPoint(distance), Color.cyan);
-			}
-
 			base.Update();
 			if (State == EntityState.IDLE)
 			{
