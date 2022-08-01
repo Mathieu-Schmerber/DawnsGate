@@ -7,6 +7,7 @@ using System.Linq;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Nawlian.Lib.EditorTools.SceneSwitcher
 {
@@ -50,6 +51,7 @@ namespace Nawlian.Lib.EditorTools.SceneSwitcher
 
 		private SceneItem[] _scenes;
 		private Vector2 _scollPos;
+		private bool _loading;
 		private int _activeScene;
 		
 		public static void Open()
@@ -84,8 +86,12 @@ namespace Nawlian.Lib.EditorTools.SceneSwitcher
 			_scenes = SceneHelper.GetAllSceneInProject().Select(x => new SceneItem(x.Path, x.BuildIndex)).OrderBy(x => x.DisplayName).ToArray();
 			_activeScene = GetActiveSceneIndex(_scenes);
 		}
+		
+		private void CloseWindow()
+		{
+			Close();
+		}
 
-		private void CloseWindow() => Close();
 		private void OnLostFocus() => CloseWindow();
 
 		private void OnGUI()
@@ -93,6 +99,7 @@ namespace Nawlian.Lib.EditorTools.SceneSwitcher
 			var evenBtn = EditorStyles.toolbarButton;
 			var oddBtn = BackgroundStyle.Get(EditorStyles.toolbarButton, new Color(.2f, .2f, .2f, 1f));
 			_scollPos = EditorGUILayout.BeginScrollView(_scollPos);
+
 			for (int i = 0; i < _scenes.Length; i++)
 			{
 				SceneItem item = _scenes[i];
@@ -102,7 +109,7 @@ namespace Nawlian.Lib.EditorTools.SceneSwitcher
 				{
 					EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo();
 					EditorSceneManager.OpenScene(item.Path, OpenSceneMode.Single);
-					CloseWindow();
+					Close();
 				}
 				if (GUILayout.Button("+", GUILayout.Width(20), GUILayout.ExpandHeight(true)))
 					EditorSceneManager.OpenScene(item.Path, OpenSceneMode.Additive);

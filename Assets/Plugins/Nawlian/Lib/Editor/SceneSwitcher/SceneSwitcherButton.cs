@@ -26,7 +26,7 @@ namespace Nawlian.Lib.EditorTools.SceneSwitcher
 				return;
 
 			GUILayout.FlexibleSpace();
-			bool pressed = GUILayout.Button($"{EditorSceneManager.GetActiveScene().name}", EditorStyles.layerMaskField, GUILayout.Width(200));
+			bool pressed = GUILayout.Button($"{EditorSceneManager.GetActiveScene().name}", EditorStyles.layerMaskField, GUILayout.Width(200), GUILayout.Height(25));
 
 			if (pressed)
 				SceneSwitcherWindow.Open();
