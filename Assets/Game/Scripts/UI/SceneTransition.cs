@@ -31,14 +31,12 @@ namespace Game.UI
 		public override void Open()
 		{
 			GuiManager.CloseAll();
-			GuiManager.Hide(_duration);
 			Fade(_duration, true);
 			base.Open();
 		}
 
 		public override void Close()
 		{
-			GuiManager.Show(_duration);
 			GuiManager.OpenMenu<PlayerUi>();
 			Fade(_duration, false);
 			base.Close();
@@ -56,6 +54,11 @@ namespace Game.UI
 		{
 			base.OpenEditorButton();
 			GetComponentInChildren<Image>().material.SetFloat("_Progress", 1);
+		}
+
+		private void OnValidate()
+		{
+			CloseEditorButton();
 		}
 
 #endif
