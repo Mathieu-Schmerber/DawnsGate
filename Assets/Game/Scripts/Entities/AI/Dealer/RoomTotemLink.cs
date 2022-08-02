@@ -19,7 +19,8 @@ namespace Game.Entities.AI.Dealer
 		public void SetTarget(Transform target)
 		{
 			_target = target;
-			_lr.enabled = _target != null;
+			if (_lr)
+				_lr.enabled = _target != null;
 		}
 
 		private void Update()
