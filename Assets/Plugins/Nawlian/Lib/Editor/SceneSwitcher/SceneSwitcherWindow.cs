@@ -1,4 +1,5 @@
 ﻿using Nawlian.Lib.EditorTools.Helpers;
+using Nawlian.Lib.Utils.Editor;
 using Sirenix.OdinInspector;
 using Sirenix.OdinInspector.Editor;
 using System;
@@ -30,8 +31,12 @@ namespace Nawlian.Lib.EditorTools.SceneSwitcher
 		}
 		#endregion
 
-		public static class BackgroundStyle
+		public static class Styles
 		{
+			public static GUIStyle WindowStyle = new GUIStyle(GUIStyle.none)
+				.WithNormalBackground(GUIHelper.lightColor)
+				.WithPadding(new RectOffset(1, 1, 1, 1));
+
 			public static GUIStyle Get(GUIStyle baseStyle, Color normal)
 			{
 				GUIStyle style = new(baseStyle);
@@ -69,7 +74,7 @@ namespace Nawlian.Lib.EditorTools.SceneSwitcher
 			window.Focus();
 		}
 
-		private float GetMinimumHeight() => (_scenes.Length + 1) * EditorGUIUtility.singleLineHeight + 7;
+		private float GetMinimumHeight() => (_scenes.Length + 1) * EditorGUIUtility.singleLineHeight + 8;
 
 		private static int GetActiveSceneIndex(SceneItem[] array)
 		{
@@ -97,25 +102,33 @@ namespace Nawlian.Lib.EditorTools.SceneSwitcher
 		private void OnGUI()
 		{
 			var evenBtn = EditorStyles.toolbarButton;
-			var oddBtn = BackgroundStyle.Get(EditorStyles.toolbarButton, new Color(.2f, .2f, .2f, 1f));
-			_scollPos = EditorGUILayout.BeginScrollView(_scollPos);
+			var oddBtn = Styles.Get(EditorStyles.toolbarButton, new Color(.2f, .2f, .2f, 1f));
 
-			for (int i = 0; i < _scenes.Length; i++)
+			EditorGUILayout.BeginVertical(Styles.WindowStyle);
 			{
-				SceneItem item = _scenes[i];
-
-				EditorGUILayout.BeginHorizontal(i % 2 == 0 ? evenBtn : oddBtn);
-				if (GUILayout.Button(item.DisplayName, i == _activeScene ? EditorStyles.boldLabel : EditorStyles.label))
+				_scollPos = EditorGUILayout.BeginScrollView(_scollPos);
 				{
-					EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo();
-					EditorSceneManager.OpenScene(item.Path, OpenSceneMode.Single);
-					Close();
+					for (int i = 0; i < _scenes.Length; i++)
+					{
+						SceneItem item = _scenes[i];
+
+						EditorGUILayout.BeginHorizontal(i % 2 == 0 ? evenBtn : oddBtn);
+						{
+							if (GUILayout.Button(item.DisplayName, i == _activeScene ? EditorStyles.boldLabel : EditorStyles.label))
+							{
+								EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo();
+								EditorSceneManager.OpenScene(item.Path, OpenSceneMode.Single);
+								Close();
+							}
+							if (GUILayout.Button("+", GUILayout.Width(20), GUILayout.ExpandHeight(true)))
+								EditorSceneManager.OpenScene(item.Path, OpenSceneMode.Additive);
+						}
+						EditorGUILayout.EndHorizontal();
+					}
 				}
-				if (GUILayout.Button("+", GUILayout.Width(20), GUILayout.ExpandHeight(true)))
-					EditorSceneManager.OpenScene(item.Path, OpenSceneMode.Additive);
-				EditorGUILayout.EndHorizontal();
+				EditorGUILayout.EndScrollView();
 			}
-			EditorGUILayout.EndScrollView();
+			EditorGUILayout.EndVertical();
 		}
 	}
 }

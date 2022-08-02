@@ -9,7 +9,7 @@ namespace Nawlian.Lib.Extensions
 {
 	public static class ColorExtensions
 	{
-		public static Color Alpha(this Color color, float alpha) => new Color(color.r, color.g, color.b, alpha);
+		public static Color WithAlpha(this Color color, float alpha) => new Color(color.r, color.g, color.b, alpha);
 
 		public static Color32 RandomColor(int alpha = 255)
 		{
