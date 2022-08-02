@@ -1,7 +1,7 @@
 ﻿using Pixelplacement;
 using UnityEngine;
 
-namespace Game.VFX
+namespace Nawlian.Lib.Components
 {
 	[RequireComponent(typeof(Light)), DisallowMultipleComponent]
 	public class FlickeringLightEffect : MonoBehaviour
@@ -28,7 +28,6 @@ namespace Game.VFX
 		private void TurnOn()
 		{
 			Tween.Value(0, _baseIntensity, (value) => _light.intensity = value, _turnOnDuration, 0, Tween.EaseInOut);
-			//_light.intensity = _baseIntensity;
 			Invoke(nameof(TurnOff), Random.Range(_onTimeMinMax.x, _onTimeMinMax.y));
 		}
 
