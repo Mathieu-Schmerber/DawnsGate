@@ -107,7 +107,11 @@ namespace Game.Entities.AI.Dealer
 				if (_dashToPerform == 0)
 					_dashToPerform = Random.Range(_stats.ConsecutiveDashes.x + 1, _stats.ConsecutiveDashes.y + 2);
 				_dashToPerform--;
-				AttackBase.ShowAttackPrevisu(_stats.DashAttack, transform.position, 1f, this, OnUpdate: (param) => param.Transform.localScale = new Vector3(1, 1, Vector3.Distance(transform.position, GameManager.Player.transform.position))); ;
+				AttackBase.ShowAttackPrevisu(_stats.DashAttack, transform.position, .5f, this, 
+					OnUpdate: (param) =>
+					{
+						param.Transform.localScale = new Vector3(1, 1, Vector3.Distance(transform.position, GameManager.Player.transform.position));
+					});
 				_gfxAnim.Play(_stats.StartDashAnimation.name);
 				if (_dashToPerform == 0)
 				{
