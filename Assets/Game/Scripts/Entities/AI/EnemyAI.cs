@@ -132,15 +132,25 @@ namespace Game.Entities.AI
 
 		protected override Vector3 GetMovementsInputs()
 		{
-			if (UsesPathfinding && _path.status != NavMeshPathStatus.PathInvalid)
-				return (_path.corners[_pathPointIndex] - transform.position).normalized;
+			if (UsesPathfinding)
+			{
+				if (_path.status != NavMeshPathStatus.PathInvalid)
+					return (_path.corners[_pathPointIndex] - transform.position).normalized;
+				else
+					return (_room.Info.GetPositionsAround(transform.position, 5).First() - transform.position).normalized;
+			}
 			return Vector3.zero;
 		}
 
 		protected override Vector3 GetTargetPosition()
 		{
-			if (UsesPathfinding && _path.status != NavMeshPathStatus.PathInvalid)
-				return _path.corners[_pathPointIndex].WithY(transform.position.y);
+			if (UsesPathfinding)
+			{
+				if (_path.status != NavMeshPathStatus.PathInvalid)
+					return _path.corners[_pathPointIndex].WithY(transform.position.y);
+				else
+					return _room.Info.GetPositionsAround(transform.position, 5).First().WithY(transform.position.y);
+			}
 			return Vector3.zero;
 		}
 
