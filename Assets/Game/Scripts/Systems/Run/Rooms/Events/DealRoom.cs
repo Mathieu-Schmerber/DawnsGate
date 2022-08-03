@@ -34,7 +34,7 @@ namespace Game.Systems.Run.Rooms.Events
 			// Stop from getting default reward
 		}
 
-		private void RoomTotem_OnStateChanged()
+		private void RoomTotem_OnStateChanged(bool active)
 		{
 			_bossIdentity.SetInvulnerable(_totems.Any(x => x.IsActive));
 		}

@@ -6,6 +6,7 @@ using Game.Systems.Items;
 using Game.Systems.Run;
 using Nawlian.Lib.Extensions;
 using Nawlian.Lib.Systems.Interaction;
+using Nawlian.Lib.Utils;
 using System.Linq;
 using UnityEngine;
 
@@ -25,12 +26,15 @@ namespace Game.Entities.AI.Dealer
 
 		private const string ON_CANNOT_DEAL = "OnCannotDeal";
 		private const string ON_DEAL_DONE = "OnDealDone";
+		private const string TALKING_ANIM = "IsTalking";
 
 		private bool _dealDone;
 		private DealerStatData _stats;
 		private DealerAI _dealer;
 		private Inventory _inventory;
 		private DealSummary _deal;
+		private Animator _animator;
+
 		private RoomRewardType _dealType => RunManager.CurrentRoom.Reward;
 
 		public DealSummary CurrentDeal => _deal;
@@ -40,6 +44,7 @@ namespace Game.Entities.AI.Dealer
 			_stats = GetComponentInParent<EntityIdentity>().Stats as DealerStatData;
 			_dealer = GetComponentInParent<DealerAI>();
 			_inventory = GameManager.Player.GetComponent<Inventory>();
+			_animator = transform.parent.GetComponentInChildren<Animator>();
 		}
 
 		private void OnEnable()
@@ -109,6 +114,19 @@ namespace Game.Entities.AI.Dealer
 
 		protected override string GetFormattedChoice(string choiceText)
 			=> choiceText.Replace("{DEAL}", GetBetText());
+
+		protected override void OnPromptShowing()
+		{
+			if (_animator.GetBool(TALKING_ANIM))
+			{
+				_animator.SetBool(TALKING_ANIM, false);
+				Awaiter.WaitAndExecute(0.1f, () => _animator.SetBool(TALKING_ANIM, true));
+			}
+			else
+				_animator.SetBool(TALKING_ANIM, true);
+		}
+
+		protected override void OnChoiceShowing() => _animator.SetBool(TALKING_ANIM, false);
 
 		#endregion
 

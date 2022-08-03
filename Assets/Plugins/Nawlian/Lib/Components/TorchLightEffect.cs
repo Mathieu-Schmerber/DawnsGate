@@ -6,49 +6,52 @@ namespace Nawlian.Lib.Components
 	public class TorchLightEffect : MonoBehaviour
 	{
         [Tooltip("maximum possible intensity the light can flicker to")]
-        [SerializeField, Min(0)] float maxIntensity = 150f;
+        [SerializeField, Min(0)] private float _maxIntensity;
 
         [Tooltip("minimum possible intensity the light can flicker to")]
-        [SerializeField, Min(0)] float minIntensity = 50f;
+        [SerializeField, Min(0)] private float _minIntensity = 0;
 
         [Tooltip("maximum frequency of often the light will flicker in seconds")]
-        [SerializeField, Min(0)] float maxFlickerFrequency = 1f;
+        [SerializeField, Min(0)] private float _maxFlickerFrequency = 1f;
 
         [Tooltip("minimum frequency of often the light will flicker in seconds")]
-        [SerializeField, Min(0)] float minFlickerFrequency = 0.1f;
+        [SerializeField, Min(0)] private float _minFlickerFrequency = 0.1f;
 
-        [Tooltip("how fast the light will flicker to it's next intensity (a very high value will)" +
+        [Tooltip("how fast the light will flicker to it's next intensity, a very high value will" +
             "look like a dying lightbulb while a lower value will look more like an organic fire")]
-        [SerializeField, Min(0)] float strength = 5f;
+        [SerializeField, Min(0)] private float _strength = 5f;
 
-        float baseIntensity;
-        float nextIntensity;
+        private float _baseIntensity;
+        private float _nextIntensity;
+        private float _flickerFrequency;
+        private float _timeOfLastFlicker;
+        private Light _light;
 
-        float flickerFrequency;
-        float timeOfLastFlicker;
+        public float MaxIntensity => _maxIntensity;
 
-        private Light LightSource => GetComponent<Light>();
-
-        private void OnValidate()
+		private void OnValidate()
         {
-            if (maxIntensity < minIntensity) minIntensity = maxIntensity;
-            if (maxFlickerFrequency < minFlickerFrequency) minFlickerFrequency = maxFlickerFrequency;
+            _light = GetComponent<Light>();
+            _maxIntensity = _light.intensity;
+            if (_maxIntensity < _minIntensity) _minIntensity = _maxIntensity;
+            if (_maxFlickerFrequency < _minFlickerFrequency) _minFlickerFrequency = _maxFlickerFrequency;
         }
 
         private void Awake()
         {
-            baseIntensity = LightSource.intensity;
+            _light = GetComponent<Light>();
+            _baseIntensity = _light.intensity;
 
-            timeOfLastFlicker = Time.time;
+            _timeOfLastFlicker = Time.time;
         }
 
         private void Update()
         {
-            if (timeOfLastFlicker + flickerFrequency < Time.time)
+            if (_timeOfLastFlicker + _flickerFrequency < Time.time)
             {
-                timeOfLastFlicker = Time.time;
-                nextIntensity = Random.Range(minIntensity, maxIntensity);
-                flickerFrequency = Random.Range(minFlickerFrequency, maxFlickerFrequency);
+                _timeOfLastFlicker = Time.time;
+                _nextIntensity = Random.Range(_minIntensity, _maxIntensity);
+                _flickerFrequency = Random.Range(_minFlickerFrequency, _maxFlickerFrequency);
             }
 
             Flicker();
@@ -56,16 +59,16 @@ namespace Nawlian.Lib.Components
 
         private void Flicker()
         {
-            LightSource.intensity = Mathf.Lerp(
-                LightSource.intensity,
-                nextIntensity,
-                strength * Time.deltaTime
+            _light.intensity = Mathf.Lerp(
+                _light.intensity,
+                _nextIntensity,
+                _strength * Time.deltaTime
             );
         }
 
         public void Reset()
         {
-            LightSource.intensity = baseIntensity;
+            _light.intensity = _baseIntensity;
         }
     }
 }

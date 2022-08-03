@@ -34,7 +34,7 @@ namespace Game.Systems.Run.Rooms
 
 		protected virtual void OnDisable()
 		{
-			RunManager.OnBeforeSceneSwitched += OnRoomSceneReady;
+			RunManager.OnBeforeSceneSwitched -= OnRoomSceneReady;
 			RunManager.OnSceneSwitched -= OnRoomReady;
 		}
 

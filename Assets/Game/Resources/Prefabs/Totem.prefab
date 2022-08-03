@@ -16,7 +16,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &3331041633589802441
 Transform:
@@ -162,7 +162,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &3331041634302934169
 Transform:
@@ -230,6 +230,71 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3331041634302934169}
     m_Modifications:
+    - target: {fileID: 602355820935105262, guid: eeb1e6d8918dac6419baecf9fdd166bb,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 806685857877392776, guid: eeb1e6d8918dac6419baecf9fdd166bb,
+        type: 3}
+      propertyPath: _strength
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 806685857877392776, guid: eeb1e6d8918dac6419baecf9fdd166bb,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 806685857877392776, guid: eeb1e6d8918dac6419baecf9fdd166bb,
+        type: 3}
+      propertyPath: maxIntensity
+      value: 30.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 806685857877392776, guid: eeb1e6d8918dac6419baecf9fdd166bb,
+        type: 3}
+      propertyPath: minIntensity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 806685857877392776, guid: eeb1e6d8918dac6419baecf9fdd166bb,
+        type: 3}
+      propertyPath: _maxIntensity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 806685857877392776, guid: eeb1e6d8918dac6419baecf9fdd166bb,
+        type: 3}
+      propertyPath: _minIntensity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 806685857877392776, guid: eeb1e6d8918dac6419baecf9fdd166bb,
+        type: 3}
+      propertyPath: _maxFlickerFrequency
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 806685857877392776, guid: eeb1e6d8918dac6419baecf9fdd166bb,
+        type: 3}
+      propertyPath: _minFlickerFrequency
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1865582098618171529, guid: eeb1e6d8918dac6419baecf9fdd166bb,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3329822575276490585, guid: eeb1e6d8918dac6419baecf9fdd166bb,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 3365778816261920067, guid: eeb1e6d8918dac6419baecf9fdd166bb,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 3443921452047578458, guid: eeb1e6d8918dac6419baecf9fdd166bb,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3443921452047578458, guid: eeb1e6d8918dac6419baecf9fdd166bb,
         type: 3}
       propertyPath: UVModule.fps
@@ -239,6 +304,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Totem
+      objectReference: {fileID: 0}
+    - target: {fileID: 5079122324439688170, guid: eeb1e6d8918dac6419baecf9fdd166bb,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 5385675160394587839, guid: eeb1e6d8918dac6419baecf9fdd166bb,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5564050535021787472, guid: eeb1e6d8918dac6419baecf9fdd166bb,
         type: 3}
@@ -297,8 +372,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6571283157160753944, guid: eeb1e6d8918dac6419baecf9fdd166bb,
         type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6571283157160753944, guid: eeb1e6d8918dac6419baecf9fdd166bb,
+        type: 3}
       propertyPath: m_Intensity
-      value: 30.6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7148757761483200237, guid: eeb1e6d8918dac6419baecf9fdd166bb,
         type: 3}
@@ -318,3 +398,21 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2010370631391502528}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &6744966896372417322 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5079122324439688170, guid: eeb1e6d8918dac6419baecf9fdd166bb,
+    type: 3}
+  m_PrefabInstance: {fileID: 2010370631391502528}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2131119267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6744966896372417322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d5e3dcc0337d104cb5fa6acddd4cd0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -16,7 +16,7 @@ namespace Game.Entities.AI.Dealer
 		private RoomTotemLink _link;
 		private DealerAI _ai;
 
-		public static event Action OnStateChanged;
+		public static event Action<bool> OnStateChanged;
 
 		public bool IsActive
 		{
@@ -24,8 +24,7 @@ namespace Game.Entities.AI.Dealer
 			set
 			{
 				_active = value;
-				_link.SetTarget(value ? _room.Boss.transform : null);
-				OnStateChanged?.Invoke();
+				SetActive(value);
 			}
 		}
 
@@ -45,6 +44,12 @@ namespace Game.Entities.AI.Dealer
 		{
 			if (!_room.Cleared)
 				IsActive = true;
+		}
+
+		private void SetActive(bool active)
+		{
+			_link.SetTarget(active ? _room.Boss.transform : null);
+			OnStateChanged?.Invoke(active);
 		}
 
 		#region IDamageProcessor

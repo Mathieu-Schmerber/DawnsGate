@@ -18,6 +18,7 @@ namespace Game.Entities.AI.Dealer
 		private DealerStatData _stats;
 		private DealRoom _dealRoom;
 		private bool _atTheMapCenter = false;
+		private bool _activated = false;
 
 		#region Unity builtins
 
@@ -27,6 +28,7 @@ namespace Game.Entities.AI.Dealer
 			_stats = _entity.Stats as DealerStatData;
 			_dealRoom = _room as DealRoom;
 			_attackNumber = 0;
+			_activated = false;
 		}
 
 		#endregion
@@ -55,6 +57,13 @@ namespace Game.Entities.AI.Dealer
 			// We don't want to activate the AI here, the room should take care of it with TakeAction()
 		}
 
+		protected override Vector3 GetTargetPosition()
+		{
+			if (_activated)
+				return base.GetTargetPosition();
+			return transform.position - transform.right;
+		}
+
 		protected override void ResetStates()
 		{
 			base.ResetStates();
@@ -64,6 +73,7 @@ namespace Game.Entities.AI.Dealer
 
 		public void TakeAction()
 		{
+			_activated = true;
 			_room.Activate();
 
 			// TODO: game feel before starting the fight here
@@ -168,7 +178,10 @@ namespace Game.Entities.AI.Dealer
 		private float GetDistanceToWall()
 		{
 			if (Physics.Raycast(transform.position, GetAimNormal(), out RaycastHit hit, Mathf.Infinity, _wallMask))
+			{
+				Debug.DrawLine(transform.position, hit.point, Color.magenta, 2f);
 				return Vector3.Distance(transform.position.WithY(_room.GroundLevel), hit.point.WithY(_room.GroundLevel));
+			}
 			return 0;
 		}
 
