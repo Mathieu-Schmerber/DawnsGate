@@ -1,4 +1,5 @@
 using Game.Entities.AI.Dealer;
+using Game.Tools;
 using Nawlian.Lib.Components;
 using Pixelplacement;
 using UnityEngine;
@@ -13,6 +14,10 @@ namespace Game.VFX
 		private ParticleSystem _ps;
 		private Light _light;
 		private TorchLightEffect _torch;
+		private AudioSource _audio;
+
+		[SerializeField] private AudioClip _turnOn;
+		[SerializeField] private AudioClip _turnOff;
 
 		private void Awake()
 		{
@@ -20,6 +25,7 @@ namespace Game.VFX
 			_light = GetComponentInChildren<Light>(true);
 			_ps = GetComponentInChildren<ParticleSystem>(true);
 			_torch = _light.GetComponent<TorchLightEffect>();
+			_audio = GetComponent<AudioSource>();
 		}
 
 		private void OnEnable()
@@ -46,6 +52,7 @@ namespace Game.VFX
 
 		private void Activate()
 		{
+			_audio.PlayOneShot(_turnOn);
 			_ps.Play(true);
 			_light.enabled = true;
 			_light.intensity = 0;
@@ -54,9 +61,10 @@ namespace Game.VFX
 
 		private void DeActivate()
 		{
+			_audio.PlayOneShot(_turnOff);
 			_torch.enabled = false;
 			_light.enabled = false;
-			_ps.Stop(true);
+			_ps.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
 		}
 	}
 }
