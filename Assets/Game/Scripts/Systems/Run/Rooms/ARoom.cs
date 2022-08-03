@@ -28,11 +28,13 @@ namespace Game.Systems.Run.Rooms
 
 		protected virtual void OnEnable()
 		{
+			RunManager.OnBeforeSceneSwitched += OnRoomSceneReady;
 			RunManager.OnSceneSwitched += OnRoomReady;
 		}
 
 		protected virtual void OnDisable()
 		{
+			RunManager.OnBeforeSceneSwitched += OnRoomSceneReady;
 			RunManager.OnSceneSwitched -= OnRoomReady;
 		}
 
@@ -54,6 +56,14 @@ namespace Game.Systems.Run.Rooms
 			}
 		}
 
+		/// <summary>
+		/// Triggers whenever the scene has been loaded
+		/// </summary>
+		protected virtual void OnRoomSceneReady() {}
+
+		/// <summary>
+		/// Triggers whenever the scene has been loaded and the player is able to play
+		/// </summary>
 		protected virtual void OnRoomReady() {}
 
 		protected abstract void OnActivate();

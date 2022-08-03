@@ -16,9 +16,9 @@ namespace Game.Systems.Run.Rooms.Events
 		public override bool ActivateOnBossSpawn => false;
 		public override bool GiveBossReward => false;
 
-		protected override void OnRoomReady()
+		protected override void OnRoomSceneReady()
 		{
-			base.OnRoomReady();
+			base.OnRoomSceneReady();
 			_dialogue = _bossIdentity.GetComponentInChildren<DealerDialogue>();
 		}
 
