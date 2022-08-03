@@ -75,7 +75,7 @@ namespace Game.Systems.Combat.Attacks
 		public static GameObject Spawn<T>(T attack, Vector3 position, Quaternion rotation, InitData init) where T : AttackBaseData
 			=> ObjectPooler.Get(attack.Prefab.gameObject, position, rotation, init);
 
-		public static void ShowAttackPrevisu<T>(T attack, Vector3 position, float duration, AController caster, Action<PreviewParameters> OnRelease = null, bool stickToCaster = false) where T : AttackBaseData
+		public static void ShowAttackPrevisu<T>(T attack, Vector3 position, float duration, AController caster, Action<PreviewParameters> OnRelease = null, Action<PreviewParameters> OnUpdate = null, bool stickToCaster = false) where T : AttackBaseData
 		{
 			if (attack.StickToCaster || stickToCaster)
 			{
@@ -89,6 +89,7 @@ namespace Game.Systems.Combat.Attacks
 					{
 						previsu.Transform.position = caster.transform.position;
 						previsu.Transform.rotation = Quaternion.LookRotation(caster.GetAimNormal());
+						OnUpdate?.Invoke(previsu);
 					});
 			}
 			else
@@ -98,7 +99,8 @@ namespace Game.Systems.Combat.Attacks
 					Quaternion.LookRotation(caster.GetAimNormal()), 
 					attack.AttackRange, 
 					duration, 
-					OnRelease);
+					OnRelease,
+					OnUpdate);
 			}
 		}
 	}

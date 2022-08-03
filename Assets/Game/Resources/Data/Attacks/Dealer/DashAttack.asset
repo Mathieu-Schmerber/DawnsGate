@@ -13,12 +13,17 @@ MonoBehaviour:
   m_Name: DashAttack
   m_EditorClassIdentifier: 
   Prefab: {fileID: 1942269787898290375, guid: 66520a493d54d2a49a85874c43750a08, type: 3}
-  Previsualisation: {fileID: 0}
+  Previsualisation: {fileID: 8134988624244144373, guid: ea7f94d1584cedd43ae178a5988fdeb1,
+    type: 3}
+  OnHitAudios: []
   BaseDamage: 10
   BaseKnockbackForce: 3
   KnockbackDir: 1
   ScaleOverLifetime: 0
   EndScale: {x: 0, y: 0, z: 0}
+  RotateOverTime: 0
+  EndRotation: {x: 0, y: 0, z: 0}
+  ContinuouslyHit: 0
   HitFx: {fileID: 6826739793168019112, guid: 161ce196c6bae7843a3573a1fe4c5d5f, type: 3}
   HitYRotation: 0
   ActiveTime: 0.3

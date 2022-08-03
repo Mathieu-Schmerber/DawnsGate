@@ -1,6 +1,7 @@
 ﻿using Game.Entities.Shared;
 using Game.Managers;
 using Game.UI;
+using Nawlian.Lib.Extensions;
 using Nawlian.Lib.Systems.Pooling;
 using Nawlian.Lib.Utils;
 using UnityEngine;
@@ -38,7 +39,8 @@ namespace Game.Systems.Run.Rooms
 		protected override void OnRoomSceneReady()
 		{
 			base.OnRoomSceneReady();
-			_bossIdentity = ObjectPooler.Get(_bossPrefab, BossSpawnPoint, _bossSpawn.rotation, this).GetComponent<EntityIdentity>();
+
+			_bossIdentity = ObjectPooler.Get(_bossPrefab, BossSpawnPoint.WithY(GroundLevel), _bossSpawn.rotation, this).GetComponent<EntityIdentity>();
 
 			if (ActivateOnBossSpawn)
 				// TODO: wait time according to some animation ?

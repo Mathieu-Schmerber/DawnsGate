@@ -128,6 +128,12 @@ namespace Game.Entities.AI.Dealer
 
 		protected override void OnChoiceShowing() => _animator.SetBool(TALKING_ANIM, false);
 
+		protected override void CloseDialogue()
+		{
+			base.CloseDialogue();
+			_animator.SetBool(TALKING_ANIM, false);
+		}
+
 		#endregion
 
 		#region Deal
