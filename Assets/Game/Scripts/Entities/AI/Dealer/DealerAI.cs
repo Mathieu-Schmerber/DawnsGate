@@ -110,7 +110,7 @@ namespace Game.Entities.AI.Dealer
 				AttackBase.ShowAttackPrevisu(_stats.DashAttack, transform.position, .5f, this, 
 					OnUpdate: (param) =>
 					{
-						param.Transform.localScale = new Vector3(1, 1, Vector3.Distance(transform.position, GameManager.Player.transform.position));
+						param.Transform.localScale = new Vector3(1, 1, Vector3.Distance(transform.position, transform.position + GetAimNormal() * GetDistanceToWall()));
 					});
 				_gfxAnim.Play(_stats.StartDashAnimation.name);
 				if (_dashToPerform == 0)
@@ -182,11 +182,10 @@ namespace Game.Entities.AI.Dealer
 
 		private float GetDistanceToWall()
 		{
-			if (Physics.Raycast(transform.position, GetAimNormal(), out RaycastHit hit, Mathf.Infinity, _wallMask))
-			{
-				Debug.DrawLine(transform.position, hit.point, Color.magenta, 2f);
+			Ray ray = new Ray(transform.position + Vector3.up, GetAimNormal());
+
+			if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, _wallMask))
 				return Vector3.Distance(transform.position.WithY(_room.GroundLevel), hit.point.WithY(_room.GroundLevel));
-			}
 			return 0;
 		}
 
