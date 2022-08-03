@@ -7,6 +7,7 @@ using Game.Systems.Run;
 using Nawlian.Lib.Extensions;
 using Nawlian.Lib.Systems.Interaction;
 using Nawlian.Lib.Utils;
+using System;
 using System.Linq;
 using UnityEngine;
 
@@ -27,6 +28,7 @@ namespace Game.Entities.AI.Dealer
 		private const string ON_CANNOT_DEAL = "OnCannotDeal";
 		private const string ON_DEAL_DONE = "OnDealDone";
 		private const string TALKING_ANIM = "IsTalking";
+		private const string APOLOGY_CHECKPOINT = "Apology";
 
 		private bool _dealDone;
 		private DealerStatData _stats;
@@ -84,6 +86,12 @@ namespace Game.Entities.AI.Dealer
 				OnDealDone();
 			else
 				OnCannotDeal();
+		}
+
+		public void Apologize()
+		{
+			ProcessCheckpoint(APOLOGY_CHECKPOINT);
+			RunManager.CurrentRoomInstance.Clear();
 		}
 
 		private void OnRefused()

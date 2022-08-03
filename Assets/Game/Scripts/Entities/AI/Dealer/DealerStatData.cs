@@ -12,6 +12,7 @@ namespace Game.Entities.AI.Dealer
 		[Title("Kind mode")]
 		public AudioClip DealTheme;
 		public DialogueData Dialogue;
+		public AnimationClip HappyAnimation;
 		[@Tooltip("Discount that the dealer applies on the item price in %"), MinValue(0), MaxValue(100)]public int PriceDiscount;
 
 		[Title("Aggressive mode")]
@@ -22,5 +23,6 @@ namespace Game.Entities.AI.Dealer
 		[Space]
 		[InlineEditor] public ModularAttackData LaserAttack;
 		public AnimationClip LaserCastAnimation;
+
 	}
 }

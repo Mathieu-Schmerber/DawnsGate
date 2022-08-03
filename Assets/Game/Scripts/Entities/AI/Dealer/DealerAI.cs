@@ -1,4 +1,4 @@
-﻿using Game.Entities.Shared;
+﻿using Game.Entities.Shared.Health;
 using Game.Managers;
 using Game.Systems.Combat.Attacks;
 using Game.Systems.Run.Rooms.Events;
@@ -15,6 +15,7 @@ namespace Game.Entities.AI.Dealer
 	{
 		[SerializeField] private Vector3 _defaultRotationNormal;
 		[SerializeField] private LayerMask _wallMask;
+
 		private DealerStatData _stats;
 		private DealRoom _dealRoom;
 		private bool _atTheMapCenter = false;
@@ -41,11 +42,15 @@ namespace Game.Entities.AI.Dealer
 
 		protected override void Update()
 		{
+			if (!_activated && _atTheMapCenter)
+				return;
 			base.Update();
 
 			_atTheMapCenter = Vector3.Distance(transform.position, _dealRoom.BossSpawnPoint.WithY(transform.position.y)) <= 0.5f;
-			if (!IsDashAttack)
+			if (!IsDashAttack || !_activated)
 				NextAggressivePosition = _dealRoom.BossSpawnPoint;
+			if (!_activated && _atTheMapCenter)
+				State = Shared.EntityState.STUN;
 		}
 
 		#endregion
@@ -82,6 +87,13 @@ namespace Game.Entities.AI.Dealer
 			ResetStates();
 		}
 
+		public void Stop()
+		{
+			ResetStates();
+			_entity.SetInvulnerable(true);
+			_activated = false;
+		}
+
 		#endregion
 
 		#region Attacks
@@ -95,28 +107,28 @@ namespace Game.Entities.AI.Dealer
 
 		protected override void TryAttacking()
 		{
-			if (!IsDashAttack && !_atTheMapCenter)
+			if (!_activated)
+				return;
+			else if (!IsDashAttack && !_atTheMapCenter)
 				return;
 			base.TryAttacking();
 		}
 
 		protected override void Attack()
 		{
-			if (IsDashAttack)
+			if (!_activated)
+				return;
+			else if (IsDashAttack)
 			{
 				if (_dashToPerform == 0)
 					_dashToPerform = Random.Range(_stats.ConsecutiveDashes.x + 1, _stats.ConsecutiveDashes.y + 2);
 				_dashToPerform--;
 				AttackBase.ShowAttackPrevisu(_stats.DashAttack, transform.position, .5f, this, 
-					OnUpdate: (param) =>
-					{
-						param.Transform.localScale = new Vector3(1, 1, Vector3.Distance(transform.position, transform.position + GetAimNormal() * GetDistanceToWall()));
-					});
+					OnUpdate: (param) 
+					=> param.Transform.localScale = new Vector3(1, 1, Vector3.Distance(transform.position, transform.position + GetAimNormal() * GetDistanceToWall())));
 				_gfxAnim.Play(_stats.StartDashAnimation.name);
 				if (_dashToPerform == 0)
-				{
 					_attackNumber++;
-				}
 			}
 			else
 			{
@@ -128,7 +140,9 @@ namespace Game.Entities.AI.Dealer
 
 		public void OnAnimationEvent(string animationArg)
 		{
-			if (animationArg != "Attack")
+			if (!_activated)
+				return;
+			else if (animationArg != "Attack")
 				return;
 			if (IsDashAttack)
 			{
