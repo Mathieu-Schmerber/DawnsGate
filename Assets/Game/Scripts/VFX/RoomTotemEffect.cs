@@ -47,6 +47,7 @@ namespace Game.VFX
 		private void Activate()
 		{
 			_ps.Play(true);
+			_light.enabled = true;
 			_light.intensity = 0;
 			Tween.LightIntensity(_light, _torch.MaxIntensity, 0.2f, 0, Tween.EaseOut, completeCallback: () => _torch.enabled = true);
 		}
@@ -54,8 +55,8 @@ namespace Game.VFX
 		private void DeActivate()
 		{
 			_torch.enabled = false;
-			Tween.LightIntensity(_light, 0, 0.2f, 0, Tween.EaseOut);
-			_ps.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+			_light.enabled = false;
+			_ps.Stop(true);
 		}
 	}
 }

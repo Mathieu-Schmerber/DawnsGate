@@ -31,28 +31,12 @@ namespace Game.Systems.Run.Rooms.Events
 
 		protected override void OnClear()
 		{
-			// Stop from getting default reward
+			RoomTotem.OnStateChanged -= RoomTotem_OnStateChanged;
 		}
 
 		private void RoomTotem_OnStateChanged(bool active)
 		{
 			_bossIdentity.SetInvulnerable(_totems.Any(x => x.IsActive));
-		}
-
-		public override void OnEnemyKilled(GameObject gameObject)
-		{
-			base.OnEnemyKilled(gameObject);
-
-			switch (RoomData.Reward)
-			{
-				case RoomRewardType.GOLD:
-					SpawnReward(_dialogue.CurrentDeal.MoneyAmount);
-					break;
-				case RoomRewardType.ITEM:
-					SpawnReward(_dialogue.CurrentDeal.Item);
-					break;
-			}
-			RoomTotem.OnStateChanged -= RoomTotem_OnStateChanged;
 		}
 	}
 }

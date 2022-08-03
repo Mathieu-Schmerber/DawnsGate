@@ -92,8 +92,7 @@ namespace Game.Entities.AI.Dealer
 		public void Apologize()
 		{
 			_animator.SetBool(APOLOGY_ANIM, true);
-			ProcessCheckpoint(APOLOGY_CHECKPOINT);
-			RunManager.CurrentRoomInstance.Clear();
+			Reward();
 		}
 
 		private void OnRefused()
@@ -197,6 +196,22 @@ namespace Game.Entities.AI.Dealer
 					return GameManager.CanRunMoneyAfford(_deal.MoneyAmount);
 			}
 			return false;
+		}
+
+		private void Reward()
+		{
+			switch (_dealType)
+			{
+				case RoomRewardType.GOLD:
+					GameManager.RewardWithRunMoney(_deal.MoneyAmount);
+					break;
+				case RoomRewardType.ITEM:
+					_inventory.EquipItem(_deal.Item);
+					break;
+			}
+			_dealDone = true;
+			ProcessCheckpoint(APOLOGY_CHECKPOINT);
+			RunManager.CurrentRoomInstance.Clear();
 		}
 
 		private void OnDealDone()
