@@ -18,7 +18,6 @@ namespace Game.Systems.Combat.Attacks
 
 		public override bool FollowCaster => _attackData.FollowCaster;
 
-		/// TODO: calculate range from particle system and sh*t rather than affecting it manually
 		public override float Range => _attackData?.Range ?? 0;
 
 		private bool _isOff = false;
@@ -58,7 +57,6 @@ namespace Game.Systems.Combat.Attacks
 			if (travelDistance != 0)
 			{
 				Vector3 travelDest = transform.position + transform.forward * travelDistance;
-
 				Tween.LocalPosition(transform, travelDest, _attackData.ActiveTime, 0, Tween.EaseLinear);
 			}
 
