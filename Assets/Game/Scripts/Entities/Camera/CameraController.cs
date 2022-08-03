@@ -13,11 +13,21 @@ namespace Game.Entities.Camera
 		[SerializeField] private float _lerpAmount = 0.123f;
 		[SerializeField] private UnityEngine.Camera _cam;
 
+		private float _baseZoom;
+		private Transform _tmpTarget;
+
 		public UnityEngine.Camera Camera => _cam;
+
+		private void Awake()
+		{
+			_baseZoom = _cam.orthographicSize;
+		}
 
 		private void LateUpdate()
 		{
-			transform.position = Vector3.Lerp(transform.position, _target.position + _offset, _lerpAmount);
+			Transform use = _tmpTarget ?? _target;
+
+			transform.position = Vector3.Lerp(transform.position, use.position + _offset, _lerpAmount);
 		}
 
 		public void Shake(Vector3 intensity, float duration)
@@ -25,6 +35,18 @@ namespace Game.Entities.Camera
 			if (duration == 0 || intensity.magnitude == 0)
 				return;
 			Tween.Shake(transform, transform.position, intensity, duration, 0);
+		}
+
+		public void LockTemporaryTarget(Transform target, float zoomMultiplier)
+		{
+			Tween.Value(_cam.orthographicSize, _cam.orthographicSize * zoomMultiplier, (value) => _cam.orthographicSize = value, 1f, 0f, Tween.EaseOut);
+			_tmpTarget = target;
+		}
+
+		public void UnlockTarget()
+		{
+			Tween.Value(_cam.orthographicSize, _baseZoom, (value) => _cam.orthographicSize = value, .5f, 0f, Tween.EaseOut);
+			_tmpTarget = null;
 		}
 	}
 }
