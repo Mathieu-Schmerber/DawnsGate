@@ -28,6 +28,7 @@ namespace Game.Entities.AI.Dealer
 		private const string ON_CANNOT_DEAL = "OnCannotDeal";
 		private const string ON_DEAL_DONE = "OnDealDone";
 		private const string TALKING_ANIM = "IsTalking";
+		private const string APOLOGY_ANIM = "Apology";
 		private const string APOLOGY_CHECKPOINT = "Apology";
 
 		private bool _dealDone;
@@ -90,6 +91,7 @@ namespace Game.Entities.AI.Dealer
 
 		public void Apologize()
 		{
+			_animator.SetBool(APOLOGY_ANIM, true);
 			ProcessCheckpoint(APOLOGY_CHECKPOINT);
 			RunManager.CurrentRoomInstance.Clear();
 		}

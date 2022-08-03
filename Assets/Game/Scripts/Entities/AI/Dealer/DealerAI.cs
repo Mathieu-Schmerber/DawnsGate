@@ -16,12 +16,20 @@ namespace Game.Entities.AI.Dealer
 		[SerializeField] private Vector3 _defaultRotationNormal;
 		[SerializeField] private LayerMask _wallMask;
 
+		private DealerDialogue _dialogue;
 		private DealerStatData _stats;
 		private DealRoom _dealRoom;
 		private bool _atTheMapCenter = false;
 		private bool _activated = false;
+		private bool _activatedOnce = false;
 
 		#region Unity builtins
+
+		protected override void Awake()
+		{
+			base.Awake();
+			_dialogue = GetComponentInChildren<DealerDialogue>();
+		}
 
 		protected override void Init(object data)
 		{
@@ -30,6 +38,7 @@ namespace Game.Entities.AI.Dealer
 			_dealRoom = _room as DealRoom;
 			_attackNumber = 0;
 			_activated = false;
+			_activatedOnce = false;
 		}
 
 		#endregion
@@ -46,11 +55,16 @@ namespace Game.Entities.AI.Dealer
 				return;
 			base.Update();
 
+			if (!_activatedOnce) return;
+
 			_atTheMapCenter = Vector3.Distance(transform.position, _dealRoom.BossSpawnPoint.WithY(transform.position.y)) <= 0.5f;
 			if (!IsDashAttack || !_activated)
 				NextAggressivePosition = _dealRoom.BossSpawnPoint;
-			if (!_activated && _atTheMapCenter)
+			if (_activatedOnce && !_activated && _atTheMapCenter)
+			{
 				State = Shared.EntityState.STUN;
+				_dialogue.Apologize();
+			}
 		}
 
 		#endregion
@@ -79,6 +93,7 @@ namespace Game.Entities.AI.Dealer
 		public void TakeAction()
 		{
 			_activated = true;
+			_activatedOnce = true;
 			_room.Activate();
 
 			// TODO: game feel before starting the fight here
@@ -90,6 +105,8 @@ namespace Game.Entities.AI.Dealer
 		public void Stop()
 		{
 			ResetStates();
+			UnlockTarget();
+			LockAim = false;
 			_entity.SetInvulnerable(true);
 			_activated = false;
 		}
@@ -219,5 +236,7 @@ namespace Game.Entities.AI.Dealer
 		}
 
 		#endregion
+
+		protected override void OnDeath(Damageable damageable) => Stop();
 	}
 }
