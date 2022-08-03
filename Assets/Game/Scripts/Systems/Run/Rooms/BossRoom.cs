@@ -15,7 +15,7 @@ namespace Game.Systems.Run.Rooms
 		protected EntityIdentity _bossIdentity;
 		protected BossBarUi _bossBar;
 		public GameObject Boss => _bossIdentity.gameObject;
-		public Vector3 BossSpawnPoint => _bossSpawn.position;
+		public Vector3 BossSpawnPoint => _bossSpawn?.position ?? Vector3.zero;
 		public override bool RequiresNavBaking => true;
 		public override bool ActivateOnStart => false;
 		public virtual bool GiveBossReward => false;

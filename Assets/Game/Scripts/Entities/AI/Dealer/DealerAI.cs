@@ -13,6 +13,7 @@ namespace Game.Entities.AI.Dealer
 {
 	public class DealerAI : EnemyAI, IAnimationEventListener
 	{
+		[SerializeField] private Vector3 _defaultRotationNormal;
 		[SerializeField] private LayerMask _wallMask;
 		private DealerStatData _stats;
 		private DealRoom _dealRoom;
