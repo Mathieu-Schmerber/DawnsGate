@@ -13,6 +13,7 @@ namespace Game.VFX
 		[SerializeField, ValidateInput(nameof(EditorValidate), "_afterImageEffect needs an IPoolableObject component.")] private GameObject _afterImageEffect;
 		private SkinnedMeshRenderer _skin;
 		private AController _controller;
+		[SerializeField] private Vector3 _spawnOffset = new Vector3(0, .5f, 0);
 
 		private void Awake()
 		{
@@ -36,7 +37,7 @@ namespace Game.VFX
 
 			for (int i = 0; i < number; i++)
 			{
-				GameObject image = ObjectPooler.Get(_afterImageEffect, transform.position, transform.rotation, null);
+				GameObject image = ObjectPooler.Get(_afterImageEffect, transform.position + _spawnOffset, transform.rotation, null);
 				var filter = image.GetComponentInChildren<MeshFilter>();
 
 				_skin.BakeMesh(filter.mesh);
