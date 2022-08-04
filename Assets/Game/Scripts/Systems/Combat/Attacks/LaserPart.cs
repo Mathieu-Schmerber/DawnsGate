@@ -8,6 +8,8 @@ namespace Game.Systems.Combat.Attacks
 	{
 		private CapsuleCollider _collider;
 		private VisualEffect _vfx;
+		private ParticleSystem _hitFx;
+
 		[SerializeField] private LayerMask _wallMask;
 
 		protected override void Awake()
@@ -15,6 +17,7 @@ namespace Game.Systems.Combat.Attacks
 			base.Awake();
 			_collider = GetComponent<CapsuleCollider>();
 			_vfx = GetComponentInChildren<VisualEffect>();
+			_hitFx = GetComponentInChildren<ParticleSystem>();
 		}
 
 		private void Update()
@@ -28,6 +31,7 @@ namespace Game.Systems.Combat.Attacks
 			{
 				float distance = Mathf.Min(rightHit.distance, leftHit.distance, centerHit.distance);
 
+				_hitFx.transform.localPosition = _hitFx.transform.localPosition.WithZ(distance);
 				_vfx.transform.localScale = _vfx.transform.localScale.WithZ(distance / 2);
 				_vfx.transform.localPosition = _vfx.transform.localPosition.WithZ(distance / 2);
 				_collider.center = _collider.center.WithZ(distance / 2);
