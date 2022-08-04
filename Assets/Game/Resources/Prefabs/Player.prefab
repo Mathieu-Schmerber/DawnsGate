@@ -511,7 +511,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1251468111181912190}
   - component: {fileID: 1251468111181912191}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: GFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5709,7 +5709,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1316463610698496166}
   - component: {fileID: 6858744135748993067}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: DirectionIndicator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7307,7 +7307,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8475001976242166597}
   - component: {fileID: 8475001976242166596}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: RightFoot
   m_TagString: Untagged
   m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
@@ -7355,7 +7355,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8475001977006521117}
   - component: {fileID: 8475001977006521116}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: LeftFoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7645,6 +7645,68 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1630336767934069219, guid: 6746bba1b38fa7147b826e84a506dbfd,
         type: 3}
+    - target: {fileID: 1630336767934069219, guid: 6746bba1b38fa7147b826e84a506dbfd,
+        type: 3}
+      propertyPath: serializationData.PrefabModifications.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1630336767934069219, guid: 6746bba1b38fa7147b826e84a506dbfd,
+        type: 3}
+      propertyPath: serializationData.PrefabModifications.Array.data[0]
+      value: '"path":"_layeredClips","add_keys":{"$id":0,"$type":"System.Object[],
+        mscorlib","$rlength":3,"$rcontent":[{"$id":1,"$type":"System.String, mscorlib","Wood"},$iref:1,$iref:1]},"remove_keys":null'
+      objectReference: {fileID: 0}
+    - target: {fileID: 1630336767934069219, guid: 6746bba1b38fa7147b826e84a506dbfd,
+        type: 3}
+      propertyPath: serializationData.PrefabModifications.Array.data[1]
+      value: '"path":"_layeredClips.{\"Wood\"}","value":{"$id":0,"$type":"UnityEngine.AudioClip[],
+        UnityEngine.AudioModule","$rlength":4,"$rcontent":[$eref:0,$eref:1,$eref:2,$eref:3]}'
+      objectReference: {fileID: 0}
+    - target: {fileID: 1630336767934069219, guid: 6746bba1b38fa7147b826e84a506dbfd,
+        type: 3}
+      propertyPath: serializationData.PrefabModifications.Array.data[2]
+      value: '"path":"_layeredClips.{\"Wood\"}.[0]","value":$eref:0'
+      objectReference: {fileID: 0}
+    - target: {fileID: 1630336767934069219, guid: 6746bba1b38fa7147b826e84a506dbfd,
+        type: 3}
+      propertyPath: serializationData.PrefabModifications.Array.data[3]
+      value: '"path":"_layeredClips.{\"Wood\"}.[1]","value":$eref:1'
+      objectReference: {fileID: 0}
+    - target: {fileID: 1630336767934069219, guid: 6746bba1b38fa7147b826e84a506dbfd,
+        type: 3}
+      propertyPath: serializationData.PrefabModifications.Array.data[4]
+      value: '"path":"_layeredClips.{\"Wood\"}.[2]","value":$eref:2'
+      objectReference: {fileID: 0}
+    - target: {fileID: 1630336767934069219, guid: 6746bba1b38fa7147b826e84a506dbfd,
+        type: 3}
+      propertyPath: serializationData.PrefabModifications.Array.data[5]
+      value: '"path":"_layeredClips.{\"Wood\"}.[3]","value":$eref:3'
+      objectReference: {fileID: 0}
+    - target: {fileID: 1630336767934069219, guid: 6746bba1b38fa7147b826e84a506dbfd,
+        type: 3}
+      propertyPath: serializationData.PrefabModificationsReferencedUnityObjects.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1630336767934069219, guid: 6746bba1b38fa7147b826e84a506dbfd,
+        type: 3}
+      propertyPath: serializationData.PrefabModificationsReferencedUnityObjects.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 1026c64db452e5d4ca84140969eeeb72, type: 3}
+    - target: {fileID: 1630336767934069219, guid: 6746bba1b38fa7147b826e84a506dbfd,
+        type: 3}
+      propertyPath: serializationData.PrefabModificationsReferencedUnityObjects.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: ebf43a52d6648cb4185408281836ad2e, type: 3}
+    - target: {fileID: 1630336767934069219, guid: 6746bba1b38fa7147b826e84a506dbfd,
+        type: 3}
+      propertyPath: serializationData.PrefabModificationsReferencedUnityObjects.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: fe4552a1eb5d43240867bfde0a2b899e, type: 3}
+    - target: {fileID: 1630336767934069219, guid: 6746bba1b38fa7147b826e84a506dbfd,
+        type: 3}
+      propertyPath: serializationData.PrefabModificationsReferencedUnityObjects.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: e54996a23c10b0344b293c307c028513, type: 3}
     - target: {fileID: 1997195114372272026, guid: 6746bba1b38fa7147b826e84a506dbfd,
         type: 3}
       propertyPath: m_Radius
@@ -7713,7 +7775,7 @@ PrefabInstance:
     - target: {fileID: 1997195114372272030, guid: 6746bba1b38fa7147b826e84a506dbfd,
         type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6746bba1b38fa7147b826e84a506dbfd, type: 3}
@@ -7811,6 +7873,68 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1630336767934069219, guid: 6746bba1b38fa7147b826e84a506dbfd,
         type: 3}
+    - target: {fileID: 1630336767934069219, guid: 6746bba1b38fa7147b826e84a506dbfd,
+        type: 3}
+      propertyPath: serializationData.PrefabModifications.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1630336767934069219, guid: 6746bba1b38fa7147b826e84a506dbfd,
+        type: 3}
+      propertyPath: serializationData.PrefabModifications.Array.data[0]
+      value: '"path":"_layeredClips","add_keys":{"$id":0,"$type":"System.Object[],
+        mscorlib","$rlength":3,"$rcontent":[{"$id":1,"$type":"System.String, mscorlib","Wood"},$iref:1,$iref:1]},"remove_keys":null'
+      objectReference: {fileID: 0}
+    - target: {fileID: 1630336767934069219, guid: 6746bba1b38fa7147b826e84a506dbfd,
+        type: 3}
+      propertyPath: serializationData.PrefabModifications.Array.data[1]
+      value: '"path":"_layeredClips.{\"Wood\"}","value":{"$id":0,"$type":"UnityEngine.AudioClip[],
+        UnityEngine.AudioModule","$rlength":4,"$rcontent":[$eref:0,$eref:1,$eref:2,$eref:3]}'
+      objectReference: {fileID: 0}
+    - target: {fileID: 1630336767934069219, guid: 6746bba1b38fa7147b826e84a506dbfd,
+        type: 3}
+      propertyPath: serializationData.PrefabModifications.Array.data[2]
+      value: '"path":"_layeredClips.{\"Wood\"}.[0]","value":$eref:0'
+      objectReference: {fileID: 0}
+    - target: {fileID: 1630336767934069219, guid: 6746bba1b38fa7147b826e84a506dbfd,
+        type: 3}
+      propertyPath: serializationData.PrefabModifications.Array.data[3]
+      value: '"path":"_layeredClips.{\"Wood\"}.[1]","value":$eref:1'
+      objectReference: {fileID: 0}
+    - target: {fileID: 1630336767934069219, guid: 6746bba1b38fa7147b826e84a506dbfd,
+        type: 3}
+      propertyPath: serializationData.PrefabModifications.Array.data[4]
+      value: '"path":"_layeredClips.{\"Wood\"}.[2]","value":$eref:2'
+      objectReference: {fileID: 0}
+    - target: {fileID: 1630336767934069219, guid: 6746bba1b38fa7147b826e84a506dbfd,
+        type: 3}
+      propertyPath: serializationData.PrefabModifications.Array.data[5]
+      value: '"path":"_layeredClips.{\"Wood\"}.[3]","value":$eref:3'
+      objectReference: {fileID: 0}
+    - target: {fileID: 1630336767934069219, guid: 6746bba1b38fa7147b826e84a506dbfd,
+        type: 3}
+      propertyPath: serializationData.PrefabModificationsReferencedUnityObjects.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1630336767934069219, guid: 6746bba1b38fa7147b826e84a506dbfd,
+        type: 3}
+      propertyPath: serializationData.PrefabModificationsReferencedUnityObjects.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 1026c64db452e5d4ca84140969eeeb72, type: 3}
+    - target: {fileID: 1630336767934069219, guid: 6746bba1b38fa7147b826e84a506dbfd,
+        type: 3}
+      propertyPath: serializationData.PrefabModificationsReferencedUnityObjects.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: ebf43a52d6648cb4185408281836ad2e, type: 3}
+    - target: {fileID: 1630336767934069219, guid: 6746bba1b38fa7147b826e84a506dbfd,
+        type: 3}
+      propertyPath: serializationData.PrefabModificationsReferencedUnityObjects.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: fe4552a1eb5d43240867bfde0a2b899e, type: 3}
+    - target: {fileID: 1630336767934069219, guid: 6746bba1b38fa7147b826e84a506dbfd,
+        type: 3}
+      propertyPath: serializationData.PrefabModificationsReferencedUnityObjects.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: e54996a23c10b0344b293c307c028513, type: 3}
     - target: {fileID: 1997195114372272026, guid: 6746bba1b38fa7147b826e84a506dbfd,
         type: 3}
       propertyPath: m_Radius
@@ -7879,7 +8003,7 @@ PrefabInstance:
     - target: {fileID: 1997195114372272030, guid: 6746bba1b38fa7147b826e84a506dbfd,
         type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6746bba1b38fa7147b826e84a506dbfd, type: 3}
