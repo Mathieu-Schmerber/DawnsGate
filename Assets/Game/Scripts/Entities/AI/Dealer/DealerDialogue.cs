@@ -111,16 +111,16 @@ namespace Game.Entities.AI.Dealer
 		{
 			string format = string.Format("{0:n0}", _deal.MoneyAmount);
 
+			if (!CanDeal())
+				return "Try to hide that you have no item to sell.";
 			switch (_dealType)
 			{
 				case RoomRewardType.GOLD:
-					if (!CanDeal())
-						return "Try to hide that you have no item to sell.";
 					return $"Deal <sprite=\"{_deal.Item.Data.Graphics.name}\" index=0>" +
 						   $"{string.Concat(Enumerable.Repeat("<sprite=\"star\" index=0>", _deal.Item.Quality + 1))}" +
-						   $" for {format}";
+						   $" for {format} <sprite=\"money\" index=0>";
 				case RoomRewardType.ITEM:
-					return $"Deal {format} for <sprite=\"{_deal.Item.Data.Graphics.name}\" index=0>" +
+					return $"Deal {format} <sprite=\"money\" index=0> for <sprite=\"{_deal.Item.Data.Graphics.name}\" index=0>" +
 						   $"{string.Concat(Enumerable.Repeat("<sprite=\"star\" index=0>", _deal.Item.Quality + 1))}";
 			}
 			return string.Empty;

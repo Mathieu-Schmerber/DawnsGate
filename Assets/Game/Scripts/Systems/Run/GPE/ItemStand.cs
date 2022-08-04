@@ -16,6 +16,7 @@ namespace Game.Systems.Run.GPE
 	{
 		[SerializeField] private SpriteRenderer _itemRenderer;
 		[SerializeField] private AudioClip _purchaseAudio;
+		[SerializeField] private AudioClip _errorAudio;
 
 		private AudioSource _source;
 
@@ -23,7 +24,7 @@ namespace Game.Systems.Run.GPE
 		public int Cost { get; set; }
 		public bool IsBuyable => GameManager.CanRunMoneyAfford(Cost) || Item.IsLifeItem;
 
-		public override string InteractionTitle => $"Buy";
+		public override string InteractionTitle => $"Buy for <color={(IsBuyable ? "white" : "red")}>{Cost} {(Item.IsLifeItem ? "<color=red>♥</color>" : "<sprite=\"money\" index=0>")}";
 		public event Action OnItemPaid;
 
 		private bool _canBeSuggested = true;
@@ -36,10 +37,14 @@ namespace Game.Systems.Run.GPE
 
 		public override void Interact(IInteractionActor actor)
 		{
-			actor.UnSuggestInteraction(this);
 
 			if (IsBuyable && !WasBought)
+			{
+				actor.UnSuggestInteraction(this);
 				PayItem();
+			}
+			else
+				_source.PlayOneShot(_errorAudio);
 			if (WasBought && TryEquipItem(actor))
 			{
 				_canBeSuggested = false;
