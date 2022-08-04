@@ -1,5 +1,6 @@
 using Nawlian.Lib.Extensions;
 using System;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -13,6 +14,7 @@ namespace Game.Tools
 		[SerializeField] private bool _playOnSelect;
 
 		private AudioSource _audioSource;
+		private AudioClip _lastPlayed;
 
 		private void Awake()
 		{
@@ -34,7 +36,10 @@ namespace Game.Tools
 
 		public void PlayRandom()
 		{
-			_audioSource.PlayOneShot(_clips.Random());
+			AudioClip selected = _clips.Length > 1 ? _clips.Where(x => x != _lastPlayed).Random() : _clips[0];
+
+			_lastPlayed = selected;
+			_audioSource.PlayOneShot(selected);
 		}
 
 		public void PlayRandom(AudioClip[] audios)
