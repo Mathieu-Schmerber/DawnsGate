@@ -21,10 +21,18 @@ namespace Game.UI
 			InputManager.OnControlChanged -= InputManager_OnControlChanged;
 		}
 
+		private void Start()
+		{
+			InputManager_OnControlChanged(InputManager.Instance.InUseControl);
+		}
+
 		private void InputManager_OnControlChanged(ControlType obj)
 		{
-			if (_switch.ContainsKey(obj))
+			_inputImage.enabled = true;
+			if (_switch.ContainsKey(obj) && _switch[obj] != null)
 				_inputImage.sprite = _switch[obj];
+			else
+				_inputImage.enabled = false;
 		}
 	}
 }

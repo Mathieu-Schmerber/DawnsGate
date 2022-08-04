@@ -24,14 +24,14 @@ namespace Game.Tools
 		public override void Open()
 		{
 			base.Open();
-			InputManager.OnCancelPressed += OnCancel;
+			//InputManager.OnCancelPressed += OnCancel;
 			InputManager.OnSubmitPressed += OnSubmit;
 		}
 
 		public override void Close()
 		{
 			base.Close();
-			InputManager.OnCancelPressed -= OnCancel;
+			//InputManager.OnCancelPressed -= OnCancel;
 			InputManager.OnSubmitPressed -= OnSubmit;
 		}
 	}
