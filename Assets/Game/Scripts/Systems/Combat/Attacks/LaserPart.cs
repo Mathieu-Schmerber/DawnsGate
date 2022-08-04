@@ -1,19 +1,20 @@
 ﻿using Nawlian.Lib.Extensions;
 using UnityEngine;
+using UnityEngine.VFX;
 
 namespace Game.Systems.Combat.Attacks
 {
 	public class LaserPart : AttackSubPart
 	{
 		private CapsuleCollider _collider;
-		private LineRenderer _lr;
+		private VisualEffect _vfx;
 		[SerializeField] private LayerMask _wallMask;
 
 		protected override void Awake()
 		{
 			base.Awake();
 			_collider = GetComponent<CapsuleCollider>();
-			_lr = GetComponent<LineRenderer>();
+			_vfx = GetComponentInChildren<VisualEffect>();
 		}
 
 		private void Update()
@@ -27,8 +28,8 @@ namespace Game.Systems.Combat.Attacks
 			{
 				float distance = Mathf.Min(rightHit.distance, leftHit.distance, centerHit.distance);
 
-				_lr.SetPosition(0, transform.position);
-				_lr.SetPosition(1, transform.position + transform.forward * distance);
+				_vfx.transform.localScale = _vfx.transform.localScale.WithZ(distance / 2);
+				_vfx.transform.localPosition = _vfx.transform.localPosition.WithZ(distance / 2);
 				_collider.center = _collider.center.WithZ(distance / 2);
 				_collider.height = distance;
 			}
