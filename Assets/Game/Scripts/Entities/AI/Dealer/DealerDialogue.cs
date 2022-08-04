@@ -55,6 +55,9 @@ namespace Game.Entities.AI.Dealer
 		{
 			ProcessNewDeal();
 			_dealDone = false;
+			Apologizing = false;
+			_animator.SetBool(TALKING_ANIM, false);
+			_animator.SetBool(APOLOGY_ANIM, false);
 			AudioManager.PlayTheme(_stats.DealTheme);
 		}
 
