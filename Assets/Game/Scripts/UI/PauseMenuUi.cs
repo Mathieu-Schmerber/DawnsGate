@@ -63,7 +63,7 @@ namespace Game.UI
 				GuiManager.CloseMenu<PauseMenuAudioUi>();
 				EventSystem.current.SetSelectedGameObject(_resumeBtn.gameObject);
 			}
-			else
+			else if (IsOpen)
 				Close();
 		}
 

@@ -1,4 +1,5 @@
-﻿using Game.UI;
+﻿using Game.Tools;
+using Game.UI;
 using Nawlian.Lib.Extensions;
 using Nawlian.Lib.Utils;
 using Pixelplacement;
@@ -20,7 +21,7 @@ namespace Game.Managers
 		private InventorySlotSelector _inventoryUi;
 		private ResourceSwitcher _resourceSwitcher;
 
-		[ShowInInspector, ReadOnly] public static bool IsMenuing => Instance?._menus?.Any(x => x.Value.IsOpen && x.Value.RequiresGameFocus) ?? false;
+		[ShowInInspector, ReadOnly] public static bool IsMenuing => Instance?._menus?.Any(x => x.Value.IsOpen && x.Value.RequiresGameFocus && x.Value is ACloseableMenu) ?? false;
 		public static InventorySlotSelector InventoryUI => Instance._inventoryUi;
 
 		private void Awake()
@@ -38,6 +39,14 @@ namespace Game.Managers
 			CloseMenu<CreditMenuUi>();
 			CloseMenu<AudioMenuUi>();
 			Instance._resourceSwitcher.SwitchGameplayResources(true);
+		}
+
+		public static void CloseAllCloseableMenus()
+		{
+			Instance._menus.Where(x => x.Value is ACloseableMenu).ForEach(x => {
+				if (x.Value.IsOpen)
+					x.Value.Close();
+			});
 		}
 
 		public static void DisplayMenuUI()
