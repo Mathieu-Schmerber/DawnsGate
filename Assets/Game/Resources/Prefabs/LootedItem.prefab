@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _item:
-    Data: {fileID: 0}
+    Data: {fileID: 11400000, guid: e93a41f81574f2e409389ea1d467bbc5, type: 2}
     Quality: 0
 --- !u!135 &1646379653
 SphereCollider:
@@ -137,7 +137,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 3907235176126722221, guid: c0707f6badf22974bad9ccc4098c3c4e,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -145,7 +146,7 @@ SpriteRenderer:
   m_Size: {x: 0.64, y: 0.64}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &6774050918583203363
@@ -161,6 +162,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _amplitude: 0.2
+  _speed: 1
 --- !u!1001 &4020201373512382939
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -247,6 +249,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: EntityCircle
+      objectReference: {fileID: 0}
+    - target: {fileID: 7944063403446872818, guid: b2a0c6a9288c1e348be8ea11091fa41b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7944063403446872818, guid: b2a0c6a9288c1e348be8ea11091fa41b,
         type: 3}

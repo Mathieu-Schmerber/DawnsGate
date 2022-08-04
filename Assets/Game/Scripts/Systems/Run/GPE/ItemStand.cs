@@ -45,8 +45,10 @@ namespace Game.Systems.Run.GPE
 			}
 			else
 				_source.PlayOneShot(_errorAudio);
-			if (WasBought && TryEquipItem(actor))
+			if (WasBought)
 			{
+				LootedItem.Create(_spr.transform.position, _item, -transform.forward * 2);
+				SetItem(null);
 				_canBeSuggested = false;
 				actor.UnSuggestInteraction(this);
 			}

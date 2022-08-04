@@ -705,7 +705,7 @@ MonoBehaviour:
   _playerEntity: {fileID: 2018765464}
   _cameraController: {fileID: 1745431546539593876}
   _cameraParent: {fileID: 1544349012}
-  _runMoney: 0
+  _runMoney: 50000
   _lobbyMoney: 50000
 --- !u!4 &5646739713950870795
 Transform:
@@ -924,7 +924,7 @@ MonoBehaviour:
   m_RendererIndex: 0
   m_VolumeLayerMask:
     serializedVersion: 2
-    m_Bits: 1023
+    m_Bits: 5119
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
   m_RenderPostProcessing: 1

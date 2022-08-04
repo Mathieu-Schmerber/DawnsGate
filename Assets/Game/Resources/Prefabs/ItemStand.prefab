@@ -65,6 +65,7 @@ MonoBehaviour:
     Quality: 0
   _itemRenderer: {fileID: 6372719873629236327}
   _purchaseAudio: {fileID: 8300000, guid: e0f50cc4e6b101546b555287c167df0c, type: 3}
+  _errorAudio: {fileID: 0}
 --- !u!82 &3966493226745208482
 AudioSource:
   m_ObjectHideFlags: 0
@@ -479,5 +480,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39f689e33549a9949904fd275372d0af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _purchaseFx: {fileID: 8466160866708085913, guid: 6b6056446adaa0b4fb3ad8b2a095bfae,
+    type: 3}
   _itemGfx: {fileID: 6372719873629236325}
   _price: {fileID: 167462816860047972}

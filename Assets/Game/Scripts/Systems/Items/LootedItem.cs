@@ -4,8 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Game.Entities.Player;
+using Game.Managers;
+using Nawlian.Lib.Extensions;
 using Nawlian.Lib.Systems.Interaction;
 using Nawlian.Lib.Systems.Pooling;
+using Pixelplacement;
 using UnityEngine;
 
 namespace Game.Systems.Items
@@ -82,9 +85,16 @@ namespace Game.Systems.Items
 			}
 		}
 
-		public static void Create(Vector3 position, ItemSummary summary)
+		public static void Create(Vector3 position, ItemSummary summary, Vector3? horizontalMotion = null)
 		{
-			ObjectPooler.Get(Databases.Database.Data.Item.LootedItem, position, Quaternion.Euler(0, 0, 0), summary, null);
+			Vector3 launch = horizontalMotion != null ? horizontalMotion.Value : new Vector3(UnityEngine.Random.Range(-1f, 1f) * 2, 0, UnityEngine.Random.Range(-1f, 1f) * 2);
+			var instance = ObjectPooler.Get(Databases.Database.Data.Item.LootedItem, position, Quaternion.Euler(0, 0, 0), summary, null);
+			float groundLevel = GameManager.Player.transform.position.y;
+			float parabolaSpeed = 0.7f;
+
+			Tween.Position(instance.transform, position + launch, parabolaSpeed, 0, Tween.EaseLinear);
+			Tween.Value(position.y, position.y + 2, (v) => instance.transform.position = instance.transform.position.WithY(v), parabolaSpeed / 2, 0, Tween.EaseOutStrong);
+			Tween.Value(position.y + 2, groundLevel, (v) => instance.transform.position = instance.transform.position.WithY(v), parabolaSpeed / 2, parabolaSpeed / 2, Tween.EaseIn);
 		}
 	}
 }
