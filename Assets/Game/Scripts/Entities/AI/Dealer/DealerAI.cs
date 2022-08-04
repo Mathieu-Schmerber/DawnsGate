@@ -19,9 +19,11 @@ namespace Game.Entities.AI.Dealer
 		private DealerDialogue _dialogue;
 		private DealerStatData _stats;
 		private DealRoom _dealRoom;
-		private bool _atTheMapCenter = false;
 		private bool _activated = false;
 		private bool _activatedOnce = false;
+
+		private Vector3 _mapCenter => _dealRoom.BossSpawnPoint.WithY(transform.position.y);
+		private bool _atTheMapCenter => Vector3.Distance(transform.position, _mapCenter) <= 0.5f;
 
 		#region Unity builtins
 
@@ -36,7 +38,7 @@ namespace Game.Entities.AI.Dealer
 			base.Init(data);
 			_stats = _entity.Stats as DealerStatData;
 			_dealRoom = _room as DealRoom;
-			_attackNumber = 0;
+			_attackNumber = 1; // Start with laser
 			_activated = false;
 			_activatedOnce = false;
 		}
@@ -55,11 +57,11 @@ namespace Game.Entities.AI.Dealer
 				return;
 			base.Update();
 
-			if (!_activatedOnce) return;
+			if (!_activatedOnce) 
+				return;
 
-			_atTheMapCenter = Vector3.Distance(transform.position, _dealRoom.BossSpawnPoint.WithY(transform.position.y)) <= 0.5f;
 			if (!IsDashAttack || !_activated)
-				NextAggressivePosition = _dealRoom.BossSpawnPoint;
+				NextAggressivePosition = _mapCenter;
 			if (_activatedOnce && !_activated && _atTheMapCenter)
 			{
 				State = Shared.EntityState.STUN;
@@ -118,15 +120,13 @@ namespace Game.Entities.AI.Dealer
 		protected override float AttackRange => _stats.DashAttack.AttackRange;
 		protected override float AttackCooldown => 0.5f;
 
-		private int _attackNumber = 0;
+		private int _attackNumber;
 		private int _dashToPerform;
 		public bool IsDashAttack => _attackNumber % 2 == 0;
 
 		protected override void TryAttacking()
 		{
 			if (!_activated)
-				return;
-			else if (!IsDashAttack && !_atTheMapCenter)
 				return;
 			base.TryAttacking();
 		}
@@ -146,6 +146,8 @@ namespace Game.Entities.AI.Dealer
 			}
 			else
 			{
+				if (!_atTheMapCenter)
+					transform.position = _mapCenter;
 				_gfxAnim.SetBool("IsCasting", true);
 				LockMovement = true;
 				LockAim = true;
