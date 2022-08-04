@@ -11,6 +11,7 @@ namespace Game.VFX
 	public class ItemStandEffect : MonoBehaviour
 	{
 		private ItemStand _stand;
+		private AudioSource _source;
 		[SerializeField] private GameObject _purchaseFx;
 		[SerializeField] private GameObject _itemGfx;
 		[SerializeField] private TextMeshPro _price;
@@ -19,7 +20,7 @@ namespace Game.VFX
 		{
 			_stand = GetComponentInParent<ItemStand>();
 			_itemGfx.SetActive(false);
-			RemovePrice();
+			_source = GetComponent<AudioSource>();
 		}
 
 		private void OnEnable()
@@ -51,6 +52,7 @@ namespace Game.VFX
 
 		private void RemovePrice()
 		{
+			_source.Play();
 			ObjectPooler.Get(_purchaseFx, _itemGfx.transform.position, Quaternion.identity, null);
 			_price.gameObject.SetActive(false);
 		}
