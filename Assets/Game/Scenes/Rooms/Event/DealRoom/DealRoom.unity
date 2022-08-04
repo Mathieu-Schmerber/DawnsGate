@@ -124,7 +124,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 23800000, guid: 474c48fb928e6c843b7295a8c09289b7, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 31ccfacfd83d87f46b29ccfd96103bc1, type: 2}
 --- !u!1001 &39740513
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -338,8 +338,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.8104107, y: 0.7560783, z: 1.2787294}
-  m_Center: {x: 0.000004291538, y: 0.017568054, z: 0.6393646}
+  m_Size: {x: 2.8104107, y: 0.5719372, z: 1.2787294}
+  m_Center: {x: 0.000004362825, y: 0.10963855, z: 0.63936454}
 --- !u!1 &95407829
 GameObject:
   m_ObjectHideFlags: 0
@@ -589,7 +589,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh243788
+  m_Name: pb_Mesh70380
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -856,7 +856,7 @@ PrefabInstance:
     - target: {fileID: 3331041634302934169, guid: 7ba9322fb7ed5c34aac97f1053f616e4,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 10
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 3331041634302934169, guid: 7ba9322fb7ed5c34aac97f1053f616e4,
         type: 3}
@@ -1246,7 +1246,7 @@ PrefabInstance:
     - target: {fileID: 3331041634302934169, guid: 7ba9322fb7ed5c34aac97f1053f616e4,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -10
+      value: -8
       objectReference: {fileID: 0}
     - target: {fileID: 3331041634302934169, guid: 7ba9322fb7ed5c34aac97f1053f616e4,
         type: 3}
@@ -1370,8 +1370,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.8104107, y: 0.7560783, z: 1.2868253}
-  m_Center: {x: 0.0000052452124, y: 0.017569961, z: 0.64341253}
+  m_Size: {x: 2.8104107, y: 0.61127156, z: 1.2868253}
+  m_Center: {x: 0.000005173809, y: 0.12038574, z: 0.6434125}
 --- !u!23 &962042153
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -58739,8 +58739,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.8104107, y: 0.7560783, z: 1.2868253}
-  m_Center: {x: 0.0000052452124, y: 0.017569961, z: 0.64341253}
+  m_Size: {x: 2.8104107, y: 0.5551975, z: 1.2868253}
+  m_Center: {x: 0.0000051738843, y: 0.1180104, z: 0.6434125}
 --- !u!65 &1161739439
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -59268,7 +59268,7 @@ PrefabInstance:
     - target: {fileID: 3331041634302934169, guid: 7ba9322fb7ed5c34aac97f1053f616e4,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 10
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 3331041634302934169, guid: 7ba9322fb7ed5c34aac97f1053f616e4,
         type: 3}
@@ -59378,7 +59378,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh243734
+  m_Name: pb_Mesh70326
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -60143,7 +60143,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &888251312339841443
 Transform:
@@ -61464,7 +61464,7 @@ PrefabInstance:
     - target: {fileID: 3331041634302934169, guid: 7ba9322fb7ed5c34aac97f1053f616e4,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10
+      value: -8
       objectReference: {fileID: 0}
     - target: {fileID: 3331041634302934169, guid: 7ba9322fb7ed5c34aac97f1053f616e4,
         type: 3}
