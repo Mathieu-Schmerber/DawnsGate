@@ -37,6 +37,7 @@ namespace Game.Entities.AI.Dealer
 		private Inventory _inventory;
 		private DealSummary _deal;
 		private Animator _animator;
+		public bool Apologizing { get; private set; } = false;
 
 		private RoomRewardType _dealType => RunManager.CurrentRoom.Reward;
 
@@ -91,6 +92,7 @@ namespace Game.Entities.AI.Dealer
 
 		public void Apologize()
 		{
+			Apologizing = true;
 			_animator.SetBool(APOLOGY_ANIM, true);
 			Reward();
 		}

@@ -66,6 +66,13 @@ namespace Game.Systems.Combat.Attacks
 				Tween.Rotate(transform, _attackData.EndRotation, Space.Self, _attackData.ActiveTime, 0, Tween.EaseLinear);
 		}
 
+		protected override void OnReleasing()
+		{
+			base.OnReleasing();
+			Tween.Stop(GetInstanceID());
+			_isOff = true;
+		}
+
 		private void Update()
 		{
 			if (_isOff)

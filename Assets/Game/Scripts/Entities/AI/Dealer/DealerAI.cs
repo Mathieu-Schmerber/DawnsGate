@@ -4,6 +4,7 @@ using Game.Systems.Combat.Attacks;
 using Game.Systems.Run.Rooms.Events;
 using Nawlian.Lib.Extensions;
 using Nawlian.Lib.Systems.Animations;
+using Nawlian.Lib.Systems.Pooling;
 using Nawlian.Lib.Utils;
 using System;
 using UnityEngine;
@@ -21,6 +22,7 @@ namespace Game.Entities.AI.Dealer
 		private DealRoom _dealRoom;
 		private bool _activated = false;
 		private bool _activatedOnce = false;
+		private Vector3 _gfxOffset;
 
 		private Vector3 _mapCenter => _dealRoom.BossSpawnPoint.WithY(transform.position.y);
 		private bool _atTheMapCenter => Vector3.Distance(transform.position, _mapCenter) <= 0.5f;
@@ -31,6 +33,7 @@ namespace Game.Entities.AI.Dealer
 		{
 			base.Awake();
 			_dialogue = GetComponentInChildren<DealerDialogue>();
+			_gfxOffset = _gfxAnim.transform.localPosition;
 		}
 
 		protected override void Init(object data)
@@ -53,7 +56,7 @@ namespace Game.Entities.AI.Dealer
 
 		protected override void Update()
 		{
-			if (!_activated && _atTheMapCenter)
+			if (_dialogue.Apologizing)
 				return;
 			base.Update();
 
@@ -111,12 +114,16 @@ namespace Game.Entities.AI.Dealer
 			LockAim = false;
 			_entity.SetInvulnerable(true);
 			_activated = false;
+
+			if (_laserInstance != null)
+				_laserInstance.Release();
 		}
 
 		#endregion
 
 		#region Attacks
 
+		[SerializeField] private ModularAttack _laserInstance;
 		protected override float AttackRange => _stats.DashAttack.AttackRange;
 		protected override float AttackCooldown => 0.5f;
 
@@ -146,12 +153,20 @@ namespace Game.Entities.AI.Dealer
 			}
 			else
 			{
-				if (!_atTheMapCenter)
-					transform.position = _mapCenter;
-				_gfxAnim.SetBool("IsCasting", true);
 				LockMovement = true;
 				LockAim = true;
+				if (!_atTheMapCenter)
+					Teleport(_mapCenter);
+				_gfxAnim.SetBool("IsCasting", true);
 			}
+		}
+
+		private void Teleport(Vector3 position)
+		{
+			ObjectPooler.Get(_stats.TeleportationFx, transform.position + Vector3.up, Quaternion.identity, null);
+			transform.position = position;
+			ObjectPooler.Get(_stats.TeleportationFx, transform.position + Vector3.up, Quaternion.identity, null);
+			_gfxAnim.transform.localPosition = _gfxOffset;
 		}
 
 		public void OnAnimationEvent(string animationArg)
@@ -175,12 +190,12 @@ namespace Game.Entities.AI.Dealer
 			}
 			else if (_atTheMapCenter)
 			{
-				ModularAttack instance = AttackBase.Spawn(_stats.LaserAttack, transform.position, Quaternion.LookRotation(GetAimNormal()), new()
+				_laserInstance = AttackBase.Spawn(_stats.LaserAttack, transform.position, Quaternion.LookRotation(GetAimNormal()), new()
 				{
 					Caster = _entity,
 					Data = _stats.LaserAttack
 				}).GetComponent<ModularAttack>();
-				instance.OnStart(Vector3.zero, 0);
+				_laserInstance.OnStart(Vector3.zero, 0);
 				Awaiter.WaitAndExecute(_stats.LaserAttack.ActiveTime, () =>
 				{
 					ResetStates();

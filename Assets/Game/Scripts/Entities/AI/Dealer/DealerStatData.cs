@@ -21,8 +21,8 @@ namespace Game.Entities.AI.Dealer
 		public AnimationClip StartDashAnimation;
 		public Vector2Int ConsecutiveDashes;
 		[Space]
+		public GameObject TeleportationFx;
 		[InlineEditor] public ModularAttackData LaserAttack;
 		public AnimationClip LaserCastAnimation;
-
 	}
 }
