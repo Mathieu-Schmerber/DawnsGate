@@ -1,4 +1,5 @@
 ﻿using Game.Tools;
+using Pixelplacement;
 using System;
 using TMPro;
 using UnityEngine;
@@ -7,9 +8,10 @@ using UnityEngine.UI;
 
 namespace Game.UI
 {
-	public class DialogueChoiceUi : MonoBehaviour, ISelectHandler
+	public class DialogueChoiceUi : MonoBehaviour, ISelectHandler, IDeselectHandler
 	{
 		[SerializeField] private TextMeshProUGUI _text;
+		[SerializeField] private float _selectedScaleMultiplier = 1.2f;
 		private Button _button;
 		private Action<string> _onClick;
 		private RandomAudioClip _rdmClip;
@@ -49,6 +51,12 @@ namespace Game.UI
 		public void OnSelect(BaseEventData eventData)
 		{
 			_rdmClip.PlayRandom();
+			Tween.LocalScale(transform, Vector3.one * _selectedScaleMultiplier, 0.2f, 0, Tween.EaseOut);
+		}
+
+		public void OnDeselect(BaseEventData eventData)
+		{
+			Tween.LocalScale(transform, Vector3.one, 0.1f, 0, Tween.EaseOut);
 		}
 	}
 }

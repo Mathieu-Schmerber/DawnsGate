@@ -63,9 +63,9 @@ MonoBehaviour:
       Data: false
     - Name: Text
       Entry: 1
-      Data: "Hello there dear traveler.\nI wonder what's gotten you there, it's getting
-        rare to see anything nor anyone over here !\n\nOh you wanna now my name ?
-        \nThat's pretty useless, I'm really just a wandering trader."
+      Data: "[speed=2]Hello there dear traveler.\nI wonder what's gotten you there,
+        it's getting rare to see anything nor anyone over here !\n\nOh you wanna
+        know my name ? \nThat's pretty useless, I'm really just a wandering trader."
     - Name: NextNodeId
       Entry: 1
       Data: f133bd90-d09e-45e8-b59c-77cb47c9934f
@@ -101,8 +101,8 @@ MonoBehaviour:
       Data: false
     - Name: Text
       Entry: 1
-      Data: "Speaking of which, I just happen to have a [effect=wave][color=magenta]lovely
-        trade[color][effect] for you.\nWould you be interested ? \nDefinitely nothing
+      Data: "[speed=2]Speaking of which, I just happen to have a [effect=wave]<color=purple>lovely
+        trade</color>[effect] for you.\nWould you be interested ? \nDefinitely nothing
         [effect=shake]fishy[effect] here, only getting down to business !"
     - Name: NextNodeId
       Entry: 1
@@ -203,10 +203,7 @@ MonoBehaviour:
       Data: false
     - Name: Text
       Entry: 1
-      Data: 'You... did you just refuse my deal ?
-
-        [effect=shake]HOW DARE
-        YOU ?[effect]'
+      Data: '[speed=2][effect=shake]HOW DARE YOU ?[effect]'
     - Name: NextNodeId
       Entry: 1
       Data: 0810ca8a-c292-47ec-87d2-e632aa2f5c12
@@ -368,7 +365,7 @@ MonoBehaviour:
       Data: false
     - Name: Text
       Entry: 1
-      Data: '[effect=shake]ARE YOU TRYING TO SCAM ME ?[effect]'
+      Data: '[speed=2][effect=shake]ARE YOU TRYING TO SCAM ME ?[effect]'
     - Name: NextNodeId
       Entry: 1
       Data: 0810ca8a-c292-47ec-87d2-e632aa2f5c12
@@ -404,13 +401,13 @@ MonoBehaviour:
       Data: true
     - Name: Text
       Entry: 1
-      Data: 'Deal !
+      Data: '[speed=2]Deal !
 
         What a great time to be alive isn''t it ?
 
         [speed=0,5]...[speed]
 
-        Not
+        [speed=2]Not
         much of a talker eh, farewell then.'
     - Name: NextNodeId
       Entry: 6
@@ -447,10 +444,10 @@ MonoBehaviour:
       Data: true
     - Name: Text
       Entry: 1
-      Data: 'Oh oh ! I guess I got a <b>bit</b> carried away over nothing, I trully
-        am sorry !
+      Data: '[speed=2]Oh oh ! I guess I got a <b>bit</b> carried away over nothing,
+        I trully am sorry !
 
-        Please accept as my sincerest apologies...'
+        Please accept this as my sincerest apologies...'
     - Name: NextNodeId
       Entry: 6
       Data: 

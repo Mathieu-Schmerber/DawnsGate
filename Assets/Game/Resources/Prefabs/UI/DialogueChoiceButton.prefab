@@ -154,6 +154,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _text: {fileID: 5728112305062992889}
+  _selectedScaleMultiplier: 1.1
 --- !u!82 &134384524376564279
 AudioSource:
   m_ObjectHideFlags: 0
@@ -268,6 +269,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 35179153f72319a4c866d02696436993, type: 3}
   - {fileID: 8300000, guid: b35f1d5b811d4954ba71d8820a9d94ef, type: 3}
   _playOnEnable: 0
+  _playOnSelect: 0
 --- !u!1 &5728112305062992891
 GameObject:
   m_ObjectHideFlags: 0

@@ -139,13 +139,10 @@ namespace Game.Entities.AI.Dealer
 			{
 				if (_dashToPerform == 0)
 					_dashToPerform = Random.Range(_stats.ConsecutiveDashes.x + 1, _stats.ConsecutiveDashes.y + 2);
-				_dashToPerform--;
 				AttackBase.ShowAttackPrevisu(_stats.DashAttack, transform.position, .5f, this, 
 					OnUpdate: (param) 
 					=> param.Transform.localScale = new Vector3(1, 1, Vector3.Distance(transform.position, transform.position + GetAimNormal() * GetDistanceToWall())));
 				_gfxAnim.Play(_stats.StartDashAnimation.name);
-				if (_dashToPerform == 0)
-					_attackNumber++;
 			}
 			else
 			{
@@ -163,6 +160,9 @@ namespace Game.Entities.AI.Dealer
 				return;
 			if (IsDashAttack)
 			{
+				_dashToPerform--;
+				if (_dashToPerform == 0)
+					_attackNumber++;
 				ModularAttack instance = AttackBase.Spawn(_stats.DashAttack, transform.position, Quaternion.LookRotation(GetAimNormal()), new()
 				{
 					Caster = _entity,
