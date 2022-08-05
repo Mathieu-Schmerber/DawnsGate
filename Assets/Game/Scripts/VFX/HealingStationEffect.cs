@@ -11,10 +11,12 @@ namespace Game.VFX
 		[SerializeField] private float _animationStarterTime;
 		[SerializeField] private GameObject _healingFx;
 		private HealingStation _station;
+		private AudioSource _source;
 
 		private void Awake()
 		{
 			_station = GetComponentInParent<HealingStation>();
+			_source = GetComponent<AudioSource>();
 		}
 
 		private void OnEnable()
@@ -50,7 +52,9 @@ namespace Game.VFX
 				RestrictPlayer();
 				yield return new WaitForSeconds(1f);
 				GameManager.Player.SetAnimatorState("IsPraising", true);
-				yield return new WaitForSeconds(_animationStarterTime);
+				yield return new WaitForSeconds(_animationStarterTime / 2);
+				_source.Play();
+				yield return new WaitForSeconds(_animationStarterTime / 2);
 				yield return new WaitForSeconds(1f);
 				_station.Heal();
 				ObjectPooler.Get(_healingFx, GameManager.Player.transform.position, Quaternion.identity, null);

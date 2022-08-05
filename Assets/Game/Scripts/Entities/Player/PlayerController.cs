@@ -67,9 +67,10 @@ namespace Game.Entities.Player
 			}
 			if (_restricted)
 			{
-				GameManager.Player.State = Entities.Shared.EntityState.STUN;
-				GameManager.Player.LockMovement = true;
-				GameManager.Player.LockAim = true;
+				State = Entities.Shared.EntityState.STUN;
+				if (_lockedTarget == null)
+					LockAim = true;
+				LockMovement = true;
 			}
 		}
 
@@ -100,17 +101,14 @@ namespace Game.Entities.Player
 		public void UnRestrict()
 		{
 			_restricted = false;
-			GameManager.Player.State = Entities.Shared.EntityState.IDLE;
-			GameManager.Player.LockMovement = false;
-			GameManager.Player.LockAim = false;
+			State = Entities.Shared.EntityState.IDLE;
+			LockMovement = false;
+			LockAim = false;
 		}
 
 		public void Restrict()
 		{
 			_restricted = true;
-			GameManager.Player.State = Entities.Shared.EntityState.STUN;
-			GameManager.Player.LockMovement = true;
-			GameManager.Player.LockAim = true;
 		}
 
 		#region Abstraction
