@@ -31,18 +31,17 @@ namespace Game.VFX
 		{
 			void RestrictPlayer()
 			{
-				GameManager.Player.State = Entities.Shared.EntityState.STUN;
-				GameManager.Player.LockMovement = true;
 				GameManager.Player.LockTarget(transform);
 				GameManager.Camera.LockTemporaryTarget(transform, 0.8f);
+				GameManager.Player.Restrict();
+				GameManager.Player.LockAim = false;
 			}
 
 			void UnRestrictPlayer()
 			{
-				GameManager.Player.State = Entities.Shared.EntityState.IDLE;
-				GameManager.Player.LockMovement = false;
 				GameManager.Player.UnlockTarget();
 				GameManager.Camera.UnlockTarget();
+				GameManager.Player.UnRestrict();
 			}
 
 			IEnumerator Animate()

@@ -25,6 +25,7 @@ namespace Game.Entities.Player
 		private Vector3 _lastAimDir;
 
 		private Plane _mousePlane;
+		private bool _restricted = false;
 
 		public bool CanDash => (!LockMovement || State == EntityState.ATTACKING) && State != EntityState.STUN && _dashTimer.IsOver();
 
@@ -64,6 +65,12 @@ namespace Game.Entities.Player
 				LockMovement = GuiManager.IsMenuing;
 				LockAim = GuiManager.IsMenuing;
 			}
+			if (_restricted)
+			{
+				GameManager.Player.State = Entities.Shared.EntityState.STUN;
+				GameManager.Player.LockMovement = true;
+				GameManager.Player.LockAim = true;
+			}
 		}
 
 		#endregion
@@ -88,6 +95,23 @@ namespace Game.Entities.Player
 
 		public void SetAnimatorState(string state, bool value) => _gfxAnim.SetBool(state, value);
 		public void SetAnimatorState(string state, float value) => _gfxAnim.SetFloat(state, value);
+		public bool GetAnimatorState(string state) => _gfxAnim.GetBool(state);
+
+		public void UnRestrict()
+		{
+			_restricted = false;
+			GameManager.Player.State = Entities.Shared.EntityState.IDLE;
+			GameManager.Player.LockMovement = false;
+			GameManager.Player.LockAim = false;
+		}
+
+		public void Restrict()
+		{
+			_restricted = true;
+			GameManager.Player.State = Entities.Shared.EntityState.STUN;
+			GameManager.Player.LockMovement = true;
+			GameManager.Player.LockAim = true;
+		}
 
 		#region Abstraction
 

@@ -111,6 +111,9 @@ namespace Game.Entities.AI
 
 		protected override void Update()
 		{
+			if (GameManager.Player.GetAnimatorState("IsDead"))
+				return;
+
 			if (UsesPathfinding)
 			{
 				CalculatePathfinding();

@@ -3,6 +3,8 @@ using Game.Managers;
 using Game.Systems.Combat.Effects;
 using Game.VFX;
 using System;
+using System.Collections;
+using UnityEngine;
 
 namespace Game.Entities.Player
 {
@@ -11,6 +13,7 @@ namespace Game.Entities.Player
 		private PlayerDamageable _damageable;
 		private Inventory _inventory;
 		private EffectProcessor _effects;
+		private PlayerController _controller;
 
 		protected override void Awake()
 		{
@@ -18,24 +21,27 @@ namespace Game.Entities.Player
 			_damageable = GetComponent<PlayerDamageable>();
 			_inventory = GetComponent<Inventory>();
 			_effects = GetComponent<EffectProcessor>();
+			_controller = GetComponent<PlayerController>();
 		}
 
 		private void OnEnable()
 		{
 			OnHealthChanged += DisplayHealthText;
 			OnArmorChanged += DisplayArmorText;
-			_damageable.OnPlayerDeath += OnRunEnded;
+			_damageable.OnPlayerDeath += GameOver;
 			GameManager.OnRunMoneyUpdated += DisplayMoneyText;
 			RunManager.OnRunEnded += OnRunEnded;
+			RunManager.OnBeforeSceneSwitched += ClearState;
 		}
 
 		private void OnDisable()
 		{
 			OnArmorChanged -= DisplayArmorText;
 			OnHealthChanged -= DisplayHealthText;
-			_damageable.OnPlayerDeath -= OnRunEnded;
+			_damageable.OnPlayerDeath -= GameOver;
 			GameManager.OnRunMoneyUpdated -= DisplayMoneyText;
 			RunManager.OnRunEnded -= OnRunEnded;
+			RunManager.OnBeforeSceneSwitched -= ClearState;
 		}
 
 		private void DisplayMoneyText(int before, int now)
@@ -63,11 +69,7 @@ namespace Game.Entities.Player
 		public override void ResetStats()
 		{
 			base.ResetStats();
-			GameManager.Traits.ForEach(x =>
-			{
-				for (int i = 0; i < GameManager.GetTraitUpgradeCount(x); i++)
-					GameManager.ApplySingleTraitUpgrade(x);
-			});
+			GameManager.Traits.ForEach(x => GameManager.ApplyMultipleTraitUpgrades(x));
 		}
 
 		private void OnRunEnded()
@@ -76,6 +78,26 @@ namespace Game.Entities.Player
 			ClearEffects();
 			ClearInventory();
 			ResetStats();
+		}
+
+		private void ClearState()
+		{
+			_controller.SetAnimatorState("IsDead", false);
+			_controller.UnRestrict();
+			GameManager.Camera.UnlockTarget();
+		}
+
+		private void GameOver()
+		{
+			IEnumerator AnimateGameOver(Action onDone)
+			{
+				GameManager.Camera.LockTemporaryTarget(transform, 0.7f);
+				_controller.Restrict();
+				_controller.SetAnimatorState("IsDead", true);
+				yield return new WaitForSeconds(5f);
+				onDone();
+			}
+			StartCoroutine(AnimateGameOver(() => RunManager.EndRun()));
 		}
 
 		#endregion

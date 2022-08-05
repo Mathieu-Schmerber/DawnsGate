@@ -53,6 +53,8 @@ namespace Game.Managers
 
 		#endregion
 
+		#region Unity Builtins
+
 		private void Awake()
 		{
 			_scenes.Add(RoomType.COMBAT, RunSettings.RoomFolders[RoomType.COMBAT].RoomDatas.Select(x => x.SceneName).ToArray());
@@ -63,24 +65,9 @@ namespace Game.Managers
 			_damageable = GameManager.Player.GetComponent<PlayerDamageable>();
 		}
 
-		private void OnEnable()
-		{
-			_damageable.OnPlayerDeath += EndRun;
-		}
+		#endregion
 
-		private void OnDisable()
-		{
-			_damageable.OnPlayerDeath -= EndRun;
-		}
-
-		#region Tools
-
-		public static void OnLobbyEntered()
-		{
-			Instance._runState = RunState.LOBBY;
-			AudioManager.PlayTheme(RunSettings.LobbyTheme);
-			SaveSystem.Load();
-		}
+		#region Run access
 
 		public static void StartNewRun()
 		{
@@ -102,20 +89,15 @@ namespace Game.Managers
 
 		public static void SelectNextRoom(Room selected)
 		{
-			if (IsLastRoom)
-				EndRun();
-			else
+			Instance._currentRoom++;
+			Instance._room = new()
 			{
-				Instance._currentRoom++;
-				Instance._room = new()
-				{
-					Type = selected.Type,
-					Reward = selected.Reward
-				};
-				Instance._room.DefineExitsFromRule(RunSettings.RoomRules[Instance._currentRoom]);
+				Type = selected.Type,
+				Reward = selected.Reward
+			};
+			Instance._room.DefineExitsFromRule(RunSettings.RoomRules[Instance._currentRoom]);
 
-				ChangeScene(selected.Type);
-			}
+			ChangeScene(selected.Type);
 		}
 
 		public static void EndRun()
@@ -124,6 +106,17 @@ namespace Game.Managers
 			SaveSystem.Save();
 			OnLobbyEntered(); // <= Maybe call this when the scene has been loaded ?
 			OnRunEnded?.Invoke();
+		}
+
+		#endregion
+
+		#region Scene management
+
+		public static void OnLobbyEntered()
+		{
+			Instance._runState = RunState.LOBBY;
+			AudioManager.PlayTheme(RunSettings.LobbyTheme);
+			SaveSystem.Load();
 		}
 
 		private static string GetRandomRoomScene(RoomType type)
@@ -167,6 +160,8 @@ namespace Game.Managers
 			}));
 		}
 
+		#endregion
+
 #if UNITY_EDITOR
 		public static void ArtificiallyLaunchScene()
 		{
@@ -175,7 +170,5 @@ namespace Game.Managers
 			OnSceneSwitched?.Invoke();
 		}
 #endif
-
-		#endregion
 	}
 }
