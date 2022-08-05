@@ -177,6 +177,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 7f9e80b797431794d852848e47c1ceaa, type: 3}
   - {fileID: 8300000, guid: 911348743aba79743b4c54bfbefefdee, type: 3}
   _playOnEnable: 1
+  _playOnSelect: 0
 --- !u!1001 &170736516704148625
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -243,6 +244,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Staff H1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7374987882779049465, guid: 7edbd3109e86e90409580f04e7773755,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7374987883151453579, guid: 7edbd3109e86e90409580f04e7773755,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7374987884120560774, guid: 7edbd3109e86e90409580f04e7773755,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7edbd3109e86e90409580f04e7773755, type: 3}

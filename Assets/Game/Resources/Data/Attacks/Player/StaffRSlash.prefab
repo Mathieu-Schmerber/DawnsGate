@@ -177,6 +177,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 9dcaad98219a11948a85b7978d11beba, type: 3}
   - {fileID: 8300000, guid: 60a935cabf66d1d41bc033f6809190a7, type: 3}
   _playOnEnable: 1
+  _playOnSelect: 0
 --- !u!1001 &3457575984332840744
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -239,10 +240,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4844015530622222123, guid: c56359dbf41a50d498bf26f47be421c8,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4844223034465252869, guid: c56359dbf41a50d498bf26f47be421c8,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 4844567603841461885, guid: c56359dbf41a50d498bf26f47be421c8,
         type: 3}
       propertyPath: m_Name
       value: Staff H2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4844567603841461885, guid: c56359dbf41a50d498bf26f47be421c8,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c56359dbf41a50d498bf26f47be421c8, type: 3}
