@@ -52,10 +52,9 @@ namespace Game.VFX
 				RestrictPlayer();
 				yield return new WaitForSeconds(1f);
 				GameManager.Player.SetAnimatorState("IsPraising", true);
-				yield return new WaitForSeconds(_animationStarterTime / 2);
+				yield return new WaitForSeconds(_animationStarterTime * .8f);
 				_source.Play();
-				yield return new WaitForSeconds(_animationStarterTime / 2);
-				yield return new WaitForSeconds(1f);
+				yield return new WaitForSeconds(3f);
 				_station.Heal();
 				ObjectPooler.Get(_healingFx, GameManager.Player.transform.position, Quaternion.identity, null);
 				yield return new WaitForSeconds(1f);
