@@ -86,6 +86,9 @@ namespace Game.Entities.Player
 			}
 		}
 
+		public void SetAnimatorState(string state, bool value) => _gfxAnim.SetBool(state, value);
+		public void SetAnimatorState(string state, float value) => _gfxAnim.SetFloat(state, value);
+
 		#region Abstraction
 
 		protected override Vector3 GetMovementsInputs() => _inputs.MovementAxis.ToVector3XZ().ToIsometric();

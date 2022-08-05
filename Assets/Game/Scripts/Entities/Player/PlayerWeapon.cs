@@ -31,6 +31,7 @@ namespace Game.Entities.Player
 		private Timer _attackTimer = new();
 		private float _minTimeBetweenAttacks = 0.1f;
 		private Weapon _weapon;
+		private AController _controller;
 
 		public WeaponData CurrentWeapon => _weapon.Data;
 
@@ -46,6 +47,7 @@ namespace Game.Entities.Player
 			_animator = GetComponentInChildren<Animator>();
 			_weapon = GetComponentInChildren<Weapon>();
 			_weaponAttackPool = new List<GameObject>();
+			_controller = GetComponent<AController>();
 		}
 
 		private void Start()
@@ -106,7 +108,7 @@ namespace Game.Entities.Player
 
 		protected virtual void TryAttack()
 		{
-			if (!GuiManager.IsMenuing && _attackTimer.IsOver() && _weapon.Data != null)
+			if (_controller.State != EntityState.STUN && !GuiManager.IsMenuing && _attackTimer.IsOver() && _weapon.Data != null)
 			{
 				OnMeleeAttack();
 				_attackTimer.Restart();
@@ -138,7 +140,15 @@ namespace Game.Entities.Player
 			OnAttackHit?.Invoke(new() { Data = data, Victim = collider, IsHeavyAttack = isHeavy, DamageApplied = damage });
 		}
 
-		public void OnAnimationEvent(string animationArg) => _weapon.OnAnimationEvent(animationArg);
+		public void OnAnimationEvent(string animationArg)
+		{
+			if (animationArg == "Hide Weapon")
+				_weapon.Hide();
+			else if (animationArg == "Show Weapon")
+				_weapon.Show();
+			else
+				_weapon.OnAnimationEvent(animationArg);
+		}
 
 		public void OnAnimationEnter(AnimatorStateInfo stateInfo) => _weapon.OnAnimationEnter(stateInfo);
 

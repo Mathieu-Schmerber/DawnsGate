@@ -125,7 +125,7 @@ namespace Game.Entities.Shared
 			if (LockAim)
 				return _lockedAim;
 			else if (_target != null)
-				return (_target.position - _rb.position).normalized;
+				return (_target.position.WithY(_rb.position.y) - _rb.position).normalized;
 			return (GetTargetPosition() - _rb.position).normalized;
 		}
 
@@ -135,7 +135,7 @@ namespace Game.Entities.Shared
 		{
 			_target = target;
 			if (forceRotation && (_target.position - _rb.position).normalized != Vector3.zero)
-				_graphics.transform.rotation = Quaternion.LookRotation((_target.position - _rb.position).normalized);
+				_graphics.transform.rotation = Quaternion.LookRotation((_target.position.WithY(_rb.position.y) - _rb.position).normalized);
 		}
 
 		public void UnlockTarget() => _target = null;

@@ -81,7 +81,7 @@ namespace Game.Systems.Dialogue
 
 		protected virtual void OpenDialogue(DialogueData dialogue)
 		{
-			GameManager.Camera.LockTemporaryTarget(transform, .7f);
+			GameManager.Camera.LockTemporaryTarget(transform, .8f);
 			_dialogue = dialogue;
 			_uiMenu = GuiManager.OpenMenu<DialogueUi>();
 			_uiMenu.OnSubmitted += OnSubmission;

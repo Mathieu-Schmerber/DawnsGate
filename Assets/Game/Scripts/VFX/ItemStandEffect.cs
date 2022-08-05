@@ -59,7 +59,6 @@ namespace Game.VFX
 
 		private void ShowItem()
 		{
-			// TODO: Show item on the stand in a smooth way
 			if (_stand.Item == null)
 				return;
 			_price.gameObject.SetActive(true);
@@ -69,7 +68,6 @@ namespace Game.VFX
 
 		private void HideItem()
 		{
-			// TODO: Make item disappear in a smooth way
 			_itemGfx.SetActive(false);
 		}
 	}

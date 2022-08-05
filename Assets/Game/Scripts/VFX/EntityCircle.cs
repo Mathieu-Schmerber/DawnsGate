@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Game.VFX
 {
-    public class EntityCircle : MonoBehaviour
+	public class EntityCircle : MonoBehaviour
     {
         [SerializeField] private LayerMask _layers;
 

@@ -7,6 +7,7 @@ using Game.Managers;
 using Game.Systems.Combat.Attacks;
 using Game.Tools;
 using Pixelplacement;
+using System;
 
 namespace Game.Systems.Combat.Weapons
 {
@@ -62,6 +63,16 @@ namespace Game.Systems.Combat.Weapons
 			_meshFilter.mesh = data?.Mesh;
 			_meshRenderer.material = data?.Material;
 			_lastAttackIndex = -1;
+		}
+
+		public void Show()
+		{
+			_meshRenderer.enabled = true;
+		}
+
+		public void Hide()
+		{
+			_meshRenderer.enabled = false;
 		}
 
 		#region Aim assist
