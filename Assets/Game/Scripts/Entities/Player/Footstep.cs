@@ -36,7 +36,7 @@ namespace Game.Entities.Player
 
 		private void OnTriggerEnter(Collider other)
 		{
-			if (other.isTrigger || !other.gameObject.isStatic || _controller.State != Shared.EntityState.IDLE)
+			if (other.isTrigger || _controller.State != Shared.EntityState.IDLE)
 				return;
 			Play(other.tag);
 		}

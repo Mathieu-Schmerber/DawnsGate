@@ -217,7 +217,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _afterImageEffect: {fileID: 2843933457422076767, guid: e51837df11f76e541a58e25d7be60a9a,
     type: 3}
-  _spawnOffset: {x: 0, y: 0, z: 0}
+  _spawnOffset: {x: 0, y: 0.5, z: 0}
 --- !u!114 &8362512119190628910
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7711,7 +7711,7 @@ PrefabInstance:
     - target: {fileID: 1997195114372272026, guid: 6746bba1b38fa7147b826e84a506dbfd,
         type: 3}
       propertyPath: m_Radius
-      value: 0.1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1997195114372272027, guid: 6746bba1b38fa7147b826e84a506dbfd,
         type: 3}
@@ -7939,7 +7939,7 @@ PrefabInstance:
     - target: {fileID: 1997195114372272026, guid: 6746bba1b38fa7147b826e84a506dbfd,
         type: 3}
       propertyPath: m_Radius
-      value: 0.1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1997195114372272027, guid: 6746bba1b38fa7147b826e84a506dbfd,
         type: 3}
