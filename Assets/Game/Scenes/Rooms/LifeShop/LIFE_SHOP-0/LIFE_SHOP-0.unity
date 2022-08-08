@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.20595828, g: 0.027285058, b: 0.08460463, a: 1}
+  m_IndirectSpecularColor: {r: 0.14675295, g: 0.026785899, b: 0.087321475, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1046,7 +1046,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isLifeShop: 1
-  _stands: []
+  _stands:
+  - {fileID: 807424676}
+  - {fileID: 464845860}
+  - {fileID: 926694301}
 --- !u!114 &238902139
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2163,6 +2166,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 464845858}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &464845860 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6153769730924542476, guid: 9565b7d598a6cbf42875f62107ccb546,
+    type: 3}
+  m_PrefabInstance: {fileID: 464845858}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d6b242ca577cad4c84bab1485f97079, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &507398515
 GameObject:
   m_ObjectHideFlags: 0
@@ -8378,6 +8393,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 807424674}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &807424676 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6153769730924542476, guid: 9565b7d598a6cbf42875f62107ccb546,
+    type: 3}
+  m_PrefabInstance: {fileID: 807424674}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d6b242ca577cad4c84bab1485f97079, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &830185605
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9249,6 +9276,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 926694299}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &926694301 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6153769730924542476, guid: 9565b7d598a6cbf42875f62107ccb546,
+    type: 3}
+  m_PrefabInstance: {fileID: 926694299}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d6b242ca577cad4c84bab1485f97079, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &931804641
 GameObject:
   m_ObjectHideFlags: 0
