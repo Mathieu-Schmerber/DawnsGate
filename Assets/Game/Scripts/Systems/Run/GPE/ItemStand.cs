@@ -1,6 +1,7 @@
 ﻿using Game.Entities.Shared;
 using Game.Managers;
 using Game.Systems.Items;
+using Game.UI;
 using Nawlian.Lib.Systems.Interaction;
 using System;
 using System.Collections.Generic;
@@ -65,6 +66,7 @@ namespace Game.Systems.Run.GPE
 
 				entity.Stats.Modifiers[StatModifier.MaxHealth].BonusModifier -= Item.LifeCost;
 				entity.CurrentHealth = Mathf.Max(1, entity.MaxHealth * healthRatio);
+				BloodScreenFx.Play();
 			}
 			_source.PlayOneShot(_purchaseAudio);
 			OnItemPaid?.Invoke();

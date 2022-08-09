@@ -52,7 +52,8 @@ namespace Game.VFX
 
 		private void RemovePrice()
 		{
-			_source.Play();
+			if (_source != null)
+				_source.Play();
 			ObjectPooler.Get(_purchaseFx, _itemGfx.transform.position, Quaternion.identity, null);
 			_price.gameObject.SetActive(false);
 		}

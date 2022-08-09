@@ -34,17 +34,21 @@ namespace Game.UI
 				GameManager.Player.GetComponent<Damageable>().OnDamaged -= ShowHurtEffect;
 		}
 
-		private void ShowHurtEffect(float obj)
-		{
-			Open();
-			_clips.PlayRandom();
-			Awaiter.WaitAndExecute(_duration, Close);
-		}
+		private void ShowHurtEffect(float obj) => Open();
 
 		public override void Show()
 		{
 			// Instantly set alpha to 1
 			_grp.alpha = 1;
 		}
+
+		public override void Open()
+		{
+			base.Open();
+			_clips.PlayRandom();
+			Awaiter.WaitAndExecute(_duration, Close);
+		}
+
+		public static void Play() => GuiManager.OpenMenu<BloodScreenFx>();
 	}
 }
