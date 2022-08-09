@@ -75,7 +75,7 @@ GameObject:
   - component: {fileID: 3740868032177259399}
   - component: {fileID: 2018076823181278398}
   - component: {fileID: 5583933570625038764}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LaserBeam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -188,7 +188,7 @@ GameObject:
   - component: {fileID: 700754460277959676}
   - component: {fileID: 5252525233263544645}
   - component: {fileID: 1994070607470012581}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LaserBeam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -301,7 +301,7 @@ GameObject:
   - component: {fileID: 8041754502965608007}
   - component: {fileID: 6745899748801970833}
   - component: {fileID: 3922640081305620305}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LaserBeam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -414,7 +414,7 @@ GameObject:
   - component: {fileID: 1589219725312138620}
   - component: {fileID: 4096057058647879743}
   - component: {fileID: 1067131595323832272}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LaserBeam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -867,6 +867,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: LaserHitFX
       objectReference: {fileID: 0}
+    - target: {fileID: 251627901822237920, guid: f3972344041422048a5cece5f8ff2d7a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 251627901822237921, guid: f3972344041422048a5cece5f8ff2d7a,
         type: 3}
       propertyPath: m_RootOrder
@@ -1001,6 +1006,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: LaserHitFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 251627901822237920, guid: f3972344041422048a5cece5f8ff2d7a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 251627901822237921, guid: f3972344041422048a5cece5f8ff2d7a,
         type: 3}
@@ -1137,6 +1147,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: LaserHitFX
       objectReference: {fileID: 0}
+    - target: {fileID: 251627901822237920, guid: f3972344041422048a5cece5f8ff2d7a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 251627901822237921, guid: f3972344041422048a5cece5f8ff2d7a,
         type: 3}
       propertyPath: m_RootOrder
@@ -1271,6 +1286,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: LaserHitFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 251627901822237920, guid: f3972344041422048a5cece5f8ff2d7a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 251627901822237921, guid: f3972344041422048a5cece5f8ff2d7a,
         type: 3}

@@ -35,7 +35,7 @@ namespace Game.VFX
 
 		private void OnActivated()
 		{
-			_animator.SetBool(ACTIVATE_ANIMATOR, true);
+			_animator?.SetBool(ACTIVATE_ANIMATOR, true);
 			if (_door.LeadToRoom != null)
 				_text.text = $"{_door.LeadToRoom.Type}{System.Environment.NewLine}{_door.LeadToRoom.Reward}";
 			else
