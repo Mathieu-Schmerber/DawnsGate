@@ -6,18 +6,19 @@ namespace Game.VFX
 {
 	public class DoorEffect : MonoBehaviour
 	{
-		[SerializeField] private Material _activatedMaterial;
+		private const string ACTIVATE_ANIMATOR = "Activated";
+
 		private RoomDoor _door;
-		private MeshRenderer _meshRenderer;
 		private TextMeshPro _text;
+		private Animator _animator;
 
 		#region Unity builtins
 
 		private void Awake()
 		{
 			_door = GetComponentInParent<RoomDoor>();
-			_meshRenderer = GetComponent<MeshRenderer>();
 			_text = GetComponentInChildren<TextMeshPro>();
+			_animator = GetComponent<Animator>();
 		}
 
 		private void OnEnable()
@@ -34,7 +35,7 @@ namespace Game.VFX
 
 		private void OnActivated()
 		{
-			_meshRenderer.material = _activatedMaterial;
+			_animator.SetBool(ACTIVATE_ANIMATOR, true);
 			if (_door.LeadToRoom != null)
 				_text.text = $"{_door.LeadToRoom.Type}{System.Environment.NewLine}{_door.LeadToRoom.Reward}";
 			else

@@ -12,7 +12,6 @@ namespace Game.Systems.Run.GPE
 {
 	public class RoomDoor : MonoBehaviour, IInteractable
 	{
-		[SerializeField] private BoxCollider _groundCollider;
 		[SerializeField] private Collider[] _deActivateOnRoomCleared;
 
 		protected bool _active = false;
@@ -33,7 +32,8 @@ namespace Game.Systems.Run.GPE
 		protected void OnActivate()
 		{
 			_active = true;
-			_deActivateOnRoomCleared.ForEach(x => x.enabled = false);
+			if (_deActivateOnRoomCleared?.Length > 0)
+				_deActivateOnRoomCleared.ForEach(x => x.enabled = false);
 			OnActivated?.Invoke();
 		}
 
@@ -58,28 +58,5 @@ namespace Game.Systems.Run.GPE
 		}
 
 		#endregion
-
-		private void OnDrawGizmos()
-		{
-			if (_groundCollider == null || Application.isPlaying)
-				return;
-			Vector3[] corners = new Vector3[4]
-			{
-				new Vector3(_groundCollider.bounds.max.x, _groundCollider.bounds.max.y, _groundCollider.bounds.max.z),
-				new Vector3(_groundCollider.bounds.min.x, _groundCollider.bounds.max.y, _groundCollider.bounds.min.z),
-				new Vector3(_groundCollider.bounds.max.x, _groundCollider.bounds.max.y, _groundCollider.bounds.min.z),
-				new Vector3(_groundCollider.bounds.min.x, _groundCollider.bounds.max.y, _groundCollider.bounds.max.z),
-			};
-			Vector3 backLeft = corners.Closest(transform.position - transform.forward - transform.right);
-			Vector3 backRight = corners.Closest(transform.position - transform.forward + transform.right);
-			Vector3 frontLeft = backLeft - transform.forward * _groundCollider.size.x;
-			Vector3 frontRight = backRight - transform.forward * _groundCollider.size.x;
-
-			Gizmos.color = Color.red;
-			Gizmos.DrawSphere(backLeft, .1f);
-			Gizmos.DrawSphere(backRight, .1f);
-			Gizmos.DrawSphere(frontLeft, .1f);
-			Gizmos.DrawSphere(frontRight, .1f);
-		}
 	}
 }
