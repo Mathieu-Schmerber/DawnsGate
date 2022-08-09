@@ -35,6 +35,35 @@ namespace Nawlian.Lib.Extensions
 		public static Vector3 ToIsometric(this Vector3 input) => _isoMatrix.MultiplyPoint3x4(input);
 
 		/// <summary>
+		/// Return the array's closest position to the given point.
+		/// </summary>
+		public static Vector3 Closest(this Vector3[] input, Vector3 point)
+		{
+			Vector3 best = Vector3.zero;
+			float bestDistance = Mathf.Infinity;
+			float distance;
+
+			if (input == null || input.Length == 0)
+				throw new ArgumentNullException("input was null or empty");
+			for (int i = 0; i < input.Length; i++)
+			{
+				distance = Vector3.Distance(point, input[i]);
+
+				if (distance < bestDistance)
+				{
+					best = input[i];
+					bestDistance = distance;
+				}
+			}
+			return best;
+		}
+
+		/// <summary>
+		/// Return the list closest position to the given point.
+		/// </summary>
+		public static Vector3 Closest(this IList<Vector3> input, Vector3 point) => input.ToArray().Closest(point);
+
+		/// <summary>
 		/// Converts a Vector2 to a Vector3, translating to X and Z
 		/// </summary>
 		/// <param name="vector"></param>
