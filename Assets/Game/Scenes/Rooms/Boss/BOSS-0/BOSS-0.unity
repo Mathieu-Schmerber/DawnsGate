@@ -4995,7 +4995,76 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
+  m_IsActive: 0
+--- !u!1001 &5906719348257874744
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6229138603998916724, guid: 9075d66bfa46f4e4e82a1b2602197a04,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 6229138603998916724, guid: 9075d66bfa46f4e4e82a1b2602197a04,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 18.94
+      objectReference: {fileID: 0}
+    - target: {fileID: 6229138603998916724, guid: 9075d66bfa46f4e4e82a1b2602197a04,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6229138603998916724, guid: 9075d66bfa46f4e4e82a1b2602197a04,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -10.11
+      objectReference: {fileID: 0}
+    - target: {fileID: 6229138603998916724, guid: 9075d66bfa46f4e4e82a1b2602197a04,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071067
+      objectReference: {fileID: 0}
+    - target: {fileID: 6229138603998916724, guid: 9075d66bfa46f4e4e82a1b2602197a04,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6229138603998916724, guid: 9075d66bfa46f4e4e82a1b2602197a04,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.70710695
+      objectReference: {fileID: 0}
+    - target: {fileID: 6229138603998916724, guid: 9075d66bfa46f4e4e82a1b2602197a04,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6229138603998916724, guid: 9075d66bfa46f4e4e82a1b2602197a04,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6229138603998916724, guid: 9075d66bfa46f4e4e82a1b2602197a04,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 6229138603998916724, guid: 9075d66bfa46f4e4e82a1b2602197a04,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6717549999056972494, guid: 9075d66bfa46f4e4e82a1b2602197a04,
+        type: 3}
+      propertyPath: m_Name
+      value: Door_Lunaris
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9075d66bfa46f4e4e82a1b2602197a04, type: 3}
 --- !u!23 &7559039850082222877
 MeshRenderer:
   m_ObjectHideFlags: 0

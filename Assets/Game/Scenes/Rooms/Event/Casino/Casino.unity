@@ -338,6 +338,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4381ddcd5aba58b41acd75ffb1548a31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _deActivateOnRoomCleared: []
 --- !u!65 &53265911
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1188,7 +1189,7 @@ PrefabInstance:
     - target: {fileID: 648867313409891150, guid: 0bfd6923a0935244d884aa24ead9dad5,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 648867313606097308, guid: 0bfd6923a0935244d884aa24ead9dad5,
         type: 3}
@@ -1237,6 +1238,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4381ddcd5aba58b41acd75ffb1548a31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _deActivateOnRoomCleared: []
 --- !u!65 &291751247
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4401,6 +4403,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4381ddcd5aba58b41acd75ffb1548a31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _deActivateOnRoomCleared: []
 --- !u!65 &1163172595
 BoxCollider:
   m_ObjectHideFlags: 0
