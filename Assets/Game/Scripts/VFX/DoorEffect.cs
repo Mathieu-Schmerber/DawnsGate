@@ -1,7 +1,9 @@
-﻿using Game.Systems.Run;
+﻿using Game.Managers;
+using Game.Systems.Run;
 using Game.Systems.Run.GPE;
 using Game.Systems.Run.Rooms;
 using Nawlian.Lib.Extensions;
+using Nawlian.Lib.Utils;
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,20 +15,21 @@ namespace Game.VFX
 		private const string ACTIVATE_ANIMATOR = "Activated";
 
 		private RoomDoor _door;
-		private Animator _animator;
 
+		[SerializeField] private AnimationClip _doorOpenAnimation;
+		[SerializeField] private Animator _roomClearAnimator = null;
 		[SerializeField] private ParticleSystem[] _totems;
 		[SerializeField] private GameObject _defaultDoorGfx;
 		[SerializeField] private Dictionary<RoomType, GameObject> _typedDoors = new();
 		[SerializeField] private Dictionary<RoomRewardType, GameObject> _rewardDoors = new();
+
+		private Animator _doorAnimator;
 
 		#region Unity builtins
 
 		private void Awake()
 		{
 			_door = GetComponentInParent<RoomDoor>();
-			_animator = GetComponentInChildren<Animator>();
-
 			_typedDoors.Values.ForEach(x => x.SetActive(false));
 			_rewardDoors.Values.ForEach(x => x.SetActive(false));
 			_defaultDoorGfx.SetActive(true);
@@ -51,8 +54,15 @@ namespace Game.VFX
 
 		private void OpenDoor()
 		{
-			// TODO: animate door opening
-			_door.EnterNextRoom();
+			_doorAnimator.enabled = true;
+			GameManager.Player.Restrict();
+			GameManager.Camera.LockTemporaryTarget(GameManager.Player.transform, 0.8f);
+			Awaiter.WaitAndExecute(_doorOpenAnimation.length + 0.5f, () =>
+			{
+				GameManager.Player.UnRestrict();
+				GameManager.Camera.UnlockTarget();
+				_door.EnterNextRoom();
+			});
 		}
 
 		private void DisplayRoomType()
@@ -65,9 +75,11 @@ namespace Game.VFX
 				case RoomType.EVENT:
 				case RoomType.COMBAT:
 					_rewardDoors[_door.LeadToRoom.Reward].SetActive(true);
+					_doorAnimator = _rewardDoors[_door.LeadToRoom.Reward].GetComponent<Animator>();
 					break;
 				default:
 					_typedDoors[_door.LeadToRoom.Type].SetActive(true);
+					_doorAnimator = _typedDoors[_door.LeadToRoom.Type].GetComponent<Animator>();
 					break;
 			}
 		}
@@ -76,7 +88,7 @@ namespace Game.VFX
 		{
 			if (_door.LeadToRoom == null)
 				return;
-			_animator?.SetBool(ACTIVATE_ANIMATOR, true);
+			_roomClearAnimator?.SetBool(ACTIVATE_ANIMATOR, true);
 			_totems.ForEach(x => x.gameObject.SetActive(true));
 		}
 	}
