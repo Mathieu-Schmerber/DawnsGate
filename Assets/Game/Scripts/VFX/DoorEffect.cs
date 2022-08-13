@@ -88,8 +88,10 @@ namespace Game.VFX
 		{
 			if (_door.LeadToRoom == null)
 				return;
-			_roomClearAnimator?.SetBool(ACTIVATE_ANIMATOR, true);
+			
 			_totems.ForEach(x => x.gameObject.SetActive(true));
+			if (_roomClearAnimator != null)
+				_roomClearAnimator.SetBool(ACTIVATE_ANIMATOR, true);
 		}
 	}
 }

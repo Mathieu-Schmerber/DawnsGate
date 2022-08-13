@@ -16,7 +16,6 @@ namespace Game.Systems.Run.Rooms
 
 		private List<ItemBaseData> _items;
 
-
 		protected override void Awake()
 		{
 			base.Awake();
@@ -26,10 +25,10 @@ namespace Game.Systems.Run.Rooms
 			_items = Databases.Database.Data.Item.All<ItemBaseData>().Where(x => x.IsLifeItem == _isLifeShop && !inventory.HasEquipped(x)).ToList();
 		}
 
-		protected override void OnRoomReady()
+		protected override void OnRoomSceneReady()
 		{
+			base.OnRoomSceneReady();
 			_stands.ForEach(x => DefineItem(x));
-			base.OnRoomReady();
 		}
 
 		private void DefineItem(ItemStand x)
