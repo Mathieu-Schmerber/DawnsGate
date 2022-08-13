@@ -18,6 +18,7 @@ namespace Game.Systems.Run.Rooms
 
 		public static event Action OnRoomActivated;
 		public static event Action OnRoomCleared;
+		public static event Action OnRoomLogicReady;
 
 		public RoomInfo Info => _info;
 		public bool Cleared { get; protected set; }
@@ -28,13 +29,13 @@ namespace Game.Systems.Run.Rooms
 
 		protected virtual void OnEnable()
 		{
-			RunManager.OnBeforeSceneSwitched += OnRoomSceneReady;
+			RunManager.OnBeforeSceneSwitched += UpdateRunData;
 			RunManager.OnSceneSwitched += OnRoomReady;
 		}
 
 		protected virtual void OnDisable()
 		{
-			RunManager.OnBeforeSceneSwitched -= OnRoomSceneReady;
+			RunManager.OnBeforeSceneSwitched -= UpdateRunData;
 			RunManager.OnSceneSwitched -= OnRoomReady;
 		}
 
@@ -45,7 +46,7 @@ namespace Game.Systems.Run.Rooms
 			RunManager.CurrentRoomInstance = this;
 		}
 
-		protected virtual void Start()
+		protected virtual void UpdateRunData()
 		{
 			SceneManager.SetActiveScene(gameObject.scene);
 
@@ -54,6 +55,8 @@ namespace Game.Systems.Run.Rooms
 				for (int i = 0; i < Mathf.Min(RoomData.NextRooms.Count, _info.Doors.Length); i++)
 					_info.Doors[i].LeadToRoom = RoomData.NextRooms[i];
 			}
+			OnRoomLogicReady?.Invoke();
+			OnRoomSceneReady();
 		}
 
 		/// <summary>

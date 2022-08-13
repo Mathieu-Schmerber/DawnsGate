@@ -16,6 +16,7 @@ namespace Game.Systems.Run.GPE
 
 		protected bool _active = false;
 		public event Action OnActivated;
+		public event Action OnInteracted;
 
 		public Room LeadToRoom { get; set; }
 
@@ -42,8 +43,10 @@ namespace Game.Systems.Run.GPE
 		public virtual void Interact(IInteractionActor actor)
 		{
 			actor.UnSuggestInteraction(this);
-			RunManager.SelectNextRoom(LeadToRoom);
+			OnInteracted?.Invoke();
 		}
+
+		public void EnterNextRoom() => RunManager.SelectNextRoom(LeadToRoom);
 
 		private void OnTriggerEnter(Collider other)
 		{
