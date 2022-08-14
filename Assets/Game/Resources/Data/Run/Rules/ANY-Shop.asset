@@ -14,13 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RuleDescription: A shop and any other room (not boss)
   RoomProbabilities:
-    keyData: 03000000000000000100000002000000
+    keyData: 030000000000000002000000
     valueData:
     - Mandatory: 0
       Probability: 5
     - Mandatory: 0
-      Probability: 70
-    - Mandatory: 0
-      Probability: 25
+      Probability: 95
     - Mandatory: 1
       Probability: 10

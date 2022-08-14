@@ -95,7 +95,10 @@ namespace Game.Managers
 				Type = selected.Type,
 				Reward = selected.Reward
 			};
-			Instance._room.DefineExitsFromRule(RunSettings.RoomRules[Instance._currentRoom]);
+			if (Instance._currentRoom >= RunSettings.RoomRules.Length)
+				Instance._room.DefineExitsFromRule(RunSettings.RoomRules.Last());
+			else
+				Instance._room.DefineExitsFromRule(RunSettings.RoomRules[Instance._currentRoom]);
 
 			ChangeScene(selected.Type);
 		}
