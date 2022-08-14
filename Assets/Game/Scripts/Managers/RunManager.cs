@@ -8,10 +8,7 @@ using Nawlian.Lib.Systems.Saving;
 using Nawlian.Lib.Utils;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -141,6 +138,7 @@ namespace Game.Managers
 
 		private static void ChangeScene(string sceneName)
 		{
+			Debug.Log($"Load scene: {sceneName}");
 			SceneTransition.StartTransition(() =>
 			{
 				Instance.ReachedRooms.Add(sceneName);
