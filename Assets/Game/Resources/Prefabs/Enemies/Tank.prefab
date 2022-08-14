@@ -358,6 +358,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 3c5a5930f5349c143858fdd6680de4b5, type: 3}
   - {fileID: 8300000, guid: 17ab77852809f2642b0ae1e03f15b7b6, type: 3}
   _playOnEnable: 1
+  _playOnSelect: 0
 --- !u!1 &7383286486518360322
 GameObject:
   m_ObjectHideFlags: 0
@@ -5279,7 +5280,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c57778accd06ce64ba08c8f7fb91715b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _baseDamage: 20
+  _baseDamage: 15
   _baseKnockbackForce: 3
   _activeTime: 0.5
   _onHitFx: {fileID: 6826739793168019112, guid: 161ce196c6bae7843a3573a1fe4c5d5f,
@@ -5399,6 +5400,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 734d3f0468df12646a1a574f4b738f94, type: 3}
   - {fileID: 8300000, guid: aecba11854ddd6548a1ca764b06e46b8, type: 3}
   _playOnEnable: 1
+  _playOnSelect: 0
 --- !u!1 &8597398927078562586
 GameObject:
   m_ObjectHideFlags: 0
@@ -6570,6 +6572,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 1ddede0fee788f147abf3c195cf2ca6b, type: 3}
   - {fileID: 8300000, guid: f87086a7f8cf44f4fbb2a48b7482a620, type: 3}
   _playOnEnable: 1
+  _playOnSelect: 0
 --- !u!1001 &4508847901191323206
 PrefabInstance:
   m_ObjectHideFlags: 0
