@@ -33,6 +33,7 @@ namespace Game.Entities.AI.Lunaris
 
 			[TabGroup("Settings")] public Vector2Int LightBeforeHeavyNumber;
 			[TabGroup("Settings")] public Mesh Weapon;
+			[TabGroup("Settings")] public Material WeaponMaterial;
 			[TabGroup("Settings")] public float AttackCooldown;
 			[TabGroup("Settings")] public float RestingTime;
 		}

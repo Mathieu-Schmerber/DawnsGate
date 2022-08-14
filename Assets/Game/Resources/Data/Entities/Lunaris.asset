@@ -99,6 +99,7 @@ MonoBehaviour:
     LightBeforeHeavyNumber: {x: 1, y: 3}
     Weapon: {fileID: -130930191001427872, guid: 35b1d2104a5e93248a0d3f40b7a776dd,
       type: 3}
+    WeaponMaterial: {fileID: 2100000, guid: 06c0dafe01cc66043b53ff7cea8cff01, type: 2}
     AttackCooldown: 0.5
     RestingTime: 1.5
   KatanaPhase:
@@ -126,6 +127,7 @@ MonoBehaviour:
     LightBeforeHeavyNumber: {x: 3, y: 3}
     Weapon: {fileID: 7991704601645392608, guid: 8021f021a8c396e4b9fd371c2289aee9,
       type: 3}
+    WeaponMaterial: {fileID: 2100000, guid: 3c0c9c64018afac44a5543616cbc1d88, type: 2}
     AttackCooldown: 0.1
     RestingTime: 2
   StaffPhase:
@@ -153,5 +155,6 @@ MonoBehaviour:
     LightBeforeHeavyNumber: {x: 2, y: 3}
     Weapon: {fileID: -5913018098454834342, guid: ba44ebd0b15fba349ac8fda0d7cfa390,
       type: 3}
+    WeaponMaterial: {fileID: 2100000, guid: 4ec54e9f7d1841144bb15b74b73158fd, type: 2}
     AttackCooldown: 0.5
     RestingTime: 3

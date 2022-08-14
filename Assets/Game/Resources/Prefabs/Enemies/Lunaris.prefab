@@ -86,6 +86,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _afterImageEffect: {fileID: 2843933457422076767, guid: e51837df11f76e541a58e25d7be60a9a,
     type: 3}
+  _spawnOffset: {x: 0, y: 0.5, z: 0}
 --- !u!114 &6628617199483225610
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6222,6 +6223,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   _weaponMesh: {fileID: 3366671404155561681}
+  _weaponRenderer: {fileID: 3366671404155561680}
 --- !u!114 &5562389671587761964
 MonoBehaviour:
   m_ObjectHideFlags: 0

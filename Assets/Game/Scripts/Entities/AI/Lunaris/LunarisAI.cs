@@ -19,6 +19,7 @@ namespace Game.Entities.AI.Lunaris
 	{
 		[SerializeField] private LayerMask _wallMask;
 		[SerializeField] private MeshFilter _weaponMesh;
+		[SerializeField] private MeshRenderer _weaponRenderer;
 		private LunarisStatData _stats;
 		private Timer _dashTimer = new();
 		private bool _isThrusting = false;
@@ -123,6 +124,7 @@ namespace Game.Entities.AI.Lunaris
 
 			// Graphics update
 			_weaponMesh.mesh = _phase.Weapon;
+			_weaponRenderer.material = _phase.WeaponMaterial;
 		}
 
 		private void OnReadyToStartNewPhase()
