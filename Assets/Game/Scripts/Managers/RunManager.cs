@@ -8,10 +8,7 @@ using Nawlian.Lib.Systems.Saving;
 using Nawlian.Lib.Utils;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -95,7 +92,10 @@ namespace Game.Managers
 				Type = selected.Type,
 				Reward = selected.Reward
 			};
-			Instance._room.DefineExitsFromRule(RunSettings.RoomRules[Instance._currentRoom]);
+			if (Instance._currentRoom >= RunSettings.RoomRules.Length)
+				Instance._room.DefineExitsFromRule(RunSettings.RoomRules.Last());
+			else
+				Instance._room.DefineExitsFromRule(RunSettings.RoomRules[Instance._currentRoom]);
 
 			ChangeScene(selected.Type);
 		}
@@ -138,6 +138,7 @@ namespace Game.Managers
 
 		private static void ChangeScene(string sceneName)
 		{
+			Debug.Log($"Load scene: {sceneName}");
 			SceneTransition.StartTransition(() =>
 			{
 				Instance.ReachedRooms.Add(sceneName);
