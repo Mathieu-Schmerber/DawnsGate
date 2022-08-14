@@ -84,21 +84,33 @@ MonoBehaviour:
       AttackData: {fileID: 11400000, guid: 98df4169ecc8d6642adb8d4c604dc4c0, type: 2}
       StartOffset: {x: 0, y: 0, z: 0}
       TravelDistance: 2
+      CustomHandPosition: 1
+      WeaponHandPosition: {x: 0.139, y: -0.326, z: 0.143}
+      WeaponHandRotation: {x: -66.909, y: -132.072, z: -96.503}
     LightAttack2:
       Animation: {fileID: 7400000, guid: f1823ca815f72274287df332a988b9ca, type: 2}
       AttackSpeed: 1
       AttackData: {fileID: 11400000, guid: 98df4169ecc8d6642adb8d4c604dc4c0, type: 2}
       StartOffset: {x: 0, y: 0, z: 0}
       TravelDistance: 2
+      CustomHandPosition: 1
+      WeaponHandPosition: {x: -0.09, y: -0.101, z: -0.305}
+      WeaponHandRotation: {x: -24.17, y: 38.662, z: -244.684}
     HeavyAttack:
       Animation: {fileID: 7400000, guid: 4c0cca327adbb4e47bcee541f868a9b8, type: 2}
       AttackSpeed: 1
       AttackData: {fileID: 11400000, guid: 913665cc2b320f3409aab545e35d9fe1, type: 2}
       StartOffset: {x: 0, y: 0, z: 0}
       TravelDistance: 0
+      CustomHandPosition: 1
+      WeaponHandPosition: {x: 0.09137173, y: -0.3486941, z: 0.0270145}
+      WeaponHandRotation: {x: -120.804, y: -203.994, z: -36.04401}
     LightBeforeHeavyNumber: {x: 1, y: 3}
     Weapon: {fileID: -130930191001427872, guid: 35b1d2104a5e93248a0d3f40b7a776dd,
       type: 3}
+    WeaponMaterial: {fileID: 2100000, guid: 06c0dafe01cc66043b53ff7cea8cff01, type: 2}
+    WeaponHandPosition: {x: -0.33, y: 0.31, z: 0.26}
+    WeaponHandRotation: {x: -235.307, y: 278.324, z: -101.902}
     AttackCooldown: 0.5
     RestingTime: 1.5
   KatanaPhase:
@@ -111,21 +123,33 @@ MonoBehaviour:
       AttackData: {fileID: 11400000, guid: eb0dbd117b0a26e4eafce17cbc6e9481, type: 2}
       StartOffset: {x: 0, y: 0, z: 0}
       TravelDistance: 0
+      CustomHandPosition: 0
+      WeaponHandPosition: {x: 0, y: 0, z: 0}
+      WeaponHandRotation: {x: 0, y: 0, z: 0}
     LightAttack2:
       Animation: {fileID: 7400000, guid: e0ce77b8f39859749b08ffabf55e7edb, type: 2}
       AttackSpeed: 0.5
       AttackData: {fileID: 11400000, guid: 539ae80a7564842439851cc93ef39233, type: 2}
       StartOffset: {x: 0, y: 0, z: 0}
       TravelDistance: 0
+      CustomHandPosition: 0
+      WeaponHandPosition: {x: 0, y: 0, z: 0}
+      WeaponHandRotation: {x: 0, y: 0, z: 0}
     HeavyAttack:
       Animation: {fileID: 7400000, guid: 7f87bffbc4c099e4893779cfd9e73aae, type: 2}
       AttackSpeed: 1
       AttackData: {fileID: 11400000, guid: 971b114439f551447a6651bb9448e433, type: 2}
       StartOffset: {x: 0, y: 0, z: 0}
       TravelDistance: 0
+      CustomHandPosition: 1
+      WeaponHandPosition: {x: -0.102, y: 0.287, z: -0.028}
+      WeaponHandRotation: {x: -95.191, y: -10.853, z: -91.763}
     LightBeforeHeavyNumber: {x: 3, y: 3}
     Weapon: {fileID: 7991704601645392608, guid: 8021f021a8c396e4b9fd371c2289aee9,
       type: 3}
+    WeaponMaterial: {fileID: 2100000, guid: 3c0c9c64018afac44a5543616cbc1d88, type: 2}
+    WeaponHandPosition: {x: -0.286, y: 0.073, z: -0.101}
+    WeaponHandRotation: {x: 180.043, y: 48.19901, z: 270}
     AttackCooldown: 0.1
     RestingTime: 2
   StaffPhase:
@@ -138,20 +162,32 @@ MonoBehaviour:
       AttackData: {fileID: 11400000, guid: 719c4adc9c0971e4389b5b9f2a566040, type: 2}
       StartOffset: {x: 0, y: 0, z: 0}
       TravelDistance: 0
+      CustomHandPosition: 1
+      WeaponHandPosition: {x: -0.07, y: -0.299, z: 0.056}
+      WeaponHandRotation: {x: -95.191, y: -10.853, z: -91.763}
     LightAttack2:
       Animation: {fileID: 7400000, guid: 8b5b1b3506b125b40b9ae2a8bcf8ce08, type: 2}
       AttackSpeed: 0.5
       AttackData: {fileID: 11400000, guid: adc31d8af869ac6469799ea0ecd264aa, type: 2}
       StartOffset: {x: 0, y: 0, z: 0}
       TravelDistance: 0
+      CustomHandPosition: 1
+      WeaponHandPosition: {x: -0.07, y: -0.299, z: 0.056}
+      WeaponHandRotation: {x: -95.191, y: -10.853, z: -91.763}
     HeavyAttack:
       Animation: {fileID: 7400000, guid: 81b6014fbba621d408ee537c3c875571, type: 2}
       AttackSpeed: 0.5
       AttackData: {fileID: 11400000, guid: 0a3b9f40347c3b947801347b80f7b018, type: 2}
       StartOffset: {x: 0, y: 0, z: 1.41}
       TravelDistance: 0
+      CustomHandPosition: 1
+      WeaponHandPosition: {x: -0.3, y: -0.131, z: 0.257}
+      WeaponHandRotation: {x: -146.746, y: -21.01001, z: 13.24001}
     LightBeforeHeavyNumber: {x: 2, y: 3}
     Weapon: {fileID: -5913018098454834342, guid: ba44ebd0b15fba349ac8fda0d7cfa390,
       type: 3}
+    WeaponMaterial: {fileID: 2100000, guid: 4ec54e9f7d1841144bb15b74b73158fd, type: 2}
+    WeaponHandPosition: {x: 0.11, y: -1.45, z: -0.12}
+    WeaponHandRotation: {x: -95.871, y: 145.476, z: -49.366}
     AttackCooldown: 0.5
     RestingTime: 3

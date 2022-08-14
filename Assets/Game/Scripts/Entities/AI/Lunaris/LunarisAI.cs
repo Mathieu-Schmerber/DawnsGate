@@ -19,6 +19,7 @@ namespace Game.Entities.AI.Lunaris
 	{
 		[SerializeField] private LayerMask _wallMask;
 		[SerializeField] private MeshFilter _weaponMesh;
+		[SerializeField] private MeshRenderer _weaponRenderer;
 		private LunarisStatData _stats;
 		private Timer _dashTimer = new();
 		private bool _isThrusting = false;
@@ -123,6 +124,9 @@ namespace Game.Entities.AI.Lunaris
 
 			// Graphics update
 			_weaponMesh.mesh = _phase.Weapon;
+			_weaponRenderer.material = _phase.WeaponMaterial;
+			_weaponMesh.transform.localPosition = _phase.WeaponHandPosition;
+			_weaponMesh.transform.localEulerAngles = _phase.WeaponHandRotation;
 		}
 
 		private void OnReadyToStartNewPhase()
@@ -253,6 +257,12 @@ namespace Game.Entities.AI.Lunaris
 			_currentAttack = _currentAttackType == AttackType.HEAVY ? _phase.HeavyAttack : _currentAttackType == AttackType.LIGHT ? _phase.LightAttack : _phase.LightAttack2;
 			_gfxAnim.SetFloat("AttackSpeed", _entity.Scale(_currentAttack.AttackSpeed, Shared.StatModifier.AttackSpeed));
 			_gfxAnim.Play(_currentAttack.Animation.name);
+			
+			if (_currentAttack.CustomHandPosition)
+			{
+				_weaponMesh.transform.localPosition = _currentAttack.WeaponHandPosition;
+				_weaponMesh.transform.localEulerAngles = _currentAttack.WeaponHandRotation;
+			}
 		}
 
 		public void OnAnimationEvent(string animationArg)
@@ -266,7 +276,7 @@ namespace Game.Entities.AI.Lunaris
 				}).GetComponent<ModularAttack>();
 				instance.OnStart(_currentAttack.StartOffset, _currentAttack.TravelDistance);
 
-				if (_phaseIndex == LunarisPhase.KATANA && _currentAttackType == AttackType.HEAVY)
+				if (_phaseIndex == LunarisPhase.KATANA && _currentAttackType == AttackType.HEAVY)					
 					ThrustAttack();
 				LockAim = false;
 			}
@@ -285,7 +295,13 @@ namespace Game.Entities.AI.Lunaris
 
 				// Show previsualisation
 				previsuTime = _currentAttack.Animation.events.FirstOrDefault(x => x.stringParameter == "Attack").time / _currentAttack.AttackSpeed;
-				AttackBase.ShowAttackPrevisu(_currentAttack.AttackData, transform.position, previsuTime, this);
+
+				if (_phaseIndex == LunarisPhase.KATANA && _currentAttackType == AttackType.HEAVY)
+					AttackBase.ShowAttackPrevisu(_currentAttack.AttackData, transform.position, previsuTime, this,
+					OnUpdate: (param)
+					=> param.Transform.localScale = new Vector3(1, 1, Vector3.Distance(transform.position, transform.position + GetAimNormal() * GetDistanceToWall())));
+				else
+					AttackBase.ShowAttackPrevisu(_currentAttack.AttackData, transform.position, previsuTime, this);
 			}
 			// Light attack specifics
 			if (stateInfo.IsName(_phase.LightAttack.Animation.name) || stateInfo.IsName(_phase.LightAttack2.Animation.name))

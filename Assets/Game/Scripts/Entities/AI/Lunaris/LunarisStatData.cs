@@ -18,6 +18,11 @@ namespace Game.Entities.AI.Lunaris
 			[InlineEditor] public ModularAttackData AttackData;
 			public Vector3 StartOffset;
 			public float TravelDistance;
+
+			public bool CustomHandPosition;
+
+			[ShowIf("@CustomHandPosition")] public Vector3 WeaponHandPosition;
+			[ShowIf("@CustomHandPosition")] public Vector3 WeaponHandRotation;
 		}
 
 		[System.Serializable, InlineProperty, HideLabel]
@@ -33,6 +38,9 @@ namespace Game.Entities.AI.Lunaris
 
 			[TabGroup("Settings")] public Vector2Int LightBeforeHeavyNumber;
 			[TabGroup("Settings")] public Mesh Weapon;
+			[TabGroup("Settings")] public Material WeaponMaterial;
+			[TabGroup("Settings")] public Vector3 WeaponHandPosition;
+			[TabGroup("Settings")] public Vector3 WeaponHandRotation;
 			[TabGroup("Settings")] public float AttackCooldown;
 			[TabGroup("Settings")] public float RestingTime;
 		}
