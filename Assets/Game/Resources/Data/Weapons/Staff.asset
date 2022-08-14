@@ -25,6 +25,7 @@ MonoBehaviour:
   Mesh: {fileID: -5913018098454834342, guid: 20fc95a2cf548b949af93a903ff66bd9, type: 3}
   InHandPosition: {x: 0.11, y: -1.45, z: -0.12}
   InHandRotation: {x: -95.871, y: 145.476, z: -49.366}
+  SmoothHandPlacement: 0
   LocomotionLayer: DefaultLocomotion
   AttackSpeed: 1.5
   ComboIntervalTime: 0.2
@@ -40,6 +41,7 @@ MonoBehaviour:
       UseCustomHandPosition: 1
       InHandPosition: {x: -0.07, y: -0.299, z: 0.056}
       InHandRotation: {x: -95.191, y: -10.853, z: -91.763}
+      SmoothHandPlacement: 0
     Dash:
       OnlyWhenMoving: 1
       Distance: 2
@@ -57,8 +59,9 @@ MonoBehaviour:
       LockAim: 0
       LockMovement: 1
       UseCustomHandPosition: 1
-      InHandPosition: {x: -0.07, y: -0.299, z: 0.056}
+      InHandPosition: {x: 0, y: -0.299, z: 0.056}
       InHandRotation: {x: -95.191, y: -10.853, z: -91.763}
+      SmoothHandPlacement: 0
     Dash:
       OnlyWhenMoving: 1
       Distance: 2
@@ -78,6 +81,7 @@ MonoBehaviour:
       UseCustomHandPosition: 1
       InHandPosition: {x: -0.3, y: -0.131, z: 0.257}
       InHandRotation: {x: -146.746, y: -21.01001, z: 13.24001}
+      SmoothHandPlacement: 0
     Dash:
       OnlyWhenMoving: 1
       Distance: 3

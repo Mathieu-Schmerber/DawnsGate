@@ -125,6 +125,8 @@ namespace Game.Entities.AI.Lunaris
 			// Graphics update
 			_weaponMesh.mesh = _phase.Weapon;
 			_weaponRenderer.material = _phase.WeaponMaterial;
+			_weaponMesh.transform.localPosition = _phase.WeaponHandPosition;
+			_weaponMesh.transform.localEulerAngles = _phase.WeaponHandRotation;
 		}
 
 		private void OnReadyToStartNewPhase()
@@ -255,6 +257,12 @@ namespace Game.Entities.AI.Lunaris
 			_currentAttack = _currentAttackType == AttackType.HEAVY ? _phase.HeavyAttack : _currentAttackType == AttackType.LIGHT ? _phase.LightAttack : _phase.LightAttack2;
 			_gfxAnim.SetFloat("AttackSpeed", _entity.Scale(_currentAttack.AttackSpeed, Shared.StatModifier.AttackSpeed));
 			_gfxAnim.Play(_currentAttack.Animation.name);
+			
+			if (_currentAttack.CustomHandPosition)
+			{
+				_weaponMesh.transform.localPosition = _currentAttack.WeaponHandPosition;
+				_weaponMesh.transform.localEulerAngles = _currentAttack.WeaponHandRotation;
+			}
 		}
 
 		public void OnAnimationEvent(string animationArg)
