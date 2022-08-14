@@ -1,4 +1,5 @@
-﻿using Game.Managers;
+﻿using Game.Entities.Player;
+using Game.Managers;
 using Nawlian.Lib.Systems.Interaction;
 using System;
 using System.Collections.Generic;
@@ -20,7 +21,11 @@ namespace Game.Systems.Run.Lobby
 			RunManager.StartNewRun();
 		}
 
-		private void OnTriggerEnter(Collider other) => other.GetComponent<IInteractionActor>()?.SuggestInteraction(this);
+		private void OnTriggerEnter(Collider other)
+		{
+			if (other.GetComponent<PlayerWeapon>()?.CurrentWeapon != null)
+				other.GetComponent<IInteractionActor>()?.SuggestInteraction(this);
+		}
 
 		private void OnTriggerExit(Collider other) => other.GetComponent<IInteractionActor>()?.UnSuggestInteraction(this);
 

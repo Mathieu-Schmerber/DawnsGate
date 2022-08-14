@@ -72,7 +72,8 @@ namespace Game.Entities.Player
 		public void EquipWeapon(WeaponData weaponData)
 		{
 			_weapon.SetData(weaponData);
-			SetupWeaponConstraints();
+			if (weaponData != null)
+				SetupWeaponConstraints();
 		}
 
 		public void SetupWeaponConstraints()
