@@ -33,8 +33,8 @@ MonoBehaviour:
   - AttackAnimation: {fileID: 7400000, guid: b57afa588f621c6409076b02fa0052d6, type: 2}
     Attack:
       AttackData: {fileID: 11400000, guid: 3fe5b49525bec9e4184c79482cf32ece, type: 2}
-      StartOffset: {x: 0, y: 1, z: 0.5}
-      TravelDistance: 1.5
+      StartOffset: {x: 0, y: 0, z: 0}
+      TravelDistance: 1
       AimAssist: 0
       LockAim: 0
       LockMovement: 1
@@ -53,8 +53,8 @@ MonoBehaviour:
   - AttackAnimation: {fileID: 7400000, guid: 61da10d661f26ca4a990e53263738f0e, type: 2}
     Attack:
       AttackData: {fileID: 11400000, guid: 3fe5b49525bec9e4184c79482cf32ece, type: 2}
-      StartOffset: {x: 0, y: 1, z: 0.5}
-      TravelDistance: 1.5
+      StartOffset: {x: 0, y: 0, z: 0}
+      TravelDistance: 1
       AimAssist: 0
       LockAim: 0
       LockMovement: 1
