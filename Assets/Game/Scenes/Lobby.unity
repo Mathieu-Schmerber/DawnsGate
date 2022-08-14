@@ -10949,6 +10949,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1333925714, guid: 53cb92c625f40b54791e769ff0271aea, type: 3}
+      propertyPath: m_RenderMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1333925714, guid: 53cb92c625f40b54791e769ff0271aea, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 1823231110, guid: 53cb92c625f40b54791e769ff0271aea, type: 3}
+      propertyPath: NoiseModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1823231110, guid: 53cb92c625f40b54791e769ff0271aea, type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1823231110, guid: 53cb92c625f40b54791e769ff0271aea, type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1823231110, guid: 53cb92c625f40b54791e769ff0271aea, type: 3}
+      propertyPath: InitialModule.startSpeed.minScalar
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 1144031063949988514, guid: 53cb92c625f40b54791e769ff0271aea,
         type: 3}
       propertyPath: m_RootOrder
