@@ -82,22 +82,23 @@ MonoBehaviour:
       Animation: {fileID: 7400000, guid: 0bb557bdf28d75744b73310677851fba, type: 2}
       AttackSpeed: 1
       AttackData: {fileID: 11400000, guid: 98df4169ecc8d6642adb8d4c604dc4c0, type: 2}
-      StartOffset: {x: 0, y: 1, z: 0}
+      StartOffset: {x: 0, y: 0, z: 0}
       TravelDistance: 2
     LightAttack2:
       Animation: {fileID: 7400000, guid: f1823ca815f72274287df332a988b9ca, type: 2}
       AttackSpeed: 1
       AttackData: {fileID: 11400000, guid: 98df4169ecc8d6642adb8d4c604dc4c0, type: 2}
-      StartOffset: {x: 0, y: 1, z: 0}
+      StartOffset: {x: 0, y: 0, z: 0}
       TravelDistance: 2
     HeavyAttack:
       Animation: {fileID: 7400000, guid: 4c0cca327adbb4e47bcee541f868a9b8, type: 2}
       AttackSpeed: 1
       AttackData: {fileID: 11400000, guid: 913665cc2b320f3409aab545e35d9fe1, type: 2}
-      StartOffset: {x: 0, y: 1, z: 0}
+      StartOffset: {x: 0, y: 0, z: 0}
       TravelDistance: 0
     LightBeforeHeavyNumber: {x: 1, y: 3}
-    Weapon: {fileID: 4300000, guid: f2892d73e025a2e4fa946c585e58c9ad, type: 3}
+    Weapon: {fileID: -130930191001427872, guid: 35b1d2104a5e93248a0d3f40b7a776dd,
+      type: 3}
     AttackCooldown: 0.5
     RestingTime: 1.5
   KatanaPhase:
@@ -108,22 +109,23 @@ MonoBehaviour:
       Animation: {fileID: 7400000, guid: a33d04255ca3c3a429387c95dc55e77f, type: 2}
       AttackSpeed: 0.5
       AttackData: {fileID: 11400000, guid: eb0dbd117b0a26e4eafce17cbc6e9481, type: 2}
-      StartOffset: {x: 0, y: 1, z: 0}
+      StartOffset: {x: 0, y: 0, z: 0}
       TravelDistance: 0
     LightAttack2:
       Animation: {fileID: 7400000, guid: e0ce77b8f39859749b08ffabf55e7edb, type: 2}
       AttackSpeed: 0.5
       AttackData: {fileID: 11400000, guid: 539ae80a7564842439851cc93ef39233, type: 2}
-      StartOffset: {x: 0, y: 1, z: 0}
+      StartOffset: {x: 0, y: 0, z: 0}
       TravelDistance: 0
     HeavyAttack:
       Animation: {fileID: 7400000, guid: 7f87bffbc4c099e4893779cfd9e73aae, type: 2}
       AttackSpeed: 1
       AttackData: {fileID: 11400000, guid: 971b114439f551447a6651bb9448e433, type: 2}
-      StartOffset: {x: 0, y: 1, z: 0}
+      StartOffset: {x: 0, y: 0, z: 0}
       TravelDistance: 0
     LightBeforeHeavyNumber: {x: 3, y: 3}
-    Weapon: {fileID: 4300000, guid: c18e53470c75ac743a8a092906d0e2f2, type: 3}
+    Weapon: {fileID: 7991704601645392608, guid: 8021f021a8c396e4b9fd371c2289aee9,
+      type: 3}
     AttackCooldown: 0.1
     RestingTime: 2
   StaffPhase:
@@ -134,21 +136,22 @@ MonoBehaviour:
       Animation: {fileID: 7400000, guid: f2f80e8c3abe135449b9aa7e5378bcd5, type: 2}
       AttackSpeed: 0.5
       AttackData: {fileID: 11400000, guid: 719c4adc9c0971e4389b5b9f2a566040, type: 2}
-      StartOffset: {x: 0, y: 1, z: 0}
+      StartOffset: {x: 0, y: 0, z: 0}
       TravelDistance: 0
     LightAttack2:
       Animation: {fileID: 7400000, guid: 8b5b1b3506b125b40b9ae2a8bcf8ce08, type: 2}
       AttackSpeed: 0.5
       AttackData: {fileID: 11400000, guid: adc31d8af869ac6469799ea0ecd264aa, type: 2}
-      StartOffset: {x: 0, y: 1, z: 0}
+      StartOffset: {x: 0, y: 0, z: 0}
       TravelDistance: 0
     HeavyAttack:
       Animation: {fileID: 7400000, guid: 81b6014fbba621d408ee537c3c875571, type: 2}
       AttackSpeed: 0.5
       AttackData: {fileID: 11400000, guid: 0a3b9f40347c3b947801347b80f7b018, type: 2}
-      StartOffset: {x: 0, y: 0.1, z: 1.41}
+      StartOffset: {x: 0, y: 0, z: 1.41}
       TravelDistance: 0
     LightBeforeHeavyNumber: {x: 2, y: 3}
-    Weapon: {fileID: 4300000, guid: 69c3ba73285f94e489e8cd5a6b07da3c, type: 3}
+    Weapon: {fileID: -5913018098454834342, guid: ba44ebd0b15fba349ac8fda0d7cfa390,
+      type: 3}
     AttackCooldown: 0.5
     RestingTime: 3
