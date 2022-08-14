@@ -14,6 +14,7 @@ namespace Game.Entities.Player
 		private Inventory _inventory;
 		private EffectProcessor _effects;
 		private PlayerController _controller;
+		private PlayerWeapon _playerWeapon;
 
 		protected override void Awake()
 		{
@@ -22,6 +23,7 @@ namespace Game.Entities.Player
 			_inventory = GetComponent<Inventory>();
 			_effects = GetComponent<EffectProcessor>();
 			_controller = GetComponent<PlayerController>();
+			_playerWeapon = GetComponent<PlayerWeapon>();
 		}
 
 		private void OnEnable()
@@ -66,6 +68,8 @@ namespace Game.Entities.Player
 
 		private void ClearInventory() => _inventory.RemoveAllItems();
 
+		private void UnEquipWeapon() => _playerWeapon.EquipWeapon(null);
+
 		public override void ResetStats()
 		{
 			base.ResetStats();
@@ -78,6 +82,7 @@ namespace Game.Entities.Player
 			ClearEffects();
 			ClearInventory();
 			ResetStats();
+			UnEquipWeapon();
 		}
 
 		private void ClearState()
