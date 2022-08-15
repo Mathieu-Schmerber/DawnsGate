@@ -2,6 +2,7 @@
 using Game.Managers;
 using Game.Systems.Combat.Attacks;
 using Game.VFX;
+using Game.VFX.Preview;
 using Nawlian.Lib.Extensions;
 using Nawlian.Lib.Systems.Animations;
 using Nawlian.Lib.Utils;
@@ -117,6 +118,15 @@ namespace Game.Entities.AI.Seeker
 				{
 					_gfxAnim.Play("EndCharge");
 					_startDamageCheck = false;
+				});
+			}
+			else if (stateInfo.IsName("LoadCharge"))
+			{
+				Preview.Show(_stats.DashPreview, transform.position, Quaternion.LookRotation(GetAimNormal()), _stats.AttackRadius, .5f,
+				OnUpdate: (param) =>
+				{
+					param.Transform.localScale = new Vector3(1, 1, Vector3.Distance(transform.position, transform.position + GetAimNormal() * _stats.DashRange));
+					param.Transform.rotation = Quaternion.LookRotation(GetAimNormal());
 				});
 			}
 		}

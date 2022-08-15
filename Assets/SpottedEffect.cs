@@ -21,6 +21,7 @@ namespace Game.VFX
 
 		private void OnEnable()
 		{
+			_renderer.material = _patrolMaterial;
 			_ai.OnStateChanged += _ai_OnStateChanged;
 		}
 

@@ -18,6 +18,8 @@ namespace Game.Entities.AI.Thrower
 {
 	public class Thrower : EnemyAI, IAnimationEventListener
 	{
+		private const string ATTACK_ANIM = "IsAttacking";
+
 		private ThrowerStatData _stats;
 		private NavMeshPath _previsionPath;
 		private Vector3 _lastHitPos;
@@ -37,6 +39,12 @@ namespace Game.Entities.AI.Thrower
 		}
 
 		protected override void OnInitState() => _spawnFx.PlaySpawnFX(() => base.OnInitState());
+
+		protected override void ResetStates()
+		{
+			base.ResetStates();
+			_gfxAnim.SetBool(ATTACK_ANIM, false);
+		}
 
 		#region Movement
 
@@ -71,7 +79,7 @@ namespace Game.Entities.AI.Thrower
 
 		#region Attack
 
-		protected override void Attack() => _gfxAnim.Play("Attack");
+		protected override void Attack() => _gfxAnim.SetBool(ATTACK_ANIM, true);
 
 		private void SpawnAOE()
 		{
@@ -96,15 +104,16 @@ namespace Game.Entities.AI.Thrower
 		{
 			if (animationArg == "Attack")
 			{
-				_lastHitPos = GameManager.Player.transform.position;
+				_gfxAnim.SetBool(ATTACK_ANIM, false);
+				_lastHitPos = GameManager.Player.transform.position.WithY(_room.GroundLevel);
 				ObjectPooler.Get(_stats.Projectile, transform.position, Quaternion.identity, new ProjectileParameters()
 				{
 					Lifetime = _stats.TravelTime,
 					MaxAltitude = _stats.MaxAltitude,
 					Destination = _lastHitPos
 				}, null);
-				Preview.Show(_stats.AoeAttack.Previsualisation, _lastHitPos, _stats.AoeAttack.Range / 2, _stats.TravelTime);
-				Invoke(nameof(SpawnAOE), _stats.TravelTime);
+				Preview.Show(_stats.AoeAttack.Previsualisation, _lastHitPos, _stats.AoeAttack.Range / 2, _stats.TravelTime, 
+					OnRelease: (param) => SpawnAOE());
 			}
 		}
 

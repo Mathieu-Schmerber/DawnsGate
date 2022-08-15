@@ -11,7 +11,7 @@ namespace Game.VFX.Preview
 
 		protected virtual void Awake()
 		{
-			_ps = GetComponent<ParticleSystem>();
+			_ps = GetComponentInChildren<ParticleSystem>();
 		}
 
 		public override void Init(object data)

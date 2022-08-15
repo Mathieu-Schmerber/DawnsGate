@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 229e9559c7722ef46a7eb36da451b9c0, type: 3}
   m_Name: Thrower
   m_EditorClassIdentifier: 
+  DisplayName: Thrower
   StartHealth: 70
   MovementSpeed: 6
   DashRange: 0
@@ -64,7 +65,7 @@ MonoBehaviour:
   TriggerRange: 9
   UntriggerRange: 13
   AttackRange: 12
-  AttackCooldown: 2
+  AttackCooldown: 1.5
   Projectile: {fileID: 3631914413587542351, guid: 9951e859b080a554aad3645d81a1ba1e,
     type: 3}
   TravelTime: 2
