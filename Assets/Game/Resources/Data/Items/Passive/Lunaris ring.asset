@@ -38,21 +38,21 @@ MonoBehaviour:
   Script: {fileID: 11500000, guid: de2d709d1305925439f866cf8a80e9dd, type: 3}
   Stages:
   - Damage: 10
-    Duration: 5
-    Amount: 10
+    Duration: 10
+    Amount: 100
     Range: 0
   - Damage: 10
-    Duration: 5
+    Duration: 10
     Amount: 15
     Range: 0
   - Damage: 10
-    Duration: 5
+    Duration: 10
     Amount: 20
     Range: 0
   SpawnPrefab: {fileID: 868409571415310201, guid: 5b4cd21be37b9eb44bf6a2db9f172078,
     type: 3}
   ApplyEffect: {fileID: 0}
-  Description: 'Killing an enemy creates a {Amount}% chance of spawning a soul which
+  Description: 'Killing an enemy creates a {Amount}% chance of spawning a soul that
     tracks and blows up nearby enemies.
 
     The soul deals {Damage:u} damages.'

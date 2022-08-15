@@ -316,8 +316,8 @@ ParticleSystem:
         m_NumAlphaKeys: 2
     startSize:
       serializedVersion: 2
-      minMaxState: 3
-      scalar: 1
+      minMaxState: 0
+      scalar: 2
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -369,7 +369,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startSizeY:
       serializedVersion: 2
-      minMaxState: 3
+      minMaxState: 0
       scalar: 1
       minScalar: 1
       maxCurve:
@@ -422,7 +422,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startSizeZ:
       serializedVersion: 2
-      minMaxState: 3
+      minMaxState: 0
       scalar: 1
       minScalar: 1
       maxCurve:
@@ -5035,7 +5035,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _explosionFx: {fileID: 6059330806658230433, guid: 1b8845461ef8899428eef896085d8e90,
     type: 3}
-  _speed: 10
+  _speed: 6
   _rotateSpeed: 6
 --- !u!54 &-3643845653257227666
 Rigidbody:
