@@ -991,8 +991,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 6.1894603, y: 2.9963708, z: 10.929892}
-  m_Center: {x: -2.5947301, y: -0.015356779, z: -0.11983967}
+  m_Size: {x: 3.1615744, y: 11.688875, z: 5.238554}
+  m_Center: {x: -4.2701354, y: 4.3308954, z: 0.0313797}
 --- !u!114 &5665349426519673435
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1254,7 +1254,6 @@ GameObject:
   - component: {fileID: 5665349427490367469}
   - component: {fileID: 5665349427490367468}
   - component: {fileID: 5665349427490367471}
-  - component: {fileID: 5665349427490367470}
   m_Layer: 0
   m_Name: GFX
   m_TagString: Untagged
@@ -1329,19 +1328,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &5665349427490367470
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5665349427490367457}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5727586139558312913
 GameObject:
   m_ObjectHideFlags: 0
