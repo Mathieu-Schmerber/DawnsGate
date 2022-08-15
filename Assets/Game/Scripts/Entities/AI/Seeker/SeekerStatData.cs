@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Game.VFX.Preview;
+using UnityEngine;
 
 namespace Game.Entities.AI.Seeker
 {
@@ -8,6 +9,7 @@ namespace Game.Entities.AI.Seeker
 		public float BaseDamage;
 		public float BaseKnockBackForce;
 		public float AttackRadius;
+		public PreviewBase DashPreview;
 		public GameObject HitFx;
 	}
 }
