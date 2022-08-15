@@ -14,11 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Prefab: {fileID: -7139160550905200502, guid: ffd7fa09cff988949bbf4391dba98d30, type: 3}
   Previsualisation: {fileID: 0}
-  BaseDamage: 30
+  OnHitAudios: []
+  BaseDamage: 20
   BaseKnockbackForce: 4
   KnockbackDir: 0
   ScaleOverLifetime: 1
   EndScale: {x: 10, y: 10, z: 10}
+  RotateOverTime: 0
+  EndRotation: {x: 0, y: 0, z: 0}
+  ContinuouslyHit: 0
   HitFx: {fileID: 6826739793168019112, guid: 161ce196c6bae7843a3573a1fe4c5d5f, type: 3}
   HitYRotation: 0
   ActiveTime: 5

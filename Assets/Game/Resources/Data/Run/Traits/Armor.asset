@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20293d223e2a206458111adf9b67daff, type: 3}
   m_Name: Armor
   m_EditorClassIdentifier: 
+  Id: abd67294-54a8-4bec-a8e0-9c6ab31d2af0
   Title: Vigilant
   Description: Vigilance is not to be mixed with overcautiouness, start well-prepared.
   NumberOfUpgrades: 10
-  BasePrice: 4000
-  PriceInflationPerUpgrade: 20
+  BasePrice: 3000
+  PriceInflationPerUpgrade: 10
   StatName: Armor
   StatModified: 2
   IncrementPerUpgrade: 10

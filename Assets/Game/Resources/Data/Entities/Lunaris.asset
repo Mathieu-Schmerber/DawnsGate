@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Lunaris
   m_EditorClassIdentifier: 
   DisplayName: Lunaris
-  StartHealth: 10
+  StartHealth: 200
   MovementSpeed: 6
   DashRange: 5
   DashCooldown: 1
@@ -111,15 +111,15 @@ MonoBehaviour:
     WeaponMaterial: {fileID: 2100000, guid: 06c0dafe01cc66043b53ff7cea8cff01, type: 2}
     WeaponHandPosition: {x: -0.33, y: 0.31, z: 0.26}
     WeaponHandRotation: {x: -235.307, y: 278.324, z: -101.902}
-    AttackCooldown: 0.5
+    AttackCooldown: 0.7
     RestingTime: 1.5
   KatanaPhase:
-    SpawnRate: 1.5
+    SpawnRate: 2
     PrevisualisationDuration: 0.5
     PassiveSpread: 2
     LightAttack:
       Animation: {fileID: 7400000, guid: a33d04255ca3c3a429387c95dc55e77f, type: 2}
-      AttackSpeed: 0.5
+      AttackSpeed: 1
       AttackData: {fileID: 11400000, guid: eb0dbd117b0a26e4eafce17cbc6e9481, type: 2}
       StartOffset: {x: 0, y: 0, z: 0}
       TravelDistance: 0
@@ -128,7 +128,7 @@ MonoBehaviour:
       WeaponHandRotation: {x: 0, y: 0, z: 0}
     LightAttack2:
       Animation: {fileID: 7400000, guid: e0ce77b8f39859749b08ffabf55e7edb, type: 2}
-      AttackSpeed: 0.5
+      AttackSpeed: 1
       AttackData: {fileID: 11400000, guid: 539ae80a7564842439851cc93ef39233, type: 2}
       StartOffset: {x: 0, y: 0, z: 0}
       TravelDistance: 0
@@ -150,15 +150,15 @@ MonoBehaviour:
     WeaponMaterial: {fileID: 2100000, guid: 3c0c9c64018afac44a5543616cbc1d88, type: 2}
     WeaponHandPosition: {x: -0.286, y: 0.073, z: -0.101}
     WeaponHandRotation: {x: 180.043, y: 48.19901, z: 270}
-    AttackCooldown: 0.1
+    AttackCooldown: 0.5
     RestingTime: 2
   StaffPhase:
-    SpawnRate: 1.2
+    SpawnRate: 2
     PrevisualisationDuration: 0.5
     PassiveSpread: 2
     LightAttack:
       Animation: {fileID: 7400000, guid: f2f80e8c3abe135449b9aa7e5378bcd5, type: 2}
-      AttackSpeed: 0.5
+      AttackSpeed: 1
       AttackData: {fileID: 11400000, guid: 719c4adc9c0971e4389b5b9f2a566040, type: 2}
       StartOffset: {x: 0, y: 0, z: 0}
       TravelDistance: 0
@@ -167,7 +167,7 @@ MonoBehaviour:
       WeaponHandRotation: {x: -95.191, y: -10.853, z: -91.763}
     LightAttack2:
       Animation: {fileID: 7400000, guid: 8b5b1b3506b125b40b9ae2a8bcf8ce08, type: 2}
-      AttackSpeed: 0.5
+      AttackSpeed: 1
       AttackData: {fileID: 11400000, guid: adc31d8af869ac6469799ea0ecd264aa, type: 2}
       StartOffset: {x: 0, y: 0, z: 0}
       TravelDistance: 0
@@ -189,5 +189,5 @@ MonoBehaviour:
     WeaponMaterial: {fileID: 2100000, guid: 4ec54e9f7d1841144bb15b74b73158fd, type: 2}
     WeaponHandPosition: {x: 0.11, y: -1.45, z: -0.12}
     WeaponHandRotation: {x: -95.871, y: 145.476, z: -49.366}
-    AttackCooldown: 0.5
+    AttackCooldown: 1
     RestingTime: 3

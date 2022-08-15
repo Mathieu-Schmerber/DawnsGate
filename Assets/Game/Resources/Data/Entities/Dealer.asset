@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Dealer
   m_EditorClassIdentifier: 
   DisplayName: Gobbling Dealer
-  StartHealth: 10
+  StartHealth: 150
   MovementSpeed: 8
   DashRange: 0
   DashCooldown: 0
@@ -70,12 +70,12 @@ MonoBehaviour:
       TemporaryModifier: 0
   DealTheme: {fileID: 8300000, guid: b907ca1959a5eab4e95b56eb033ef73a, type: 3}
   Dialogue: {fileID: 11400000, guid: b34964c42fff6094bbdb844ae1c30261, type: 2}
-  HappyAnimation: {fileID: 0}
+  HappyAnimation: {fileID: 7400000, guid: 70834ce39ac0bf941b19ef65f474b363, type: 2}
   PriceDiscount: 20
   FightTheme: {fileID: 8300000, guid: 7430f5e96c1214d43bb617e5336c30bf, type: 3}
   DashAttack: {fileID: 11400000, guid: 7b5aae8b01596c94e8fb739a5975340e, type: 2}
   StartDashAnimation: {fileID: 7400000, guid: 82dc0d66fd6ce3d4dafe2654abe2020d, type: 2}
-  ConsecutiveDashes: {x: 4, y: 7}
+  ConsecutiveDashes: {x: 4, y: 6}
   TeleportationFx: {fileID: 3494829457440919073, guid: 4f3ec52745efb034d835b6ce5dbcdfc8,
     type: 3}
   LaserAttack: {fileID: 11400000, guid: 5947d81b259f55c4498b441ca4341132, type: 2}

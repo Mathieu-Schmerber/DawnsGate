@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20293d223e2a206458111adf9b67daff, type: 3}
   m_Name: Damage
   m_EditorClassIdentifier: 
+  Id: f2f14f83-e590-4bc7-9577-9171fc412b57
   Title: Persuasive
   Description: Winning an argument will likely be easier...
   NumberOfUpgrades: 10
-  BasePrice: 4000
-  PriceInflationPerUpgrade: 20
+  BasePrice: 3000
+  PriceInflationPerUpgrade: 10
   StatName: Damage
   StatModified: 3
   IncrementPerUpgrade: 5

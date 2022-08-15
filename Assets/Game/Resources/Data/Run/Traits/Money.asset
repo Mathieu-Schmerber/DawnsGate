@@ -12,14 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20293d223e2a206458111adf9b67daff, type: 3}
   m_Name: Money
   m_EditorClassIdentifier: 
+  Id: 4c293c04-0466-4842-b437-cff2d6802ff5
   Title: Gold digging
   Description: 'Money doesn''t buy happiness they said !
 
     Earn more money after
     clearing a room.'
   NumberOfUpgrades: 10
-  BasePrice: 5000
-  PriceInflationPerUpgrade: 20
+  BasePrice: 4000
+  PriceInflationPerUpgrade: 10
   StatName: Gold
   StatModified: 14
   IncrementPerUpgrade: 5

@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20293d223e2a206458111adf9b67daff, type: 3}
   m_Name: Revive
   m_EditorClassIdentifier: 
+  Id: 2c722748-b110-41d4-b99e-5e6e1fdcc90b
   Title: Tireless
   Description: Revive one time with a portion of your health.
   NumberOfUpgrades: 5
-  BasePrice: 5000
-  PriceInflationPerUpgrade: 20
+  BasePrice: 7000
+  PriceInflationPerUpgrade: 10
   StatName: Health
   StatModified: 15
   IncrementPerUpgrade: 10

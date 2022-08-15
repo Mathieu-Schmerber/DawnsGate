@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20293d223e2a206458111adf9b67daff, type: 3}
   m_Name: Health
   m_EditorClassIdentifier: 
+  Id: 65506204-b473-47f0-a9c8-a00455f63156
   Title: Vigorous
   Description: Who's the big guy ? Show 'em
   NumberOfUpgrades: 10
-  BasePrice: 4000
-  PriceInflationPerUpgrade: 20
+  BasePrice: 3000
+  PriceInflationPerUpgrade: 10
   StatName: Health
   StatModified: 0
   IncrementPerUpgrade: 10

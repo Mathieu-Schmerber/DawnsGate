@@ -124,7 +124,7 @@ namespace Game.Entities.AI.Dealer
 
 		[SerializeField] private ModularAttack _laserInstance;
 		protected override float AttackRange => _stats.DashAttack.AttackRange;
-		protected override float AttackCooldown => 0.5f;
+		protected override float AttackCooldown => 2f;
 
 		private int _attackNumber;
 		private int _dashToPerform;
