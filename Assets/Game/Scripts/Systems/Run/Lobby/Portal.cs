@@ -13,18 +13,26 @@ namespace Game.Systems.Run.Lobby
 	public class Portal : MonoBehaviour, IInteractable
 	{
 		#region Interaction
-		public string InteractionTitle => $"Enter portal";
+
+		private string _interactionTitle;
+		public string InteractionTitle => _interactionTitle;
+
+		private bool _canEnter;
 
 		public void Interact(IInteractionActor actor)
 		{
-			actor.UnSuggestInteraction(this);
-			RunManager.StartNewRun();
+			if (_canEnter)
+			{
+				actor.UnSuggestInteraction(this);
+				RunManager.StartNewRun();
+			}
 		}
 
 		private void OnTriggerEnter(Collider other)
 		{
-			if (other.GetComponent<PlayerWeapon>()?.CurrentWeapon != null)
-				other.GetComponent<IInteractionActor>()?.SuggestInteraction(this);
+			_canEnter = other.GetComponent<PlayerWeapon>().CurrentWeapon != null;
+			_interactionTitle = _canEnter ? $"Enter portal" : $"<color=red>Please equip a weapon before entering the portal</color>";
+			other.GetComponent<IInteractionActor>()?.SuggestInteraction(this);
 		}
 
 		private void OnTriggerExit(Collider other) => other.GetComponent<IInteractionActor>()?.UnSuggestInteraction(this);
