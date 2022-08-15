@@ -32,6 +32,7 @@ namespace Game.Entities.Player
 			OnArmorChanged += DisplayArmorText;
 			_damageable.OnPlayerDeath += GameOver;
 			GameManager.OnRunMoneyUpdated += DisplayMoneyText;
+			RunManager.OnRunStarted += Heal;
 			RunManager.OnRunEnded += OnRunEnded;
 			RunManager.OnBeforeSceneSwitched += ClearState;
 		}
@@ -43,6 +44,7 @@ namespace Game.Entities.Player
 			_damageable.OnPlayerDeath -= GameOver;
 			GameManager.OnRunMoneyUpdated -= DisplayMoneyText;
 			RunManager.OnRunEnded -= OnRunEnded;
+			RunManager.OnRunStarted -= Heal;
 			RunManager.OnBeforeSceneSwitched -= ClearState;
 		}
 
@@ -83,6 +85,11 @@ namespace Game.Entities.Player
 			ClearInventory();
 			ResetStats();
 			UnEquipWeapon();
+		}
+
+		private void Heal()
+		{
+			CurrentHealth = MaxHealth;
 		}
 
 		private void ClearState()

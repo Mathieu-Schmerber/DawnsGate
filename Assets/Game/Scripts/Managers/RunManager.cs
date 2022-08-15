@@ -45,6 +45,7 @@ namespace Game.Managers
 		public List<string> ReachedRooms = new();
 
 		public static event Action OnRunEnded;
+		public static event Action OnRunStarted;
 		public static event Action OnBeforeSceneSwitched;
 		public static event Action OnSceneSwitched;
 
@@ -68,6 +69,7 @@ namespace Game.Managers
 
 		public static void StartNewRun()
 		{
+			OnRunStarted?.Invoke();
 			SaveSystem.Save();
 			AudioManager.PlayTheme(RunSettings.RunTheme);
 			CurrentRoomInstance = null;
