@@ -10,4 +10,4 @@ You might want to take a look at the [Game design document](GameDesignDocument.p
 If you are looking to install and lauch the game, please download and execute the dedicated [installer](installer.exe).
 
 ## Submission requirements
-A short trailer for the game can be found [here](https://www.youtube.com/watch?v=haB8_vaRXfQ).
+A short trailer for the game can be found [here](https://youtu.be/YXl3cXdUzAs).
