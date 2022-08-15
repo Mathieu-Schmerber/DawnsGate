@@ -3580,9 +3580,9 @@ RectTransform:
   m_Father: {fileID: 1237332105}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 45.25, y: -18.25}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 16.5, y: 16.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &227631820
@@ -8383,9 +8383,9 @@ RectTransform:
   m_Children:
   - {fileID: 295073398}
   - {fileID: 1227652750}
-  - {fileID: 922159779}
   - {fileID: 979030528}
   - {fileID: 636336540}
+  - {fileID: 922159779}
   m_Father: {fileID: 1129333466}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -9671,7 +9671,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 532339968}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -9709,11 +9709,12 @@ MonoBehaviour:
     with <sprite="stick" index=0/> and dash using <sprite="inputs" index=1/>.
 
     Don''t
-    forget to gear up, you can attack with [Attack_Input] while having one of the
-    Sun''s weapons equipped.
+    forget to gear up, you can attack with <sprite="inputs" index=2/>  while having
+    one of the Sun''s weapons equipped.
 
 
-    We wish you good luck, May the Sun rise again.'
+    We wish you good luck, May the Sun
+    rise again.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8bf9a74247a59944eab39bc3a7e89cc3, type: 2}
   m_sharedMaterial: {fileID: 2299022548054918219, guid: 8bf9a74247a59944eab39bc3a7e89cc3,
@@ -13810,7 +13811,7 @@ RectTransform:
   - {fileID: 2022953843}
   - {fileID: 1155483326}
   m_Father: {fileID: 532339968}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -15088,7 +15089,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 532339968}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -15126,11 +15127,12 @@ MonoBehaviour:
     with <sprite="wasd" index=0/> and dash using <sprite="inputs" index=0/>.
 
     Don''t
-    forget to gear up, you can attack with [Attack_Input] while having one of the
-    Sun''s weapons equipped.
+    forget to gear up, you can attack with <sprite="mouse" index=0/> while having
+    one of the Sun''s weapons equipped.
 
 
-    We wish you good luck, May the Sun rise again.'
+    We wish you good luck, May the Sun
+    rise again.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8bf9a74247a59944eab39bc3a7e89cc3, type: 2}
   m_sharedMaterial: {fileID: 2299022548054918219, guid: 8bf9a74247a59944eab39bc3a7e89cc3,
@@ -23067,9 +23069,9 @@ RectTransform:
   m_Father: {fileID: 1237332105}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 18.75, y: -18.25}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 16.5, y: 16.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1545583737
@@ -30082,9 +30084,9 @@ RectTransform:
   m_Father: {fileID: 1237332105}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 71.75, y: -18.25}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 16.5, y: 16.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2073926272
