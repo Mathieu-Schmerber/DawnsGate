@@ -56,7 +56,9 @@ namespace Game.UI
 
 		private void PerformPurchase(TraitDescriptorUi descriptorUi)
 		{
-			if (GameManager.UpgradeTrait(descriptorUi.Trait))
+			if (descriptorUi == null)
+				return;
+			else if (GameManager.UpgradeTrait(descriptorUi.Trait))
 			{
 				_descriptors.ForEach(x => Refresh(x));
 				Refresh(descriptorUi);
