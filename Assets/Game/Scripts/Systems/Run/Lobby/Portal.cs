@@ -31,7 +31,7 @@ namespace Game.Systems.Run.Lobby
 		private void OnTriggerEnter(Collider other)
 		{
 			_canEnter = GameManager.Player.GetComponent<PlayerWeapon>().CurrentWeapon != null;
-			_interactionTitle = _canEnter ? $"Enter portal" : $"<color=red>Please equip a weapon before entering the portal</color>";
+			_interactionTitle = _canEnter ? $"Enter the Dawns Gate" : $"<color=red>Please equip a weapon before entering the portal</color>";
 			other.GetComponent<IInteractionActor>()?.SuggestInteraction(this);
 		}
 
