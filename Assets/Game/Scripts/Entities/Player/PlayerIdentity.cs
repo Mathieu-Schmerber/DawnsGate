@@ -113,5 +113,11 @@ namespace Game.Entities.Player
 		}
 
 		#endregion
+
+		private void Update()
+		{
+			Debug.Log($"crit: {Stats.Modifiers[StatModifier.CriticalRate].Value}");
+			Debug.Log($"crit dmg: {Stats.Modifiers[StatModifier.CriticalDamage].Value}");
+		}
 	}
 }

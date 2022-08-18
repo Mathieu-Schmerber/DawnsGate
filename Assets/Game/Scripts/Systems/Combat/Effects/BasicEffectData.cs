@@ -26,7 +26,11 @@ namespace Game.Systems.Combat.Effects
 			[ShowIf("@Action == EffectAction.SPAWN_OBJECT")] public GameObject Prefab;
 			[ShowIf("@Action == EffectAction.SPAWN_OBJECT")] public bool StickToEntity;
 			[ShowIf("@Action == EffectAction.SPAWN_OBJECT")] public bool AllowDuplicates;
+
 		}
+
+		public bool LimitStack;
+		[ShowIf("@LimitStack")] public int MaxStack;
 
 		public List<ActionDescriptor> Actions;
 	}

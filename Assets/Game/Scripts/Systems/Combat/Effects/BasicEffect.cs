@@ -12,7 +12,7 @@ namespace Game.Systems.Combat.Effects
 		protected EntityIdentity _identity;
 		protected List<GameObject> _spawned = new();
 
-		private int _activations { get; set; }
+		private int _activations { get; set; } = 0;
 
 		protected virtual void Awake()
 		{
@@ -50,6 +50,8 @@ namespace Game.Systems.Combat.Effects
 
 		protected override void OnActivation()
 		{
+			if (_data.LimitStack && _activations >= _data.MaxStack)
+				return;
 			foreach (BasicEffectData.ActionDescriptor action in _data.Actions)
 			{
 				switch (action.Action)
@@ -62,7 +64,7 @@ namespace Game.Systems.Combat.Effects
 						break;
 					case EffectAction.SPAWN_OBJECT:
 						if (!action.AllowDuplicates && _activations > 0)
-							return;
+							break;
 						ObjectPooler.Get(action.Prefab, null, (GameObject go) => {
 							if (action.StickToEntity)
 							{

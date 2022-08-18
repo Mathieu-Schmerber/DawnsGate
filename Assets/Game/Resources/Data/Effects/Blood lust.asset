@@ -32,7 +32,7 @@ MonoBehaviour:
       Data: 
   DisplayName: Blood lust
   Description: Gains <color=red>1%</color> critial rate and <color=red>10%</color>
-    critical damage every <color=yellow>0.5</color> second.
+    critical damage every <color=yellow>0.5</color> second. Can be cumulated 10 times.
   Script: {fileID: 11500000, guid: ab790384dc304bd478352368cd7fc1e2, type: 3}
   Interval:
     Enabled: 1
@@ -69,3 +69,4 @@ MonoBehaviour:
       type: 3}
     StickToEntity: 1
     AllowDuplicates: 0
+  MaxStack: 10
