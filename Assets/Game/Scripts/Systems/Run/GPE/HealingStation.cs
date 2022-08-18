@@ -9,12 +9,12 @@ namespace Game.Systems.Run.GPE
 {
 	public class HealingStation : ATriggerInteractable
 	{
-		[SerializeField, Range(0, 1)] private float _healAmount;
+		[SerializeField] private float _healAmount;
 		private bool _used = false;
 
 		public event Action OnInteracted;
 		public override string InteractionTitle => $"Praise the sun (+ {HealAmount}<color=red>♥</color>)";
-		public int HealAmount => Mathf.CeilToInt(_player.MaxHealth * _healAmount);
+		public float HealAmount => _healAmount;
 
 		private EntityIdentity _player;
 
