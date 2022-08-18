@@ -15,9 +15,15 @@ MonoBehaviour:
   Prefab: {fileID: -7109925867012405211, guid: 19775b0bbaba990448d8c078821a4c85, type: 3}
   Previsualisation: {fileID: 8134988624244144373, guid: 090f1101c6e3bf6408f16eefbc28fe08,
     type: 3}
-  BaseDamage: 10
+  OnHitAudios: []
+  BaseDamage: 5
   BaseKnockbackForce: 1
   KnockbackDir: 1
+  ScaleOverLifetime: 0
+  EndScale: {x: 0, y: 0, z: 0}
+  RotateOverTime: 0
+  EndRotation: {x: 0, y: 0, z: 0}
+  ContinuouslyHit: 0
   HitFx: {fileID: 6826739793168019112, guid: 161ce196c6bae7843a3573a1fe4c5d5f, type: 3}
   HitYRotation: 0
   ActiveTime: 0.4
