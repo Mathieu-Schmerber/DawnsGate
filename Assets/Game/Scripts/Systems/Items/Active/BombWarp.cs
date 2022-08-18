@@ -41,6 +41,10 @@ namespace Game.Systems.Items.Active
 		{
 			ObjectPooler.Get(_data.SpawnPrefab, _controller.transform.position, Quaternion.Euler(0, 0, 0), _data.Stages[Quality], 
 				(bomb) => bomb.GetComponent<Bomb>().Caster = _entity);
+			Awaiter.WaitAndExecute(dash.Time, () => {
+				ObjectPooler.Get(_data.SpawnPrefab, _controller.transform.position, Quaternion.Euler(0, 0, 0), _data.Stages[Quality],
+				(bomb) => bomb.GetComponent<Bomb>().Caster = _entity);
+			});
 		}
 	}
 }
