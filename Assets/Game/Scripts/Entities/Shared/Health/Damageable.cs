@@ -41,6 +41,7 @@ namespace Game.Entities.Shared.Health
 
 			OnBeforeDamaged?.Invoke();
 
+			bool hadArmor = _identity.CurrentArmor > 0;
 			float totalDamage = damage;
 
 			// Critical hit check
@@ -66,7 +67,8 @@ namespace Game.Entities.Shared.Health
 			}
 
 			// Lifesteal
-			attacker.CurrentHealth += attacker.Scale(totalDamage, StatModifier.LifeSteal);
+			if (!hadArmor) // Lifesteal on real health only
+				attacker.CurrentHealth += attacker.Scale(totalDamage, StatModifier.LifeSteal);
 
 			// Triggering event
 			OnDamaged?.Invoke(totalDamage);
