@@ -37,6 +37,8 @@ MonoBehaviour:
   Interval:
     Enabled: 1
     _value: 0.5
+  LimitStack: 1
+  MaxStack: 10
   Actions:
   - Action: 1
     DamageAmount: 0
@@ -69,4 +71,3 @@ MonoBehaviour:
       type: 3}
     StickToEntity: 1
     AllowDuplicates: 0
-  MaxStack: 10
