@@ -32,23 +32,32 @@ MonoBehaviour:
       Data: 
   Type: 0
   Graphics: {fileID: 21300000, guid: 4568209267e50a34dbfa7d6424b3f92f, type: 3}
-  Tags: 2
+  Tags: 11
   IsLifeItem: 0
   LifeCost: 0
   Script: {fileID: 11500000, guid: 08926e121668c91429746aa3d5ff809b, type: 3}
   Stages:
-  - keyData: 0a000000
+  - keyData: 0000000003000000
     valueData:
-    - _baseModifier: 50
+    - _baseModifier: 20
       BonusModifier: 0
       TemporaryModifier: 0
-  - keyData: 0a000000
-    valueData:
-    - _baseModifier: 75
+    - _baseModifier: 15
       BonusModifier: 0
       TemporaryModifier: 0
-  - keyData: 0a000000
+  - keyData: 0000000003000000
     valueData:
-    - _baseModifier: 100
+    - _baseModifier: 30
+      BonusModifier: 0
+      TemporaryModifier: 0
+    - _baseModifier: 23
+      BonusModifier: 0
+      TemporaryModifier: 0
+  - keyData: 0000000003000000
+    valueData:
+    - _baseModifier: 40
+      BonusModifier: 0
+      TemporaryModifier: 0
+    - _baseModifier: 30
       BonusModifier: 0
       TemporaryModifier: 0
