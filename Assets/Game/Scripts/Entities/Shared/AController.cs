@@ -33,6 +33,7 @@ namespace Game.Entities.Shared
 
 		[SerializeField] private float _rotationSpeed = 6f;
 		[SerializeField] private LayerMask _wallLayer;
+		[SerializeField] private bool _activeDashCheck;
 
 		private Vector3 _lockedAim;
 		private Vector3 _gfxAnchor;
@@ -237,29 +238,32 @@ namespace Game.Entities.Shared
 			Gizmos.DrawSphere(GetTargetPosition(), 0.2f);
 		}
 
-		private void CheckDashCollision(Collision collision)
-		{
-			bool notGround = false;
+		//private void CheckDashCollision(Collision collision)
+		//{
+		//	if (!_activeDashCheck)
+		//		return;
 
-			foreach (var item in collision.contacts)
-			{
-				if (Mathf.Abs(transform.position.y - collision.contacts[0].point.y) > 0.3f)
-				{
-					notGround = true;
-					break;
-				}
-			}
+		//	bool notGround = false;
 
-			if (notGround && State == EntityState.DASH)
-			{
-				_rb.velocity = Vector3.zero;
-				State = EntityState.IDLE;
-				_currentDash = null;
-			}
-		}
+		//	foreach (var item in collision.contacts)
+		//	{
+		//		if (Mathf.Abs(transform.position.y - collision.contacts[0].point.y) > 0.3f)
+		//		{
+		//			notGround = true;
+		//			break;
+		//		}
+		//	}
 
-		private void OnCollisionEnter(Collision collision) => CheckDashCollision(collision);
+		//	if (notGround && State == EntityState.DASH)
+		//	{
+		//		_rb.velocity = Vector3.zero;
+		//		State = EntityState.IDLE;
+		//		_currentDash = null;
+		//	}
+		//}
 
-		private void OnCollisionStay(Collision collision) => CheckDashCollision(collision);
+		//private void OnCollisionEnter(Collision collision) => CheckDashCollision(collision);
+
+		//private void OnCollisionStay(Collision collision) => CheckDashCollision(collision);
 	}
 }

@@ -19,8 +19,18 @@ namespace Game.Systems.Run.Rooms
 		[ReadOnly] public NavMeshData NavMesh;
 		[ReadOnly] public float GroundLevel;
 		public List<Vector3> SpawnablePositions;
+		[ReadOnly] public Vector3 RoomCenter;
 
 #if UNITY_EDITOR
+
+		private void OnValidate()
+		{
+			Bounds bounds = new();
+
+			foreach (Vector3 item in SpawnablePositions)
+				bounds.Encapsulate(item);
+			RoomCenter = bounds.center;
+		}
 
 		public string ScenePath { 
 			get

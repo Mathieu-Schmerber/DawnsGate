@@ -218,6 +218,9 @@ namespace Game.Systems.Run.Rooms
 			Gizmos.color = Color.red;
 			foreach (var item in Data.SpawnablePositions)
 				Gizmos.DrawSphere(item, 0.1f);
+
+			Gizmos.color = Color.magenta;
+			Gizmos.DrawSphere(Data.RoomCenter, 0.2f);
 		}
 	}
 }

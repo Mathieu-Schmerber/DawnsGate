@@ -27,7 +27,7 @@ namespace Game.Systems.Run.Rooms
 				case RoomRewardType.ITEM:
 					var inventory = _player.GetComponent<Inventory>();
 					var item = Databases.Database.Data.Item.All<ItemBaseData>().Where(x => !x.IsLifeItem && !inventory.HasEquipped(x)).Random();
-					LootedItem.Create(_player.transform.position, new ItemSummary() { Data = item, Quality = 0 });
+					LootedItem.Create(Info.Data.RoomCenter, new ItemSummary() { Data = item, Quality = 0 });
 					break;
 				default:
 					break;

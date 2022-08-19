@@ -211,7 +211,7 @@ namespace Game.Entities.AI.Dealer
 					GameManager.RewardWithRunMoney(_deal.MoneyAmount);
 					break;
 				case RoomRewardType.ITEM:
-					_inventory.EquipItem(_deal.Item);
+					LootedItem.Create(RunManager.CurrentRoomInstance.Info.Data.RoomCenter, new ItemSummary() { Data = _deal.Item.Data, Quality = 0 });
 					break;
 			}
 			_dealDone = true;
@@ -228,7 +228,7 @@ namespace Game.Entities.AI.Dealer
 					GameManager.RewardWithRunMoney(_deal.MoneyAmount);
 					break;
 				case RoomRewardType.ITEM:
-					_inventory.EquipItem(_deal.Item);
+					LootedItem.Create(RunManager.CurrentRoomInstance.Info.Data.RoomCenter, new ItemSummary() { Data = _deal.Item.Data, Quality = 0 });
 					GameManager.PayWithRunMoney(_deal.MoneyAmount);
 					break;
 			}
