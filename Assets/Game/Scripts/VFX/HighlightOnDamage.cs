@@ -11,12 +11,14 @@ namespace Game.VFX
 		[SerializeField] private Material _highlight;
 		[SerializeField] private float _highlightTime;
 
+		private Material[] _baseMaterials;
 		private Material[] _priorMaterials;
 		private Renderer _renderer;
 		private Damageable _damageable;
 
 		private void OnEnable()
 		{
+			_renderer.materials = _baseMaterials;
 			_damageable.OnDamaged += OnDamageDealt;
 		}
 
@@ -29,6 +31,7 @@ namespace Game.VFX
 		{
 			_renderer = GetComponentInChildren<Renderer>();
 			_damageable = GetComponent<Damageable>();
+			_baseMaterials = _renderer.materials;
 		}
 
 		private IEnumerator Highlight()
