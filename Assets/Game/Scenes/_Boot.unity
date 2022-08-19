@@ -522,6 +522,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 1251468110984439642, guid: 814944eadb999fb47af7403b53a00139,
+        type: 3}
+      propertyPath: m_CollisionDetection
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1251468110984439643, guid: 814944eadb999fb47af7403b53a00139,
+        type: 3}
+      propertyPath: _wallLayer.m_Bits
+      value: 513
+      objectReference: {fileID: 0}
     - target: {fileID: 1251468110984439643, guid: 814944eadb999fb47af7403b53a00139,
         type: 3}
       propertyPath: serializationData.Prefab

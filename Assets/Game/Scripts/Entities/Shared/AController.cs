@@ -32,10 +32,12 @@ namespace Game.Entities.Shared
 		#region Properties
 
 		[SerializeField] private float _rotationSpeed = 6f;
+		[SerializeField] private LayerMask _wallLayer;
 
 		private Vector3 _lockedAim;
 		private Vector3 _gfxAnchor;
 
+		protected CapsuleCollider _collider;
 		protected EntityIdentity _entity;
 		protected Rigidbody _rb;
 		protected Quaternion _desiredRotation;
@@ -46,6 +48,8 @@ namespace Game.Entities.Shared
 		private bool _lockAim = false;
 
 		public event Action<DashParameters> OnDashStarted;
+
+		protected DashParameters? _currentDash = null;
 
 		[ShowInInspector, ReadOnly] public bool LockMovement { get => _lockMovement; 
 			set {
@@ -76,6 +80,7 @@ namespace Game.Entities.Shared
 		// Get references
 		protected virtual void Awake()
 		{
+			_collider = GetComponent<CapsuleCollider>();
 			_entity = GetComponent<EntityIdentity>();
 			_rb = GetComponent<Rigidbody>();
 			_gfxAnim = GetComponentInChildren<Animator>();
@@ -174,25 +179,31 @@ namespace Game.Entities.Shared
 			if (parameters.Distance == 0)
 				return;
 
-			Vector3 destination = (_rb.position + parameters.Direction * parameters.Distance).WithY(_rb.position.y);
-			float speed = parameters.Distance / parameters.Time;
-
+			_currentDash = parameters;
 			OnDashStarted?.Invoke(parameters);
 			if (parameters.ChangeVulnerabilityState)
 				_entity.SetInvulnerable(parameters.Time); // Invulnerable during dash
 
 			if (!parameters.CanDashThroughWalls)
 			{
+				float speed = parameters.Distance / parameters.Time;
+
 				_rb.velocity = parameters.Direction.normalized * speed;
 				State = EntityState.DASH;
 				Awaiter.WaitAndExecute(parameters.Time, () =>
 				{
-					_rb.velocity = Vector3.zero;
-					State = EntityState.IDLE;
+					if (State == EntityState.DASH)
+					{
+						_rb.velocity = Vector3.zero;
+						State = EntityState.IDLE;
+						_currentDash = null;
+					}
 				});
 			}
 			else
 			{
+				Vector3 destination = (_rb.position + parameters.Direction * parameters.Distance).WithY(_rb.position.y);
+
 				Tween.Position(transform, destination, parameters.Time, 0,
 				startCallback: () =>
 				{
@@ -201,6 +212,7 @@ namespace Game.Entities.Shared
 				completeCallback: () =>
 				{
 					State = EntityState.IDLE;
+					_currentDash = null;
 				});
 			}
 		}
@@ -224,5 +236,30 @@ namespace Game.Entities.Shared
 			Gizmos.color = Color.green;
 			Gizmos.DrawSphere(GetTargetPosition(), 0.2f);
 		}
+
+		private void CheckDashCollision(Collision collision)
+		{
+			bool notGround = false;
+
+			foreach (var item in collision.contacts)
+			{
+				if (Mathf.Abs(transform.position.y - collision.contacts[0].point.y) > 0.3f)
+				{
+					notGround = true;
+					break;
+				}
+			}
+
+			if (notGround && State == EntityState.DASH)
+			{
+				_rb.velocity = Vector3.zero;
+				State = EntityState.IDLE;
+				_currentDash = null;
+			}
+		}
+
+		private void OnCollisionEnter(Collision collision) => CheckDashCollision(collision);
+
+		private void OnCollisionStay(Collision collision) => CheckDashCollision(collision);
 	}
 }

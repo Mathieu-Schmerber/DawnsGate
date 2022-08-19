@@ -389,6 +389,7 @@ MonoBehaviour:
   _clips:
   - {fileID: 8300000, guid: 67a7b95e5ac025b44b2cbb847577d450, type: 3}
   _playOnEnable: 1
+  _playOnSelect: 0
 --- !u!1 &4732068448631359841
 GameObject:
   m_ObjectHideFlags: 0
@@ -5415,6 +5416,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: db639a26120233d42b19c855e11c2293, type: 3}
   - {fileID: 8300000, guid: 9213a333a8a43bf4b83bede95bb71859, type: 3}
   _playOnEnable: 1
+  _playOnSelect: 0
 --- !u!1 &7310629612046420550
 GameObject:
   m_ObjectHideFlags: 0
@@ -5556,6 +5558,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _afterImageEffect: {fileID: 2843933457422076767, guid: e51837df11f76e541a58e25d7be60a9a,
     type: 3}
+  _spawnOffset: {x: 0, y: 0.5, z: 0}
 --- !u!114 &4655342726327593292
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -117,7 +117,7 @@ namespace Nawlian.Lib.Utils.Database.Editor
             asset.Prefab = SirenixEditorFields.UnityObjectField(objectRect, GUIContent.none, asset.Prefab, typeof(UnityEngine.Object), false);
 
             // Handling changes
-            if (oldPrefab != asset.Prefab && asset.Prefab != null)
+            if (oldPrefab != asset.Prefab && asset.Prefab != null && string.IsNullOrEmpty(asset.Name))
                 asset.Name = asset.Prefab.name.ToPascalCase();
 
             GUI.color = currentColor;
