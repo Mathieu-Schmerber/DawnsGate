@@ -12,7 +12,6 @@ namespace Game.VFX
 		[SerializeField] private float _highlightTime;
 
 		private Material[] _baseMaterials;
-		private Material[] _priorMaterials;
 		private Renderer _renderer;
 		private Damageable _damageable;
 
@@ -36,17 +35,16 @@ namespace Game.VFX
 
 		private IEnumerator Highlight()
 		{
-			Material[] currentMaterials = _renderer.materials;
-			for (int i = 0; i < currentMaterials.Length; i++)
-				currentMaterials[i] = _highlight;
-			_renderer.materials = currentMaterials;
+			Material[] highlightMaterials = _renderer.materials;
+			for (int i = 0; i < highlightMaterials.Length; i++)
+				highlightMaterials[i] = _highlight;
+			_renderer.materials = highlightMaterials;
 			yield return new WaitForSeconds(_highlightTime);
-			_renderer.materials = _priorMaterials;
+			_renderer.materials = _baseMaterials;
 		}
 
 		public void OnDamageDealt(float damage)
 		{
-			_priorMaterials = _renderer.materials;
 			if (!_damageable.IsDead)
 				StartCoroutine(Highlight());
 		}

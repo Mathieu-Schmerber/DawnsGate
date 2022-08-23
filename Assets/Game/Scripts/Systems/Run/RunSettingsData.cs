@@ -111,6 +111,7 @@ namespace Game.Systems.Run
 
         [Title("Run")]
         [MinValue(0)] public Vector2Int RoomMoneyReward;
+        [MinValue(0)] public Vector2Int DefaultRunMoneyGain;
         [MinValue(0)] public Vector2Int LobbyMoneyPerRoom;
         [MinValue(0)] public Vector2Int LobbyMoneyRunReward;
 
@@ -125,11 +126,11 @@ namespace Game.Systems.Run
         [LabelText("Room Order")] 
         public RoomRuleData[] RoomRules;
 
-        #region Editor check
+		#region Editor check
 
 #if UNITY_EDITOR
 
-        [Button]
+		[Button]
         private void UpdateAllRoomDatas()
 		{
 			foreach (var room in RoomFolders)

@@ -15,19 +15,24 @@ namespace Game.Systems.Run.Rooms
 			SpawnReward();
 		}
 
+		private void RewardWithGold(Vector2Int amountRange)
+		{
+			int money = UnityEngine.Random.Range(amountRange.x, amountRange.y + 1);
+			GameManager.RewardWithRunMoney(money);
+		}
+
 		protected virtual void SpawnReward()
 		{
 			switch (RoomData.Reward)
 			{
 				case RoomRewardType.GOLD:
-					int money = UnityEngine.Random.Range(RunManager.RunSettings.RoomMoneyReward.x, RunManager.RunSettings.RoomMoneyReward.y + 1);
-					money = Mathf.RoundToInt(_player.Scale(money, Entities.Shared.StatModifier.GoldGain));
-					GameManager.RewardWithRunMoney(money);
+					RewardWithGold(RunManager.RunSettings.RoomMoneyReward);
 					break;
 				case RoomRewardType.ITEM:
 					var inventory = _player.GetComponent<Inventory>();
 					var item = Databases.Database.Data.Item.All<ItemBaseData>().Where(x => !x.IsLifeItem && !inventory.HasEquipped(x)).Random();
 					LootedItem.Create(Info.Data.RoomCenter, new ItemSummary() { Data = item, Quality = 0 });
+					RewardWithGold(RunManager.RunSettings.DefaultRunMoneyGain);
 					break;
 				default:
 					break;
