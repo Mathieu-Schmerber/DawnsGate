@@ -204,6 +204,8 @@ namespace Game.Systems.Run.Rooms
 
 		public Vector3[] GetPositionsAround(Vector3 center, float radius) => Data.SpawnablePositions.Where(pos => pos != center && Vector3.Distance(center, pos) <= radius).ToArray();
 
+		public Vector3 GetClosestPosition(Vector3 point) => GetPositionsAround(point, 100f).OrderBy(x => Vector3.Distance(x, point)).First();
+
 		private void OnDrawGizmos()
 		{
 			if (!_requiresNav || !_drawGizmos)

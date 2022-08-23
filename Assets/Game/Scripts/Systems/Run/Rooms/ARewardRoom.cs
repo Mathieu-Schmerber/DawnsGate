@@ -31,7 +31,7 @@ namespace Game.Systems.Run.Rooms
 				case RoomRewardType.ITEM:
 					var inventory = _player.GetComponent<Inventory>();
 					var item = Databases.Database.Data.Item.All<ItemBaseData>().Where(x => !x.IsLifeItem && !inventory.HasEquipped(x)).Random();
-					LootedItem.Create(Info.Data.RoomCenter, new ItemSummary() { Data = item, Quality = 0 });
+					LootedItem.Create(Info.GetClosestPosition(Info.Data.RoomCenter), new ItemSummary() { Data = item, Quality = 0 }, Vector3.zero);
 					RewardWithGold(RunManager.RunSettings.DefaultRunMoneyGain);
 					break;
 				default:
