@@ -30,6 +30,7 @@ namespace Game.Entities.AI
 		protected float _lastAttackTime;
 
 		private int _pathPointIndex;
+		private bool _aggressivityLock;
 		private Vector3 _nextPatrolPosition;
 		private Vector3 _nextAggressivePosition;
 		private Vector3 _cachedDestination;
@@ -43,6 +44,13 @@ namespace Game.Entities.AI
 		#region Settings
 
 		protected virtual float AttackRange => _aiSettings.AttackRange;
+
+		public void ForceAggressivity()
+		{
+			_aggressivityLock = true;
+			_aiState = EnemyState.AGGRESSIVE;
+		}
+
 		protected virtual float AttackCooldown => _aiSettings.AttackCooldown;
 		protected virtual float TriggerRange => _aiSettings.TriggerRange;
 		protected virtual float UnTriggerRange => _aiSettings.UntriggerRange;
@@ -77,6 +85,7 @@ namespace Game.Entities.AI
 			_entity.ResetStats();
 			_aiSettings = _entity.Stats as EnemyStatData;
 			_aiState = EnemyState.PASSIVE;
+			_aggressivityLock = false;
 			_path.ClearCorners();
 			_lastAttackTime = Time.time;
 
@@ -251,14 +260,16 @@ namespace Game.Entities.AI
 
 			if (_aiState == EnemyState.PASSIVE && distance < TriggerRange)
 			{
-				_aiState = EnemyState.AGGRESSIVE;
+				if (!_aggressivityLock)
+					_aiState = EnemyState.AGGRESSIVE;
 				NextAggressivePosition = transform.position;
 				UpdateAgressivePoint();
 				OnStateChanged?.Invoke(_aiState);
 			}
 			else if (_aiState == EnemyState.AGGRESSIVE && distance > UnTriggerRange)
 			{
-				_aiState = EnemyState.PASSIVE;
+				if (!_aggressivityLock)
+					_aiState = EnemyState.PASSIVE;
 				NextPassivePosition = transform.position;
 				UpdatePassivePoint();
 				OnStateChanged?.Invoke(_aiState);

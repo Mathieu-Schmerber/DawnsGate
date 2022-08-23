@@ -1,4 +1,5 @@
-﻿using Game.Entities.Shared;
+﻿using Game.Entities.AI;
+using Game.Entities.Shared;
 using Game.Managers;
 using Game.Systems.Run.GPE;
 using Nawlian.Lib.Extensions;
@@ -48,7 +49,7 @@ namespace Game.Systems.Run.Rooms.Events
 			for (int i = 0; i < number; i++)
 			{
 				if (!Cleared)
-					SpawnEnemy();
+					SpawnEnemy().GetComponent<EnemyAI>().ForceAggressivity();
 				yield return new WaitForSeconds(delay);
 			}
 			onDone?.Invoke();

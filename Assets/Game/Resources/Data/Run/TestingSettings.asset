@@ -46,12 +46,13 @@ MonoBehaviour:
       - {fileID: 11400000, guid: 2ab2956c780fe294e8e11b7e51036217, type: 2}
       - {fileID: 11400000, guid: ece19d753a3565549b067245e2b9f233, type: 2}
   RoomMoneyReward: {x: 70, y: 90}
+  DefaultRunMoneyGain: {x: 0, y: 0}
   LobbyMoneyPerRoom: {x: 100, y: 120}
   LobbyMoneyRunReward: {x: 500, y: 600}
   LobbyTheme: {fileID: 8300000, guid: f60df34f448dc624293b7303c6043beb, type: 3}
   RunTheme: {fileID: 8300000, guid: 9c443d020dfed0e4ba21352cbb4144bc, type: 3}
   FirstRoom:
-    Type: 0
+    Type: 1
     Reward: 1
   RoomRules:
   - {fileID: 11400000, guid: 79ec421b3049b9c419c735921f2143a6, type: 2}

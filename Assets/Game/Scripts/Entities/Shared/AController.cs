@@ -37,6 +37,7 @@ namespace Game.Entities.Shared
 
 		private Vector3 _lockedAim;
 		private Vector3 _gfxAnchor;
+		private Vector3 _dashPosInit;
 
 		protected CapsuleCollider _collider;
 		protected EntityIdentity _entity;
@@ -111,6 +112,14 @@ namespace Game.Entities.Shared
 			Move();
 		}
 
+		protected virtual void FixedUpdate()
+		{
+			if (State != EntityState.DASH)
+				return;
+			else if (Vector3.Distance(_rb.position, _dashPosInit) > _currentDash.Value.Distance)
+				CancelDash();
+		}
+
 		#endregion
 
 		/// <summary>
@@ -175,13 +184,23 @@ namespace Game.Entities.Shared
 			Awaiter.WaitAndExecute(duration, () => State = EntityState.IDLE);
 		}
 
+		public void CancelDash()
+		{
+			if (State != EntityState.DASH)
+				return;
+			_rb.velocity = Vector3.zero;
+			State = EntityState.IDLE;
+			_currentDash = null;
+		}
+
 		public void Dash(DashParameters parameters)
 		{
-			if (parameters.Distance == 0)
+			if (parameters.Distance == 0 || State == EntityState.DASH)
 				return;
 
 			_currentDash = parameters;
 			OnDashStarted?.Invoke(parameters);
+			_dashPosInit = _rb.position;
 			if (parameters.ChangeVulnerabilityState)
 				_entity.SetInvulnerable(parameters.Time); // Invulnerable during dash
 

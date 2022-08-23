@@ -35,7 +35,7 @@ namespace Game.Systems.Run.Rooms
 
 		protected override void OnActivate() => StartCoroutine(SpawnWave());
 
-		protected void SpawnEnemy()
+		protected GameObject SpawnEnemy()
 		{
 			GameObject enemy = _settings.Enemies.Random();
 			Vector3 spawnPos = Info.Data.SpawnablePositions.Random();
@@ -43,6 +43,7 @@ namespace Game.Systems.Run.Rooms
 
 			ScaleEnemyStats(instance.GetComponent<EntityIdentity>());
 			_wave.Add(instance);
+			return instance;
 		}
 
 		public void ScaleEnemyStats(EntityIdentity enemy)
