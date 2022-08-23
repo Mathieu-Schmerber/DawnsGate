@@ -32,7 +32,7 @@ namespace Game.Entities.Shared
 		#region Properties
 
 		[SerializeField] private float _rotationSpeed = 6f;
-		[SerializeField] private LayerMask _wallLayer;
+		[SerializeField] protected LayerMask _wallLayer;
 		[SerializeField] private bool _activeDashCheck;
 
 		private Vector3 _lockedAim;

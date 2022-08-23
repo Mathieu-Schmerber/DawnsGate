@@ -86,12 +86,22 @@ namespace Game.Entities.Player
 			if (CanDash)
 			{
 				Vector3 direction = GetMovementNormal().magnitude > 0 ? GetMovementNormal() : GetAimNormal();
+				float distance = GetDistanceToWall(direction, _entity.CurrentDashRange);
 
+				if (distance < .6f)
+					return;
 				_dashFx.Play(true);
-				Dash(direction, _entity.CurrentDashRange, _dashTime, false, true);
+				Dash(direction, distance, _dashTime, false, true);
 				_dashTimer.Interval = _entity.CurrentDashCooldown;
 				_dashTimer.Restart();
 			}
+		}
+
+		private float GetDistanceToWall(Vector3 direction, float currentDashRange)
+		{
+			if (Physics.Raycast(transform.position, direction, out RaycastHit hit, currentDashRange, _wallLayer))
+				return Vector3.Distance(transform.position, hit.point.WithY(transform.position.y)) - _collider.radius; // substrating capsule radius to not touch the wall
+			return currentDashRange;
 		}
 
 		public void SetAnimatorState(string state, bool value) => _gfxAnim.SetBool(state, value);
