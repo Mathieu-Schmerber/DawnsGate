@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23ec327d7ac9f094db26d3973055ee7e, type: 3}
   m_Name: Tank
   m_EditorClassIdentifier: 
+  DisplayName: Tank
   StartHealth: 70
   MovementSpeed: 3
   DashRange: 12
@@ -49,7 +50,7 @@ MonoBehaviour:
     - _baseModifier: 100
       BonusModifier: 0
       TemporaryModifier: 0
-    - _baseModifier: 0
+    - _baseModifier: 100
       BonusModifier: 0
       TemporaryModifier: 0
     - _baseModifier: 100
