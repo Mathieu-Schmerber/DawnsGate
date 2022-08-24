@@ -48,6 +48,7 @@ namespace Game.Entities.AI.Tank
 			base.Init(data);
 			_stats = _entity.Stats as TankStatData;
 			_isDefending = false;
+			_basicAttack.gameObject.SetActive(false);
 		}
 
 		protected override void OnInitState() => _spawnFx.PlaySpawnFX(() => base.OnInitState());
