@@ -32,8 +32,9 @@ namespace Game.Systems.Run.Rooms.Events
 			base.OnClear();
 			foreach (var item in _wave.ToList())
 			{
-				item.GetComponent<EntityIdentity>().SetInvulnerable(false);
-				item.GetComponent<IDamageProcessor>().ApplyPassiveDamage(Mathf.Infinity);
+				//item.GetComponent<EntityIdentity>().SetInvulnerable(false);
+				//item.GetComponent<IDamageProcessor>().ApplyPassiveDamage(Mathf.Infinity);
+				item.GetComponent<EnemyAI>().Release();
 			}
 		}
 
