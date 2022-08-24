@@ -39,16 +39,16 @@ MonoBehaviour:
   Stages:
   - keyData: 03000000
     valueData:
-    - _baseModifier: 40
+    - _baseModifier: 30
+      BonusModifier: 0
+      TemporaryModifier: 0
+  - keyData: 03000000
+    valueData:
+    - _baseModifier: 45
       BonusModifier: 0
       TemporaryModifier: 0
   - keyData: 03000000
     valueData:
     - _baseModifier: 60
-      BonusModifier: 0
-      TemporaryModifier: 0
-  - keyData: 03000000
-    valueData:
-    - _baseModifier: 80
       BonusModifier: 0
       TemporaryModifier: 0
