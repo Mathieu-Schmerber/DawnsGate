@@ -112,7 +112,7 @@ namespace Game.Entities.AI.Dealer
 			string format = string.Format("{0:n0}", _deal.MoneyAmount);
 
 			if (!CanDeal())
-				return "Try to hide that you have no item to sell.";
+				return _dealType == RoomRewardType.GOLD ? "Try to hide that you have no gold to spend." : "Try to hide that you have no item to sell.";
 			switch (_dealType)
 			{
 				case RoomRewardType.GOLD:
