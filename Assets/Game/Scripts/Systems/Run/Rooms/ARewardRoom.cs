@@ -15,7 +15,7 @@ namespace Game.Systems.Run.Rooms
 			SpawnReward();
 		}
 
-		private void RewardWithGold(Vector2Int amountRange)
+		protected void RewardWithGold(Vector2Int amountRange)
 		{
 			int money = UnityEngine.Random.Range(amountRange.x, amountRange.y + 1);
 			GameManager.RewardWithRunMoney(money);
@@ -32,7 +32,6 @@ namespace Game.Systems.Run.Rooms
 					var inventory = _player.GetComponent<Inventory>();
 					var item = Databases.Database.Data.Item.All<ItemBaseData>().Where(x => !x.IsLifeItem && !inventory.HasEquipped(x)).Random();
 					LootedItem.Create(Info.GetClosestPosition(Info.Data.RoomCenter), new ItemSummary() { Data = item, Quality = 0 }, Vector3.zero);
-					RewardWithGold(RunManager.RunSettings.DefaultRunMoneyGain);
 					break;
 				default:
 					break;

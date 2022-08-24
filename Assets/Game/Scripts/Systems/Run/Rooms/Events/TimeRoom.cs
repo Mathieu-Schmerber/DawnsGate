@@ -58,7 +58,7 @@ namespace Game.Systems.Run.Rooms.Events
 
 		public override void OnEnemyKilled(GameObject gameObject)
 		{
-
+			RewardWithGold(RunManager.RunSettings.RunMoneyPerKill);
 		}
 	}
 }

@@ -71,6 +71,7 @@ namespace Game.Systems.Run.Rooms
 
 		public virtual void OnEnemyKilled(GameObject gameObject)
 		{
+			RewardWithGold(RunManager.RunSettings.RunMoneyPerKill);
 			_wave.Remove(gameObject);
 			if (_wave.Count == 0 && _currentWave < _waveNumber)
 				StartCoroutine(SpawnWave());
