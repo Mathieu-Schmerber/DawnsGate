@@ -6219,6 +6219,10 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   _rotationSpeed: 6
+  _wallLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  _activeDashCheck: 0
   _wallMask:
     serializedVersion: 2
     m_Bits: 1
@@ -6466,9 +6470,9 @@ SkinnedMeshRenderer:
   m_Materials:
   - {fileID: 2100000, guid: 5f5ed5fd810d2864082d1f1ef1f5140f, type: 2}
   - {fileID: 2100000, guid: 5f5ed5fd810d2864082d1f1ef1f5140f, type: 2}
-  - {fileID: 2100000, guid: 60c2592f71354e944b94515aa32c5d07, type: 2}
+  - {fileID: 2100000, guid: a6076d9177c9b084eb2e50581086c73c, type: 2}
   - {fileID: 2100000, guid: 5f5ed5fd810d2864082d1f1ef1f5140f, type: 2}
-  - {fileID: 2100000, guid: 16af6d51f912b924eb0b36e0cf934326, type: 2}
+  - {fileID: 2100000, guid: 0338245d4311d9c4aa26f9d424264e49, type: 2}
   - {fileID: 2100000, guid: 3ec43d141374fe342a4a546323d306ad, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
