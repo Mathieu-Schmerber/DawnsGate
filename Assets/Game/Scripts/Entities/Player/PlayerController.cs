@@ -88,8 +88,8 @@ namespace Game.Entities.Player
 				Vector3 direction = GetMovementNormal().magnitude > 0 ? GetMovementNormal() : GetAimNormal();
 				float distance = GetDistanceToWall(direction, _entity.CurrentDashRange);
 
-				if (distance < .6f)
-					return;
+				//if (distance < .6f)
+				//	return;
 				_dashFx.Play(true);
 				Dash(direction, distance, _dashTime, false, true);
 				_dashTimer.Interval = _entity.CurrentDashCooldown;
@@ -99,7 +99,7 @@ namespace Game.Entities.Player
 
 		private float GetDistanceToWall(Vector3 direction, float currentDashRange)
 		{
-			if (Physics.Raycast(transform.position, direction, out RaycastHit hit, currentDashRange, _wallLayer))
+			if (Physics.Raycast(transform.position + Vector3.up, direction, out RaycastHit hit, currentDashRange, _wallLayer))
 				return Vector3.Distance(transform.position, hit.point.WithY(transform.position.y)) - _collider.radius; // substrating capsule radius to not touch the wall
 			return currentDashRange;
 		}

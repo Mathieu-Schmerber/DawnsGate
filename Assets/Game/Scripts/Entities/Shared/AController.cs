@@ -112,14 +112,6 @@ namespace Game.Entities.Shared
 			Move();
 		}
 
-		protected virtual void FixedUpdate()
-		{
-			if (State != EntityState.DASH)
-				return;
-			else if (Vector3.Distance(_rb.position, _dashPosInit) > _currentDash.Value.Distance)
-				CancelDash();
-		}
-
 		#endregion
 
 		/// <summary>

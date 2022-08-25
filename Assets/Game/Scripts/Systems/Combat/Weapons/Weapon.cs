@@ -146,7 +146,6 @@ namespace Game.Systems.Combat.Weapons
 			attack.OnStart(CurrentWeaponAttack.Attack.StartOffset, CurrentWeaponAttack.Attack.TravelDistance);
 
 			// Locks
-			_controller.CancelDash();
 			_controller.LockAim = CurrentWeaponAttack.Attack.LockAim;
 			_controller.LockMovement = CurrentWeaponAttack.Attack.LockMovement;
 
