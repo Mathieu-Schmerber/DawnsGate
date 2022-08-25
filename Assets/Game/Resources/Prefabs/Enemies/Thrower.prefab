@@ -642,11 +642,11 @@ Cloth:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2889013478364108101}
   m_Enabled: 1
-  m_StretchingStiffness: 0
-  m_BendingStiffness: 0
+  m_StretchingStiffness: 0.2
+  m_BendingStiffness: 0.2
   m_UseTethers: 1
   m_UseGravity: 1
-  m_Damping: 0.5
+  m_Damping: 0.8
   m_ExternalAcceleration: {x: 0, y: 0, z: 0}
   m_RandomAcceleration: {x: 0, y: 0, z: 0}
   m_WorldVelocityScale: 0.5
