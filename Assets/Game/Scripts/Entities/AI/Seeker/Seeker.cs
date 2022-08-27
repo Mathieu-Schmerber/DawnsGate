@@ -37,7 +37,7 @@ namespace Game.Entities.AI.Seeker
 			base.Awake();
 			_spawnFx = GetComponentInChildren<AEnemySpawnFX>();
 		}
-		protected override void OnInitState() => _spawnFx.PlaySpawnFX(() => base.OnInitState());
+		//protected override void OnInitState() => _spawnFx?.PlaySpawnFX(() => base.OnInitState());
 
 		#region Movement
 
