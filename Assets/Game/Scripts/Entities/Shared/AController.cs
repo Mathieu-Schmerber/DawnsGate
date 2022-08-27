@@ -178,8 +178,8 @@ namespace Game.Entities.Shared
 
 		public void CancelDash()
 		{
-			if (State != EntityState.DASH)
-				return;
+			//if (State != EntityState.DASH)
+			//	return;
 			_rb.velocity = Vector3.zero;
 			State = EntityState.IDLE;
 			_currentDash = null;
@@ -189,7 +189,6 @@ namespace Game.Entities.Shared
 		{
 			if (parameters.Distance == 0 || State == EntityState.DASH)
 				return;
-
 			_currentDash = parameters;
 			OnDashStarted?.Invoke(parameters);
 			_dashPosInit = _rb.position;
@@ -204,12 +203,7 @@ namespace Game.Entities.Shared
 				State = EntityState.DASH;
 				Awaiter.WaitAndExecute(parameters.Time, () =>
 				{
-					if (State == EntityState.DASH)
-					{
-						_rb.velocity = Vector3.zero;
-						State = EntityState.IDLE;
-						_currentDash = null;
-					}
+					CancelDash();
 				});
 			}
 			else

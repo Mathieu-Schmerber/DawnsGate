@@ -88,8 +88,6 @@ namespace Game.Entities.Player
 				Vector3 direction = GetMovementNormal().magnitude > 0 ? GetMovementNormal() : GetAimNormal();
 				float distance = GetDistanceToWall(direction, _entity.CurrentDashRange);
 
-				//if (distance < .6f)
-				//	return;
 				_dashFx.Play(true);
 				Dash(direction, distance, _dashTime, false, true);
 				_dashTimer.Interval = _entity.CurrentDashCooldown;
