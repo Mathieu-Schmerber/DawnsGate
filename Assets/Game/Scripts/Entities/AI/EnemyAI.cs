@@ -99,6 +99,7 @@ namespace Game.Entities.AI
 			// Clear old state logic, since we pulled this from the pool
 			OnAttackEnd();
 			ResetStates();
+			_gfxAnim.Play("Idle");
 
 			// Init polished state
 			_entity.SetInvulnerable(true);
@@ -157,12 +158,16 @@ namespace Game.Entities.AI
 
 		protected override Vector3 GetMovementsInputs()
 		{
-			if (UsesPathfinding)
+			if (UsesPathfinding && _room?.Info != null)
 			{
 				if (_path.status != NavMeshPathStatus.PathInvalid)
 					return (_path.corners[_pathPointIndex] - transform.position).normalized;
 				else
-					return (_room.Info.GetPositionsAround(transform.position, 5).FirstOrDefault() - transform.position).normalized;
+				{
+					Vector3[] points = _room.Info.GetPositionsAround(transform.position, 5);
+
+					return ((points?.Length == 0 ? transform.position : points[0]) - transform.position).normalized;
+				}
 			}
 			return Vector3.zero;
 		}

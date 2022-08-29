@@ -46,7 +46,8 @@ namespace Game.VFX
 				Tween.ShaderFloat(renderer.material, _exposedShaderSliderValue, end, _duration, 0, 
 					completeCallback: () => renderer.material.shader = defaultSh);
 			}
-			_source.PlayOneShot(_audio);
+			if (_audio)
+				_source.PlayOneShot(_audio);
 			Awaiter.WaitAndExecute(_duration, onCompleted);
 		}
 	}
