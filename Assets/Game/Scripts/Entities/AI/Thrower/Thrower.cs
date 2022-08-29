@@ -38,8 +38,6 @@ namespace Game.Entities.AI.Thrower
 			_spawnFx = GetComponentInChildren<AMaterialFx>();
 		}
 
-		protected override void OnInitState() => _spawnFx.PlaySpawnFX(() => base.OnInitState());
-
 		protected override void ResetStates()
 		{
 			base.ResetStates();
