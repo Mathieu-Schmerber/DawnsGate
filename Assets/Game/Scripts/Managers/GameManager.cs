@@ -49,20 +49,22 @@ namespace Game.Managers
 			BootInit();
 		}
 
-#if UNITY_EDITOR
 		private void Start()
 		{
+			SaveSystem.Load();
+#if UNITY_EDITOR
 			if (!SceneManager.GetSceneByName("Main Menu").IsValid())
 				StartGameFromEditor();
+#endif
 		}
 
+#if UNITY_EDITOR
 		public static void StartGameFromEditor()
 		{
 			GuiManager.DisplayGameplayUI();
 			Instance._switcher.SwitchGameplayResources(true);
 			RunManager.ArtificiallyLaunchScene();
 		}
-
 #endif
 
 		private void BootInit() => _switcher.SwitchGameplayResources(false);

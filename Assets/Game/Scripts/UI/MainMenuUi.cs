@@ -60,7 +60,6 @@ namespace Game.UI
 
 		private void QuitGame()
 		{
-			SaveSystem.Save();
 			Application.Quit();
 		}
 

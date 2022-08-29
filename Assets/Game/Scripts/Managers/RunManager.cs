@@ -70,7 +70,6 @@ namespace Game.Managers
 		public static void StartNewRun()
 		{
 			OnRunStarted?.Invoke();
-			SaveSystem.Save();
 			AudioManager.PlayTheme(RunSettings.RunTheme);
 			CurrentRoomInstance = null;
 			Instance.ReachedRooms.Clear();
@@ -105,7 +104,6 @@ namespace Game.Managers
 		public static void EndRun()
 		{
 			ChangeScene(RunSettings.LobbySceneName);
-			SaveSystem.Save();
 			OnLobbyEntered(); // <= Maybe call this when the scene has been loaded ?
 			OnRunEnded?.Invoke();
 		}
@@ -118,7 +116,6 @@ namespace Game.Managers
 		{
 			Instance._runState = RunState.LOBBY;
 			AudioManager.PlayTheme(RunSettings.LobbyTheme);
-			SaveSystem.Load();
 		}
 
 		private static string GetRandomRoomScene(RoomType type)
@@ -168,7 +165,8 @@ namespace Game.Managers
 #if UNITY_EDITOR
 		public static void ArtificiallyLaunchScene()
 		{
-			AudioManager.PlayTheme(RunSettings.LobbyTheme);
+			if (SceneManager.GetSceneByName(RunSettings.LobbySceneName).IsValid())
+				OnLobbyEntered();
 			OnBeforeSceneSwitched?.Invoke();
 			OnSceneSwitched?.Invoke();
 		}
