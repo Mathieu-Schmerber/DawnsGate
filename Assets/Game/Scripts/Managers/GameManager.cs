@@ -262,6 +262,8 @@ namespace Game.Managers
 			};
 		}
 
+		private void OnApplicationQuit() => SaveSystem.Save();
+
 		#endregion
 	}
 }
