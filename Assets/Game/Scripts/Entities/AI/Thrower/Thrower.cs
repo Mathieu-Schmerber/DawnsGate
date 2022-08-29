@@ -70,7 +70,8 @@ namespace Game.Entities.AI.Thrower
 			if (aroundPos?.Length == 0)
 				return _room.Info.Data.SpawnablePositions.Random();
 
-			return aroundPos.Where(x => !PathIsDangerous(x)).Random();
+			var poses = aroundPos.Where(x => !PathIsDangerous(x));
+			return poses.Count() == 0 ? _room.Info.Data.SpawnablePositions.Random() : poses.Random();
 		}
 
 		#endregion

@@ -106,7 +106,7 @@ namespace Game.Entities.Player
 				GameManager.Camera.LockTemporaryTarget(transform, 0.7f);
 				_controller.Restrict();
 				_controller.SetAnimatorState("IsDead", true);
-				yield return new WaitForSeconds(5f);
+				yield return new WaitForSeconds(4f);
 				onDone();
 			}
 			StartCoroutine(AnimateGameOver(() => RunManager.EndRun()));
