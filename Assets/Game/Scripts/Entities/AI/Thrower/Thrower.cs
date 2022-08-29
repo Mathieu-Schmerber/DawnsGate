@@ -23,7 +23,7 @@ namespace Game.Entities.AI.Thrower
 		private ThrowerStatData _stats;
 		private NavMeshPath _previsionPath;
 		private Vector3 _lastHitPos;
-		private AEnemySpawnFX _spawnFx;
+		private AMaterialFx _spawnFx;
 
 		protected override void Init(object data)
 		{
@@ -35,7 +35,7 @@ namespace Game.Entities.AI.Thrower
 		{
 			base.Awake();
 			_previsionPath = new();
-			_spawnFx = GetComponentInChildren<AEnemySpawnFX>();
+			_spawnFx = GetComponentInChildren<AMaterialFx>();
 		}
 
 		protected override void OnInitState() => _spawnFx.PlaySpawnFX(() => base.OnInitState());

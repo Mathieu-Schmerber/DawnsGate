@@ -21,13 +21,6 @@ namespace Game.Entities.AI.Tank
 		private TankStatData _stats;
 		private AnimatorStateInfo _currentState;
 		private float _restTime = 1f;
-		private AEnemySpawnFX _spawnFx;
-
-		protected override void Awake()
-		{
-			base.Awake();
-			_spawnFx = GetComponentInChildren<AEnemySpawnFX>();
-		}
 
 		protected override void OnEnable()
 		{
@@ -50,8 +43,6 @@ namespace Game.Entities.AI.Tank
 			_isDefending = false;
 			_basicAttack.gameObject.SetActive(false);
 		}
-
-		protected override void OnInitState() => _spawnFx.PlaySpawnFX(() => base.OnInitState());
 
 		#region Movement
 

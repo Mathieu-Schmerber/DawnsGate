@@ -2,6 +2,7 @@
 using Game.Entities.Shared.Health;
 using Game.Managers;
 using Game.Systems.Run.Rooms;
+using Game.VFX;
 using Nawlian.Lib.Extensions;
 using Nawlian.Lib.Systems.Pooling;
 using Nawlian.Lib.Utils;
@@ -22,11 +23,14 @@ namespace Game.Entities.AI
 	[RequireComponent(typeof(Damageable))]
 	public abstract class EnemyAI : AController, IPoolableObject
 	{
+		protected const string ANIMATOR_DEATH_BOOL = "IsDead";
+
 		protected CombatRoom _room;
 		protected NavMeshPath _path;
 		protected EnemyState _aiState;
 		protected Damageable _damageable;
 		protected EnemyStatData _aiSettings;
+		protected AMaterialFx _spawnDeathFx;
 		protected float _lastAttackTime;
 
 		private int _pathPointIndex;
@@ -34,6 +38,7 @@ namespace Game.Entities.AI
 		private Vector3 _nextPatrolPosition;
 		private Vector3 _nextAggressivePosition;
 		private Vector3 _cachedDestination;
+		private Canvas _canvas;
 
 		protected abstract bool UsesPathfinding { get; }
 		protected Vector3 NextPassivePosition { get => _nextPatrolPosition.WithY(transform.position.y); set => _nextPatrolPosition = value; }
@@ -98,14 +103,20 @@ namespace Game.Entities.AI
 			// Init polished state
 			_entity.SetInvulnerable(true);
 			State = EntityState.STUN;
-			OnInitState();
+			if (_spawnDeathFx)
+				_spawnDeathFx.PlaySpawnFX(OnInitState);
+			else
+				OnInitState();
+			_canvas.enabled = true;
 		}
 
 		protected override void Awake()
 		{
 			base.Awake();
+			_canvas = GetComponentInChildren<Canvas>();
 			_path = new();
 			_damageable = GetComponent<Damageable>();
+			_spawnDeathFx = GetComponentInChildren<AMaterialFx>();
 		}
 
 		protected virtual void OnEnable()
@@ -120,6 +131,8 @@ namespace Game.Entities.AI
 
 		protected override void Update()
 		{
+			if (_gfxAnim.GetBool(ANIMATOR_DEATH_BOOL))
+				return;
 			if (GameManager.Player.GetAnimatorState("IsDead"))
 				return;
 
@@ -251,6 +264,7 @@ namespace Game.Entities.AI
 			State = Shared.EntityState.IDLE;
 			LockAim = false;
 			LockMovement = false;
+			_gfxAnim.SetBool(ANIMATOR_DEATH_BOOL, false);
 			UnlockTarget();
 		}
 
@@ -306,8 +320,15 @@ namespace Game.Entities.AI
 		{
 			if (damageable == _damageable)
 			{
+				_canvas.enabled = false;
 				_room.OnEnemyKilled(gameObject);
-				Release();
+				ResetStates();
+				_gfxAnim.SetBool(ANIMATOR_DEATH_BOOL, true);
+				State = EntityState.STUN;
+				if (_spawnDeathFx)
+					Awaiter.WaitAndExecute(1f, () => _spawnDeathFx.PlayDeathFX(() => Release()));
+				else
+					Release();
 			}
 		}
 	}

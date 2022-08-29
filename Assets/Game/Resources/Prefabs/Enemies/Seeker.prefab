@@ -34150,6 +34150,7 @@ GameObject:
   - component: {fileID: 4844548713350793365}
   - component: {fileID: 130950331416712062}
   - component: {fileID: 7801357095582883200}
+  - component: {fileID: 3832318632762350133}
   m_Layer: 7
   m_Name: GFX
   m_TagString: Untagged
@@ -34308,6 +34309,33 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &3832318632762350133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7310629612046420550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c487eabffbbc3745b2d2fb9ec79e051, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  _shader: {fileID: -6465566751694194690, guid: 2c6e52535f17dfc4b8e0bb3d1e91aea4,
+    type: 3}
+  _exposedShaderSliderValue: _Dissolve
+  _duration: 1
+  _startToEndValues: {x: 1, y: 0}
+  _audio: {fileID: 0}
 --- !u!1 &7538132102015118881
 GameObject:
   m_ObjectHideFlags: 0

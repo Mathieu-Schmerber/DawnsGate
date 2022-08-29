@@ -81,6 +81,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c487eabffbbc3745b2d2fb9ec79e051, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  _shader: {fileID: -6465566751694194690, guid: 2c6e52535f17dfc4b8e0bb3d1e91aea4,
+    type: 3}
   _exposedShaderSliderValue: _Dissolve
   _duration: 1
   _startToEndValues: {x: 1, y: 0}
@@ -646,7 +657,7 @@ Cloth:
   m_BendingStiffness: 0.2
   m_UseTethers: 1
   m_UseGravity: 1
-  m_Damping: 0.8
+  m_Damping: 0.5
   m_ExternalAcceleration: {x: 0, y: 0, z: 0}
   m_RandomAcceleration: {x: 0, y: 0, z: 0}
   m_WorldVelocityScale: 0.5

@@ -24,20 +24,12 @@ namespace Game.Entities.AI.Seeker
 		private SeekerStatData _stats;
 		private Vector3? _sinPos;
 		private bool _startDamageCheck = false;
-		private AEnemySpawnFX _spawnFx;
 
 		protected override void Init(object data)
 		{
 			base.Init(data);
 			_stats = _entity.Stats as SeekerStatData;
 		}
-
-		protected override void Awake()
-		{
-			base.Awake();
-			_spawnFx = GetComponentInChildren<AEnemySpawnFX>();
-		}
-		//protected override void OnInitState() => _spawnFx?.PlaySpawnFX(() => base.OnInitState());
 
 		#region Movement
 
@@ -54,6 +46,8 @@ namespace Game.Entities.AI.Seeker
 
 		protected override void Update()
 		{
+			if (_gfxAnim.GetBool(ANIMATOR_DEATH_BOOL))
+				return;
 			GenerateSinPath();
 			if (_startDamageCheck)
 				ApplyDashDamage();
