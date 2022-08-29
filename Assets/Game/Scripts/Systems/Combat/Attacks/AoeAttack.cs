@@ -41,6 +41,7 @@ namespace Game.Systems.Combat.Attacks
 
 			_particleSystem.Play(true);
 			_source.PlayOneShot(_attackData.IdleAudio);
+			_isOff = false;
 		}
 
 		protected override void OnReleasing()

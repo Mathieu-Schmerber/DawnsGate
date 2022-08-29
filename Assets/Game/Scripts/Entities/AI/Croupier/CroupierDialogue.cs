@@ -132,7 +132,7 @@ namespace Game.Entities.AI.Croupier
 				$"<sprite=\"{_currentReward.ItemBet.Details.Graphics.name}\" index=0>" +
 				$"{string.Concat(Enumerable.Repeat("<sprite=\"star\" index=0>", _currentReward.ItemBet.Quality + 1))}";
 			}
-			return "Bet nothing";
+			return "You have no item to bet";
 		}
 
 		private string GetMoneyBetChoiceText()
