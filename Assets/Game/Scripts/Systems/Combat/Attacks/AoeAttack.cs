@@ -24,6 +24,8 @@ namespace Game.Systems.Combat.Attacks
 
 		private ParticleSystem _particleSystem;
 		private AudioSource _source;
+		private ParticleSystem[] _pss;
+		private bool _isOff = false;
 
 		public override void Init(object data)
 		{
@@ -49,6 +51,7 @@ namespace Game.Systems.Combat.Attacks
 
 		private void Awake()
 		{
+			_pss = GetComponentsInChildren<ParticleSystem>(true);
 			_source = GetComponent<AudioSource>();
 			_particleSystem = GetComponentInChildren<ParticleSystem>();
 		}
@@ -63,13 +66,27 @@ namespace Game.Systems.Combat.Attacks
 
 		private void Update()
 		{
+			if (_isOff)
+				return;
 			if (Time.time - _startTime >= _attackData.ActiveTime)
+				SmoothRelease();
+		}
+
+		private void SmoothRelease()
+		{
+			_isOff = true;
+			if (_pss?.Length > 0)
+			{
+				float time = _pss.Max(x => x.main.startLifetime.constantMax) + _pss.Max(x => x.main.startDelay.constantMax);
+				Invoke(nameof(Release), time);
+			}
+			else
 				Release();
 		}
 
 		public override void OnAttackHit(Collider collider)
 		{
-			if (collider.gameObject.layer == Caster.gameObject.layer)
+			if (collider.gameObject.layer == Caster.gameObject.layer || _isOff)
 				return;
 			else if (Time.time - _startTime <= 0.1f && !_hitColliders.Contains(collider))
 			{

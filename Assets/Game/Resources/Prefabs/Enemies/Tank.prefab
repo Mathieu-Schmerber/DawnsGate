@@ -793,7 +793,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 1.01
+  m_Radius: 1.19
   m_Height: 3.8169916
   m_Direction: 1
   m_Center: {x: 0, y: 1.9084958, z: 0.007968962}
@@ -1965,7 +1965,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7383286486518360351
 Transform:
   m_ObjectHideFlags: 0
@@ -1989,13 +1989,13 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7383286486518360322}
   serializedVersion: 8
-  lengthInSec: 0.6
+  lengthInSec: 0.37
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
-  emitterVelocityMode: 0
+  emitterVelocityMode: 1
   looping: 0
   prewarm: 0
   playOnAwake: 1
@@ -2054,7 +2054,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 0
+  moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: 0
@@ -2064,7 +2064,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.6
+      scalar: 0.37
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -2392,7 +2392,7 @@ ParticleSystem:
     startRotationX:
       serializedVersion: 2
       minMaxState: 0
-      scalar: -1.5707963
+      scalar: 1.5707963
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -3320,32 +3320,32 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 1, g: 0, b: 0, a: 0}
-        key1: {r: 1, g: 0.28636205, b: 0, a: 0.48235294}
-        key2: {r: 0, g: 0, b: 0, a: 0.48235294}
+        key0: {r: 1, g: 1, b: 1, a: 1}
+        key1: {r: 1, g: 0, b: 0, a: 0.6745098}
+        key2: {r: 1, g: 0.6132481, b: 0, a: 0.827451}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
         key5: {r: 0, g: 0, b: 0, a: 0}
         key6: {r: 0, g: 0, b: 0, a: 0}
         key7: {r: 0, g: 0, b: 0, a: 0}
         ctime0: 0
-        ctime1: 65535
-        ctime2: 0
+        ctime1: 37008
+        ctime2: 65535
         ctime3: 0
         ctime4: 0
         ctime5: 0
         ctime6: 0
         ctime7: 0
         atime0: 0
-        atime1: 15227
-        atime2: 41056
+        atime1: 13878
+        atime2: 47224
         atime3: 65535
         atime4: 0
         atime5: 0
         atime6: 0
         atime7: 0
         m_Mode: 0
-        m_NumColorKeys: 2
+        m_NumColorKeys: 3
         m_NumAlphaKeys: 4
       minGradient:
         serializedVersion: 2
@@ -3379,7 +3379,7 @@ ParticleSystem:
   UVModule:
     serializedVersion: 2
     enabled: 1
-    mode: 0
+    mode: 1
     timeMode: 0
     fps: 30
     frameOverTime:
@@ -3489,28 +3489,15 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     speedRange: {x: 0, y: 1}
-    tilesX: 3
-    tilesY: 3
+    tilesX: 1
+    tilesY: 1
     animationType: 0
     rowIndex: 0
     cycles: 1
     uvChannelMask: -1
     rowMode: 1
     sprites:
-    - sprite: {fileID: 4176362632249098406, guid: 96ca527f15b6635468ba2cc75050e65f,
-        type: 3}
-    - sprite: {fileID: -3696019449777573715, guid: 96ca527f15b6635468ba2cc75050e65f,
-        type: 3}
-    - sprite: {fileID: 6099374761294450104, guid: 96ca527f15b6635468ba2cc75050e65f,
-        type: 3}
-    - sprite: {fileID: -1817706105750108133, guid: 96ca527f15b6635468ba2cc75050e65f,
-        type: 3}
-    - sprite: {fileID: -1305193885933302247, guid: 96ca527f15b6635468ba2cc75050e65f,
-        type: 3}
-    - sprite: {fileID: 6922725289032308390, guid: 96ca527f15b6635468ba2cc75050e65f,
-        type: 3}
-    - sprite: {fileID: -4407079611941592608, guid: 96ca527f15b6635468ba2cc75050e65f,
-        type: 3}
+    - sprite: {fileID: 21300000, guid: d0ddf8f6f5836bd42a91b287488ef5c5, type: 3}
     flipU: 0
     flipV: 0
   VelocityModule:
@@ -6821,7 +6808,7 @@ ParticleSystemRenderer:
   m_SortingFudge: 0
   m_NormalDirection: 1
   m_ShadowBias: 0
-  m_RenderAlignment: 2
+  m_RenderAlignment: 1
   m_Pivot: {x: 0, y: 0, z: 0}
   m_Flip: {x: 0, y: 0, z: 0}
   m_UseCustomVertexStreams: 0
@@ -7579,60 +7566,12 @@ MonoBehaviour:
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects:
-    - {fileID: -3172835386652333677, guid: c94014821db01464483bd97fffbb01ed, type: 3}
-    - {fileID: -3172835386652333677, guid: 8290fbf1b007f9949a2255b4afbcf22d, type: 3}
-    - {fileID: 2100000, guid: bb7ea34f26b311c458d06c0f9d2b7af0, type: 2}
-    - {fileID: 2100000, guid: 7830c14a12bae8041b90ace9ef1e8457, type: 2}
+    ReferencedUnityObjects: []
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes:
-    - Name: _effetMaterialPairs
-      Entry: 7
-      Data: 0|System.Collections.Generic.Dictionary`2[[UnityEngine.Material, UnityEngine.CoreModule],[UnityEngine.Material,
-        UnityEngine.CoreModule]], mscorlib
-    - Name: comparer
-      Entry: 7
-      Data: 1|System.Collections.Generic.ObjectEqualityComparer`1[[UnityEngine.Material,
-        UnityEngine.CoreModule]], mscorlib
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 12
-      Data: 2
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 10
-      Data: 0
-    - Name: $v
-      Entry: 10
-      Data: 1
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 10
-      Data: 2
-    - Name: $v
-      Entry: 10
-      Data: 3
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
+    SerializationNodes: []
   _shader: {fileID: -6465566751694194690, guid: 2c6e52535f17dfc4b8e0bb3d1e91aea4,
     type: 3}
   _exposedShaderSliderValue: _Dissolve
