@@ -162,7 +162,7 @@ namespace Game.Entities.AI
 				if (_path.status != NavMeshPathStatus.PathInvalid)
 					return (_path.corners[_pathPointIndex] - transform.position).normalized;
 				else
-					return (_room.Info.GetPositionsAround(transform.position, 5).First() - transform.position).normalized;
+					return (_room.Info.GetPositionsAround(transform.position, 5).FirstOrDefault() - transform.position).normalized;
 			}
 			return Vector3.zero;
 		}

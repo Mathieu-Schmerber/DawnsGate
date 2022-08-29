@@ -50,6 +50,8 @@ namespace Game.Entities.AI.Tank
 
 		protected override Vector3 GetMovementsInputs()
 		{
+			if (_stats == null)
+				return base.GetMovementsInputs();
 			if (Vector3.Distance(transform.position, GameManager.Player.transform.position) < (_stats.AttackRange / 2f))
 				return Vector3.zero;
 			return base.GetMovementsInputs();
