@@ -11,13 +11,12 @@ namespace Game.VFX
 		[SerializeField] private Material _highlight;
 		[SerializeField] private float _highlightTime;
 
-		private Material[] _baseMaterials;
-		private Renderer _renderer;
+		private Dictionary<Renderer, Material[]> _baseMaterials = new();
 		private Damageable _damageable;
 
 		private void OnEnable()
 		{
-			_renderer.materials = _baseMaterials;
+			RestoreMaterials();
 			_damageable.OnDamaged += OnDamageDealt;
 		}
 
@@ -28,19 +27,38 @@ namespace Game.VFX
 
 		private void Awake()
 		{
-			_renderer = GetComponentInChildren<Renderer>();
 			_damageable = GetComponent<Damageable>();
-			_baseMaterials = _renderer.materials;
+			CacheRenderers();
+		}
+
+		private void CacheRenderers()
+		{
+			foreach (Renderer item in GetComponentsInChildren<Renderer>())
+				_baseMaterials.Add(item, item.materials);
+		}
+
+		private void RestoreMaterials()
+		{
+			foreach (Renderer item in _baseMaterials.Keys)
+				item.materials = _baseMaterials[item];
+		}
+
+		private void AffectHighlight()
+		{
+			foreach (Renderer item in _baseMaterials.Keys)
+			{
+				Material[] highlight = item.materials;
+				for (int i = 0; i < highlight.Length; i++)
+					highlight[i] = _highlight;
+				item.materials = highlight;
+			}
 		}
 
 		private IEnumerator Highlight()
 		{
-			Material[] highlightMaterials = _renderer.materials;
-			for (int i = 0; i < highlightMaterials.Length; i++)
-				highlightMaterials[i] = _highlight;
-			_renderer.materials = highlightMaterials;
+			AffectHighlight();
 			yield return new WaitForSeconds(_highlightTime);
-			_renderer.materials = _baseMaterials;
+			RestoreMaterials();
 		}
 
 		public void OnDamageDealt(float damage)
