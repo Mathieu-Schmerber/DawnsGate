@@ -11,3 +11,5 @@ If you are looking to install and lauch the game, please download and execute th
 
 ## Submission requirements
 A short trailer for the game can be found: [Dawns Gate Trailer on youtube](https://youtu.be/YXl3cXdUzAs).
+This trailer showcases the game in its submission state on Heriot Watt's deadline the 15th of August 2022.
+However, this project received major improvements and polish since then and until the 1st of September 2022.
