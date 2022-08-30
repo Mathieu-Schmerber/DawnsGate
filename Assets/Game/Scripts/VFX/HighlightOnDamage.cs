@@ -34,7 +34,11 @@ namespace Game.VFX
 		private void CacheRenderers()
 		{
 			foreach (Renderer item in GetComponentsInChildren<Renderer>())
+			{
+				if (item is ParticleSystemRenderer || item is UnityEngine.UI.ICanvasElement)
+					continue;
 				_baseMaterials.Add(item, item.materials);
+			}
 		}
 
 		private void RestoreMaterials()
