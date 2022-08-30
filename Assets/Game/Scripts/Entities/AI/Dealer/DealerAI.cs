@@ -13,6 +13,8 @@ namespace Game.Entities.AI.Dealer
 {
 	public class DealerAI : EnemyAI, IAnimationEventListener
 	{
+		protected override bool IsBasicEnemy => false;
+
 		[SerializeField] private Vector3 _defaultRotationNormal;
 		[SerializeField] private LayerMask _wallMask;
 
@@ -123,7 +125,7 @@ namespace Game.Entities.AI.Dealer
 		#region Attacks
 
 		[SerializeField] private ModularAttack _laserInstance;
-		protected override float AttackRange => _stats.DashAttack.AttackRange;
+		protected override float AttackRange => 99999;
 		protected override float AttackCooldown => 1.5f;
 
 		private int _attackNumber;

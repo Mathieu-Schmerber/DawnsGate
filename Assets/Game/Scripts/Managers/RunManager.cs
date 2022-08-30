@@ -108,6 +108,8 @@ namespace Game.Managers
 			OnRunEnded?.Invoke();
 		}
 
+		public static void InvokeEndRun() => OnRunEnded?.Invoke();
+
 		#endregion
 
 		#region Scene management

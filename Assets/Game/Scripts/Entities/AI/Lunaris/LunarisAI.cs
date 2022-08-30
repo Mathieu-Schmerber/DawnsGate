@@ -17,6 +17,8 @@ namespace Game.Entities.AI.Lunaris
 {
 	public class LunarisAI : EnemyAI, IAnimationEventListener
 	{
+		protected override bool IsBasicEnemy => false;
+
 		[SerializeField] private LayerMask _wallMask;
 		[SerializeField] private MeshFilter _weaponMesh;
 		[SerializeField] private MeshRenderer _weaponRenderer;

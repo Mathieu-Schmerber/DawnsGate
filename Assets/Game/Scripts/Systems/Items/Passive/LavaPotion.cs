@@ -30,6 +30,8 @@ namespace Game.Systems.Items.Passive
 
 		private void OnTick()
 		{
+			if (_entity == null)
+				return;
 			ObjectPooler.Get(_data.SpawnPrefab, _entity.transform.position, Quaternion.identity, _data.Stages[Quality],
 				(go) => go.GetComponent<Lava>().Caster = _entity);
 		}

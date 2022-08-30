@@ -88,6 +88,7 @@ namespace Game.Managers
 
 		public static void StopGame()
 		{
+			RunManager.InvokeEndRun();
 			SceneManager.LoadScene("Main Menu", LoadSceneMode.Single);
 			SceneManager.LoadScene("_Boot", LoadSceneMode.Additive);
 			SceneManager.LoadScene("_UI", LoadSceneMode.Additive);

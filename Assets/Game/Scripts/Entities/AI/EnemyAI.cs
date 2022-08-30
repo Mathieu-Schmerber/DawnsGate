@@ -49,6 +49,7 @@ namespace Game.Entities.AI
 		#region Settings
 
 		protected virtual float AttackRange => _aiSettings.AttackRange;
+		protected virtual bool IsBasicEnemy => true;
 
 		public void ForceAggressivity()
 		{
@@ -99,7 +100,9 @@ namespace Game.Entities.AI
 			// Clear old state logic, since we pulled this from the pool
 			OnAttackEnd();
 			ResetStates();
-			_gfxAnim.Play("Idle");
+
+			if (IsBasicEnemy)
+				_gfxAnim.Play("Idle");
 
 			// Init polished state
 			_entity.SetInvulnerable(true);
@@ -108,7 +111,9 @@ namespace Game.Entities.AI
 				_spawnDeathFx.PlaySpawnFX(OnInitState);
 			else
 				OnInitState();
-			_canvas.enabled = true;
+
+			if (_canvas)
+				_canvas.enabled = true;
 		}
 
 		protected override void Awake()
@@ -269,7 +274,8 @@ namespace Game.Entities.AI
 			State = Shared.EntityState.IDLE;
 			LockAim = false;
 			LockMovement = false;
-			_gfxAnim.SetBool(ANIMATOR_DEATH_BOOL, false);
+			if (IsBasicEnemy)
+				_gfxAnim.SetBool(ANIMATOR_DEATH_BOOL, false);
 			UnlockTarget();
 		}
 
@@ -325,15 +331,20 @@ namespace Game.Entities.AI
 		{
 			if (damageable == _damageable)
 			{
-				_canvas.enabled = false;
+				if (_canvas)
+					_canvas.enabled = false;
 				_room.OnEnemyKilled(gameObject);
 				ResetStates();
-				_gfxAnim.SetBool(ANIMATOR_DEATH_BOOL, true);
-				State = EntityState.STUN;
-				if (_spawnDeathFx)
-					Awaiter.WaitAndExecute(1f, () => _spawnDeathFx.PlayDeathFX(() => Release()));
-				else
-					Release();
+
+				if (IsBasicEnemy)
+				{
+					_gfxAnim.SetBool(ANIMATOR_DEATH_BOOL, true);
+					State = EntityState.STUN;
+					if (_spawnDeathFx)
+						Awaiter.WaitAndExecute(1f, () => _spawnDeathFx.PlayDeathFX(() => Release()));
+					else
+						Release();
+				}
 			}
 		}
 	}
